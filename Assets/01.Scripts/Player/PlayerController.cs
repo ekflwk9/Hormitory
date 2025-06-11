@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
     [Header("Input KeyCodes")]
     [SerializeField] private KeyCode keyCodeRun = KeyCode.LeftShift;
     [SerializeField] private KeyCode keyCodeJump = KeyCode.Space;
+    [SerializeField]private KeyCode keyCodeReload = KeyCode.R;
     private RotateToMouse rotateToMouse;
     private MovementCharacterController movement;
     private Status status;
     private PlayerAnimatorController animator;
+    private WeaponAssaultRifle weapon;
 
     private void Awake()
     {
@@ -68,6 +70,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(keyCodeJump))
         {
             movement.Jump(); 
+        }
+    }
+
+    private void UpdateWeaponAction()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            weapon.StartWeaponAction();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            weapon.StopWeaponAction();
+        }
+
+        if (Input.GetKeyDown(keyCodeReload))
+        {
+            weapon.StartReload();
         }
     }
 }
