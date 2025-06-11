@@ -20,8 +20,10 @@ public class DebugTool : EditorWindow
 
         GUILayout.Space(15f);
         if (GUILayout.Button("메뉴 On")) OnMenu();
-        if (GUILayout.Button("대화 On")) OnTalk();
-        if (GUILayout.Button("미션 On")) OnMission();
+        else if (GUILayout.Button("대화 On")) OnTalk();
+        else if (GUILayout.Button("미션 On")) OnMission();
+        else if (GUILayout.Button("총알 추가")) OnBullet(true);
+        else if (GUILayout.Button("총알 감소")) OnBullet(false);
     }
 
     private void Addressable()
@@ -44,6 +46,11 @@ public class DebugTool : EditorWindow
     private void OnMission()
     {
         UiManager.Instance.Get<MissionUi>().Popup("목표 : 그레니 처치하기");
+    }
+
+    private void OnBullet(bool _isUp)
+    {
+        UiManager.Instance.Get<BulletUi>().BulletView(_isUp);
     }
 }
 #endif

@@ -2,7 +2,7 @@
 
 public class BulletUi : UiBase
 {
-    private int bulletCount = -1;
+    private int bulletCount;
     private GameObject[] bulletUi;
 
     public override void Init()
@@ -25,14 +25,10 @@ public class BulletUi : UiBase
     /// <param name="_isUp"></param>
     public void BulletView(bool _isUp)
     {
-        bulletCount = _isUp ? +1 : -1;
-
-        if (bulletCount < 0)
-        {
-            bulletCount = 0;
-            Service.Log($"{bulletCount}가 0 이하일 수는 없음");
-        }
+        if (bulletCount < 0) bulletCount = 0;
+        else if (bulletCount == bulletUi.Length) bulletCount -= 1;
 
         bulletUi[bulletCount].SetActive(_isUp);
+        bulletCount = _isUp ? bulletCount + 1 : bulletCount - 1;
     }
 }
