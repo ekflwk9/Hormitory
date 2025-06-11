@@ -1,12 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class UiButton : MonoBehaviour
+public abstract class UiButton : UiBase, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private void Awake()
+    protected GameObject touch;
+
+    public override void Init()
     {
-        
+        touch = this.TryFindChild(StringMap.Touch).gameObject;
+    }
+
+    public abstract void OnPointerClick(PointerEventData eventData);
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        touch.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (touch.activeSelf) touch.SetActive(false);
     }
 }
