@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Item
   - Ground
+  - Target
+  - Metal
+  - ExplosiveBarrel
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - Enemy
   - Item
   - Ground
-  - 
+  - Casing
   - 
   - 
   - 

@@ -3,8 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class AmmoEvent : UnityEngine.Events.UnityEvent<int, int>{}
+
+//무기가 활성화 될때 해당 무기의 탄 수 정보를 갱신한다.
+//onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+//이벤트 클래스에 호출할 메소드 등록(외부 클래스)
+//weapon.onAmmoEvent.AddListener(UpdateAmmoHUD);
+//이벤트 클래스에 등록되는 메소드(이벤트 클래스의 Invoke()가 호출될 때 자동 호출)
+//private void UpdateAmmoHUD(int currentAmmo, int maxAmmo)
+// {
+//     textAmmo.text = $"<size=40>{currentAmmo}/</size>{maxAmmo}";
+// }
 public class WeaponAssaultRifle : MonoBehaviour
 {
+
+    [HideInInspector] public AmmoEvent onAmmoEvent = new AmmoEvent();
     [Header("Fire Effects")] [SerializeField]
     private GameObject muzzleFlashEffect;       //총구 이펙트
     
@@ -18,15 +32,22 @@ public class WeaponAssaultRifle : MonoBehaviour
     private PlayerAnimatorController animator; 
     private CasingMemoryPool casingMemoryPool;          //탄피 생성 관리
 
+
+    //외부에서 필요한 정보를 열람하기 위한 프로퍼티
+    public WeaponName WeaponName => weaponSetting.WeaponName;
     private void Awake()
     {
         animator = GetComponentInParent<PlayerAnimatorController>();
         casingMemoryPool = GetComponent<CasingMemoryPool>();
+        
+        weaponSetting.currentAmmo = weaponSetting.maxAmmo;
     }
 
     private void OnEnable()
     {
-        throw new NotImplementedException();
+        muzzleFlashEffect.SetActive(false);
+        //무기가 활성화될 때 해당 무기의 탄 수 정보 갱신
+        onAmmoEvent.Invoke(weaponSetting.currentAmmo,weaponSetting.maxAmmo);
     }
 
     public void StartWeaponAction(int type = 0)
@@ -61,7 +82,13 @@ public class WeaponAssaultRifle : MonoBehaviour
             }
             
             lastAttackTime = Time.time;
-        
+            //탄 수가 없으면 공격 불가능
+            if (weaponSetting.currentAmmo <= 0)
+            {
+                return;
+            }
+            weaponSetting.currentAmmo--;
+            onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
             //animator.Play("Fire", -1, 0);
             //총구 이펙트 재생
             StartCoroutine("OnMuzzleFlashEffect");
