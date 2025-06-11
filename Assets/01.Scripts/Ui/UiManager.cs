@@ -7,16 +7,6 @@ public class UiManager : MonoBehaviour
     public static UiManager Instance { get; private set; }
     private Dictionary<Type, UiBase> ui = new();
 
-    private void Reset()
-    {
-        var uiBase = GetComponentsInChildren<UiBase>();
-
-        for (int i = 0; i < uiBase.Length; i++)
-        {
-            uiBase[i].Init();
-        }
-    }
-
     private void Awake()
     {
         if (UiManager.Instance == null)
@@ -28,6 +18,23 @@ public class UiManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+        }
+
+        var uiBase = this.transform.GetComponentsInChildren<UiBase>(true);
+
+        for (int i = 0; i < uiBase.Length; i++)
+        {
+            uiBase[i].Init();
+        }
+    }
+
+    private void Reset()
+    {
+        var uiBase = this.transform.GetComponentsInChildren<UiBase>(true);
+
+        for (int i = 0; i < uiBase.Length; i++)
+        {
+            uiBase[i].Init();
         }
     }
 
