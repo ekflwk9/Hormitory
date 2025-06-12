@@ -1,6 +1,14 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+public static class AnimName
+{
+    public static int FadeIn = Animator.StringToHash("FadeIn");
+    public static int FadeOut = Animator.StringToHash("FadeOut");
+    public static int Idle = Animator.StringToHash("Idle");
+    public static int Hit = Animator.StringToHash("Hit");
+}
+
 public static class StringMap
 {
     public const string Data = "Data";
@@ -12,6 +20,9 @@ public static class StringMap
     public const string Count = "Count";
     public const string Info = "Info";
     public const string Name = "Name";
+    public const string Battle = "Battle";
+    public const string Puzzle = "Puzzle";
+    public const string Ending = "Ending";
 }
 
 public static class Service

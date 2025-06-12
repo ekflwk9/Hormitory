@@ -3,11 +3,16 @@ using UnityEngine.EventSystems;
 
 public abstract class UiButton : UiBase, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    protected GameObject touch;
+    [SerializeField] protected GameObject touch;
+
+    private void Reset()
+    {
+        touch = this.TryFindChild(StringMap.Touch).gameObject;
+    }
 
     public override void Init()
     {
-        touch = this.TryFindChild(StringMap.Touch).gameObject;
+        if (touch == null) touch = this.TryFindChild(StringMap.Touch).gameObject;
     }
 
     public abstract void OnPointerClick(PointerEventData eventData);

@@ -17,11 +17,46 @@ public class DebugTool : EditorWindow
         //itemId = EditorGUILayout.IntField("획득할 아이템 아이디", itemId);
 
         if (GUILayout.Button("어드레서블 로드")) Addressable();
+
+        GUILayout.Space(15f);
+        if (GUILayout.Button("메뉴 On")) OnMenu();
+        else if (GUILayout.Button("대화 On")) OnTalk();
+        else if (GUILayout.Button("미션 On")) OnMission();
+        else if (GUILayout.Button("총알 추가")) OnBullet(true);
+        else if (GUILayout.Button("총알 감소")) OnBullet(false);
+        else if (GUILayout.Button("피격 쉐이더")) HitView();
     }
 
     private void Addressable()
     {
 
+    }
+
+
+    //
+    private void OnMenu()
+    {
+        UiManager.Instance.Show<MenuUi>(true);
+    }
+
+    private void OnTalk()
+    {
+        UiManager.Instance.Get<TalkUi>().Popup("이런 빌어먹을 녀석 !!");
+    }
+
+    private void OnMission()
+    {
+        UiManager.Instance.Get<MissionUi>().Popup("목표 : 그레니 처치하기");
+    }
+
+    private void OnBullet(bool _isUp)
+    {
+        UiManager.Instance.Get<BulletUi>().BulletView(_isUp);
+    }
+
+    private void HitView()
+    {
+        UiManager.Instance.Get<HitUi>().HitView();
     }
 }
 #endif
