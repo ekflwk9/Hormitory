@@ -8,7 +8,7 @@ public class StartButton : UiButton
         if (!UiManager.Instance.Get<FadeUi>().isFade)
         {
             UiManager.Instance.Show<IntroUi>(false);
-            UiManager.Instance.Get<FadeUi>().OnFade(NextScene);
+            UiManager.Instance.Get<FadeUi>().OnFade(NextScene, 0.6f);
         }
     }
 

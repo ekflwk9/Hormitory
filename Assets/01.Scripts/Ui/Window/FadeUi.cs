@@ -18,9 +18,11 @@ public class FadeUi : UiBase
     /// 페이드 인이 끝나면서 해당 메서드 호출
     /// </summary>
     /// <param name="_fadeFunc"></param>
-    public void OnFade(Action _fadeFunc)
+    public void OnFade(Action _fadeFunc, float _speed = 1f)
     {
+        anim.SetFloat(AnimName.Speed, _speed);
         anim.Play(AnimName.FadeIn, 0, 0);
+
         func = _fadeFunc;
         isFade = true;
     }

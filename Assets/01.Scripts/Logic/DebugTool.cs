@@ -25,6 +25,7 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("총알 추가")) OnBullet(true);
         else if (GUILayout.Button("총알 감소")) OnBullet(false);
         else if (GUILayout.Button("피격 쉐이더")) HitView();
+        else if (GUILayout.Button("죽었을때 윈도우")) DeadWindow();
     }
 
     private void Addressable()
@@ -57,6 +58,11 @@ public class DebugTool : EditorWindow
     private void HitView()
     {
         UiManager.Instance.Get<HitUi>().HitView();
+    }
+
+    private void DeadWindow()
+    {
+        UiManager.Instance.Show<DeadUi>(true);
     }
 }
 #endif
