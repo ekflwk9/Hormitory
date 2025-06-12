@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts.Player.Player_Battle;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,6 +51,7 @@ public class WeaponAssaultRifle : MonoBehaviour
     private CasingMemoryPool casingMemoryPool;          //탄피 생성 관리
     private ImpactMemoryPool impactMemoryPool;          //공격 효과 생성 후 활성/비활성화 관리
     private Camera mainCamera;           //광선 발사
+    private Coroutine attackCoroutine;
 
     //외부에서 필요한 정보를 열람하기 위한 프로퍼티
     public WeaponName WeaponName => weaponSetting.WeaponName;
@@ -98,7 +100,7 @@ public class WeaponAssaultRifle : MonoBehaviour
             if (weaponSetting.isAutomaticAttack == true)
             {
                 isAttack = true;
-                StartCoroutine("OnAttackLoop");
+                attackCoroutine = StartCoroutine(OnAttackLoop());
             }
             //단발 공격
             else
@@ -111,16 +113,16 @@ public class WeaponAssaultRifle : MonoBehaviour
             //공격 중일 때는 모드 전환 X
             if (isAttack == true) return;
 
-            StartCoroutine("OnModeChange");
+            StartCoroutine(OnModeChange());
         }
     }
 
     public void StopWeaponAction(int type = 0)
     {
-        if (type == 0)
+        if (type == 0) 
         {
             isAttack = false;
-            StopCoroutine("OnAttackLoop");
+            StopCoroutine(attackCoroutine);
         }
     }
     public void StartReload()
@@ -131,7 +133,7 @@ public class WeaponAssaultRifle : MonoBehaviour
         //무기 액션 도중에 'R'키를 눌러 재장전을 시도하면 액션 종료 후 재장전
         StopWeaponAction();
         
-        StartCoroutine("OnReload");
+        StartCoroutine(OnReload());
     }
 
     private IEnumerator OnAttackLoop()
@@ -170,7 +172,7 @@ public class WeaponAssaultRifle : MonoBehaviour
             string animation = animator.AimModeIs == true ? "AimFire" : "Fire";
             animator.Play(animation, -1, 0);
             //총구 이펙트 재생
-            if(animator.AimModeIs == false)StartCoroutine("OnMuzzleFlashEffect");
+            if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());
             //탄피 생성
             casingMemoryPool.SpawnCasing(casingSpawnPoint.position,transform.right);
             
@@ -195,7 +197,7 @@ public class WeaponAssaultRifle : MonoBehaviour
         while (true)
         {
             //현재 애니메이션이 Movement이면 장전 애니메이션이 종료되었다는 뜻
-            if (animator.CuurrentAnimationsIs("Movement"))
+            if (animator.CurrentAnimationsIs("Movement"))
             {
                 isReload = false;
                 
@@ -240,9 +242,11 @@ public class WeaponAssaultRifle : MonoBehaviour
         if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
         {
             impactMemoryPool.SpawnImpact(hit);
+            
             if (hit.transform.CompareTag("Enemy"))
             {
-                //데미지처리
+                IDamagable damageable = hit.transform.GetComponent<IDamagable>();
+                damageable.TakeDamage(weaponSetting.damage);
             }
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);

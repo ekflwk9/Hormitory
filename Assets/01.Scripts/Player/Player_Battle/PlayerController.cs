@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts.Player.Player_Battle;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
     [Header("Input KeyCodes")]
-    [SerializeField] private KeyCode keyCodeRun = KeyCode.LeftShift;
-    [SerializeField] private KeyCode keyCodeJump = KeyCode.Space;
     [SerializeField]private KeyCode keyCodeReload = KeyCode.R;
     private Status status;
     private PlayerAnimatorController animator;
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         bool isDie = status.DecreasHP(damage);
         

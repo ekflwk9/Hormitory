@@ -83,7 +83,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    private void UpdateHPHUD(int previous, int current)
+    private void UpdateHPHUD(float previous, float current)
     {
         if (previous - current > 0)
         {

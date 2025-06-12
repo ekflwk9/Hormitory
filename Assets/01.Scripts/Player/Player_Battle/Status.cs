@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class HPEvent : UnityEngine.Events.UnityEvent<int, int>{}
+public class HPEvent : UnityEngine.Events.UnityEvent<float, float>{}
 
 public class Status : MonoBehaviour
 {
@@ -17,12 +17,12 @@ public class Status : MonoBehaviour
     private float runSpeed;
 
     [Header("HP")] [SerializeField] private int maxHP = 100;
-    private int currentHP;
+    private float currentHP;
     
     public float WalkSpeed => walkSpeed;
     public float RunSpeed => runSpeed;
 
-    public int CurrentHP => currentHP;
+    public float CurrentHP => currentHP;
     public int MaxHP => maxHP;
 
 
@@ -42,9 +42,9 @@ public class Status : MonoBehaviour
         
     }
 
-    public bool DecreasHP(int damage)
+    public bool DecreasHP(float damage)
     {
-        int previousHP = currentHP;
+        float previousHP = currentHP;
         
         currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
         
