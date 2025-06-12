@@ -1,17 +1,17 @@
-﻿// PuzzlePlayerController.cs
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-
-// UI 관련 변수를 모두 제거했으므로 using UnityEngine.UI; 는 필요 없습니다.
 
 [RequireComponent(typeof(CharacterController))]
 public class PuzzlePlayerController : MonoBehaviour
 {
-    // --- 체력 및 UI 관련 변수 모두 제거 ---
+    [Header("Look Settings")]
+    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private Transform cameraTransform;
+    private float xRotation = 0f;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float rotationSpeed = 3f;
     [SerializeField] private float jumpHeight = 1.5f;
 
     [Header("Gravity Settings")]
@@ -20,7 +20,6 @@ public class PuzzlePlayerController : MonoBehaviour
     [Header("Interaction Settings")]
     [SerializeField] private float interactionDistance = 2.0f;
     [SerializeField] private LayerMask interactionLayer;
-    private Camera mainCamera;
     private IInteractable currentInteractable;
 
     private CharacterController characterController;
@@ -33,9 +32,9 @@ public class PuzzlePlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerActions = new PuzzlePlayer();
-        mainCamera = Camera.main;
 
-     
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void OnEnable()
@@ -56,23 +55,40 @@ public class PuzzlePlayerController : MonoBehaviour
     {
         HandleMovementAndGravity();
         HandleInteraction();
+        HandleLook();
     }
 
+    private void HandleLook()
+    {
+        Vector2 lookInput = playerActions.Player.Look.ReadValue<Vector2>();
+        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
+    }
+
+    // 이 함수가 수정되었습니다.
     private void HandleMovementAndGravity()
     {
         isGrounded = characterController.isGrounded;
-        moveInput = playerActions.Player.Move.ReadValue<Vector2>();
-        Vector3 horizontalMovement = new Vector3(moveInput.x, 0, moveInput.y);
-
         if (isGrounded && verticalVelocity < 0.0f)
         {
             verticalVelocity = -2.0f;
         }
 
-        verticalVelocity += gravity * Time.deltaTime;
+        moveInput = playerActions.Player.Move.ReadValue<Vector2>();
 
-        Vector3 finalMovement = (horizontalMovement * moveSpeed) + new Vector3(0, verticalVelocity, 0);
-        characterController.Move(finalMovement * Time.deltaTime);
+        Vector3 moveDirection = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized;
+
+        // 회전 로직은 제거하고 이동만 처리합니다.
+        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+
+        verticalVelocity += gravity * Time.deltaTime;
+        characterController.Move(new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -85,7 +101,7 @@ public class PuzzlePlayerController : MonoBehaviour
 
     private void HandleInteraction()
     {
-        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out RaycastHit hit, interactionDistance, interactionLayer))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, interactionDistance, interactionLayer))
         {
             if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
             {
@@ -110,15 +126,10 @@ public class PuzzlePlayerController : MonoBehaviour
         }
     }
 
-    // --- TakeDamage, Die, ShowHitEffect 함수 모두 제거 ---
-
-    // --- 충돌 감지 함수를 아래와 같이 단순화 ---
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // 충돌한 오브젝트의 태그가 "Enemy"인지 확인
         if (hit.collider.CompareTag("Enemy"))
         {
-            // 디버그 로그만 출력
             Debug.Log("몬스터와 충돌했습니다!");
         }
     }
