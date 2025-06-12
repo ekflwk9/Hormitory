@@ -81,13 +81,26 @@ public class WeaponAssaultRifle : MonoBehaviour
         //마우스 왼쪽 클릭( 공격 시작)
         if (type == 0)
         {
+            //연속 공격
+            if (weaponSetting.isAutomaticAttack == true)
+            {
+                StartCoroutine("OnAttackLoop");
+            }
+            //단발 공격
+            else
+            {
+                OnAttack();
+            }
             
         }
     }
 
     public void StopWeaponAction(int type = 0)
     {
-        
+        if (type == 0)
+        {
+            StopCoroutine("OnAttackLoop");
+        }
     }
     public void StartReload()
     {
@@ -102,7 +115,12 @@ public class WeaponAssaultRifle : MonoBehaviour
 
     private IEnumerator OnAttackLoop()
     {
-        return null;
+        while (true)
+        {
+            OnAttack();
+
+            yield return null;
+        }
     }
 
     public void OnAttack()
@@ -116,6 +134,7 @@ public class WeaponAssaultRifle : MonoBehaviour
             }
             
             lastAttackTime = Time.time;
+            
             //탄 수가 없으면 공격 불가능
             if (weaponSetting.currentAmmo <= 0)
             {
@@ -123,7 +142,10 @@ public class WeaponAssaultRifle : MonoBehaviour
             }
             weaponSetting.currentAmmo--;
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-            //animator.Play("Fire", -1, 0);
+            
+            //animator.Play("Fire", -1, 0) --> 같은 애니메이션을 반복할 떄
+            //애니메이션을 끊고 처음부터 다시 재생
+            animator.Play("Fire", -1, 0);
             //총구 이펙트 재생
             StartCoroutine("OnMuzzleFlashEffect");
             //탄피 생성
@@ -136,7 +158,11 @@ public class WeaponAssaultRifle : MonoBehaviour
 
     private IEnumerator OnMuzzleFlashEffect()
     {
-        yield return null;
+        muzzleFlashEffect.SetActive(true);
+
+        yield return new WaitForSeconds(weaponSetting.attackRate * 0.3f);
+        
+        muzzleFlashEffect.SetActive(false);
     }
     private IEnumerator OnReload()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum WeaponName {AssaultRifle =0}
 
+
 [System.Serializable]
 public class WeaponSetting
 {

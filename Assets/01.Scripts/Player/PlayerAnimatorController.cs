@@ -17,7 +17,7 @@ public class PlayerAnimatorController : MonoBehaviour
         get => animator.GetFloat("movementSpeed");
         set => animator.SetFloat("movementSpeed", value);
     }
-
+    
     //OnReload 트리거 작동 및 애니메이션 재생
     public void OnReload()
     {
@@ -26,7 +26,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public void Play(string stateName, int layer, float normalizedTime)
     {
-        
+        animator.Play(stateName, layer, normalizedTime);
     }
 
     /// <summary>

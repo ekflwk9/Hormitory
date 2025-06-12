@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
         movement = GetComponent<MovementCharacterController>();
         status = GetComponent<Status>();
         animator = GetComponent<PlayerAnimatorController>();
+        weapon = GetComponentInChildren<WeaponAssaultRifle>();
     }
 
     private void Update()
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
         UpdateRotate();
         UpdateMove();
         UpdateJump();
+        UpdateWeaponAction();
     }
 
     private void UpdateRotate()
