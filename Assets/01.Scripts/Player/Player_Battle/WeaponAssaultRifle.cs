@@ -22,7 +22,6 @@ public class MagazineEvent : UnityEngine.Events.UnityEvent<int>{}
 
 public class WeaponAssaultRifle : MonoBehaviour
 {
-
     [HideInInspector] public AmmoEvent onAmmoEvent = new AmmoEvent();
     [HideInInspector] public MagazineEvent onMagazineEvent = new MagazineEvent();
     
@@ -241,6 +240,10 @@ public class WeaponAssaultRifle : MonoBehaviour
         if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
         {
             impactMemoryPool.SpawnImpact(hit);
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                //데미지처리
+            }
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
         

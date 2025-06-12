@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
         UpdateMove();
         UpdateJump();
         UpdateWeaponAction();
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            TakeDamage(10);
+        }
     }
 
     private void UpdateRotate()
@@ -100,4 +104,15 @@ public class PlayerController : MonoBehaviour
             weapon.StartReload();
         }
     }
+
+    public void TakeDamage(int damage)
+    {
+        bool isDie = status.DecreasHP(damage);
+        
+        if (isDie == true)
+        {
+            //GameOver
+        }
+    }
+    
 }

@@ -9,6 +9,9 @@ public class PlayerHUD : MonoBehaviour
     [Header("Components")] [SerializeField]
     private WeaponAssaultRifle weapon;                      //현재 정보가 출력되는 무기
 
+    [SerializeField] private Status status;
+    
+    
     [Header("Weapon Base")] [SerializeField]
     private TextMeshProUGUI textWeaponName;
 
@@ -19,7 +22,8 @@ public class PlayerHUD : MonoBehaviour
 
     [Header("Magazine")] [SerializeField] private GameObject magazineUIPrefab; //탄창 UI 프리펩
     [SerializeField] private Transform magazineParent;   //탄창 UI가 배치되는 Panel
-
+    
+    
     private List<GameObject> magazineList;  //탄창 UI 리스트
     private void Awake()
     {
@@ -30,6 +34,7 @@ public class PlayerHUD : MonoBehaviour
         //Invoke() 메서드가 호출될 때 등록된 메서드(매개변수)가 실행된다.
         weapon.onAmmoEvent.AddListener(UpdateAmmoUHD);
         weapon.onMagazineEvent.AddListener(UpdateMagazineHUD);
+        status.onHPEvent.AddListener(UpdateHPHUD);
     }
 
     private void SetupWeapon()
@@ -75,6 +80,14 @@ public class PlayerHUD : MonoBehaviour
         for (int i = 0; i < currentMagazine; ++i)
         {
             magazineList[i].SetActive(true);
+        }
+    }
+
+    private void UpdateHPHUD(int previous, int current)
+    {
+        if (previous - current > 0)
+        {
+            UiManager.Instance.Get<HitUi>().HitView();
         }
     }
 }
