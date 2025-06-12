@@ -24,6 +24,7 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("미션 On")) OnMission();
         else if (GUILayout.Button("총알 추가")) OnBullet(true);
         else if (GUILayout.Button("총알 감소")) OnBullet(false);
+        else if (GUILayout.Button("피격 쉐이더")) HitView();
     }
 
     private void Addressable()
@@ -51,6 +52,11 @@ public class DebugTool : EditorWindow
     private void OnBullet(bool _isUp)
     {
         UiManager.Instance.Get<BulletUi>().BulletView(_isUp);
+    }
+
+    private void HitView()
+    {
+        UiManager.Instance.Get<HitUi>().HitView();
     }
 }
 #endif
