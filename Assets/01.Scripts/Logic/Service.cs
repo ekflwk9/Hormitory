@@ -20,6 +20,7 @@ public static class StringMap
     public const string Count = "Count";
     public const string Info = "Info";
     public const string Name = "Name";
+    public const string Intro = "Intro";
     public const string Battle = "Battle";
     public const string Puzzle = "Puzzle";
     public const string Ending = "Ending";

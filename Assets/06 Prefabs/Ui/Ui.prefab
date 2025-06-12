@@ -1595,6 +1595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2320249229936521056}
   - component: {fileID: 4970436583743984682}
+  - component: {fileID: 8539907972721042171}
   m_Layer: 5
   m_Name: EffectSlider
   m_TagString: Untagged
@@ -1676,6 +1677,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8539907972721042171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148125899895341313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e61467df7aa4845922619348bb28d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2340861853393317952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,7 +2082,7 @@ GameObject:
   - component: {fileID: 2952779438407844428}
   - component: {fileID: 8330859238632292707}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4640,10 +4653,10 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &4271300460026609279
 MonoBehaviour:
@@ -5068,6 +5081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1032831717171911784}
   - component: {fileID: 8213825453139166154}
+  - component: {fileID: 1229515485877082464}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -5149,6 +5163,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1229515485877082464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416176174905343600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23541df187d699a45a76d90cdcf588d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6565445898803337783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6352,7 +6378,7 @@ GameObject:
   - component: {fileID: 6583716363654998147}
   - component: {fileID: 126548245964471630}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

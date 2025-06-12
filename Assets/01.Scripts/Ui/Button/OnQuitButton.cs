@@ -4,7 +4,12 @@ public class OnQuitButton : UiButton
 {
     public override void OnPointerClick(PointerEventData eventData)
     {
-        touch.SetActive(false);
-        UiManager.Instance.Show<QuitUi>(true);
+        if (!UiManager.Instance.Get<FadeUi>().isFade)
+        {
+            touch.SetActive(false);
+            UiManager.Instance.Show<QuitUi>(true);
+
+            if (UiManager.Instance.introScene) UiManager.Instance.Show<IntroUi>(false);
+        }
     }
 }

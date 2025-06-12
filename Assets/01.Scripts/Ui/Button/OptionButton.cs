@@ -6,7 +6,12 @@ public class OptionButton : UiButton
     {
         touch.SetActive(false);
 
-        UiManager.Instance.Show<OptionUi>(true);
-        UiManager.Instance.Show<MenuUi>(false);
+        if (!UiManager.Instance.Get<FadeUi>().isFade)
+        {
+            UiManager.Instance.Show<OptionUi>(true);
+            UiManager.Instance.Show<MenuUi>(false);
+
+            if (UiManager.Instance.introScene) UiManager.Instance.Show<IntroUi>(false);
+        }
     }
 }
