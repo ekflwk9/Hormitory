@@ -2430,11 +2430,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1978549808}
   - component: {fileID: 1978549810}
-  - component: {fileID: 1978549809}
   - component: {fileID: 1978549812}
-  - component: {fileID: 1978549811}
   - component: {fileID: 1978549813}
   - component: {fileID: 1978549814}
+  - component: {fileID: 1978549815}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -2459,20 +2458,6 @@ Transform:
   - {fileID: 1660296886}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1978549809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978549807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 048766b2e2e02e54f8e30cada81470c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotCamXAxisSpeed: 5
-  rotCamYAxisSpeed: 3
 --- !u!114 &1978549810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2488,21 +2473,6 @@ MonoBehaviour:
   keyCodeRun: 304
   keyCodeJump: 32
   keyCodeReload: 114
---- !u!114 &1978549811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978549807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47f4bdaf71550d24093d9d03863bb039, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  jumpForce: 10
-  gravity: -20
 --- !u!143 &1978549812
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2559,6 +2529,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf0e4a5e6f57e042909a2a1cf4d272e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1978549815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978549807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d504e04af0fac6c4ca6c899069e19cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 10
+  cameraTransform: {fileID: 1381736809}
+  moveSpeed: 5
+  rotationSpeed: 3
+  jumpHeight: 1.5
+  gravity: -9.81
+  interactionDistance: 2
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &2097808523
 GameObject:
   m_ObjectHideFlags: 0
