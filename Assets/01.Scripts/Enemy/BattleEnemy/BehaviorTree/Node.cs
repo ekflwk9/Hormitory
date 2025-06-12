@@ -1,4 +1,4 @@
-public interface INode
+﻿public interface INode
 {
     public enum State
     { RUN, SUCCESS, FAILED }

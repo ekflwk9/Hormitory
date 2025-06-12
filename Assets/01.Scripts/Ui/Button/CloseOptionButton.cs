@@ -5,8 +5,9 @@ public class CloseOptionButton : UiButton
     public override void OnPointerClick(PointerEventData eventData)
     {
         touch.SetActive(false);
-
         UiManager.Instance.Show<OptionUi>(false);
-        UiManager.Instance.Show<MenuUi>(true);
+
+        if (!UiManager.Instance.introScene) UiManager.Instance.Show<MenuUi>(true);
+        else UiManager.Instance.Show<IntroUi>(true);
     }
 }

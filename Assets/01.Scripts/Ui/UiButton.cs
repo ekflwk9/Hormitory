@@ -19,7 +19,7 @@ public abstract class UiButton : UiBase, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        touch.SetActive(true);
+        if (!UiManager.Instance.Get<FadeUi>().isFade) touch.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)

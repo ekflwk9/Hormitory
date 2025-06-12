@@ -21,9 +21,18 @@ public class HitUi : UiBase
 
     public void HitView()
     {
-        if (hitCount < 0 || hitCount == anim.Length) hitCount = 0;
+        if (hitCount == anim.Length) hitCount = anim.Length - 1;
 
-        anim[hitCount].Play(AnimName.Hit, 0, 0);
+        for (int i = 0; i < hitCount + 1; i++)
+        {
+            anim[i].Play(AnimName.Hit, 0, 0);
+        }
+
         hitCount++;
+    }
+
+    public void ResetView()
+    {
+        hitCount = 0;
     }
 }
