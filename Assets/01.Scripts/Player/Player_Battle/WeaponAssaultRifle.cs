@@ -49,7 +49,7 @@ public class WeaponAssaultRifle : MonoBehaviour
     private PlayerAnimatorController animator; 
     private CasingMemoryPool casingMemoryPool;          //탄피 생성 관리
     private ImpactMemoryPool impactMemoryPool;          //공격 효과 생성 후 활성/비활성화 관리
-    private Camera mainCamera;          //광선 발사
+    private Camera mainCamera;           //광선 발사
 
     //외부에서 필요한 정보를 열람하기 위한 프로퍼티
     public WeaponName WeaponName => weaponSetting.WeaponName;

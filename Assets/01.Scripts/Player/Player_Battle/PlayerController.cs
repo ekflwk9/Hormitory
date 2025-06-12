@@ -14,8 +14,22 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimatorController animator;
     private WeaponAssaultRifle weapon;
 
+    public static PlayerController Instance { get; private set; }
+    
+    
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
         //마우스 커서를 보이지 않게 설정하고, 현재위치에 고정
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
