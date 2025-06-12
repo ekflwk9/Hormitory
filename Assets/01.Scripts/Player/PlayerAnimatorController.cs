@@ -14,8 +14,8 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public float MoveSpeed
     {
-        get => animator.GetFloat("movementSpeed");
-        set => animator.SetFloat("movementSpeed", value);
+        get => animator.GetFloat("MovementSpeed");
+        set => animator.SetFloat("MovementSpeed", value);
     }
     
     //OnReload 트리거 작동 및 애니메이션 재생
@@ -23,7 +23,13 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator.SetTrigger("OnReload");
     }
-
+    
+    public bool AimModeIs
+    {
+        get => animator.GetBool("isAimMode");
+        set => animator.SetBool("isAimMode", value);
+    }
+    
     public void Play(string stateName, int layer, float normalizedTime)
     {
         animator.Play(stateName, layer, normalizedTime);

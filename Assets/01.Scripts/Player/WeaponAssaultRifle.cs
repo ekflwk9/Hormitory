@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class AmmoEvent : UnityEngine.Events.UnityEvent<int, int>{}
@@ -35,8 +37,15 @@ public class WeaponAssaultRifle : MonoBehaviour
     [Header("Weapon Setting")] [SerializeField]
     private WeaponSetting weaponSetting;                //무기 설정
 
+    [Header("Aim UI")] [SerializeField] private Image imageAim; // default/aim 모드에 따라 Aim 이미지 활성/비활성
+    
     private float lastAttackTime = 0;                   //마지막 발사 시간
     private bool isReload = false;                      //재장전 중인지 체크
+    private bool isAttack = false;                      //공격 여부 체크
+    private bool isModeChange = false;                  //모드 전환 여부 체크
+    private float defaultModeFOV = 60;                  //기본 모드에서 카메라 FOV
+    private float aimModeFOV = 30;                      //AIM모드에서 카메라 FOV
+    
     
     private PlayerAnimatorController animator; 
     private CasingMemoryPool casingMemoryPool;          //탄피 생성 관리
@@ -72,18 +81,24 @@ public class WeaponAssaultRifle : MonoBehaviour
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
         //무기가 활성화될 때 해당 무기 탄 수 정보 갱신
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+
+        ResetVariables();
     }
 
     public void StartWeaponAction(int type = 0)
     {
-        //재장전 중일 떄는 무기 액션을 할 수 없다
+        //재장전 중일 떄는 무기 액션 X
         if (isReload) return;
+
+        //모드 전환중이면 무기 액션 X
+        if (isModeChange == true) return;
         //마우스 왼쪽 클릭( 공격 시작)
         if (type == 0)
         {
             //연속 공격
             if (weaponSetting.isAutomaticAttack == true)
             {
+                isAttack = true;
                 StartCoroutine("OnAttackLoop");
             }
             //단발 공격
@@ -91,7 +106,13 @@ public class WeaponAssaultRifle : MonoBehaviour
             {
                 OnAttack();
             }
-            
+        }
+        else
+        {
+            //공격 중일 때는 모드 전환 X
+            if (isAttack == true) return;
+
+            StartCoroutine("OnModeChange");
         }
     }
 
@@ -99,6 +120,7 @@ public class WeaponAssaultRifle : MonoBehaviour
     {
         if (type == 0)
         {
+            isAttack = false;
             StopCoroutine("OnAttackLoop");
         }
     }
@@ -145,9 +167,11 @@ public class WeaponAssaultRifle : MonoBehaviour
             
             //animator.Play("Fire", -1, 0) --> 같은 애니메이션을 반복할 떄
             //애니메이션을 끊고 처음부터 다시 재생
-            animator.Play("Fire", -1, 0);
+            
+            string animation = animator.AimModeIs == true ? "AimFire" : "Fire";
+            animator.Play(animation, -1, 0);
             //총구 이펙트 재생
-            StartCoroutine("OnMuzzleFlashEffect");
+            if(animator.AimModeIs == false)StartCoroutine("OnMuzzleFlashEffect");
             //탄피 생성
             casingMemoryPool.SpawnCasing(casingSpawnPoint.position,transform.right);
             
@@ -220,5 +244,39 @@ public class WeaponAssaultRifle : MonoBehaviour
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
         
+    }
+
+    private IEnumerator OnModeChange()
+    {
+        float current = 0;
+        float percent = 0;
+        float time = 0.35f;
+
+        animator.AimModeIs = !animator.AimModeIs;
+        imageAim.enabled = !imageAim.enabled;
+        
+        float start = mainCamera.fieldOfView;
+        float end = animator.AimModeIs == true ? aimModeFOV : defaultModeFOV;
+        
+        isModeChange = true;
+
+        while (percent < 1)
+        {
+            current += Time.deltaTime;
+            percent = current / time;
+            
+            //모드에 따라 카메라 시야각 변경
+            mainCamera.fieldOfView = Mathf.Lerp(start, end, percent);
+            
+            yield return null;
+        }
+        isModeChange = false;
+    }
+
+    private void ResetVariables()
+    {
+        isReload = false;
+        isAttack = false;
+        isModeChange = false;
     }
 }
