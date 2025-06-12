@@ -8,7 +8,14 @@ public class RetryButton : UiButton
         UiManager.Instance.Show<MenuUi>(false);
         UiManager.Instance.Show<RetryUi>(false);
 
-        //씬 전환 및 페이드 액션
-        //SceneManager.LoadScene(StringMap.Battle);
+        UiManager.Instance.Get<FadeUi>().OnFade(NextScene);
+    }
+
+    private void NextScene()
+    {
+        var retryScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(retryScene);
+
+        UiManager.Instance.Get<FadeUi>().OnFade();
     }
 }
