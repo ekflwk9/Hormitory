@@ -23,11 +23,16 @@ public class MonsterStateMachine : MonoBehaviour
     [SerializeField] private float _patrolRadius = 10f; //순찰 반경
     [SerializeField] private float _patrolWaitTime = 2f; // 목적지 도착 후 대기 시간
     
+    [Header("SpeedSetting")]
+    [SerializeField] private float _chaseSpeed = 2.2f;//c추격 시 속도
+    private float _defaultSpeed;
     public PuzzleMonster PuzzleMonster { get; private set; }
 
     public Transform PlayerStransform => _playerTransform;
     public float DetectRange => _detectRange;
     public float SearchDuration => _searchDuration;
+    public float ChaseSpeed => _chaseSpeed;
+    public float DefaultSpeed => _defaultSpeed;
     public NavMeshAgent NavMeshAgent { get; private set; }
     public float PatrolRadius => _patrolRadius;
     public float PatrolWaitTime => _patrolWaitTime;
@@ -36,6 +41,9 @@ public class MonsterStateMachine : MonoBehaviour
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
         PuzzleMonster = GetComponent<PuzzleMonster>();
+        
+        _defaultSpeed = NavMeshAgent.speed;
+        
         _states = new Dictionary<MonsterStateType, IState>
         {
             { MonsterStateType.Idle, new IdleState(this) },
