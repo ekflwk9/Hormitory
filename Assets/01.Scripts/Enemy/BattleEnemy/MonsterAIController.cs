@@ -54,8 +54,8 @@ public class MonsterAIController : MonoBehaviour
     private bool flyingRoarEnded = false;
     private bool takeOffFinished = false;
     private bool biteAttackFinished = false;
+    private bool tailAttackFinished = false;
     private bool isLanding = false;
-    
     
     private bool shouldLookAtPlayer = true;
     
@@ -179,7 +179,10 @@ public class MonsterAIController : MonoBehaviour
 
     private INode.State IsPlayerInAttackDistanceAction()
     {       
-        if (Vector3.Distance(player.transform.position, transform.position) > attackDistance)
+        float sqrTempDistance = (player.transform.position - transform.position).sqrMagnitude;
+        float sqrAttackDistance = attackDistance * attackDistance;
+
+        if (sqrTempDistance <= sqrAttackDistance)
         {
             return INode.State.SUCCESS;
         }
@@ -298,7 +301,6 @@ public class MonsterAIController : MonoBehaviour
 
         animator.SetBool("Fly", false);
         timer = 0f;
-        agent.enabled = true;
         currentAction = null;
     }
 
@@ -345,7 +347,17 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator TailAttackActionCoroutine()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.2f);
+        shouldLookAtPlayer = false;
+        agent.enabled = false;
+
+        tailAttackFinished = false;
+        animator.SetBool("TailAttack", true);
+        
+        yield return new WaitUntil(() => tailAttackFinished);
+
+        animator.SetBool("TailAttack", false);
+        
         currentAction = null;
     }
 
@@ -367,8 +379,12 @@ public class MonsterAIController : MonoBehaviour
 
     public void BiteAttackEnd()
     {
-        Debug.Log("실행?");
         biteAttackFinished = true;
+    }
+
+    public void TailAttackEnd()
+    {
+        tailAttackFinished = true;
     }
     
     private void LookAtPlayer()
