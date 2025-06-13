@@ -5,9 +5,10 @@ using UnityEngine.InputSystem;
 public class PuzzlePlayerController : MonoBehaviour
 {
     [Header("Look Settings")]
-    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float mouseSensitivity = 10f;
     [SerializeField] private Transform cameraTransform;
     private float xRotation = 0f;
+    private float yRotation = 0f;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
@@ -15,11 +16,14 @@ public class PuzzlePlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.5f;
 
     [Header("Gravity Settings")]
-    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float gravity = -20f;
 
     [Header("Interaction Settings")]
     [SerializeField] private float interactionDistance = 2.0f;
     [SerializeField] private LayerMask interactionLayer;
+
+   
+
     private IInteractable currentInteractable;
 
     private CharacterController characterController;
@@ -65,13 +69,13 @@ public class PuzzlePlayerController : MonoBehaviour
         float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
+        yRotation += mouseX;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
 
-    // 이 함수가 수정되었습니다.
+   
     private void HandleMovementAndGravity()
     {
         isGrounded = characterController.isGrounded;
@@ -133,4 +137,6 @@ public class PuzzlePlayerController : MonoBehaviour
             Debug.Log("몬스터와 충돌했습니다!");
         }
     }
+
+     
 }
