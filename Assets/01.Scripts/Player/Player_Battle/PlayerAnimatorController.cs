@@ -43,5 +43,10 @@ namespace _01.Scripts.Player.Player_Battle
         {
             return animator.GetCurrentAnimatorStateInfo(0).IsName(name);
         }
+
+        public void SetFloat(string parameterName, float value)
+        {
+            animator.SetFloat(parameterName, value);
+        }
     }
 }

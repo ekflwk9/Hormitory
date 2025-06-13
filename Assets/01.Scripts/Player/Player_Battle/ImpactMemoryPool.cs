@@ -42,6 +42,24 @@ namespace _01.Scripts.Player.Player_Battle
             }
         }
 
+        public void SpawnImapct(Collider other, Transform knifeTransform)
+        {
+            //부딪친 오브젝트의 Tag에 따라 다르게 처리
+            if (other.transform.CompareTag("ImpactNormal"))
+            {
+                //Quaternion.Inverse(knifeTransform.rotation) rotation과 반대되는 회전 값을 반환
+                OnSpawnImpact(ImpactType.Normal, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation));
+            }
+            else if (other.transform.CompareTag("ImpactObstacle"))
+            {
+                OnSpawnImpact(ImpactType.Obstacle, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation));
+            }
+            else if (other.transform.CompareTag("Enemy"))
+            {
+                OnSpawnImpact(ImpactType.Enemy, knifeTransform.position,Quaternion.Inverse(knifeTransform.rotation));
+            }
+        }
+
         public void OnSpawnImpact(ImpactType type, Vector3 position, Quaternion rotation)
         {
             GameObject item = memoryPool[(int)type].ActivePoolItem();
