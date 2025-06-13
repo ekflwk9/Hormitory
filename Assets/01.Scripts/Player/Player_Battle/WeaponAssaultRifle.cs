@@ -1,31 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts.Player.Player_Battle;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class AmmoEvent : UnityEngine.Events.UnityEvent<int, int>{}
 
-//무기가 활성화 될때 해당 무기의 탄 수 정보를 갱신한다.
-//onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-//이벤트 클래스에 호출할 메소드 등록(외부 클래스)
-//weapon.onAmmoEvent.AddListener(UpdateAmmoHUD);
-//이벤트 클래스에 등록되는 메소드(이벤트 클래스의 Invoke()가 호출될 때 자동 호출)
-//private void UpdateAmmoHUD(int currentAmmo, int maxAmmo)
-// {
-//     textAmmo.text = $"<size=40>{currentAmmo}/</size>{maxAmmo}";
-// }
-[System.Serializable]
-public class MagazineEvent : UnityEngine.Events.UnityEvent<int>{}
 
-public class WeaponAssaultRifle : MonoBehaviour
+public class WeaponAssaultRifle : WeaponBase
 {
-
-    [HideInInspector] public AmmoEvent onAmmoEvent = new AmmoEvent();
-    [HideInInspector] public MagazineEvent onMagazineEvent = new MagazineEvent();
-    
     [Header("Fire Effects")] [SerializeField]
     private GameObject muzzleFlashEffect;       //총구 이펙트
     
@@ -34,33 +18,20 @@ public class WeaponAssaultRifle : MonoBehaviour
 
     [SerializeField] private Transform bulletSpawnPoint; //총알 생성 위치
     
-    [Header("Weapon Setting")] [SerializeField]
-    private WeaponSetting weaponSetting;                //무기 설정
-
     [Header("Aim UI")] [SerializeField] private Image imageAim; // default/aim 모드에 따라 Aim 이미지 활성/비활성
     
-    private float lastAttackTime = 0;                   //마지막 발사 시간
-    private bool isReload = false;                      //재장전 중인지 체크
-    private bool isAttack = false;                      //공격 여부 체크
     private bool isModeChange = false;                  //모드 전환 여부 체크
     private float defaultModeFOV = 60;                  //기본 모드에서 카메라 FOV
     private float aimModeFOV = 30;                      //AIM모드에서 카메라 FOV
     
-    
-    private PlayerAnimatorController animator; 
     private CasingMemoryPool casingMemoryPool;          //탄피 생성 관리
     private ImpactMemoryPool impactMemoryPool;          //공격 효과 생성 후 활성/비활성화 관리
-    private Camera mainCamera;          //광선 발사
-
-    //외부에서 필요한 정보를 열람하기 위한 프로퍼티
-    public WeaponName WeaponName => weaponSetting.WeaponName;
-    public int CurrentMagazine => weaponSetting.currentMagazine;
-    public int MaxMagazine => weaponSetting.maxMagazine;
-    
+    private Camera mainCamera;           //광선 발사
+    private Coroutine attackCoroutine;
     
     private void Awake()
     {
-        animator = GetComponentInParent<PlayerAnimatorController>();
+        base.Setup();
         casingMemoryPool = GetComponent<CasingMemoryPool>();
         impactMemoryPool = GetComponent<ImpactMemoryPool>();
         mainCamera = Camera.main;
@@ -85,7 +56,7 @@ public class WeaponAssaultRifle : MonoBehaviour
         ResetVariables();
     }
 
-    public void StartWeaponAction(int type = 0)
+    public override void StartWeaponAction(int type = 0)
     {
         //재장전 중일 떄는 무기 액션 X
         if (isReload) return;
@@ -99,7 +70,7 @@ public class WeaponAssaultRifle : MonoBehaviour
             if (weaponSetting.isAutomaticAttack == true)
             {
                 isAttack = true;
-                StartCoroutine("OnAttackLoop");
+                attackCoroutine = StartCoroutine(OnAttackLoop());
             }
             //단발 공격
             else
@@ -112,19 +83,19 @@ public class WeaponAssaultRifle : MonoBehaviour
             //공격 중일 때는 모드 전환 X
             if (isAttack == true) return;
 
-            StartCoroutine("OnModeChange");
+            StartCoroutine(OnModeChange());
         }
     }
 
-    public void StopWeaponAction(int type = 0)
+    public override void StopWeaponAction(int type = 0)
     {
-        if (type == 0)
+        if (type == 0) 
         {
             isAttack = false;
-            StopCoroutine("OnAttackLoop");
+            StopCoroutine(attackCoroutine);
         }
     }
-    public void StartReload()
+    public override void StartReload()
     {
         //현재 장전 중이거나 탄창 수가 0 이면 재장전 불가능
         if (isReload || weaponSetting.currentMagazine <= 0) return;
@@ -132,7 +103,7 @@ public class WeaponAssaultRifle : MonoBehaviour
         //무기 액션 도중에 'R'키를 눌러 재장전을 시도하면 액션 종료 후 재장전
         StopWeaponAction();
         
-        StartCoroutine("OnReload");
+        StartCoroutine(OnReload());
     }
 
     private IEnumerator OnAttackLoop()
@@ -171,7 +142,7 @@ public class WeaponAssaultRifle : MonoBehaviour
             string animation = animator.AimModeIs == true ? "AimFire" : "Fire";
             animator.Play(animation, -1, 0);
             //총구 이펙트 재생
-            if(animator.AimModeIs == false)StartCoroutine("OnMuzzleFlashEffect");
+            if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());
             //탄피 생성
             casingMemoryPool.SpawnCasing(casingSpawnPoint.position,transform.right);
             
@@ -196,7 +167,7 @@ public class WeaponAssaultRifle : MonoBehaviour
         while (true)
         {
             //현재 애니메이션이 Movement이면 장전 애니메이션이 종료되었다는 뜻
-            if (animator.CuurrentAnimationsIs("Movement"))
+            if (animator.CurrentAnimationsIs("Movement"))
             {
                 isReload = false;
                 
@@ -241,6 +212,12 @@ public class WeaponAssaultRifle : MonoBehaviour
         if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
         {
             impactMemoryPool.SpawnImpact(hit);
+            
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                IDamagable damageable = hit.transform.GetComponent<IDamagable>();
+                damageable.TakeDamage(weaponSetting.damage);
+            }
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
         
@@ -279,4 +256,6 @@ public class WeaponAssaultRifle : MonoBehaviour
         isAttack = false;
         isModeChange = false;
     }
+    
+    
 }
