@@ -1,6 +1,6 @@
 namespace _01.Scripts.Player.Player_Battle
 {
-    public enum WeaponName {AssaultRifle =0}
+    public enum WeaponName {AssaultRifle = 0, Revolver, CombatKnife, HandGrenade}
 
 
     [System.Serializable]

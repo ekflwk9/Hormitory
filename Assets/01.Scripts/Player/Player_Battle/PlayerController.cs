@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [Header("Input KeyCodes")]
     [SerializeField]private KeyCode keyCodeReload = KeyCode.R;
     private Status status;
-    private PlayerAnimatorController animator;
-    private WeaponAssaultRifle weapon;
+    private WeaponBase weapon;
 
 
     private void Awake()
@@ -19,8 +18,6 @@ public class PlayerController : MonoBehaviour, IDamagable
         Cursor.lockState = CursorLockMode.Locked;
         
         status = GetComponent<Status>();
-        animator = GetComponent<PlayerAnimatorController>();
-        weapon = GetComponentInChildren<WeaponAssaultRifle>();
     }
 
     private void Update()
@@ -68,5 +65,10 @@ public class PlayerController : MonoBehaviour, IDamagable
             //GameOver
         }
     }
-    
+
+
+    public void SwitchingWeapon(WeaponBase newWeapon)
+    {
+        weapon = newWeapon;
+    }
 }
