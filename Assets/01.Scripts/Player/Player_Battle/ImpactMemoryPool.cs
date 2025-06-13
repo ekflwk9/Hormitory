@@ -7,6 +7,7 @@ namespace _01.Scripts.Player.Player_Battle
         Normal = 0,
         Obstacle,
         Enemy,
+        InteractionObject,
     }
 
     public class ImpactMemoryPool : MonoBehaviour
@@ -40,6 +41,12 @@ namespace _01.Scripts.Player.Player_Battle
             {
                 OnSpawnImpact(ImpactType.Enemy, hit.point, Quaternion.LookRotation(hit.normal));
             }
+            else if (hit.transform.CompareTag("ExplosiveBarrel"))
+            {
+                //오브젝트 색상에 따라 색상 변경
+                Color color = hit.transform.GetComponentInChildren<MeshRenderer>().material.color;
+                OnSpawnImpact(ImpactType.InteractionObject, hit.point, Quaternion.LookRotation(hit.normal), color);;
+            }
         }
 
         public void SpawnImapct(Collider other, Transform knifeTransform)
@@ -60,12 +67,19 @@ namespace _01.Scripts.Player.Player_Battle
             }
         }
 
-        public void OnSpawnImpact(ImpactType type, Vector3 position, Quaternion rotation)
+        public void OnSpawnImpact(ImpactType type, Vector3 position, Quaternion rotation, Color color = new Color())
         {
             GameObject item = memoryPool[(int)type].ActivePoolItem();
             item.transform.position = position;
             item.transform.rotation = rotation;
             item.GetComponent<Impact>().Setup(memoryPool[(int)type]);
+
+            if (type == ImpactType.InteractionObject)
+            {
+                // 파티클시스템의 메인프로퍼티는 바로 접근할 수 없기 때문에 변수를 생성한 후 접근해서 사용한다.
+                ParticleSystem.MainModule main = item.GetComponent<ParticleSystem>().main;
+                main.startColor = color;
+            }
         }
         void Start()
         {
