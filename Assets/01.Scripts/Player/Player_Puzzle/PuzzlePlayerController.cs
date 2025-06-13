@@ -31,6 +31,7 @@ public class PuzzlePlayerController : MonoBehaviour
     private Vector2 moveInput;
     private float verticalVelocity;
     private bool isGrounded;
+    private bool isInputLocked = false;
 
     private void Awake()
     {
@@ -55,8 +56,31 @@ public class PuzzlePlayerController : MonoBehaviour
         playerActions.Player.Interact.performed -= OnInteract;
     }
 
+    // --- 추가: 입력을 잠그는 공개 함수 ---
+    public void LockInput()
+    {
+        isInputLocked = true;
+        Cursor.lockState = CursorLockMode.None; // 커서를 보이게 하고
+        Cursor.visible = true;                  // 자유롭게 움직이도록 설정
+    }
+
+    // --- 추가: 입력을 해제하는 공개 함수 ---
+    public void UnlockInput()
+    {
+        isInputLocked = false;
+        Cursor.lockState = CursorLockMode.Locked; // 커서를 다시 잠그고
+        Cursor.visible = false;                   // 보이지 않게 설정
+    }
+
+
     private void Update()
     {
+        // --- 수정: 입력이 잠겨있으면 아래 로직을 실행하지 않음 ---
+        if (isInputLocked)
+        {
+            return;
+        }
+
         HandleMovementAndGravity();
         HandleInteraction();
         HandleLook();
