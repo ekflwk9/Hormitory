@@ -41,10 +41,11 @@ public class MonsterAIController : MonoBehaviour
     
     [Header("AI")]
     [SerializeField] private NavMeshAgent agent;
-    public float detectedDistance;
-    public float attackDistance;
-    private float timer;
-    
+    [SerializeField] private float detectedDistance = 30f;
+    [SerializeField] private float attackDistance = 8f;
+    [SerializeField] private float jumpDistance = 20f;
+    [SerializeField] private float patternCooldown = 20f;
+    private float timer = 0f;
     
     [SerializeField] private GameObject player;
     
@@ -52,6 +53,9 @@ public class MonsterAIController : MonoBehaviour
     [SerializeField] private Animator animator;
     private bool flyingRoarEnded = false;
     private bool takeOffFinished = false;
+    private bool biteAttackFinished = false;
+    private bool isLanding = false;
+    
     
     private bool shouldLookAtPlayer = true;
     
@@ -107,7 +111,7 @@ public class MonsterAIController : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-    
+        
         // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
         if (shouldLookAtPlayer)
         {
@@ -120,7 +124,7 @@ public class MonsterAIController : MonoBehaviour
 
     private INode.State IsTimerPassedAction()
     {
-        if (timer > 3f)
+        if (timer > patternCooldown)
         {
             return INode.State.SUCCESS;
         }
@@ -155,7 +159,7 @@ public class MonsterAIController : MonoBehaviour
         float sqrTempDistance = (player.transform.position - transform.position).sqrMagnitude;
         float sqrDetectedDistance = detectedDistance * detectedDistance;
 
-        if (sqrTempDistance < sqrDetectedDistance)
+        if (sqrTempDistance > sqrDetectedDistance)
         {
             return INode.State.SUCCESS;
         }
@@ -175,10 +179,7 @@ public class MonsterAIController : MonoBehaviour
 
     private INode.State IsPlayerInAttackDistanceAction()
     {       
-        float sqrTempDistance = (player.transform.position - transform.position).sqrMagnitude;
-        float sqrAttackDistance = attackDistance * attackDistance;
-
-        if (sqrTempDistance < sqrAttackDistance)
+        if (Vector3.Distance(player.transform.position, transform.position) > attackDistance)
         {
             return INode.State.SUCCESS;
         }
@@ -304,7 +305,41 @@ public class MonsterAIController : MonoBehaviour
     
     private IEnumerator JumpingAndBodySlamActionCoroutine()
     {
-        yield return null;
+        shouldLookAtPlayer = false;
+        agent.enabled = false;
+        
+        Vector3 direction = player.transform.position - transform.position;
+        direction.y = 0;
+        direction.Normalize(); // 방향만 유지, 길이는 1로 만듬
+
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = startPosition + direction * jumpDistance;
+        
+        float duration = 0.5f; // 점프 시간
+        float elapsed = 0f;        
+        
+        biteAttackFinished = false;
+        animator.SetBool("BiteAttack", true);
+        isLanding = false;
+        
+        while (elapsed < duration)
+        {
+            if (biteAttackFinished && !isLanding)
+            {
+                Debug.Log("실행");
+                animator.SetBool("BiteAttack", false);
+                isLanding = true;
+            }
+            
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        
+        animator.SetBool("BiteLanding", false);
+        transform.position = targetPosition;
+        
+        shouldLookAtPlayer = true;
         currentAction = null;
     }
 
@@ -328,6 +363,12 @@ public class MonsterAIController : MonoBehaviour
     public void OnFlyingRoarEnd()
     {
         flyingRoarEnded = true;
+    }
+
+    public void BiteAttackEnd()
+    {
+        Debug.Log("실행?");
+        biteAttackFinished = true;
     }
     
     private void LookAtPlayer()
