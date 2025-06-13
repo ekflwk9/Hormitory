@@ -14,8 +14,8 @@ public class DebugTool : EditorWindow
     {
         //GUILayout.Label("디버그 전용 패널");
         //GUILayout.Space(10f);
-        //itemId = EditorGUILayout.IntField("획득할 아이템 아이디", itemId);
-
+        // itemId = EditorGUILayout.IntField("획득할 아이템 아이디", itemId);
+        
         if (GUILayout.Button("어드레서블 로드")) Addressable();
 
         GUILayout.Space(15f);
@@ -25,6 +25,8 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("총알 추가")) OnBullet(true);
         else if (GUILayout.Button("총알 감소")) OnBullet(false);
         else if (GUILayout.Button("피격 쉐이더")) HitView();
+        else if (GUILayout.Button("좌물쇠테스트")) MatchPuzzle();
+
     }
 
     private void Addressable()
@@ -57,6 +59,22 @@ public class DebugTool : EditorWindow
     private void HitView()
     {
         UiManager.Instance.Get<HitUi>().HitView();
+    }
+
+    private void MatchPuzzle()
+    {
+        int passWord = Random.Range(0, 10000);
+        // CountMatchController 인스턴스 찾기
+        // 기존에 Instance로 되어있던 CountMatchController가 MonoBehavior를 잃으면서
+        // 시작하는 위치가 CountMatchController로 변경됨 => 씬에서 해당.cs를 가진 UI를 찾아야 하는 상황
+        var controller = Object.FindObjectOfType<CountMatchController>();
+        if (controller == null)
+        {
+            Debug.LogError("CountMatchController를 씬에서 찾을 수 없습니다.");
+            return;
+        }
+
+        controller.SetRequiredNum(passWord);
     }
 }
 #endif
