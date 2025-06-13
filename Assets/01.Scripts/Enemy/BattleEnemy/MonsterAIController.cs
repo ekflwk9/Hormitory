@@ -91,7 +91,7 @@ public class MonsterAIController : MonoBehaviour
         flyingBodySlam.Add(flyBodySlam);
         
         jumpingBodySlam.Add(playerOutOfDetectDistance);
-        jumpingBodySlam.Add(currentActionNull);
+        jumpingBodySlam.Add(currentActionNullOrChasingPlayer);
         jumpingBodySlam.Add(jumpBodySlam);
         
         tailAttack.Add(playerInAttackDistance);
@@ -156,10 +156,7 @@ public class MonsterAIController : MonoBehaviour
 
     private INode.State IsPlayerOutOfDetectDistanceAction()
     {
-        float sqrTempDistance = (player.transform.position - transform.position).sqrMagnitude;
-        float sqrDetectedDistance = detectedDistance * detectedDistance;
-
-        if (sqrTempDistance > sqrDetectedDistance)
+        if (Vector3.Distance(player.transform.position, transform.position) > detectedDistance)
         {
             return INode.State.SUCCESS;
         }
@@ -178,11 +175,8 @@ public class MonsterAIController : MonoBehaviour
     }
 
     private INode.State IsPlayerInAttackDistanceAction()
-    {       
-        float sqrTempDistance = (player.transform.position - transform.position).sqrMagnitude;
-        float sqrAttackDistance = attackDistance * attackDistance;
-
-        if (sqrTempDistance <= sqrAttackDistance)
+    {      
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
         {
             return INode.State.SUCCESS;
         }
@@ -307,8 +301,15 @@ public class MonsterAIController : MonoBehaviour
     
     private IEnumerator JumpingAndBodySlamActionCoroutine()
     {
-        shouldLookAtPlayer = false;
-        agent.enabled = false;
+        biteAttackFinished = false;
+        animator.SetBool("BiteAttack", true);
+        isLanding = false;
+        animator.SetBool("CrawlForward", false);
+        
+        shouldLookAtPlayer = true;
+        agent.enabled = true;
+        agent.isStopped = true;
+        agent.SetDestination(transform.position);
         
         Vector3 direction = player.transform.position - transform.position;
         direction.y = 0;
@@ -317,18 +318,13 @@ public class MonsterAIController : MonoBehaviour
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = startPosition + direction * jumpDistance;
         
-        float duration = 0.5f; // 점프 시간
+        float duration = 0.7f; // 점프 시간
         float elapsed = 0f;        
-        
-        biteAttackFinished = false;
-        animator.SetBool("BiteAttack", true);
-        isLanding = false;
         
         while (elapsed < duration)
         {
             if (biteAttackFinished && !isLanding)
             {
-                Debug.Log("실행");
                 animator.SetBool("BiteAttack", false);
                 isLanding = true;
             }
@@ -338,7 +334,6 @@ public class MonsterAIController : MonoBehaviour
             yield return null;
         }
         
-        animator.SetBool("BiteLanding", false);
         transform.position = targetPosition;
         
         shouldLookAtPlayer = true;
@@ -347,10 +342,15 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator TailAttackActionCoroutine()
     {
-        yield return new WaitForSeconds(0.2f);
+        animator.SetBool("CrawlForward", false);
+        
+        yield return new WaitForSeconds(0.4f);
         shouldLookAtPlayer = false;
-        agent.enabled = false;
-
+        agent.enabled = true;
+        agent.isStopped = true;
+        
+        agent.SetDestination(transform.position);
+        
         tailAttackFinished = false;
         animator.SetBool("TailAttack", true);
         
@@ -363,7 +363,19 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator ChasingPlayerActionCoroutine()
     {
-        yield return null;
+        shouldLookAtPlayer = true;
+        agent.enabled = true;
+        agent.isStopped = false;
+        
+        animator.SetBool("CrawlForward", true);
+
+        agent.speed = 2f;
+        agent.SetDestination(player.transform.position);
+        
+        yield return new WaitUntil(() => agent.remainingDistance < 0.3f);
+        
+        animator.SetBool("CrawlForward", false);
+        
         currentAction = null;
     }
     
