@@ -8,6 +8,7 @@ public class PuzzlePlayerController : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 10f;
     [SerializeField] private Transform cameraTransform;
     private float xRotation = 0f;
+    private float yRotation = 0f;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
@@ -68,10 +69,10 @@ public class PuzzlePlayerController : MonoBehaviour
         float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -80f, 50f);
+        yRotation += mouseX;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
 
    
