@@ -12,7 +12,7 @@ public class ChaseState : BaseState
     public override void Enter()
     {
         NavMeshAgent.isStopped = false;
-        //애니매이터
+        StartAnimation(StateMachine.PuzzleMonster.AnimationData.ChaseParameterHash);
     }
 
     public override void Update()
@@ -28,7 +28,7 @@ public class ChaseState : BaseState
     public override void Exit()
     {
         NavMeshAgent.isStopped = true;
-        //애니매이션 종료
+        StopAnimation(StateMachine.PuzzleMonster.AnimationData.ChaseParameterHash);
     }
 
 }

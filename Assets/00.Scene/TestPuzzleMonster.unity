@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 995421400}
   - component: {fileID: 995421399}
   - component: {fileID: 995421401}
+  - component: {fileID: 995421402}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -652,11 +653,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 1
+  m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -673,7 +674,7 @@ Transform:
   m_GameObject: {fileID: 995421398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 11.56, y: 0, z: -4.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -695,6 +696,25 @@ MonoBehaviour:
   _playerTransform: {fileID: 1087098098}
   _detectRange: 5
   _searchDuration: 3
+  _patrolRadius: 10
+  _patrolWaitTime: 1.2
+--- !u!114 &995421402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995421398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31056b11bd7a48f429c63a11fc115489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationData:
+    idleParameterName: Idle
+    walkParameterName: Walk
+    chaseParameterName: Chase
+    searchParameterName: Search
 --- !u!1 &1060598105
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,7 +892,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 97f5d06a130764642b7d2a4b38ef39a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1772037747}
   m_SourcePrefab: {fileID: 100100000, guid: 97f5d06a130764642b7d2a4b38ef39a6, type: 3}
 --- !u!1 &1581332250
 GameObject:
@@ -992,12 +1016,39 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1772037745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 97f5d06a130764642b7d2a4b38ef39a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1565613680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1772037746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97f5d06a130764642b7d2a4b38ef39a6,
     type: 3}
   m_PrefabInstance: {fileID: 1565613680}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1772037747
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772037745}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8617fcac9ecd06349821967e4dcd56f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1847149847
 GameObject:
   m_ObjectHideFlags: 0

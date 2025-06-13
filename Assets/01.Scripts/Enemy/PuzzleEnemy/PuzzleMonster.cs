@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PuzzleMonster : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private MonsterAnimationData animationData;
+    public MonsterAnimationData AnimationData => animationData;
+    public Animator Animator { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    private MonsterStateMachine stateMachine;
+    void Awake()
     {
+        AnimationData.Initialize();
         
+        Animator = GetComponentInChildren<Animator>();
+        stateMachine = new MonsterStateMachine();
     }
 }

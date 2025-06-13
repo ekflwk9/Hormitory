@@ -20,14 +20,22 @@ public class MonsterStateMachine : MonoBehaviour
     private IState _currentState;
     private Dictionary<MonsterStateType, IState> _states;
 
+    [SerializeField] private float _patrolRadius = 10f; //순찰 반경
+    [SerializeField] private float _patrolWaitTime = 2f; // 목적지 도착 후 대기 시간
+    
+    public PuzzleMonster PuzzleMonster { get; private set; }
+
     public Transform PlayerStransform => _playerTransform;
     public float DetectRange => _detectRange;
     public float SearchDuration => _searchDuration;
     public NavMeshAgent NavMeshAgent { get; private set; }
+    public float PatrolRadius => _patrolRadius;
+    public float PatrolWaitTime => _patrolWaitTime;
+    
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
-
+        PuzzleMonster = GetComponent<PuzzleMonster>();
         _states = new Dictionary<MonsterStateType, IState>
         {
             { MonsterStateType.Idle, new IdleState(this) },

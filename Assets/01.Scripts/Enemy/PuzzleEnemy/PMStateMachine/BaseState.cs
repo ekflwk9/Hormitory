@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
 public class BaseState : IState
 {
     protected readonly MonsterStateMachine StateMachine;
@@ -11,6 +12,9 @@ public class BaseState : IState
     protected float DetectRange => StateMachine.DetectRange;
     protected float SearchDuration => StateMachine.SearchDuration;
 
+    protected float PatrolRadius => StateMachine.PatrolRadius;
+    protected float PatrolWaitTime => StateMachine.PatrolWaitTime;
+
     protected BaseState(MonsterStateMachine stateMachine)
     {
         StateMachine = stateMachine;
@@ -18,18 +22,27 @@ public class BaseState : IState
 
     public virtual void Enter()
     {
-        
+
     }
 
 
     public virtual void Exit()
     {
-        
+
     }
 
     public virtual void Update()
     {
-        
+
     }
 
+    protected void StartAnimation(int animationHash)
+    {
+        StateMachine.PuzzleMonster.Animator.SetBool(animationHash, true);
+    }
+
+    protected void StopAnimation(int animationHash)
+    {
+        StateMachine.PuzzleMonster.Animator.SetBool(animationHash, false);
+    }
 }

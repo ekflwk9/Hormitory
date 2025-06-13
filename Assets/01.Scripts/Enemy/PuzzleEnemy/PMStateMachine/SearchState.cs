@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class SearchState : BaseState
 {
+    private Coroutine _searchCoroutine;
     public SearchState(MonsterStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
     {
-        //애니메이션
+        NavMeshAgent.isStopped = true;
+        
+        StartAnimation(StateMachine.PuzzleMonster.AnimationData.SearchParameterHash);
+        _searchCoroutine = StateMachine.StartCoroutine(SearchCoroutine());
     }
 
     public override void Exit()
     {
-        //애니메이션 리셋
+        if (_searchCoroutine != null)
+        {
+            StateMachine.StopCoroutine(_searchCoroutine);
+            _searchCoroutine = null;
+        }
+        NavMeshAgent.isStopped = false;
+        
+        StopAnimation(StateMachine.PuzzleMonster.AnimationData.SearchParameterHash);
     }
 
-    private IEnumerator SerchCoroutine()
+    private IEnumerator SearchCoroutine()
     {
+        yield return new WaitForSeconds(SearchDuration);
         float timer = 0f;
         while (timer < SearchDuration)
         {
