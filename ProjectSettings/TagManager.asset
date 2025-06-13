@@ -12,6 +12,7 @@ TagManager:
   - ExplosiveBarrel
   - ImpactNormal
   - ImpactObstacle
+  - Puzzle
   layers:
   - Default
   - TransparentFX
