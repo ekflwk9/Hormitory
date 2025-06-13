@@ -33,6 +33,7 @@ public class CountMatch : MonoBehaviour, IPuzzle
     private int maxChance = 3;
     private int failCount = 0;
     private int[] currentNums = new int[4]; //4개의 칸에 설정된 현재 수 = numTexts 받아오기
+    private int requireNum; // 외부에서 받아온 RequiredNum을 저장하는 변수
 
     // 정답 세팅 로직(상호작용한 오브젝트의 Interaction에서 호출
     public void SetRequiredNum(IRequireNumber numData)
@@ -60,8 +61,18 @@ public class CountMatch : MonoBehaviour, IPuzzle
         //2.
         if (requireNumberData != null)
         {
-            int requireNum = requireNumberData.RequiredNum;
-            Service.Log($"해당 퍼즐의 RequiredNum(정답): {requireNum}"); //정상적으로 데이터를 받아왔는지 확인(체크 완료)
+            requireNum = requireNumberData.RequiredNum;
+            if(requireNum > 9999)
+            {
+                Service.Log($"CountMatch: RequiredNum이 9999를 초과하여, 값이 9999로 고정됩니다, 입력값: {requireNum}");
+                requireNum = 9999;
+            }
+            else if (requireNum < 0)
+            {
+                Service.Log($"CountMatch: RequiredNum이 0 미만이므로, 값이 0000으로 고정됩니다. 입력값: {requireNum}");
+                requireNum = 0;
+            }
+                Service.Log($"해당 퍼즐의 RequiredNum(정답): {requireNum}"); //정상적으로 데이터를 받아왔는지 확인(체크 완료)
 
             ResetNum(); // 빈 칸의 모든 수를 0으로 변경(초기값)
             
@@ -70,6 +81,8 @@ public class CountMatch : MonoBehaviour, IPuzzle
                 int idx = i; // NumberChange에 연결할 배열 (1번 버튼을 누르면 1번 Text가 변경되도록)
                 // 더 나은 방법이 있을 것 같은데 (체크)
                 Service.Log($"CountMatch: for문 진입 현재 {idx} 번");
+
+                // UP Button과 DownButton을 각 배열 순서에 맞춰서 연결지음.
                 upButtons[idx].onClick.RemoveAllListeners(); // 중복 방지
                 upButtons[idx].onClick.AddListener(() => ChangeNumber(idx, 1)); //up 버튼 클릭시 1 상승
                 downButtons[idx].onClick.RemoveAllListeners();
@@ -78,6 +91,7 @@ public class CountMatch : MonoBehaviour, IPuzzle
 
             if(selectButton != null)
             {
+                //selectButton을 연결함
                 selectButton.onClick.RemoveAllListeners();
                 selectButton.onClick.AddListener(GuessNum);
             }
@@ -163,7 +177,7 @@ public class CountMatch : MonoBehaviour, IPuzzle
         // 2. 조정된 숫자와 맞춰야 할 숫자를 확인한다.
         // 3. 동일하면 IsSolved로, 틀리면 Incorrect로
 
-        if(userNum == requireNumberData.RequiredNum)
+        if(userNum == requireNum)
         {
             IsSolved();
         }

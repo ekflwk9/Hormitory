@@ -12,8 +12,10 @@ public class PuzzleManager : MonoBehaviour
 
     // 모든 퍼즐을 쉽게 접근 할 수 있도록 Instance하는 역할. 
     // 모든 퍼즐은 Dictionary로 관리하며, 모든 퍼즐은 IPuzzle 인터페이스를 가진다. (List로 하게 될지도 모릅니다)
+    // 2개 밖에 없어서 필요 없을 것 같아요 
 
     public CountMatch CountMatch;
+    public TimingMatch TimingMatch;
 
     private void Awake()
     {
