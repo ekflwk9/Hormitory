@@ -171,8 +171,8 @@ Material:
     - __dirty: 0
     m_Colors:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 0.50735295, g: 0.34768596, b: 0.10818548, a: 0.534}
-    - _Color: {r: 0.50735295, g: 0.34768593, b: 0.10818545, a: 0.534}
+    - _BaseColor: {r: 0.50735295, g: 0.34768593, b: 0.10818545, a: 0.47058824}
+    - _Color: {r: 0.50735295, g: 0.3476859, b: 0.1081854, a: 0.47058824}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
