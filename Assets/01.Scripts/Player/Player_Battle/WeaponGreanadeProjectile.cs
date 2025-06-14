@@ -32,7 +32,7 @@ public class WeaponGreanadeProjectile : MonoBehaviour
         foreach (Collider hit in colliders)
         {
             if(hit != null && hit.GetComponent<IDamagable>() != null)
-            hit.GetComponent<IDamagable>().TakeDamage(explosionDamage);
+                hit.GetComponent<IDamagable>().TakeDamage(explosionDamage);
             
             // 중력을 가지고 있는 오브젝트면 밀려나도록
             Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
