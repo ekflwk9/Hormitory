@@ -218,6 +218,11 @@ public class WeaponAssaultRifle : WeaponBase
                 IDamagable damageable = hit.transform.GetComponent<IDamagable>();
                 damageable.TakeDamage(weaponSetting.damage);
             }
+            else if (hit.transform.CompareTag("ExplosiveBarrel"))
+            {
+                IDamagable damageable = hit.transform.GetComponent<IDamagable>();
+                damageable.TakeDamage(weaponSetting.damage);
+            }
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
         
