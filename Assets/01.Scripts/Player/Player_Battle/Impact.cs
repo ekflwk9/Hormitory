@@ -30,7 +30,10 @@ namespace _01.Scripts.Player.Player_Battle
             //파티클이 재생중이 아니면 삭제
             if (particle.isPlaying == false)
             {
-                memoryPool.DeactivatePoolItem(gameObject);
+                if (memoryPool != null)
+                {
+                    memoryPool.DeactivatePoolItem(gameObject);
+                }
             }
         }
     }
