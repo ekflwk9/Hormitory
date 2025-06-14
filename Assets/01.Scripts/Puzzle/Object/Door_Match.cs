@@ -17,9 +17,7 @@ public class Door_Match : MonoBehaviour, IInteractable
         // 2. CountMatch의 StartPuzzle을 시작시킨다.
 
         MatchCount = MatchData.RequiredNum;
-
-
-        PuzzleManager.instance.CountMatch.SetRequiredNum(MatchCount);
+        PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(MatchCount);
     }
 
 }
