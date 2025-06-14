@@ -21,8 +21,8 @@ public class WeaponRevolver : WeaponBase
         base.Setup();
 
         impactMemoryPool = GetComponent<ImpactMemoryPool>();
-        mainCamera = CameraManager.Instance.MainCamera;
-        
+
+        mainCamera = Camera.main;
         //탄 & 탄창 수 초기화
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
         weaponSetting.currentAmmo = weaponSetting.maxAmmo;
@@ -171,15 +171,5 @@ public class WeaponRevolver : WeaponBase
     {
         isReload = false;
         isAttack = false;
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
