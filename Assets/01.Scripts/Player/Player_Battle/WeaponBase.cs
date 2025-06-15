@@ -18,7 +18,7 @@ public class AmmoEvent : UnityEngine.Events.UnityEvent<int, int>{}
 [System.Serializable]
 public class MagazineEvent : UnityEngine.Events.UnityEvent<int>{}
 
-public enum WeaponType{ Main = 0, Sub, melee, Throw}
+public enum WeaponType{ Main = 0, Melee, Throw}
 
 public abstract class WeaponBase : MonoBehaviour
 {
@@ -52,15 +52,5 @@ public abstract class WeaponBase : MonoBehaviour
     {
         animator = GetComponent<PlayerAnimatorController>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
