@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LockUi : UiBase
@@ -6,49 +7,36 @@ public class LockUi : UiBase
     [SerializeField] private TMP_Text[] number;
     [SerializeField] private int[] passWord;
 
-    private void Reset()
+    public override void Init()
     {
-        number = GetComponentsInChildren<TMP_Text>();
+        var tempList = new List<TMP_Text>();
+        var tempArray = GetComponentsInChildren<TMP_Text>();
+
+        for (int i = 0; i < tempArray.Length; i++)
+        {
+            if (tempArray[i].name.Contains("Number"))
+            {
+                tempList.Add(tempArray[i]);
+            }
+        }
+
+        number = tempList.ToArray();
         passWord = new int[number.Length];
 
         var buttonComponent = GetComponentsInChildren<SetLockButton>();
         var findCount = 0;
-        var count = 1;
+        var count = 0;
 
         for (int i = 0; i < buttonComponent.Length; i++)
         {
-            count++;
-
-            if (count == 3)
+            if (count == 2)
             {
                 count = 0;
                 findCount++;
             }
 
-            buttonComponent[i].SetButtonIndex(findCount, count);
-        }
-    }
-
-    public override void Init()
-    {
-        if (number.Length == 0)
-        {
-            var buttonComponent = GetComponentsInChildren<SetLockButton>();
-            var findCount = 0;
-            var count = 0;
-
-            for (int i = 0; i < buttonComponent.Length; i++)
-            {
-                count++;
-
-                if (count == 2)
-                {
-                    count = 0;
-                    findCount++;
-                }
-
-                buttonComponent[i].SetButtonIndex(findCount, count);
-            }
+            buttonComponent[i].SetButtonIndex(findCount);
+            count++;
         }
 
         UiManager.Instance.Add<LockUi>(this);
@@ -60,11 +48,10 @@ public class LockUi : UiBase
         UiManager.Instance.Get<FadeUi>().OnFade();
 
         if (!_isActive)
-        { 
-            for(int i =0; i < number.Length; i++)
+        {
+            for (int i = 0; i < number.Length; i++)
             {
                 passWord[i] = 0;
-
             }
         }
     }
@@ -78,12 +65,17 @@ public class LockUi : UiBase
         }
 
         passWord[_buttonIndex] += _value;
+
+        if (passWord[_buttonIndex] < 0) passWord[_buttonIndex] = 9;
+        else if (passWord[_buttonIndex] > 9) passWord[_buttonIndex] = 0;
+
         number[_buttonIndex].text = passWord[_buttonIndex].ToString();
     }
 
     public void SetPassWord()
     {
         //정보 전송
+
         //PuzzleManager.instance.
     }
 }

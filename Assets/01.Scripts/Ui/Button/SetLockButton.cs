@@ -6,10 +6,12 @@ public class SetLockButton : UiButton
     [SerializeField] private int index;
     [SerializeField] private int value;
 
-    public void SetButtonIndex(int thisIndex, int _setValue)
+    public void SetButtonIndex(int thisIndex)
     {
+        if (this.name.Contains("Up")) value = 1;
+        else value = -1;
+
         index = thisIndex;
-        value = _setValue == 1 ? 1 : -1;
     }
 
     public override void OnPointerClick(PointerEventData eventData)
