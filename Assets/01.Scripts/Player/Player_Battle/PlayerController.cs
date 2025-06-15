@@ -20,6 +20,8 @@ public class PlayerController : BasePlayerController, IDamagable
     [SerializeField] private float camFOV;
     [SerializeField] private float bonusFOV = 15f;
     
+    private bool isInvincibility;
+    private bool isDie;
     private bool isRolling;
     
     private void Awake()
@@ -93,7 +95,8 @@ public class PlayerController : BasePlayerController, IDamagable
 
     public void TakeDamage(float damage)
     {
-        bool isDie = status.DecreasHP(damage);
+        if (isInvincibility) return;
+        isDie = status.DecreasHP(damage);
         
         if (isDie == true)
         {
@@ -111,7 +114,8 @@ public class PlayerController : BasePlayerController, IDamagable
     {
         isRolling = true;
         float elapsed = 0f;
-        
+        isInvincibility = true;
+        weapon.Animator.SetTrigger("isRoll");
         mainCamera.fieldOfView = camFOV - bonusFOV;
         moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         Vector3 direction = (moveInput.y * transform.forward) + (moveInput.x * transform.right).normalized;
@@ -125,6 +129,7 @@ public class PlayerController : BasePlayerController, IDamagable
         
         mainCamera.fieldOfView = camFOV;
         yield return new WaitForSeconds(delay);
+        isInvincibility = false;
         isRolling = false;
     }
 }
