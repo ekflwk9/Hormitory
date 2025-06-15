@@ -58,7 +58,9 @@ public class MonsterAIController : MonoBehaviour
     private bool tailAttackFinished = false;
     private bool isLanding = false;
     
+    [Header("Battle")]
     [SerializeField] private int damageAmount = 20;
+    [SerializeField] MonsterStatController monsterStatController;
     
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
@@ -68,6 +70,7 @@ public class MonsterAIController : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        monsterStatController = GetComponent<MonsterStatController>();
     }
 
     private void Awake()
@@ -111,15 +114,18 @@ public class MonsterAIController : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        
-        // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
-        if (shouldLookAtPlayer)
+        if (!monsterStatController.isDead)
         {
-            LookAtPlayer();
-        }
+            timer += Time.deltaTime;
+        
+            // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
+            if (shouldLookAtPlayer)
+            {
+                LookAtPlayer();
+            }
 
-        rootNode.Evaluate();
+            rootNode.Evaluate();
+        }
     }
 
 

@@ -1,21 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterStatController : MonoBehaviour, IDamagable
 {
-    public float MonsterHealth { get; private set; } = 100f;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float MonsterHealth { get; private set; }
+    public bool isDead = false;
+    [SerializeField] private Animator animator;
 
-    // Update is called once per frame
-    void Update()
+    private void Reset()
     {
-        
+        MonsterHealth = 100f;
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(float damage)
@@ -30,7 +27,13 @@ public class MonsterStatController : MonoBehaviour, IDamagable
 
     public void Die()
     {
-        Service.Log("사망");
-        // 사망 로직
+        animator.SetBool("BiteAttack", false);
+        animator.SetBool("TailAttack", false);
+        animator.SetBool("CrawlForward", false);
+        animator.SetBool("Fly", false);
+        animator.SetBool("TakeOff", false);
+        
+        isDead = true;
+        
     }
 }
