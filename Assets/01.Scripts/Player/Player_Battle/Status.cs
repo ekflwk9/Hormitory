@@ -31,17 +31,6 @@ public class Status : MonoBehaviour
         currentHP = maxHP;
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public bool DecreasHP(float damage)
     {
         float previousHP = currentHP;
