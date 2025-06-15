@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5889024263036039098}
   - component: {fileID: 291929483988369454}
   m_Layer: 5
-  m_Name: YesButton
+  m_Name: Yes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touch: {fileID: 6427287967265236217}
   index: 0
-  value: 1
+  value: 0
 --- !u!1 &923776482822204404
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,9 +5085,7 @@ MonoBehaviour:
   - {fileID: 3640526824479174849}
   - {fileID: 8901139297354827390}
   - {fileID: 5082602857777746201}
-  - {fileID: 4264559866119824444}
-  - {fileID: 7349662305031726402}
-  passWord: 000000000000000000000000000000000000000000000000
+  passWord: 00000000000000000000000000000000
 --- !u!1 &4144266433077334090
 GameObject:
   m_ObjectHideFlags: 0
@@ -6195,7 +6193,7 @@ GameObject:
   - component: {fileID: 1044518904740356595}
   - component: {fileID: 8901139297354827390}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6494,7 +6492,7 @@ GameObject:
   - component: {fileID: 8745321484023817867}
   - component: {fileID: 5082602857777746201}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8080,7 +8078,7 @@ GameObject:
   - component: {fileID: 7287110169904981927}
   - component: {fileID: 3640526824479174849}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8843,7 +8841,7 @@ GameObject:
   - component: {fileID: 7920866283953340400}
   - component: {fileID: 4405053747595121518}
   m_Layer: 5
-  m_Name: CloseButton
+  m_Name: Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8933,7 +8931,7 @@ GameObject:
   - component: {fileID: 3926717090187732963}
   - component: {fileID: 3381967188204796718}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

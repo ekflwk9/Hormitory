@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using _01.Scripts.Component;
 
 public class SolidUi : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class SolidUi : MonoBehaviour
 
     private void Start()
     {
-        //target = ;
+        target = CameraManager.Instance.MainCamera.transform;
     }
 
     private void LateUpdate()
