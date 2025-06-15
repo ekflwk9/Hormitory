@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1626847103370915202}
   - component: {fileID: 6621454387655800453}
   - component: {fileID: 824874972907192443}
-  - component: {fileID: 14261496812384117}
+  - component: {fileID: 3836574802195378827}
   m_Layer: 9
   m_Name: big_bullet_casing
   m_TagString: Untagged
@@ -136,7 +136,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &14261496812384117
+--- !u!114 &3836574802195378827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

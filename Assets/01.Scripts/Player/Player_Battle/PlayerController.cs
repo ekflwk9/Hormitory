@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts.Player.Player_Battle;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
     [Header("Input KeyCodes")]
-    [SerializeField] private KeyCode keyCodeRun = KeyCode.LeftShift;
-    [SerializeField] private KeyCode keyCodeJump = KeyCode.Space;
     [SerializeField]private KeyCode keyCodeReload = KeyCode.R;
-    private RotateToMouse rotateToMouse;
-    private MovementCharacterController movement;
     private Status status;
-    private PlayerAnimatorController animator;
-    private WeaponAssaultRifle weapon;
+    private WeaponBase weapon;
+
 
     private void Awake()
     {
@@ -20,61 +17,19 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         
-        rotateToMouse = GetComponent<RotateToMouse>();
-        movement = GetComponent<MovementCharacterController>();
         status = GetComponent<Status>();
-        animator = GetComponent<PlayerAnimatorController>();
-        weapon = GetComponentInChildren<WeaponAssaultRifle>();
     }
 
     private void Update()
     {
-        UpdateRotate();
-        UpdateMove();
-        UpdateJump();
         UpdateWeaponAction();
-    }
-
-    private void UpdateRotate()
-    {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-        
-        rotateToMouse.UpdateRotate(mouseX, mouseY);
-    }
-
-    private void UpdateMove()
-    {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        if (x != 0 || z != 0) // 이동중일때 ( 걷기 or 뛰기)
+        if(Input.GetKeyDown(KeyCode.H))
         {
-            bool isRun = false;
-            
-            isRun = Input.GetKey(keyCodeRun);
-            
-            movement.MoveSpeed = isRun == true ? status.RunSpeed : status.WalkSpeed;
-        }
-        else
-        {
-            {
-                movement.MoveSpeed = 0;
-                animator.MoveSpeed = 0;
-            }
-        }
-        
-        movement.MoveTo(new Vector3(x, 0, z));
-    }
-
-    private void UpdateJump()
-    {
-        if (Input.GetKeyDown(keyCodeJump))
-        {
-            movement.Jump(); 
+            TakeDamage(10);
         }
     }
-
+    
+    
     private void UpdateWeaponAction()
     {
         if (Input.GetMouseButtonDown(0))
@@ -99,5 +54,21 @@ public class PlayerController : MonoBehaviour
         {
             weapon.StartReload();
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        bool isDie = status.DecreasHP(damage);
+        
+        if (isDie == true)
+        {
+            //GameOver
+        }
+    }
+
+
+    public void SwitchingWeapon(WeaponBase newWeapon)
+    {
+        weapon = newWeapon;
     }
 }
