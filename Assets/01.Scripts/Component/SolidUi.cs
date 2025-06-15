@@ -3,13 +3,13 @@ using _01.Scripts.Component;
 
 public class SolidUi : MonoBehaviour
 {
-    [Header("고정 크기 값")]
     [SerializeField] private float scale;
     private Transform target;
 
     private void Start()
     {
         target = CameraManager.Instance.MainCamera.transform;
+        scale = this.transform.localScale.x;
     }
 
     private void LateUpdate()

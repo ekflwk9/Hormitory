@@ -17,8 +17,9 @@ public class DeadUi : UiBase
     {
         var thisScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(thisScene);
-        this.gameObject.SetActive(false);
 
+        this.gameObject.SetActive(false);
+        UiManager.Instance.Get<HitUi>().ResetView();
         UiManager.Instance.Get<FadeUi>().OnFade();
     }
 }
