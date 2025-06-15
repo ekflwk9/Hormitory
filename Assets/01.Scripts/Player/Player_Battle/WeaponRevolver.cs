@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class WeaponRevolver : WeaponBase
 {
@@ -13,7 +16,7 @@ public class WeaponRevolver : WeaponBase
     [Header("Spawn Ponts")] [SerializeField]
     private Transform bulletSpawnPoint;                 //총알 생성 위치
     [SerializeField]private Transform casingSpawnPoint; //탄피 생성 위치
-
+    float spreadAmount => animator.AimModeIs ? 0f : 0.05f;
     [Header("Aim UI")] [SerializeField] private Image imageAim; // default/aim 모드에 따라 Aim 이미지 활성/비활성
     
     private bool isModeChange = false;                  //모드 전환 여부 체크
@@ -182,23 +185,51 @@ public class WeaponRevolver : WeaponBase
         RaycastHit hit;
         Vector3 targetPoint = Vector3.zero;
         
-        //화면의 중앙 좌표 (Aim 기준으로 Raycast 연산)
-        ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f);
-        //공격 사거리 안에 부딪치는 오브젝트 있으면 targetPoint는 광선에 부딪친 위치
-        if(Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
+        // 탄 정확도 조절
+        Vector2 spreadOffset = new Vector2(
+            Random.Range(-spreadAmount, spreadAmount),
+            Random.Range(-spreadAmount, spreadAmount)
+        );
+        //에임 모드 시 레이캐스트
+        if (animator.AimModeIs)
         {
-            targetPoint = hit.point;
+            //에임 모드 조준점과 일치한 방향으로 레이캐스트
+            ray = mainCamera.ViewportPointToRay(new Vector2(0.515f, 0.575f));
+
+            if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
+            {
+                targetPoint = hit.point;
+            }
+            else
+            {
+                targetPoint = ray.origin + ray.direction * weaponSetting.attackDistance;
+            }
         }
-        // 공격 사거리 안에 부딪치는 오브젝트가 없으면 targetPoint는 최대 사거리 위치
+        //에임 모드 아닐시 레이 캐스트
         else
         {
-            targetPoint = ray.origin + ray.direction * weaponSetting.attackDistance;
+            //화면의 중앙 좌표 (Aim 기준으로 Raycast 연산)
+            Ray spreadRay = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f) + spreadOffset);
+            
+            //공격 사거리 안에 부딪치는 오브젝트 있으면 targetPoint는 광선에 부딪친 위치
+            if(Physics.Raycast(spreadRay, out hit, weaponSetting.attackDistance))
+            {
+                targetPoint = hit.point;
+            }
+            // 공격 사거리 안에 부딪치는 오브젝트가 없으면 targetPoint는 최대 사거리 위치
+            else
+            {
+                targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
+            }
+            Debug.DrawRay(spreadRay.origin, spreadRay.direction * 5f, Color.red, 20f);
         }
-        Debug.DrawRay(ray.origin, ray.direction * weaponSetting.attackDistance, Color.red, 10f);
+
+        
+        
         
         //첫번째 Raycast연산으로 얻어진 targetPoint를 목표지점으로 설정하고
         //총구를 시작지점으로 하여 Raycast 연산
-        Vector3 attackDirection = (targetPoint - transform.position).normalized;
+        Vector3 attackDirection = (targetPoint - bulletSpawnPoint.position).normalized;
         if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
         {
             impactMemoryPool.SpawnImpact(hit);
@@ -214,7 +245,7 @@ public class WeaponRevolver : WeaponBase
                 damageable.TakeDamage(weaponSetting.damage);
             }
         }
-        Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
+        //Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue,2f);
         
     }
     private IEnumerator OnModeChange()
@@ -248,5 +279,34 @@ public class WeaponRevolver : WeaponBase
         isReload = false;
         isAttack = false;
         isModeChange = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+        
+        Gizmos.color = Color.cyan;
+        Ray ray;
+        RaycastHit hit;
+        Vector3 targetPoint = Vector3.zero;
+        
+        // 탄 정확도 조절
+        Vector2 spreadOffset = new Vector2(
+            Random.Range(-spreadAmount, spreadAmount),
+            Random.Range(-spreadAmount, spreadAmount)
+        );
+        
+            Ray spreadRay = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f) + spreadOffset);
+            //공격 사거리 안에 부딪치는 오브젝트 있으면 targetPoint는 광선에 부딪친 위치
+            if(Physics.Raycast(spreadRay, out hit, weaponSetting.attackDistance))
+            {
+                targetPoint = hit.point;
+            }
+            // 공격 사거리 안에 부딪치는 오브젝트가 없으면 targetPoint는 최대 사거리 위치
+            else
+            {
+                targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
+            }
+            Gizmos.DrawRay(spreadRay.origin, spreadRay.direction * 5f);
     }
 }
