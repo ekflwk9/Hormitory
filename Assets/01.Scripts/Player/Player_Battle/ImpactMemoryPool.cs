@@ -52,18 +52,23 @@ namespace _01.Scripts.Player.Player_Battle
         public void SpawnImapct(Collider other, Transform knifeTransform)
         {
             //부딪친 오브젝트의 Tag에 따라 다르게 처리
-            if (other.transform.CompareTag("ImpactNormal"))
+            if (other.CompareTag("ImpactNormal"))
             {
                 //Quaternion.Inverse(knifeTransform.rotation) rotation과 반대되는 회전 값을 반환
                 OnSpawnImpact(ImpactType.Normal, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation));
             }
-            else if (other.transform.CompareTag("ImpactObstacle"))
+            else if (other.CompareTag("ImpactObstacle"))
             {
                 OnSpawnImpact(ImpactType.Obstacle, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation));
             }
-            else if (other.transform.CompareTag("Enemy"))
+            else if (other.CompareTag("Enemy"))
             {
                 OnSpawnImpact(ImpactType.Enemy, knifeTransform.position,Quaternion.Inverse(knifeTransform.rotation));
+            }
+            else if (other.CompareTag("ExplosiveBarrel"))
+            {
+                Color color = other.transform.GetComponentInChildren<MeshRenderer>().material.color;
+                OnSpawnImpact(ImpactType.InteractionObject, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation), color);
             }
         }
 

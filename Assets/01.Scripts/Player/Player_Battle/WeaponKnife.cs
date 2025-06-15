@@ -45,7 +45,6 @@ public class WeaponKnife : WeaponBase
 
     public override void StartReload()
     {
-        throw new System.NotImplementedException();
     }
 
     private IEnumerator OnAttackLoop(int type)
@@ -80,15 +79,5 @@ public class WeaponKnife : WeaponBase
     public void StartWeaponKnifeCollider()
     {
         weaponKnifeCollider.StartCollider(weaponSetting.damage);
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
