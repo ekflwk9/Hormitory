@@ -45,7 +45,9 @@ public class WeaponSwitchSystem : MonoBehaviour
     private void UpdateSwitch()
     {
         if(!Input.anyKeyDown) return;
+        
         if (currentWeapon.Animator.AimModeIs) return;
+
 
         int inputIndex = 0;
         if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= weapons.Length))

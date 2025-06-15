@@ -16,7 +16,7 @@ public class WeaponRevolver : WeaponBase
     [Header("Spawn Ponts")] [SerializeField]
     private Transform bulletSpawnPoint;                 //총알 생성 위치
     [SerializeField]private Transform casingSpawnPoint; //탄피 생성 위치
-    float spreadAmount => animator.AimModeIs ? 0f : 0.05f;
+    float spreadAmount => animator.AimModeIs ? 0f : 0.5f;
     [Header("Aim UI")] [SerializeField] private Image imageAim; // default/aim 모드에 따라 Aim 이미지 활성/비활성
     
     private bool isModeChange = false;                  //모드 전환 여부 체크
