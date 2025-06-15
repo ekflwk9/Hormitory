@@ -6,10 +6,10 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(CameraManager.Instance != null)
-        CameraManager.Instance.SetCamera(GetComponent<Camera>());
+            CameraManager.Instance.SetCamera(GetComponent<Camera>());
     }
     
 }
