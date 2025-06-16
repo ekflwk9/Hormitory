@@ -24,6 +24,6 @@ public class MusicUi : UiBase
         var valueText = _value * 100f;
         sliderText.text = $"{valueText.ToString("F0")}%";
 
-        //배경음 메서드 호출
+        SoundManager.SetBgmVolume(_value);
     }
 }

@@ -33,6 +33,6 @@ public class SlotUi : UiBase
 
     public override void Show(bool _isActive)
     {
-        select.color = _isActive ? new Color(0.278f, 0.764f, 1f, 1f) : Color.clear;
+        select.color = _isActive ? new Color(0.278f, 0.764f, 1f, 1f) : Color.white;
     }
 }

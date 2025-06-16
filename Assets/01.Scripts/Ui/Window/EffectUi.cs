@@ -23,5 +23,7 @@ public class EffectUi : UiBase
 
         var valueText = _value * 100f;
         sliderText.text = $"{valueText.ToString("F0")}%";
+
+        SoundManager.SetSfxVolume(_value);
     }
 }
