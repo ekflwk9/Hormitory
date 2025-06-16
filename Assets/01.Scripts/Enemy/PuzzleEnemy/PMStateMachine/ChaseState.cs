@@ -9,6 +9,7 @@ public class ChaseState : BaseState
     {
     }
    
+   
     public override void Enter()
     {
         NavMeshAgent.speed = StateMachine.ChaseSpeed;
@@ -21,8 +22,9 @@ public class ChaseState : BaseState
         NavMeshAgent.SetDestination(PlayerTransform.position);
         float distance = Vector3.Distance(MonsterTransform.position,PlayerTransform.position);
 
-        if (distance > DetectRange ) // || hide 상태
+        if (distance > DetectRange ) // || hide상태
         {
+            
             StateMachine.TransitionTo(MonsterStateType.Search);
         }
     }
