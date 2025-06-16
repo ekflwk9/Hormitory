@@ -16,10 +16,6 @@ public enum CreateType
 public class CreateEditMap : MonoBehaviour
 {
     [Space(10f)]
-    [Header("어떤 오브젝트인가?")]
-    [SerializeField] private GameObject mapObject;
-
-    [Space(10f)]
     [Header("어느 방향으로 나아갈 것인가?")]
     [SerializeField] private CreateType direction;
 
@@ -30,21 +26,36 @@ public class CreateEditMap : MonoBehaviour
     [Header("몇 개 생성할 것인가?")]
     [SerializeField] private int spawnCount;
 
+    private bool isSpawn = true;
+
     private void Start()
     {
+        if (!isSpawn) return;
+
         SetFullMap(direction);
+        Destroy(this);
+    }
+
+    public void SetSpawn(bool _isSpawn)
+    {
+        isSpawn = _isSpawn;
     }
 
     private void SetFullMap(CreateType _direction)
     {
-        var nextPos = mapObject.transform.position;
+        var nextPos = this.transform.position;
         var newDiretion = Direction();
 
         for (int i = 0; i < spawnCount; i++)
         {
-            var spawnMapObject = Instantiate(mapObject);
-            nextPos += newDiretion;
+            var spawnMapObject = Instantiate(this.gameObject);
+            var component = spawnMapObject.GetComponent<CreateEditMap>();
 
+            component.SetSpawn(false);
+            Destroy(component);
+
+            nextPos += newDiretion;
+            spawnMapObject.name = $"{this.name} ({i})";
             spawnMapObject.transform.position = nextPos;
         }
     }
