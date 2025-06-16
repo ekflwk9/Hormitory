@@ -48,7 +48,6 @@ public class WeaponSwitchSystem : MonoBehaviour
         if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= weapons.Length))
         {
             SwitchingWeapon((WeaponType)(inputIndex - 1));
-
         }
 
     }
