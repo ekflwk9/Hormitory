@@ -31,19 +31,12 @@ public class Status : MonoBehaviour
         currentHP = maxHP;
     }
 
-    public bool DecreasHP(float damage)
+    public void DecreasHP(float damage)
     {
         float previousHP = currentHP;
-        
-        currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
-        
-        onHPEvent.Invoke(previousHP, currentHP);
-        
-        if (currentHP == 0)
-        {
-            return true;
-        }
 
-        return false;
+        currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
+
+        onHPEvent.Invoke(previousHP, currentHP);
     }
 }

@@ -18,7 +18,7 @@ public class AmmoEvent : UnityEngine.Events.UnityEvent<int, int>{}
 [System.Serializable]
 public class MagazineEvent : UnityEngine.Events.UnityEvent<int>{}
 
-public enum WeaponType{ Main = 0, Melee, Throw}
+public enum WeaponType{ Main = 0, Melee}
 
 public abstract class WeaponBase : MonoBehaviour
 {
