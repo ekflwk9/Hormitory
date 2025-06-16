@@ -25,7 +25,7 @@ public class WeaponKnifeCollider : MonoBehaviour
         this.damage = damage;
         collider.enabled = true;
 
-        StartCoroutine("DisableByTime", 0.1f);
+        StartCoroutine("DisableByTime", 0.2f);
     }
 
     private IEnumerator DisableByTime(float time)
@@ -45,10 +45,8 @@ public class WeaponKnifeCollider : MonoBehaviour
 
         if (other.CompareTag("ExplosiveBarrel"))
         {
-            other.GetComponent<IDamagable>()?.TakeDamage(damage);
+            other.GetComponent<ExplosionBarrel>().TakeDamageFromWeapon(damage, WeaponType.Melee);
             Debug.Log($"{damage}");
         }
-        
     }
-
 }

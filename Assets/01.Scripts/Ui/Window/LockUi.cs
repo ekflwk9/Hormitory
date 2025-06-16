@@ -74,8 +74,13 @@ public class LockUi : UiBase
 
     public void SetPassWord()
     {
-        //정보 전송
+        var passWordNumber = 0;
 
-        //PuzzleManager.instance.
+        for (int i = 0; i < passWord.Length; i++)
+        {
+            passWordNumber += passWord[i] + 1000;
+        }
+
+        PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(passWordNumber);
     }
 }

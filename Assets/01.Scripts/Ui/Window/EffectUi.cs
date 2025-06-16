@@ -24,6 +24,6 @@ public class EffectUi : UiBase
         var valueText = _value * 100f;
         sliderText.text = $"{valueText.ToString("F0")}%";
 
-        //사운드 조절 메서드
+        SoundManager.SetSfxVolume(_value);
     }
 }

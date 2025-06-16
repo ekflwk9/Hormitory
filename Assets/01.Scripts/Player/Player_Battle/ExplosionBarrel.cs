@@ -12,17 +12,46 @@ public class ExplosionBarrel : InteractionObject, IDamagable
     [SerializeField] private float explosionForce = 1000.0f;
 
     private bool isExplode = false;
-
+    private bool isPrepared = false;
     public void TakeDamage(float damage)
     {
-        currentHP -= damage;
-
-        if (currentHP <= 0 && isExplode == false)
-        {
-            StartCoroutine("ExplodeBarrel");
-        }
+        if (isExplode) return;
+        
     }
 
+    public void TakeDamageFromWeapon(float damage, WeaponType weaponType)
+    {
+        if (isExplode) return;
+        
+        if (!isPrepared && weaponType == WeaponType.Melee)
+        {
+            if (currentHP > 0)
+            {
+                currentHP -= damage;
+                currentHP = Mathf.Max(currentHP, 1.0f);
+                Debug.Log($"{currentHP}");
+            }
+            if (currentHP == 1.0f)
+            {
+                Debug.Log("Prepared");
+                isPrepared = true;
+            }
+        }
+        
+        else if (weaponType == WeaponType.Main)
+        {
+            if (isPrepared)
+            {
+                 currentHP -= damage;
+                 if (currentHP <= 0)
+                 {
+                    StartCoroutine("ExplodeBarrel");
+                 }
+            }
+        }
+    }
+    
+    
     private IEnumerator ExplodeBarrel()
     {
         yield return new WaitForSeconds(explosionDelayTime);
@@ -69,7 +98,6 @@ public class ExplosionBarrel : InteractionObject, IDamagable
                 rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
         }
-
 
         // 폭발 드럼통 삭제
         Destroy(gameObject);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Component;
@@ -11,5 +12,4 @@ public class MainCamera : MonoBehaviour
         if(CameraManager.Instance != null)
             CameraManager.Instance.SetCamera(GetComponent<Camera>());
     }
-    
 }

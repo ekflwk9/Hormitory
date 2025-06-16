@@ -22,7 +22,11 @@ namespace _01.Scripts.Player.Player_Battle
         {
             animator.SetTrigger("OnReload");
         }
-    
+
+        public void SetTrigger(string triggerName)
+        {
+            animator.SetTrigger(triggerName);
+        }
         public bool AimModeIs
         {
             get => animator.GetBool("isAimMode");

@@ -15,8 +15,6 @@ public class DebugTool : EditorWindow
         //GUILayout.Label("디버그 전용 패널");
         //GUILayout.Space(10f);
         // itemId = EditorGUILayout.IntField("획득할 아이템 아이디", itemId);
-        
-        if (GUILayout.Button("어드레서블 로드")) Addressable();
 
         GUILayout.Space(15f);
         if (GUILayout.Button("메뉴 On")) OnMenu();
@@ -29,15 +27,10 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("좌물쇠테스트")) MatchPuzzle();
         else if (GUILayout.Button("타이밍 맞추기")) Timing();
         else if (GUILayout.Button("아이템 획득")) ItemGet();
+        else if (GUILayout.Button("인벤토리 On")) ShowInventory(true);
+        else if (GUILayout.Button("인벤토리 Off")) ShowInventory(false);
     }
 
-    private void Addressable()
-    {
-
-    }
-
-
-    //
     private void OnMenu()
     {
         UiManager.Instance.Show<MenuUi>(true);
@@ -67,6 +60,7 @@ public class DebugTool : EditorWindow
     {
         UiManager.Instance.Show<DeadUi>(true);
     }
+
     private void MatchPuzzle()
     {
         PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(1364);
@@ -83,5 +77,9 @@ public class DebugTool : EditorWindow
         ItemManager.instance.Getitem(1); // ItemManager에 있는 아이템ID 1의 아이템이 있는지 없는지 확인 - 가져옴
     }
 
+    private void ShowInventory(bool _isActive)
+    {
+        UiManager.Instance.Show<InventoryUi>(_isActive);
+    }
 }
 #endif
