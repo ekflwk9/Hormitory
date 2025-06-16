@@ -123,7 +123,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 753342d66f00cd24397d83c36d3ac935, type: 2}
 --- !u!1 &2242726
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,13 +200,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall05 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -339,6 +351,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460738, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_RootOrder
       value: 82
@@ -402,9 +418,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 135062, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_Name
       value: MetalCabinet01_1 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 182050, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 496200, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_RootOrder
@@ -460,6 +488,10 @@ PrefabInstance:
     - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_Name
       value: PowerBox03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 494384, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_RootOrder
@@ -520,6 +552,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 762987825}
     m_Modifications:
+    - target: {fileID: 1026643317633192, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749617874376190, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851368016385714, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4750778014161352, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -571,6 +615,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 762987825}
     m_Modifications:
+    - target: {fileID: 122194, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 466108, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -622,6 +670,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1298158610659638, guid: 4013db2700171ec4f869921a19f36546, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4905551904120068, guid: 4013db2700171ec4f869921a19f36546, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -676,6 +728,10 @@ PrefabInstance:
     - target: {fileID: 163640, guid: eab05062438a5094e856331a01421c2e, type: 3}
       propertyPath: m_Name
       value: Debris01_8 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163640, guid: eab05062438a5094e856331a01421c2e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 433220, guid: eab05062438a5094e856331a01421c2e, type: 3}
       propertyPath: m_RootOrder
@@ -744,6 +800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -811,6 +871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox01 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 140538, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 499098, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -862,6 +926,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 438488, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -917,13 +985,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall05 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -1083,6 +1163,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 438488, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_RootOrder
       value: 72
@@ -1137,6 +1221,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -1193,6 +1281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1RoofBase01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1230604926543902, guid: a0d253912c97ad544a93114e968522b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4932709645493342, guid: a0d253912c97ad544a93114e968522b4, type: 3}
       propertyPath: m_RootOrder
       value: 67
@@ -1247,6 +1339,10 @@ PrefabInstance:
     - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_Name
       value: Debris01_11 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 496260, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_RootOrder
@@ -1317,7 +1413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -1450,6 +1546,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460738, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1595,6 +1695,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox03 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 494384, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -1646,9 +1750,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 149050, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 151078, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 159518, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 176892, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 189036, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
       propertyPath: m_Name
       value: LargeGates1_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 189036, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 494028, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
       propertyPath: m_RootOrder
@@ -1707,7 +1831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -1780,6 +1904,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 140538, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 499098, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1834,6 +1962,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -1890,6 +2022,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4603155083716662, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -1941,6 +2077,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994600787}
     m_Modifications:
+    - target: {fileID: 106310, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 417210, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1996,6 +2136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460738, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_RootOrder
       value: 51
@@ -2050,6 +2194,10 @@ PrefabInstance:
     - target: {fileID: 106310, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
       propertyPath: m_Name
       value: PowerBox02_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 106310, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 417210, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
       propertyPath: m_RootOrder
@@ -2108,7 +2256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -2245,6 +2393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1RoofBase01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1230604926543902, guid: a0d253912c97ad544a93114e968522b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4932709645493342, guid: a0d253912c97ad544a93114e968522b4, type: 3}
       propertyPath: m_RootOrder
       value: 68
@@ -2302,7 +2454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -2371,6 +2523,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1230604926543902, guid: a0d253912c97ad544a93114e968522b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4932709645493342, guid: a0d253912c97ad544a93114e968522b4, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -2457,6 +2613,10 @@ PrefabInstance:
     - target: {fileID: 1279709873290230, guid: ed861de9e9af2e2499e9cba5255df1c9, type: 3}
       propertyPath: m_Name
       value: Factory1Roof02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279709873290230, guid: ed861de9e9af2e2499e9cba5255df1c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4159253055756618, guid: ed861de9e9af2e2499e9cba5255df1c9, type: 3}
       propertyPath: m_RootOrder
@@ -2615,7 +2775,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &380134158
 Transform:
@@ -2734,6 +2894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460738, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_RootOrder
       value: 44
@@ -2789,6 +2953,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crane01_Rail4 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 102810, guid: 0733bbc4ac990f642be0a1325c781495, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 487926, guid: 0733bbc4ac990f642be0a1325c781495, type: 3}
       propertyPath: m_RootOrder
       value: 41
@@ -2840,6 +3008,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 135062, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 182050, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 422278, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.33414835
@@ -2923,6 +3103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_5 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 142880, guid: e628c7da204999e40995bec6b60177b9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 436874, guid: e628c7da204999e40995bec6b60177b9, type: 3}
       propertyPath: m_RootOrder
       value: 76
@@ -2990,6 +3174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 41
@@ -3053,6 +3241,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -3111,7 +3303,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &441131987
 Transform:
@@ -3169,6 +3361,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 456362, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_RootOrder
       value: 63
@@ -3235,6 +3431,10 @@ PrefabInstance:
     - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_Name
       value: Factory1RoofBase02 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4603155083716662, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_RootOrder
@@ -3322,6 +3522,10 @@ PrefabInstance:
     - target: {fileID: 163640, guid: eab05062438a5094e856331a01421c2e, type: 3}
       propertyPath: m_Name
       value: Debris01_8 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 163640, guid: eab05062438a5094e856331a01421c2e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 433220, guid: eab05062438a5094e856331a01421c2e, type: 3}
       propertyPath: m_RootOrder
@@ -3418,6 +3622,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460738, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_RootOrder
       value: 74
@@ -3473,6 +3681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox02_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 170050, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400520, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -3524,6 +3736,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1139861789165088, guid: 64e306e2db357174b943bc6313b84021, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4902307462026462, guid: 64e306e2db357174b943bc6313b84021, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -3567,6 +3783,133 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 527368572}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &546780158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5275170033331383108, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_Name
+      value: Ui
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608278328069476420, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894194544350041096, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7894194544350041096, guid: 82bf9863203f6734bae819eb944ca94a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 890103942}
+  m_SourcePrefab: {fileID: 100100000, guid: 82bf9863203f6734bae819eb944ca94a, type: 3}
 --- !u!1001 &555972768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3575,6 +3918,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 153368, guid: d5f27232461d8e5408d83bc39e5107ec, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 442806, guid: d5f27232461d8e5408d83bc39e5107ec, type: 3}
       propertyPath: m_RootOrder
       value: 88
@@ -3641,6 +3988,10 @@ PrefabInstance:
     - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_Name
       value: Debris01_3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 484792, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_RootOrder
@@ -3709,6 +4060,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_4 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 438488, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_RootOrder
       value: 84
@@ -3763,6 +4118,10 @@ PrefabInstance:
     - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_Name
       value: Debris01_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
@@ -3855,6 +4214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox02_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 170050, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400520, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -3909,6 +4272,10 @@ PrefabInstance:
     - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_Name
       value: Debris01_4 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 438488, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_RootOrder
@@ -3967,7 +4334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -4036,6 +4403,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994600787}
     m_Modifications:
+    - target: {fileID: 170050, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400520, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -4087,6 +4458,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994600787}
     m_Modifications:
+    - target: {fileID: 170050, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400520, guid: 0b997373854a4d44b8ac8fe631cfd30e, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -4175,7 +4550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -4248,6 +4623,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_3 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 484792, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_RootOrder
       value: 53
@@ -4299,6 +4678,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 762987825}
     m_Modifications:
+    - target: {fileID: 1026643317633192, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749617874376190, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851368016385714, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4750778014161352, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -4353,6 +4744,10 @@ PrefabInstance:
     - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_Name
       value: Debris01_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460738, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_RootOrder
@@ -4421,13 +4816,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall05 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -4646,13 +5053,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_RootOrder
@@ -4773,6 +5192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1298158610659638, guid: 4013db2700171ec4f869921a19f36546, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4905551904120068, guid: 4013db2700171ec4f869921a19f36546, type: 3}
       propertyPath: m_RootOrder
       value: 32
@@ -4950,6 +5373,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1RoofBase02 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4603155083716662, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_RootOrder
       value: 69
@@ -5007,7 +5434,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &762987825
 Transform:
@@ -5071,6 +5498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 153368, guid: d5f27232461d8e5408d83bc39e5107ec, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 442806, guid: d5f27232461d8e5408d83bc39e5107ec, type: 3}
       propertyPath: m_RootOrder
       value: 64
@@ -5125,6 +5556,10 @@ PrefabInstance:
     - target: {fileID: 140538, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
       propertyPath: m_Name
       value: PowerBox01 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140538, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 499098, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
       propertyPath: m_RootOrder
@@ -5212,6 +5647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -5278,6 +5717,10 @@ PrefabInstance:
     - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_Name
       value: Debris01_6 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
@@ -5435,7 +5878,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &869520338
 Transform:
@@ -5501,6 +5944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 40
@@ -5552,6 +5999,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1139861789165088, guid: 64e306e2db357174b943bc6313b84021, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4902307462026462, guid: 64e306e2db357174b943bc6313b84021, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -5606,6 +6057,10 @@ PrefabInstance:
     - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_Name
       value: Debris01_12 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 456362, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_RootOrder
@@ -5662,6 +6117,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 883867448}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &890103939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7894194544350041096, guid: 82bf9863203f6734bae819eb944ca94a,
+    type: 3}
+  m_PrefabInstance: {fileID: 546780158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &890103942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890103939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae99fc2caa52e94bbf1c54388c98d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RailObj: {fileID: 0}
+  marker: {fileID: 0}
+  pinPoint: {fileID: 0}
 --- !u!1001 &892785169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5670,6 +6146,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 183608, guid: 6a53f0c8427bc2d49b828aa97154ab08, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 435596, guid: 6a53f0c8427bc2d49b828aa97154ab08, type: 3}
       propertyPath: m_RootOrder
       value: 45
@@ -5724,6 +6204,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -5788,13 +6272,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -5927,6 +6423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1RoofBase02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4603155083716662, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_RootOrder
       value: 66
@@ -5984,7 +6484,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &925108190
 Transform:
@@ -6044,6 +6544,10 @@ PrefabInstance:
     - target: {fileID: 122194, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
       propertyPath: m_Name
       value: FanBig01Motor01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122194, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 466108, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
       propertyPath: m_RootOrder
@@ -6107,6 +6611,10 @@ PrefabInstance:
     - target: {fileID: 146606, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
       propertyPath: m_Name
       value: PowerBox01_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 146606, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 441246, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
       propertyPath: m_RootOrder
@@ -6194,6 +6702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 32
@@ -6260,6 +6772,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -6356,6 +6872,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 484792, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -6413,7 +6933,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &994600787
 Transform:
@@ -6496,13 +7016,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_RootOrder
@@ -6623,6 +7155,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1366770935781188, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4894932031434760, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -6674,6 +7210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994600787}
     m_Modifications:
+    - target: {fileID: 106310, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 417210, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -6760,6 +7300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox01_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 146606, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 441246, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6811,6 +7355,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
       value: 75
@@ -6904,7 +7452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -7095,6 +7643,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
       value: 56
@@ -7154,6 +7706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Roof01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1366770935781188, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4894932031434760, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -7209,6 +7765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_4 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 438488, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_RootOrder
       value: 62
@@ -7263,6 +7823,10 @@ PrefabInstance:
     - target: {fileID: 122194, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
       propertyPath: m_Name
       value: FanBig01Motor01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122194, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 466108, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
       propertyPath: m_RootOrder
@@ -7327,6 +7891,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994600787}
     m_Modifications:
+    - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 494384, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -7378,6 +7946,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 496260, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_RootOrder
       value: 96
@@ -7444,6 +8016,10 @@ PrefabInstance:
     - target: {fileID: 122194, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
       propertyPath: m_Name
       value: FanBig01Motor01 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122194, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 466108, guid: 8b4c3f5393e8fc14cbcb6b7d7030dcfc, type: 3}
       propertyPath: m_RootOrder
@@ -7512,6 +8088,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_8 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 163640, guid: eab05062438a5094e856331a01421c2e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 433220, guid: eab05062438a5094e856331a01421c2e, type: 3}
       propertyPath: m_RootOrder
       value: 52
@@ -7579,6 +8159,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crane01_Wires04 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 183608, guid: 6a53f0c8427bc2d49b828aa97154ab08, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 435596, guid: 6a53f0c8427bc2d49b828aa97154ab08, type: 3}
       propertyPath: m_RootOrder
       value: 44
@@ -7645,6 +8229,10 @@ PrefabInstance:
     - target: {fileID: 146606, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
       propertyPath: m_Name
       value: PowerBox01_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 146606, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 441246, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
       propertyPath: m_RootOrder
@@ -7732,6 +8320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1RoofBase01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1230604926543902, guid: a0d253912c97ad544a93114e968522b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4932709645493342, guid: a0d253912c97ad544a93114e968522b4, type: 3}
       propertyPath: m_RootOrder
       value: 64
@@ -7783,6 +8375,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -7938,6 +8534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox03 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 494384, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -8001,6 +8601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox02_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 106310, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 417210, guid: ffdc491f1ac37f24fa76d492743c2c42, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -8056,6 +8660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -8107,6 +8715,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 484792, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_RootOrder
       value: 73
@@ -8158,6 +8770,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 762987825}
     m_Modifications:
+    - target: {fileID: 1026643317633192, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749617874376190, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851368016385714, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4750778014161352, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -8221,6 +8845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_11 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 496260, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_RootOrder
       value: 94
@@ -8283,6 +8911,10 @@ PrefabInstance:
     - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_Name
       value: Debris01_3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 484792, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_RootOrder
@@ -8431,6 +9063,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 163640, guid: eab05062438a5094e856331a01421c2e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 433220, guid: eab05062438a5094e856331a01421c2e, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -8498,13 +9134,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall05 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -8669,6 +9317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_11 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 496260, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_RootOrder
       value: 92
@@ -8736,6 +9388,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -8802,6 +9458,10 @@ PrefabInstance:
     - target: {fileID: 142880, guid: e628c7da204999e40995bec6b60177b9, type: 3}
       propertyPath: m_Name
       value: Debris01_5 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 142880, guid: e628c7da204999e40995bec6b60177b9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 436874, guid: e628c7da204999e40995bec6b60177b9, type: 3}
       propertyPath: m_RootOrder
@@ -8872,7 +9532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -8944,6 +9604,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -9040,6 +9704,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 102810, guid: 0733bbc4ac990f642be0a1325c781495, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 487926, guid: 0733bbc4ac990f642be0a1325c781495, type: 3}
       propertyPath: m_RootOrder
       value: 40
@@ -9094,6 +9762,10 @@ PrefabInstance:
     - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_Name
       value: Debris01_12 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 456362, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_RootOrder
@@ -9158,6 +9830,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -9213,13 +9889,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_RootOrder
@@ -9332,143 +10020,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 18.000002, y: 9.900018, z: 2}
   m_Center: {x: -8.999997, y: 4.9500146, z: 1.1004947}
---- !u!1 &1373607538
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1373607541}
-  - component: {fileID: 1373607540}
-  - component: {fileID: 1373607539}
-  - component: {fileID: 1373607542}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1373607539
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373607538}
-  m_Enabled: 1
---- !u!20 &1373607540
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373607538}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &1373607541
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373607538}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1373607542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373607538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
-  m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
 --- !u!1001 &1374752464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9480,6 +10031,10 @@ PrefabInstance:
     - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_Name
       value: Debris01_4 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 438488, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_RootOrder
@@ -9535,6 +10090,10 @@ PrefabInstance:
     - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_Name
       value: Debris01_12 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 456362, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_RootOrder
@@ -9599,13 +10158,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -9738,6 +10309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_12 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 456362, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_RootOrder
       value: 60
@@ -9804,6 +10379,10 @@ PrefabInstance:
     - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_Name
       value: Debris01_12 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 456362, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_RootOrder
@@ -10044,7 +10623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1422848592}
   patternCooldown: 5
-  player: {fileID: 0}
+  player: {fileID: 1846497019}
   animator: {fileID: 1422848593}
   damageAmount: 20
   monsterStatController: {fileID: 1422848589}
@@ -10140,6 +10719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1RoofBase02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4603155083716662, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_RootOrder
       value: 65
@@ -10194,6 +10777,10 @@ PrefabInstance:
     - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_Name
       value: Debris01_3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 484792, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_RootOrder
@@ -10256,7 +10843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -10325,6 +10912,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 172240, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 438488, guid: edd7bb53fcff5a84cb4228b91cdd3165, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10468,6 +11059,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994600787}
     m_Modifications:
+    - target: {fileID: 146606, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 441246, guid: 7f7e955452aa05047b5fda13dc3c5c0e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10644,9 +11239,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 104234, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 105204, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
       propertyPath: m_Name
       value: MetalCabinet01_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 105204, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 114836, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 412286, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10727,6 +11334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -10781,6 +11392,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -10869,9 +11484,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 135062, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_Name
       value: MetalCabinet01_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 182050, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 422278, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10954,7 +11581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -11029,7 +11656,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1554375382
 Transform:
@@ -11089,9 +11716,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 135062, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_Name
       value: MetalCabinet01_1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 182050, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 496200, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_RootOrder
@@ -11151,6 +11790,10 @@ PrefabInstance:
     - target: {fileID: 183608, guid: 6a53f0c8427bc2d49b828aa97154ab08, type: 3}
       propertyPath: m_Name
       value: Crane01_Wires04 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 183608, guid: 6a53f0c8427bc2d49b828aa97154ab08, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 435596, guid: 6a53f0c8427bc2d49b828aa97154ab08, type: 3}
       propertyPath: m_RootOrder
@@ -11271,7 +11914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -11344,6 +11987,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 50
@@ -11395,9 +12042,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 104234, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 105204, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
       propertyPath: m_Name
       value: MetalCabinet01_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 105204, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 114836, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 412286, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11481,6 +12140,10 @@ PrefabInstance:
     - target: {fileID: 142880, guid: e628c7da204999e40995bec6b60177b9, type: 3}
       propertyPath: m_Name
       value: Debris01_5 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 142880, guid: e628c7da204999e40995bec6b60177b9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 436874, guid: e628c7da204999e40995bec6b60177b9, type: 3}
       propertyPath: m_RootOrder
@@ -11571,7 +12234,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1648470592
 Transform:
@@ -11633,13 +12296,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall05 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -11799,6 +12474,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 496260, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_RootOrder
       value: 87
@@ -11866,6 +12545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1RoofBase01 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1230604926543902, guid: a0d253912c97ad544a93114e968522b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4932709645493342, guid: a0d253912c97ad544a93114e968522b4, type: 3}
       propertyPath: m_RootOrder
       value: 72
@@ -11920,6 +12603,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -12008,6 +12695,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
       value: 34
@@ -12066,6 +12757,10 @@ PrefabInstance:
     - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_Name
       value: PowerBox03 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 494384, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_RootOrder
@@ -12130,6 +12825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Roof01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1366770935781188, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4894932031434760, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -12184,6 +12883,10 @@ PrefabInstance:
     - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_Name
       value: Debris01_11 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 496260, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_RootOrder
@@ -12271,6 +12974,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_10 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 153368, guid: d5f27232461d8e5408d83bc39e5107ec, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 442806, guid: d5f27232461d8e5408d83bc39e5107ec, type: 3}
       propertyPath: m_RootOrder
       value: 91
@@ -12338,6 +13045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_1 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
       value: 80
@@ -12399,7 +13110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -12472,6 +13183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 49
@@ -12527,6 +13242,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -12581,6 +13300,10 @@ PrefabInstance:
     - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_Name
       value: Debris01_1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
@@ -12640,6 +13363,10 @@ PrefabInstance:
     - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_Name
       value: Debris01_6 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
@@ -12707,6 +13434,10 @@ PrefabInstance:
     - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_Name
       value: Factory1RoofBase02 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4603155083716662, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_RootOrder
@@ -12795,13 +13526,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Wall05 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822068649596986, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4661362728943144, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_RootOrder
@@ -12930,6 +13673,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 762987825}
     m_Modifications:
+    - target: {fileID: 1026643317633192, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749617874376190, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851368016385714, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4750778014161352, guid: ddab92f78afd35c45ab45e8e5ffb5c50, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -12989,6 +13744,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 142880, guid: e628c7da204999e40995bec6b60177b9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 436874, guid: e628c7da204999e40995bec6b60177b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -13040,6 +13799,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -13094,6 +13857,10 @@ PrefabInstance:
     - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_Name
       value: Debris01_7 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
@@ -13161,6 +13928,10 @@ PrefabInstance:
     - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_Name
       value: Debris01_6 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
@@ -13248,6 +14019,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1267635252}
   m_LocalEulerAnglesHint: {x: 0.005172175, y: 0.0037130006, z: 2.3579996}
+--- !u!1 &1846497019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6204939324654745962, guid: dbd9b44e423a69045ae2ea2966258ff3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1155718478}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1858664409
 GameObject:
   m_ObjectHideFlags: 0
@@ -13386,7 +14163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -13458,6 +14235,10 @@ PrefabInstance:
     - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_Name
       value: Debris01_6 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
@@ -13579,7 +14360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1a5f2b92e3d507a438173f443b67a160, type: 3}
       propertyPath: m_RootOrder
@@ -13778,6 +14559,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 54
@@ -13829,9 +14614,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 135062, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_Name
       value: MetalCabinet01_1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 154188, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 182050, guid: 08fbf63192859a8478ea10767d582048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 422278, guid: 08fbf63192859a8478ea10767d582048, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13916,6 +14713,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -13970,6 +14771,10 @@ PrefabInstance:
     - target: {fileID: 1230604926543902, guid: a0d253912c97ad544a93114e968522b4, type: 3}
       propertyPath: m_Name
       value: Factory1RoofBase01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230604926543902, guid: a0d253912c97ad544a93114e968522b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4932709645493342, guid: a0d253912c97ad544a93114e968522b4, type: 3}
       propertyPath: m_RootOrder
@@ -14085,6 +14890,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 149050, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 151078, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 159518, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 176892, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 189036, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 494028, guid: da4178119ec433f4c84f9a9186f816c9, type: 3}
       propertyPath: m_RootOrder
       value: 46
@@ -14139,6 +14964,10 @@ PrefabInstance:
     - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_Name
       value: Debris01_6 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
@@ -14197,7 +15026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: caeabf688d2b87a4aa8c17ef36a8566b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: caeabf688d2b87a4aa8c17ef36a8566b, type: 3}
       propertyPath: m_RootOrder
@@ -14266,6 +15095,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -14321,6 +15154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Factory1Roof01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1366770935781188, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4894932031434760, guid: 3ad3857b04db9024f8528dff8ac33bfb, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -14375,6 +15212,10 @@ PrefabInstance:
     - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_Name
       value: Debris01_11 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 106276, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 496260, guid: 59a8b8a8a3364564a90b7be85d23f966, type: 3}
       propertyPath: m_RootOrder
@@ -14443,6 +15284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 45
@@ -14494,6 +15339,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 113054, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460738, guid: a0775b8f0a4df084ba6e1ee04ad55a13, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -14548,6 +15397,10 @@ PrefabInstance:
     - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_Name
       value: Factory1RoofBase02 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648722303640494, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4603155083716662, guid: 985369c38b6cde34c9edcb82fcb80fcd, type: 3}
       propertyPath: m_RootOrder
@@ -14650,6 +15503,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 175586, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 484792, guid: aa36899a7c912734f9c08658de8b1d48, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -14701,6 +15558,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 130060, guid: 4a430d96f9b898d45882d1b2f7615640, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 461694, guid: 4a430d96f9b898d45882d1b2f7615640, type: 3}
       propertyPath: m_RootOrder
       value: 86
@@ -14752,6 +15613,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 142880, guid: e628c7da204999e40995bec6b60177b9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 436874, guid: e628c7da204999e40995bec6b60177b9, type: 3}
       propertyPath: m_RootOrder
       value: 71
@@ -14806,6 +15671,10 @@ PrefabInstance:
     - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_Name
       value: Debris01_12 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 149388, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 456362, guid: 938b400dc12f3644d8a511e64b6014f5, type: 3}
       propertyPath: m_RootOrder
@@ -14877,7 +15746,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2046457044
 Transform:
@@ -15278,6 +16147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_7 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 197014, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460298, guid: b1850d2f9adae5f438b46afc21ae8a86, type: 3}
       propertyPath: m_RootOrder
       value: 37
@@ -15373,9 +16246,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869520338}
     m_Modifications:
+    - target: {fileID: 104234, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 105204, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
       propertyPath: m_Name
       value: MetalCabinet01_2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 105204, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 114836, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 412286, guid: a89aa0f7fb27db94790f2db204b64677, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15460,6 +16345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerBox03 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 494384, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -15519,6 +16408,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554375382}
     m_Modifications:
+    - target: {fileID: 1279709873290230, guid: ed861de9e9af2e2499e9cba5255df1c9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4159253055756618, guid: ed861de9e9af2e2499e9cba5255df1c9, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -15573,6 +16466,10 @@ PrefabInstance:
     - target: {fileID: 140538, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
       propertyPath: m_Name
       value: PowerBox01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140538, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 499098, guid: 93b7d0ada2e6c2849be407103254d1fe, type: 3}
       propertyPath: m_RootOrder
@@ -15629,6 +16526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_6 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 190274, guid: 8de24721e0816684687d5996f397a82d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 480466, guid: 8de24721e0816684687d5996f397a82d, type: 3}
       propertyPath: m_RootOrder
       value: 61
@@ -15680,6 +16581,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380134158}
     m_Modifications:
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -15738,6 +16643,10 @@ PrefabInstance:
     - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_Name
       value: PowerBox03 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 137684, guid: aff140f02621ac24782b60cba0a08072, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 494384, guid: aff140f02621ac24782b60cba0a08072, type: 3}
       propertyPath: m_RootOrder
@@ -15834,6 +16743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Debris01_1 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 167278, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 432968, guid: 8909eebb69e093445a7f13a7b7d8721b, type: 3}
       propertyPath: m_RootOrder
       value: 81
@@ -15893,8 +16806,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1373607541}
   - {fileID: 1050550423}
   - {fileID: 869520338}
   - {fileID: 1422848594}
   - {fileID: 1155718478}
+  - {fileID: 546780158}
