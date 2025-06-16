@@ -7,8 +7,8 @@ public class WeaponSwitchSystem : MonoBehaviour
 {
     [SerializeField]
     private PlayerController playerController;
-    [SerializeField]
-    private PlayerHUD playerHUD;
+    // [SerializeField]
+    // private PlayerHUD playerHUD;
     
     [SerializeField]
     private WeaponBase[] weapons;
@@ -19,7 +19,7 @@ public class WeaponSwitchSystem : MonoBehaviour
     private void Awake()
     {
         //무기 정보 출력을 위해 현재 소지중인 모든 무기 이벤트 등록
-        playerHUD.SetupAllWeapons(weapons);
+        // playerHUD.SetupAllWeapons(weapons);
 
         //현재 소지중인 모든 무기를 보이지 않게 설정
         for (int i = 0; i < weapons.Length; ++i)
@@ -74,7 +74,7 @@ public class WeaponSwitchSystem : MonoBehaviour
         
         //무기를 사용하는 PlayerController, PlayerHUD에 현재 무기 정보 전달
         playerController.SwitchingWeapon(currentWeapon);
-        playerHUD.SwitchingWeapon(currentWeapon);
+        //playerHUD.SwitchingWeapon(currentWeapon);
 
         if (previousWeapon != null)
         {
