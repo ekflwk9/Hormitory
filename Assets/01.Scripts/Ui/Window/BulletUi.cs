@@ -33,7 +33,7 @@ public class BulletUi : UiBase
     }
 
     /// <summary>
-    /// 총알 + 1일 경우 true / - 1일 경우 false
+    /// false : 한 칸씩 소모됨 / true 모두 충전
     /// </summary>
     /// <param name="_isUp"></param>
     public void BulletView(bool _isUp)
