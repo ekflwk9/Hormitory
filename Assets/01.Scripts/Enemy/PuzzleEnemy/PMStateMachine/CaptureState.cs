@@ -16,6 +16,8 @@ public class CaptureState : BaseState
         NavMeshAgent.isStopped = true;
         PuzzlePlayerController.Die();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
+        
+        DeadCam.enabled = true;
     }
 
     public override void Exit()
@@ -23,6 +25,7 @@ public class CaptureState : BaseState
         NavMeshAgent.isStopped = false;
         PuzzlePlayerController.UnlockInput();
         StopAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
+       
     }
 
     public override void Update()

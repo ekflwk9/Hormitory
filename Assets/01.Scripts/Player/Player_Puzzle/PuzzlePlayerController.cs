@@ -11,6 +11,8 @@ public class PuzzlePlayerController : BasePlayerController
     [SerializeField] private float interactionDistance = 2.0f;
     [SerializeField] private LayerMask interactionLayer;
 
+    private MainCamera mainCamera;
+
     /// <summary>
     /// 외부에서 플레이어가 숨어있는지 확인할 수 있는 프로퍼티입니다.
     /// </summary>
@@ -89,6 +91,8 @@ public class PuzzlePlayerController : BasePlayerController
             CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
         }
         // 사망 시 UI 표시
+        
+        mainCamera.enabled = false;
         UiManager.Instance.Show<HitUi>(true); 
         UiManager.Instance.Show<DeadUi>(true);
         Debug.Log("퍼즐 플레이어가 사망했습니다.");
