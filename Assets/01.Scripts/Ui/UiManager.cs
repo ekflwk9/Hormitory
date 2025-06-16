@@ -29,16 +29,6 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    private void Reset()
-    {
-        var uiBase = this.transform.GetComponentsInChildren<UiBase>(true);
-
-        for (int i = 0; i < uiBase.Length; i++)
-        {
-            uiBase[i].Init();
-        }
-    }
-
     public void IntroScene(bool _isIntro)
     {
         introScene = _isIntro;
