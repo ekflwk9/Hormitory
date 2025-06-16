@@ -21,7 +21,6 @@ public class PlayerController : BasePlayerController, IDamagable
     [SerializeField] private float bonusFOV = 15f;
     
     private bool isInvincibility;
-    private bool isDie;
     private bool isRolling;
     
     private void Awake()
@@ -96,14 +95,19 @@ public class PlayerController : BasePlayerController, IDamagable
     public void TakeDamage(float damage)
     {
         if (isInvincibility) return;
-        isDie = status.DecreasHP(damage);
-        
-        if (isDie == true)
+        status.DecreasHP(damage);
+
+        if (status.CurrentHP == 0)
         {
-            //GameOver
+            Die();
         }
     }
 
+    public override void Die()
+    {
+        base.Die();
+        StartCoroutine("DeathEffect");
+    }
 
     public void SwitchingWeapon(WeaponBase newWeapon)
     {
@@ -131,5 +135,19 @@ public class PlayerController : BasePlayerController, IDamagable
         yield return new WaitForSeconds(delay);
         isInvincibility = false;
         isRolling = false;
+    }
+    
+    IEnumerator DeathEffect()
+    {
+        float t = 0f;
+        Quaternion startRot = mainCamera.transform.localRotation;
+        Quaternion endRot = Quaternion.Euler(80, 0, 0); // 아래로 고개 떨어짐
+    
+        while (t < 1f)
+        {
+            t += Time.deltaTime;
+            mainCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
+            yield return null;
+        }
     }
 }
