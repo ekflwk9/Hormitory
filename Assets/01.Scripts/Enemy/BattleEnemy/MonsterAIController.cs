@@ -41,11 +41,12 @@ public class MonsterAIController : MonoBehaviour
     
     [Header("AI")]
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private float detectedDistance = 30f;
+    [SerializeField] private float detectedDistance = 10f;
     [SerializeField] private float attackDistance = 8f;
-    [SerializeField] private float jumpDistance = 20f;
-    [SerializeField] private float patternCooldown = 20f;
+    [SerializeField] private float jumpDistance = 9f;
+    [SerializeField] private float patternCooldown = 25f;
     private float timer = 0f;
+    private bool shouldLookAtPlayer = true;
     
     [SerializeField] private GameObject player;
     
@@ -57,7 +58,9 @@ public class MonsterAIController : MonoBehaviour
     private bool tailAttackFinished = false;
     private bool isLanding = false;
     
-    private bool shouldLookAtPlayer = true;
+    [Header("Battle")]
+    [SerializeField] private int damageAmount = 20;
+    [SerializeField] MonsterStatController monsterStatController;
     
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
@@ -67,6 +70,7 @@ public class MonsterAIController : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        monsterStatController = GetComponent<MonsterStatController>();
     }
 
     private void Awake()
@@ -110,15 +114,18 @@ public class MonsterAIController : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        
-        // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
-        if (shouldLookAtPlayer)
+        if (!monsterStatController.isDead)
         {
-            LookAtPlayer();
-        }
+            timer += Time.deltaTime;
+        
+            // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
+            if (shouldLookAtPlayer)
+            {
+                LookAtPlayer();
+            }
 
-        rootNode.Evaluate();
+            rootNode.Evaluate();
+        }
     }
 
 
@@ -221,6 +228,8 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator FlyingAndBodySlamActionCoroutine()
     {
+        animator.SetBool("BiteAttack", false);
+        
         shouldLookAtPlayer = true;
         agent.enabled = false;
         
@@ -318,13 +327,14 @@ public class MonsterAIController : MonoBehaviour
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = startPosition + direction * jumpDistance;
         
-        float duration = 0.7f; // 점프 시간
+        float duration = 0.4f; // 점프 시간
         float elapsed = 0f;        
         
         while (elapsed < duration)
         {
             if (biteAttackFinished && !isLanding)
             {
+                Debug.Log("애니메이션 중단");
                 animator.SetBool("BiteAttack", false);
                 isLanding = true;
             }
@@ -342,10 +352,11 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator TailAttackActionCoroutine()
     {
+        animator.SetBool("BiteAttack", false);
         animator.SetBool("CrawlForward", false);
         
         yield return new WaitForSeconds(0.4f);
-        shouldLookAtPlayer = false;
+        shouldLookAtPlayer = true;
         agent.enabled = true;
         agent.isStopped = true;
         
@@ -363,6 +374,7 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator ChasingPlayerActionCoroutine()
     {
+        animator.SetBool("BiteAttack", false);
         shouldLookAtPlayer = true;
         agent.enabled = true;
         agent.isStopped = false;
@@ -412,5 +424,20 @@ public class MonsterAIController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (currentAction == flyBodySlam || currentAction == jumpBodySlam || currentAction == tailAttacking)
+        {
+            if (other.CompareTag("Player"))
+            {
+                IDamagable damageable = other.gameObject.GetComponent<IDamagable>();
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(damageAmount);
+                    Service.Log("데미지입음");
+                }
+            }
+        }
+    }
 }

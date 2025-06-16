@@ -31,10 +31,15 @@ public class CountMatchController : MonoBehaviour
 
     private void Awake()
     {
+
         countMatch = new CountMatch();
+        // CountMatch 생성자에서 자동 등록됨
+        PuzzleManager.instance.RegisterPuzzle(this); //퍼즐매니저에 컨트롤러 등록
+
+
         countMatch.OnSolved += HandleSolved; //성공 이벤트 구독
         countMatch.OnFailed += HandleFailed; //실패 이벤트 구독
-        countMatch.OnNumbersChanged += UpdateNumberTexts; 
+        countMatch.OnNumbersChanged += UpdateNumberTexts;
         // 데이터 상에서 바뀐 숫자를 TMP_text에 넣을 수 있도록 구독
     }
 

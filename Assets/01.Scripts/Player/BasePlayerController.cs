@@ -1,10 +1,10 @@
-﻿// BasePlayerController.cs
+﻿
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 // CharacterController 컴포넌트가 반드시 필요함을 명시
 [RequireComponent(typeof(CharacterController))]
-// abstract 키워드는 이 클래스가 직접 게임 오브젝트에 붙일 수 없는 '설계도'임을 의미
+
 public abstract class BasePlayerController : MonoBehaviour
 {
     #region Serialized Fields
@@ -33,12 +33,11 @@ public abstract class BasePlayerController : MonoBehaviour
     protected float xRotation = 0f;
     protected float yRotation = 0f;
     protected bool isGrounded;
-
+    protected bool isDead = false; // <<-- 사망 상태 플래그 추가
     #endregion
 
     #region Unity Lifecycle Methods
 
-    // virtual: 자식 클래스에서 이 함수의 내용을 확장하거나 재정의(override)할 수 있도록 허용
     protected virtual void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -46,13 +45,13 @@ public abstract class BasePlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // <<-- deathUIPanel.SetActive(false) 로직 제거
     }
 
     protected virtual void OnEnable()
     {
         playerActions.Player.Enable();
-        // 점프와 상호작용 입력은 각 컨트롤러의 특성을 탈 수 있으므로,
-        // 자식 클래스에서 필요에 따라 연결하도록 할 수 있습니다. 여기서는 점프만 공통으로 둡니다.
         playerActions.Player.Jump.performed += OnJump;
     }
 
@@ -64,10 +63,10 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected virtual void Update()
     {
-        // 땅에 닿았는지 체크
-        isGrounded = characterController.isGrounded;
+        // 사망 상태이면 모든 로직을 중단
+        if (isDead) return;
 
-        // 핵심 로직 호출
+        isGrounded = characterController.isGrounded;
         HandleMovementAndGravity();
         HandleLook();
     }
@@ -110,6 +109,18 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+    }
+ 
+    public virtual void Die()
+    {
+        if (isDead) return;
+
+        isDead = true;
+
+        // 모든 입력을 비활성화
+       // playerActions.Player.Disable();
+                
+        Debug.Log("플레이어가 사망했습니다.");
     }
 
     #endregion

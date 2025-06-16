@@ -8,8 +8,7 @@ public class CountMatch : IPuzzle
 {
   
 
-    // Button들과 Text의 배열 순서 맞추기 (0~3)
-    
+    // Button들과 Text의 배열 순서 맞추기 (0~3)    
 
     //맞춰야 할 횟수
     private int maxChance = 3;
@@ -27,6 +26,12 @@ public class CountMatch : IPuzzle
     // 1. Numbers와 Buttons 게임 오브젝트를 SetActive true로 변경
     // 2. RequireNum이 존재한다면 퍼즐 로직을 진행
     // 3. 할당되지 않았다면 오류.
+
+
+    public CountMatch()
+    {
+        PuzzleManager.instance.RegisterPuzzle(this);
+    }
 
 
     // 정답 세팅 로직(상호작용한 오브젝트의 Interaction에서 호출
