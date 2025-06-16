@@ -42,8 +42,7 @@ public class ExplosionBarrel : InteractionObject, IDamagable
         {
             if (isPrepared)
             {
-                currentHP -= damage;
-
+                 currentHP -= damage;
                  StartCoroutine("ExplodeBarrel");
             }
             else
