@@ -15,13 +15,18 @@ public class InventoryUi : UiBase
         secondSlot = this.TryGetChildComponent<SlotUi>("SecondSlot");
 
         UiManager.Instance.Add<InventoryUi>(this);
-        if (this.gameObject.activeSelf) this.gameObject.SetActive(false);
     }
 
     public void SetView(SlotType _slot, int _itemId)
     {
         if (_slot == SlotType.FirstSlot) firstSlot.SetSlotView(_itemId);
         else secondSlot.SetSlotView(_itemId);
+    }
+
+    public override void Show(bool _isActive)
+    {
+        firstSlot.Show(false);
+        secondSlot.Show(false);
     }
 
     public void SlotSelection(SlotType _slot)
