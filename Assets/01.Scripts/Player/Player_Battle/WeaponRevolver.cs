@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -116,6 +117,7 @@ public class WeaponRevolver : WeaponBase
     
     public void OnAttack()
     {
+        if (isReload) return;
         if (Time.time - lastAttackTime > weaponSetting.attackRate)
         {
             if(animator.MoveSpeed > 0.5f) return;
@@ -127,6 +129,7 @@ public class WeaponRevolver : WeaponBase
                 return;
             }
             weaponSetting.currentAmmo--;
+            UiManager.Instance.Get<BulletUi>().BulletView(false);
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
             
             //animator.Play("Fire", -1, 0) --> 같은 애니메이션을 반복할 떄
@@ -157,25 +160,27 @@ public class WeaponRevolver : WeaponBase
     {
         isReload = true;
         animator.OnReload();
-        
+
+        yield return new WaitForSeconds(0.5f);
         while (true)
         {
             //현재 애니메이션이 Movement이면 장전 애니메이션이 종료되었다는 뜻
             if (animator.CurrentAnimationsIs("Movement"))
             {
-                isReload = false;
-                
                 //현재 탄창 수 1 감소 , 바뀐 탄창 정보 업데이트
                 weaponSetting.currentMagazine--;
                 onMagazineEvent.Invoke(weaponSetting.currentMagazine);
+
                 
                 //현재 탄 수 최대, 바뀐 탄 수 정보 업데이트
                 weaponSetting.currentAmmo = weaponSetting.maxAmmo;
                 onAmmoEvent.Invoke(weaponSetting.currentAmmo,weaponSetting.maxAmmo);
                 
+                
+                UiManager.Instance.Get<BulletUi>().BulletView(true);
+                isReload = false;
                 yield break;
             }
-
             yield return null;
         }
     }
@@ -281,32 +286,32 @@ public class WeaponRevolver : WeaponBase
         isModeChange = false;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (!Application.isPlaying) return;
-        
-        Gizmos.color = Color.cyan;
-        Ray ray;
-        RaycastHit hit;
-        Vector3 targetPoint = Vector3.zero;
-        
-        // 탄 정확도 조절
-        Vector2 spreadOffset = new Vector2(
-            Random.Range(-spreadAmount, spreadAmount),
-            Random.Range(-spreadAmount, spreadAmount)
-        );
-        
-            Ray spreadRay = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f) + spreadOffset);
-            //공격 사거리 안에 부딪치는 오브젝트 있으면 targetPoint는 광선에 부딪친 위치
-            if(Physics.Raycast(spreadRay, out hit, weaponSetting.attackDistance))
-            {
-                targetPoint = hit.point;
-            }
-            // 공격 사거리 안에 부딪치는 오브젝트가 없으면 targetPoint는 최대 사거리 위치
-            else
-            {
-                targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
-            }
-            Gizmos.DrawRay(spreadRay.origin, spreadRay.direction * 5f);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     if (!Application.isPlaying) return;
+    //     
+    //     Gizmos.color = Color.cyan;
+    //     Ray ray;
+    //     RaycastHit hit;
+    //     Vector3 targetPoint = Vector3.zero;
+    //     
+    //     // 탄 정확도 조절
+    //     Vector2 spreadOffset = new Vector2(
+    //         Random.Range(-spreadAmount, spreadAmount),
+    //         Random.Range(-spreadAmount, spreadAmount)
+    //     );
+    //     
+    //         Ray spreadRay = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f) + spreadOffset);
+    //         //공격 사거리 안에 부딪치는 오브젝트 있으면 targetPoint는 Ray에 부딪친 위치
+    //         if(Physics.Raycast(spreadRay, out hit, weaponSetting.attackDistance))
+    //         {
+    //             targetPoint = hit.point;
+    //         }
+    //         // 공격 사거리 안에 부딪치는 오브젝트가 없으면 targetPoint는 최대 사거리 위치
+    //         else
+    //         {
+    //             targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
+    //         }
+    //         Gizmos.DrawRay(spreadRay.origin, spreadRay.direction * 5f);
+    // }
 }

@@ -14,15 +14,15 @@ public class PlayerController : BasePlayerController, IDamagable
 
     [SerializeField] private float duration = 0.3f;
     [SerializeField] private float rollSpeed = 5f;
-    [SerializeField] private float delay = 1f;
+    [SerializeField] private float delay = 5f;
     
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float camFOV;
     [SerializeField] private float bonusFOV = 15f;
     
     private bool isInvincibility;
-    private bool isRolling;
-    
+    private bool isRolling; // 구르기 시 공격 제어
+    private bool canRoll = true; //구르기 제어
     private void Awake()
     {
         base.Awake();
@@ -68,7 +68,7 @@ public class PlayerController : BasePlayerController, IDamagable
 
     private void UpdateWeaponAction()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isRolling)
         {
             weapon.StartWeaponAction();
         }
@@ -77,7 +77,7 @@ public class PlayerController : BasePlayerController, IDamagable
             weapon.StopWeaponAction();
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && !isRolling)
         {
             weapon.StartWeaponAction(1);
         }
@@ -107,6 +107,7 @@ public class PlayerController : BasePlayerController, IDamagable
     {
         base.Die();
         StartCoroutine("DeathEffect");
+        UiManager.Instance.Show<DeadUi>(true);
     }
 
     public void SwitchingWeapon(WeaponBase newWeapon)
@@ -116,6 +117,7 @@ public class PlayerController : BasePlayerController, IDamagable
     
     private IEnumerator Roll()
     {
+        canRoll = false;
         isRolling = true;
         float elapsed = 0f;
         isInvincibility = true;
@@ -130,11 +132,11 @@ public class PlayerController : BasePlayerController, IDamagable
             characterController.Move(direction * rollSpeed * Time.deltaTime);
             yield return null;
         }
-        
+        isRolling = false;
+        isInvincibility = false;
         mainCamera.fieldOfView = camFOV;
         yield return new WaitForSeconds(delay);
-        isInvincibility = false;
-        isRolling = false;
+        canRoll = true;
     }
     
     IEnumerator DeathEffect()
