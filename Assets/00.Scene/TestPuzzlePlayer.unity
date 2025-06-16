@@ -2044,6 +2044,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc86626843adb245a5b0a22ecf41950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeProfiles:
+  - type: 0
+    duration: 1
+    magnitude: 0
+    isTiltEffect: 0
+    tiltAngle: 0
+  - type: 1
+    duration: 2
+    magnitude: 0.2
+    isTiltEffect: 1
+    tiltAngle: 45
+  - type: 2
+    duration: 3
+    magnitude: 0.6
+    isTiltEffect: 0
+    tiltAngle: 0
+  - type: 3
+    duration: 4
+    magnitude: 0.5
+    isTiltEffect: 0
+    tiltAngle: 0
 --- !u!1001 &2131799854526771913
 PrefabInstance:
   m_ObjectHideFlags: 0

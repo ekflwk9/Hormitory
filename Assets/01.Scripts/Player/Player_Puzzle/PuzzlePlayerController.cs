@@ -86,7 +86,7 @@ public class PuzzlePlayerController : BasePlayerController
         // 카메라 사망 연출 호출
         if (CameraShake.Instance != null)
         {
-            CameraShake.Instance.StartDeathTilt(2.5f, 45f);
+            CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
         }
 
         Debug.Log("퍼즐 플레이어가 사망했습니다.");
@@ -104,7 +104,7 @@ public class PuzzlePlayerController : BasePlayerController
         // 카메라 피격 연출 호출
         if (CameraShake.Instance != null)
         {
-            CameraShake.Instance.Shake(0.15f, 0.1f);
+            CameraShake.Instance.Play(CameraShakeType.PlayerHit);
         }
     }
 
@@ -224,8 +224,8 @@ public class PuzzlePlayerController : BasePlayerController
     {
         if (hit.collider.CompareTag("Enemy"))
         {
-            TakeDamage();
-            // Die(); // 사망 테스트 시 이 줄의 주석을 해제하세요.
+           //TakeDamage();
+            Die(); // 사망 테스트 시 이 줄의 주석을 해제하세요.
         }
     }
 
