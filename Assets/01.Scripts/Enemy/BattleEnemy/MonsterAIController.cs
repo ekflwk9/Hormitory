@@ -32,7 +32,7 @@ public class MonsterAIController : MonoBehaviour
     
     [Header("AI")]
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private float patternCooldown = 25f;
+    [SerializeField] private float patternCooldown = 5f;
     private float timer;
     private bool shouldLookAtPlayer = true;
     float overshootDistance = 10.0f; // 플레이어보다 얼마나 더 지나쳐서 착지할지
