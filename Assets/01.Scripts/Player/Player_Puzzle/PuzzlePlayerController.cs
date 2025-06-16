@@ -88,7 +88,9 @@ public class PuzzlePlayerController : BasePlayerController
         {
             CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
         }
-
+        // 사망 시 UI 표시
+        UiManager.Instance.Show<HitUi>(true); 
+        UiManager.Instance.Show<DeadUi>(true);
         Debug.Log("퍼즐 플레이어가 사망했습니다.");
     }
 
