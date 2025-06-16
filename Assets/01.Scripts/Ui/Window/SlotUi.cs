@@ -11,14 +11,14 @@ public class SlotUi : UiBase
         icon.color = Color.clear;
     }
 
-    public void SetSlotView()
+    public void SetSlotView(int _itemId)
     {
         var itemId = 0;
 
         if (itemId == 0)
         {
-            //var item = ItemManager.GetItem(itemId);
-            //icon.sprite = item.sprite;
+            var itemData = ItemManager.instance.Getitem(_itemId);
+            icon.sprite = itemData.Icon;
             icon.color = Color.white;
         }
 

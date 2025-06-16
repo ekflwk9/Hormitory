@@ -12,7 +12,7 @@
 
     public void SetView()
     {
-        firstSlot.SetSlotView();
-        secondSlot.SetSlotView();
+        //firstSlot.SetSlotView();
+        //secondSlot.SetSlotView();
     }
 }
