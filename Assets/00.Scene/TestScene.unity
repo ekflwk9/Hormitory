@@ -136,11 +136,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionBarrel (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3221900602192822945, guid: f1caabca635a11c4a843910b34305051,
-        type: 3}
-      propertyPath: m_TagString
-      value: ExplosiveBarrel
-      objectReference: {fileID: 0}
     - target: {fileID: 4023463711220993101, guid: f1caabca635a11c4a843910b34305051,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1292,11 +1287,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ExplosionBarrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3221900602192822945, guid: f1caabca635a11c4a843910b34305051,
-        type: 3}
-      propertyPath: m_TagString
-      value: ExplosiveBarrel
       objectReference: {fileID: 0}
     - target: {fileID: 4023463711220993101, guid: f1caabca635a11c4a843910b34305051,
         type: 3}
@@ -3196,7 +3186,7 @@ MonoBehaviour:
     maxMagazine: 0
     currentAmmo: 0
     maxAmmo: 0
-    attackRate: 0.3
+    attackRate: 1
     attackDistance: 0
     isAutomaticAttack: 1
   onAmmoEvent:

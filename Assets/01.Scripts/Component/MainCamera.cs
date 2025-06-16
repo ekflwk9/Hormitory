@@ -24,7 +24,7 @@ public class MainCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Shake(1, 0.02f);
+            Shake(1, 0.08f);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -49,7 +49,7 @@ public class MainCamera : MonoBehaviour
 
     public void Fall(float duration, float angle)
     {
-        transform.DOLocalRotate(new Vector3(0, 0f, angle), duration)
+        transform.DOLocalRotate(new Vector3(angle, 0f, angle), duration)
             .SetEase(Ease.InOutCubic);
     }
 }
