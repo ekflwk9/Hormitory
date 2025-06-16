@@ -13,6 +13,9 @@ public enum CreateType
     Down,
 }
 
+/// <summary>
+/// 맵 생성 전용 스크립트
+/// </summary>
 public class CreateEditMap : MonoBehaviour
 {
     [Space(10f)]
