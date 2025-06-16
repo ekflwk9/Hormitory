@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _01.Scripts.Component;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SlotUi : UiBase
