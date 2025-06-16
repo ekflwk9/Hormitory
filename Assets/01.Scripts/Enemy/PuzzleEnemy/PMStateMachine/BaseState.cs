@@ -14,6 +14,8 @@ public class BaseState : IState
 
     protected float PatrolRadius => StateMachine.PatrolRadius;
     protected float PatrolWaitTime => StateMachine.PatrolWaitTime;
+    protected float CaptureRange => StateMachine.CaptureRange;
+    protected PuzzlePlayerController PuzzlePlayerController => StateMachine.PuzzlePlayerController;
 
     protected BaseState(MonsterStateMachine stateMachine)
     {

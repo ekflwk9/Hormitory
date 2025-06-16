@@ -8,7 +8,8 @@ public enum MonsterStateType
     Idle,
     Chase,
     Search,
-    PuzzleWait
+    PuzzleWait,
+    Capture
 }
 public class MonsterStateMachine : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class MonsterStateMachine : MonoBehaviour
     [Header("SpeedSetting")]
     [SerializeField] private float _chaseSpeed = 2.2f;//c추격 시 속도
     private float _defaultSpeed;
+
+    private float _captureRange = 1.5f;
+    
     public PuzzleMonster PuzzleMonster { get; private set; }
 
     public Transform PlayerStransform => _playerTransform;
@@ -36,7 +40,10 @@ public class MonsterStateMachine : MonoBehaviour
     public NavMeshAgent NavMeshAgent { get; private set; }
     public float PatrolRadius => _patrolRadius;
     public float PatrolWaitTime => _patrolWaitTime;
-    
+
+    public float CaptureRange => _captureRange;
+    public PuzzlePlayerController PuzzlePlayerController => _playerTransform.GetComponent<PuzzlePlayerController>();
+   
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -49,7 +56,8 @@ public class MonsterStateMachine : MonoBehaviour
             { MonsterStateType.Idle, new IdleState(this) },
             { MonsterStateType.Chase, new ChaseState(this) },
             { MonsterStateType.Search, new SearchState( this) },
-            { MonsterStateType.PuzzleWait, new PuzzleWaitState(this) }
+            { MonsterStateType.PuzzleWait, new PuzzleWaitState(this) },
+            {MonsterStateType.Capture, new CaptureState(this)}
         };
     }
 
