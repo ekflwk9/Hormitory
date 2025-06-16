@@ -23,16 +23,16 @@ public class CameraShake : MonoBehaviour
 
     private void Start()
     {
-        // Ä«¸Þ¶óÀÇ ¿ø·¡ À§Ä¡¿Í È¸Àü°ªÀ» ÀúÀåÇØ µÓ´Ï´Ù.
+        // Ä«ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó´Ï´ï¿½.
         originalPos = transform.localPosition;
         originalRot = transform.localRotation;
     }
 
     /// <summary>
-    /// ÁöÁ¤µÈ ½Ã°£°ú °­µµ·Î Ä«¸Þ¶ó¸¦ Èçµì´Ï´Ù. (ÇÇ°Ý È¿°ú¿ë)
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½. (ï¿½Ç°ï¿½ È¿ï¿½ï¿½ï¿½ï¿½)
     /// </summary>
-    /// <param name="duration">Èçµé¸² Áö¼Ó ½Ã°£</param>
-    /// <param name="magnitude">Èçµé¸² °­µµ</param>
+    /// <param name="duration">ï¿½ï¿½é¸² ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½</param>
+    /// <param name="magnitude">ï¿½ï¿½é¸² ï¿½ï¿½ï¿½ï¿½</param>
     public void Shake(float duration, float magnitude)
     {
         StartCoroutine(ShakeCoroutine(duration, magnitude));
@@ -44,26 +44,26 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            // ·£´ýÇÑ À§Ä¡·Î Ä«¸Þ¶ó¸¦ »ìÂ¦ Èçµê
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Â¦ ï¿½ï¿½ï¿½
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 
             transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
 
             elapsed += Time.deltaTime;
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        // Èçµé¸²ÀÌ ³¡³ª¸é ¿ø·¡ À§Ä¡·Î º¹¿ø
+        // ï¿½ï¿½é¸²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         transform.localPosition = originalPos;
     }
 
 
     /// <summary>
-    /// ÁöÁ¤µÈ ½Ã°£ µ¿¾È ÁöÁ¤µÈ °¢µµ·Î Ä«¸Þ¶ó¸¦ ±â¿ïÀÔ´Ï´Ù. (»ç¸Á ¿¬Ãâ¿ë)
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½. (ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
     /// </summary>
-    /// <param name="duration">±â¿ï¾îÁö´Â µ¥ °É¸®´Â ½Ã°£</param>
-    /// <param name="tiltAngle">ÃÖÁ¾ÀûÀ¸·Î ±â¿ï¾îÁú °¢µµ</param>
+    /// <param name="duration">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½É¸ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½</param>
+    /// <param name="tiltAngle">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
     public void StartDeathTilt(float duration, float tiltAngle)
     {
         StartCoroutine(DeathTiltCoroutine(duration, tiltAngle));
@@ -72,17 +72,17 @@ public class CameraShake : MonoBehaviour
     private IEnumerator DeathTiltCoroutine(float duration, float tiltAngle)
     {
         Quaternion startRot = transform.localRotation;
-        Quaternion targetRot = originalRot * Quaternion.Euler(0, 0, tiltAngle); // ¿ø·¡ È¸Àü°ª¿¡ ±â¿ïÀÓÀ» Ãß°¡
+        Quaternion targetRot = originalRot * Quaternion.Euler(0, 0, tiltAngle); // ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         float elapsed = 0.0f;
 
         while (elapsed < duration)
         {
-            // Slerp¸¦ »ç¿ëÇØ ºÎµå·´°Ô È¸Àü
+            // Slerpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµå·´ï¿½ï¿½ È¸ï¿½ï¿½
             transform.localRotation = Quaternion.Slerp(startRot, targetRot, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.localRotation = targetRot; // Á¤È®ÇÑ ¸ñÇ¥ °¢µµ·Î ¼³Á¤
+        transform.localRotation = targetRot; // ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 }
