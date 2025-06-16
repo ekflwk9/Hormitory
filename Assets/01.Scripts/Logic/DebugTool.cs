@@ -26,6 +26,8 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("총알 감소")) OnBullet(false);
         else if (GUILayout.Button("피격 쉐이더")) HitView();
         else if (GUILayout.Button("좌물쇠테스트")) MatchPuzzle();
+        else if (GUILayout.Button("타이밍 맞추기")) Timing();
+        else if (GUILayout.Button("아이템 획득")) ItemGet();
 
     }
 
@@ -65,5 +67,17 @@ public class DebugTool : EditorWindow
     {
         PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(1364);
     }
+
+    private void Timing()
+    {
+        PuzzleManager.instance.GetPuzzle<TimingMatch>().StartPuzzle();
+    }
+
+    // 원하는 아이템 번호를 자신이 가지고 있는지 확인하기
+    private void ItemGet()
+    {
+        ItemManager.instance.Getitem(1); // ItemManager에 있는 아이템ID 1의 아이템이 있는지 없는지 확인 - 가져옴
+    }
+
 }
 #endif
