@@ -34,5 +34,10 @@ public class HitUi : UiBase
     public void ResetView()
     {
         hitCount = 0;
+
+        for (int i = 0; i < anim.Length; i++)
+        {
+            anim[i].Play(AnimName.Idle, 0, 0);
+        }
     }
 }
