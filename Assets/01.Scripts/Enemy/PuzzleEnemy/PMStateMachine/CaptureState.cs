@@ -14,12 +14,13 @@ public class CaptureState : BaseState
     public override void Enter()
     {
         NavMeshAgent.isStopped = true;
-        PuzzlePlayerController.LockInput();
+        PuzzlePlayerController.Die();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
         MainCam.enabled = false;
         DeadCam.enabled = true;
-        PuzzlePlayerController.Die();
-        //UI띄워야되나
+        UiManager.Instance.Get<HitUi>().HitView();
+        
+        UiManager.Instance.Show<DeadUi>(true);
         
     }
 

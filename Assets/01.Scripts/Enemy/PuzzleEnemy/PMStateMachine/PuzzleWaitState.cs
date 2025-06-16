@@ -16,7 +16,8 @@ public class PuzzleWaitState: BaseState
 
     public override void Exit()
     {
-        NavMeshAgent.isStopped = false;
         //다시 움직임
+        NavMeshAgent.isStopped = false;
+        StateMachine.TransitionTo(MonsterStateType.Idle);
     }
 }
