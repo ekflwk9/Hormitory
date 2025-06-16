@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
@@ -103,7 +103,7 @@ public class PlayerController : BasePlayerController, IDamagable
         }
     }
 
-    public override void Die()
+    protected override void Die()
     {
         base.Die();
         StartCoroutine("DeathEffect");
