@@ -36,7 +36,7 @@ public class ItemManager
         {
             Service.Log($"{item.name} 아이템이 이미 등록되어 있습니다. 덮어씁니다.");
         }
-        // 아이템이 이미 등록되어 있으면 덮어쓰기
+        // 아이템이 이미 등록되어 있으면 덮어쓰기 (보통, 일어나선 안됨.)
         // 아이템이 2개를 초과하면 등록 불가
 
         ItemDict[item] = itemNumber;
