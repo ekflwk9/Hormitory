@@ -63,6 +63,7 @@ public class DebugTool : EditorWindow
 
     private void MatchPuzzle()
     {
+        UiManager.Instance.Show<LockUi>(true);
         PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(1364);
     }
 
@@ -81,5 +82,7 @@ public class DebugTool : EditorWindow
     {
         UiManager.Instance.Show<InventoryUi>(_isActive);
     }
+
+    
 }
 #endif

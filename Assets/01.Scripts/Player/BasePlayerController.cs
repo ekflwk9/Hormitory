@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// BasePlayerController.cs
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
@@ -16,11 +17,8 @@ public abstract class BasePlayerController : MonoBehaviour
     [Header("Gravity Settings")]
     [SerializeField] protected float gravity = -20f;
 
-    // <<--- 플레이어 사운드 관련 변수 추가
     [Header("Player Audio Settings")]
-    [Tooltip("걷기 소리를 재생할 전용 AudioSource")]
     [SerializeField] protected AudioSource walkAudioSource;
-    [Tooltip("재생할 걷기 소리 오디오 클립")]
     [SerializeField] protected AudioClip walkSoundClip;
     #endregion
 
@@ -43,10 +41,6 @@ public abstract class BasePlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    protected virtual void Start()
-    {
-        SoundManager.PlayBgm("PuzzleBGM");
-    }
 
     protected virtual void OnEnable()
     {
@@ -62,7 +56,9 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected virtual void Update()
     {
+        // isDead 플래그는 부모가 계속 관리하여, 어떤 자식이든 죽으면 움직임이 멈추도록 보장
         if (isDead) return;
+
         isGrounded = characterController.isGrounded;
         HandleMovementAndGravity();
         HandleLook();
@@ -93,7 +89,6 @@ public abstract class BasePlayerController : MonoBehaviour
 
         bool isMoving = moveDirection.magnitude > 0.1f;
 
-        // <<--- 걷기 소리 재생/정지 로직
         if (isMoving && isGrounded)
         {
             if (!walkAudioSource.isPlaying)
@@ -119,18 +114,25 @@ public abstract class BasePlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            // <<--- 점프 사운드 재생
             SoundManager.PlaySfx(SoundCategory.Movement, "Jump");
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
 
-    protected virtual void Die()
+    // <<--- TakeDamage() 메서드 제거
+
+    public virtual void Die()
     {
         if (isDead) return;
         isDead = true;
         playerActions.Player.Disable();
+
+        if (CameraShake.Instance != null)
+        {
+            CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
+        }
         Debug.Log("플레이어가 사망했습니다.");
     }
+
     #endregion
 }

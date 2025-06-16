@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using System.Net.NetworkInformation;
+
 
 public class PuzzlePlayerController : BasePlayerController
 {
     #region Serialized Fields & Public Properties
 
-    [Header("Interaction Settings")]
+    [Header("Puzzle Player Settings")]
     [SerializeField] private float interactionDistance = 2.0f;
     [SerializeField] private LayerMask interactionLayer;
 
+    /// <summary>
+    /// 외부에서 플레이어가 숨어있는지 확인할 수 있는 프로퍼티입니다.
+    /// </summary>
     public bool IsHiding => isHiding;
 
     #endregion
@@ -26,25 +29,26 @@ public class PuzzlePlayerController : BasePlayerController
 
     #region Unity Lifecycle Methods
 
+    // 부모의 OnEnable 기능을 확장하여 상호작용 입력을 추가로 연결합니다.
     protected override void OnEnable()
     {
-        base.OnEnable();
+        base.OnEnable(); // 부모 클래스의 OnEnable()을 먼저 실행 (점프 입력 등)
         playerActions.Player.Interact.performed += OnInteract;
     }
 
+    // 부모의 OnDisable 기능을 확장합니다.
     protected override void OnDisable()
     {
-        base.OnDisable();
+        base.OnDisable(); // 부모 클래스의 OnDisable()을 먼저 실행
         playerActions.Player.Interact.performed -= OnInteract;
     }
 
-    // <<--- 수정된 Update 함수
+    
     protected override void Update()
     {
-        if (isInputLocked) return;
+        
 
-        // 땅에 닿았는지 여부는 항상 체크
-        isGrounded = characterController.isGrounded;
+        if (isInputLocked) return;
 
         // 숨어있는 상태일 때의 로직
         if (isHiding)
@@ -57,16 +61,56 @@ public class PuzzlePlayerController : BasePlayerController
         // 숨어있지 않은 일반 상태일 때의 로직
         else
         {
-            // 부모 클래스의 기능을 직접 호출
-            HandleMovementAndGravity();
-            HandleLook();
+            // 부모의 Update를 호출하여 이동, 시점 조작 등 공통 기능 실행
+            base.Update();
+            // 퍼즐 플레이어 고유의 상호작용 탐색 기능 실행
             HandleInteraction();
         }
     }
 
     #endregion
 
-    #region Puzzle-Specific Logic
+    #region Core Overridden & Specific Methods
+
+    /// <summary>
+    /// 부모 클래스의 abstract Die 메서드를 반드시 구현(override)해야 합니다.
+    /// </summary>
+    public override void Die()
+    {
+        
+        if (isDead) return;
+
+        isDead = true;
+        playerActions.Player.Disable();
+
+        // 카메라 사망 연출 호출
+        if (CameraShake.Instance != null)
+        {
+            CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
+        }
+
+        Debug.Log("퍼즐 플레이어가 사망했습니다.");
+    }
+
+    /// <summary>
+    /// PuzzlePlayerController의 고유한 피격 처리 기능입니다.
+    /// </summary>
+    public void TakeDamage()
+    {
+        if (isDead) return;
+
+        Debug.Log("퍼즐 플레이어가 피격당했습니다!");
+
+        // 카메라 피격 연출 호출
+        if (CameraShake.Instance != null)
+        {
+            CameraShake.Instance.Play(CameraShakeType.PlayerHit);
+        }
+    }
+
+    #endregion
+
+    #region Interaction & Hiding Logic
 
     private void HandleInteraction()
     {
@@ -172,21 +216,6 @@ public class PuzzlePlayerController : BasePlayerController
         UnlockInput();
     }
 
-    public void Die()
-    {
-        if (isDead) return;
-        isDead = true;
-        LockInput();
-        characterController.enabled = false;
-        // 사망 UI 패널 활성화
-        // deathUIPanel.SetActive(true); // deathUIPanel은 BasePlayerController에서 관리
-        Debug.Log("플레이어가 사망했습니다.");
-    }
-    public void CameraShake()
-    {
-        // 카메라 흔들림 로직을 여기에 구현
-        Debug.Log("카메라 흔들림 효과 발생");
-    }
     #endregion
 
     #region Physics Callbacks
@@ -195,7 +224,8 @@ public class PuzzlePlayerController : BasePlayerController
     {
         if (hit.collider.CompareTag("Enemy"))
         {
-            Debug.Log("몬스터와 충돌했습니다!");
+           //TakeDamage();
+            Die(); // 사망 테스트 시 이 줄의 주석을 해제하세요.
         }
     }
 

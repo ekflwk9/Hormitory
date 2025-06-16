@@ -1,11 +1,41 @@
-// CameraShake.cs
+ï»¿// CameraShake.cs íŒŒì¼ ìƒë‹¨ì— ì¶”ê°€
+
 using UnityEngine;
+using System.Collections.Generic; // Dictionary ì‚¬ìš©ì„ ìœ„í•´ ì¶”ê°€
 using System.Collections;
 
+// 1. ì¹´ë©”ë¼ ì‰ì´í¬ì˜ ì¢…ë¥˜ë¥¼ ì •ì˜í•˜ëŠ” ì—´ê±°í˜•
+public enum CameraShakeType
+{
+    PlayerHit,
+    PlayerDeath,
+    SpecialEvent,
+    MonsterImpact
+}
+
+// 2. ê° ì‰ì´í¬ íƒ€ì…ì— ëŒ€í•œ ìƒì„¸ ì„¤ì •ì„ ë‹´ëŠ” í´ë˜ìŠ¤
+[System.Serializable]
+public class ShakeProfile
+{
+    public CameraShakeType type;
+    public float duration = 0.2f;
+    public float magnitude = 0.1f;
+
+    [Tooltip("ì²´í¬í•˜ë©´ ì¼ë°˜ í”ë“¤ë¦¼ ëŒ€ì‹  ê¸°ìš¸ì´ê¸° íš¨ê³¼ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤ (ì‚¬ë§ ì—°ì¶œ ë“±)")]
+    public bool isTiltEffect = false;
+    [Range(0, 90)]
+    public float tiltAngle = 45f;
+}
+
+// CameraShake.cs (ìˆ˜ì • ë²„ì „)
 public class CameraShake : MonoBehaviour
 {
     public static CameraShake Instance { get; private set; }
 
+    [Header("í”ë“¤ë¦¼ íš¨ê³¼ í”„ë¡œí•„ ëª©ë¡")]
+    [SerializeField] private ShakeProfile[] shakeProfiles;
+
+    private Dictionary<CameraShakeType, ShakeProfile> shakeProfileDict;
     private Vector3 originalPos;
     private Quaternion originalRot;
 
@@ -19,70 +49,73 @@ public class CameraShake : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        shakeProfileDict = new Dictionary<CameraShakeType, ShakeProfile>();
+        foreach (var profile in shakeProfiles)
+        {
+            if (shakeProfileDict.ContainsKey(profile.type))
+            {
+                Debug.LogWarning($"CameraShake: í”„ë¡œí•„ ëª©ë¡ì— ì´ë¯¸ '{profile.type}' íƒ€ì…ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
+                continue;
+            }
+            shakeProfileDict.Add(profile.type, profile);
+        }
     }
 
     private void Start()
     {
-        // Ä«¸Ş¶óÀÇ ¿ø·¡ À§Ä¡¿Í È¸Àü°ªÀ» ÀúÀåÇØ µÓ´Ï´Ù.
         originalPos = transform.localPosition;
         originalRot = transform.localRotation;
     }
 
-    /// <summary>
-    /// ÁöÁ¤µÈ ½Ã°£°ú °­µµ·Î Ä«¸Ş¶ó¸¦ Èçµì´Ï´Ù. (ÇÇ°İ È¿°ú¿ë)
-    /// </summary>
-    /// <param name="duration">Èçµé¸² Áö¼Ó ½Ã°£</param>
-    /// <param name="magnitude">Èçµé¸² °­µµ</param>
-    public void Shake(float duration, float magnitude)
+    public void Play(CameraShakeType type)
     {
-        StartCoroutine(ShakeCoroutine(duration, magnitude));
+        if (shakeProfileDict.TryGetValue(type, out ShakeProfile profile))
+        {
+            if (profile.isTiltEffect)
+            {
+                StartCoroutine(DeathTiltCoroutine(profile.duration, profile.tiltAngle));
+            }
+            else
+            {
+                StartCoroutine(ShakeCoroutine(profile.duration, profile.magnitude));
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ìš”ì²­í•œ ì¹´ë©”ë¼ ì‰ì´í¬ íƒ€ì…ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤: " + type);
+        }
     }
 
     private IEnumerator ShakeCoroutine(float duration, float magnitude)
     {
         float elapsed = 0.0f;
-
         while (elapsed < duration)
         {
-            // ·£´ıÇÑ À§Ä¡·Î Ä«¸Ş¶ó¸¦ »ìÂ¦ Èçµê
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
-
             transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
 
-            elapsed += Time.deltaTime;
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            // Time.deltaTime ëŒ€ì‹  Time.unscaledDeltaTime ì‚¬ìš©
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
         }
-
-        // Èçµé¸²ÀÌ ³¡³ª¸é ¿ø·¡ À§Ä¡·Î º¹¿ø
         transform.localPosition = originalPos;
-    }
-
-
-    /// <summary>
-    /// ÁöÁ¤µÈ ½Ã°£ µ¿¾È ÁöÁ¤µÈ °¢µµ·Î Ä«¸Ş¶ó¸¦ ±â¿ïÀÔ´Ï´Ù. (»ç¸Á ¿¬Ãâ¿ë)
-    /// </summary>
-    /// <param name="duration">±â¿ï¾îÁö´Â µ¥ °É¸®´Â ½Ã°£</param>
-    /// <param name="tiltAngle">ÃÖÁ¾ÀûÀ¸·Î ±â¿ï¾îÁú °¢µµ</param>
-    public void StartDeathTilt(float duration, float tiltAngle)
-    {
-        StartCoroutine(DeathTiltCoroutine(duration, tiltAngle));
     }
 
     private IEnumerator DeathTiltCoroutine(float duration, float tiltAngle)
     {
         Quaternion startRot = transform.localRotation;
-        Quaternion targetRot = originalRot * Quaternion.Euler(0, 0, tiltAngle); // ¿ø·¡ È¸Àü°ª¿¡ ±â¿ïÀÓÀ» Ãß°¡
+        Quaternion targetRot = originalRot * Quaternion.Euler(0, 0, tiltAngle);
         float elapsed = 0.0f;
-
         while (elapsed < duration)
         {
-            // Slerp¸¦ »ç¿ëÇØ ºÎµå·´°Ô È¸Àü
             transform.localRotation = Quaternion.Slerp(startRot, targetRot, elapsed / duration);
-            elapsed += Time.deltaTime;
+
+            // Time.deltaTime ëŒ€ì‹  Time.unscaledDeltaTime ì‚¬ìš©
+            elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
-
-        transform.localRotation = targetRot; // Á¤È®ÇÑ ¸ñÇ¥ °¢µµ·Î ¼³Á¤
+        transform.localRotation = targetRot;
     }
 }
