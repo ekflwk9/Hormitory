@@ -1,91 +1,139 @@
+// SoundManager.cs (업그레이드 버전)
 using UnityEngine;
+using System.Collections.Generic; // Dictionary를 사용하기 위해 추가
 
-
-public enum SoundCategory
+public class SoundManager : MonoBehaviour
 {
-    Aiming,
-    BGM,
-    Casings_And_Shells, 
-    Explosions,
-    Grenade_Throw,
-    Gun_Reloads,
-    Impacts,
-    Misc,
-    Movement,
-    Shoot
-}
+    public static SoundManager Instance { get; private set; }
 
-public static class SoundManager
-{
-    private static AudioSource bgmPlayer;
-    private static AudioSource sfxPlayer;
-    private static bool isInitialized = false;
+    [Header("사운드 클립 목록")]
+    [SerializeField] private Sound[] bgmSounds;
+    [SerializeField] private Sound[] sfxSounds;
 
-    private static void Init()
+    private AudioSource bgmPlayer;
+    private AudioSource sfxPlayer;
+
+    // 사전 로딩된 클립을 저장할 딕셔너리
+    private Dictionary<string, AudioClip> bgmClips;
+    private Dictionary<string, AudioClip> sfxClips;
+
+    private void Awake()
     {
-        if (isInitialized) return;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        GameObject soundPlayerObject = new GameObject("SoundPlayer");
-        Object.DontDestroyOnLoad(soundPlayerObject);
-
-        bgmPlayer = soundPlayerObject.AddComponent<AudioSource>();
+        // 오디오 플레이어 설정
+        bgmPlayer = gameObject.AddComponent<AudioSource>();
         bgmPlayer.loop = true;
+        sfxPlayer = gameObject.AddComponent<AudioSource>();
 
-        sfxPlayer = soundPlayerObject.AddComponent<AudioSource>();
+        // --- 피드백 4번: 사전 로딩 구현 ---
+        // 딕셔너리 초기화
+        bgmClips = new Dictionary<string, AudioClip>();
+        sfxClips = new Dictionary<string, AudioClip>();
 
-        isInitialized = true;
+        foreach (Sound sound in bgmSounds)
+        {
+            // 이미 같은 이름의 키가 있는지 확인
+            if (bgmClips.ContainsKey(sound.name))
+            {
+                Debug.LogWarning($"SoundManager: BGM 목록에 이미 '{sound.name}'이라는 이름의 키가 존재합니다.");
+                continue; // 중복된 키는 건너뜀
+            }
+            bgmClips.Add(sound.name, sound.clip);
+        }
+
+        foreach (Sound sound in sfxSounds)
+        {
+            // 이미 같은 이름의 키가 있는지 확인
+            if (sfxClips.ContainsKey(sound.name))
+            {
+                Debug.LogWarning($"SoundManager: SFX 목록에 이미 '{sound.name}'이라는 이름의 키가 존재합니다.");
+                continue; // 중복된 키는 건너뜀
+            }
+            sfxClips.Add(sound.name, sound.clip);
+        }
+    }
+
+    // --- 피드백 1번: 배경음 제어 기능 ---
+    public void StopBgm()
+    {
+        bgmPlayer.Stop();
+    }
+
+    public void PauseBgm()
+    {
+        bgmPlayer.Pause();
+    }
+
+    public void UnpauseBgm()
+    {
+        bgmPlayer.UnPause();
+    }
+
+    public void PlayBgm(string name)
+    {
+        if (bgmClips.TryGetValue(name, out AudioClip clip))
+        {
+            if (bgmPlayer.clip == clip && bgmPlayer.isPlaying) return;
+            bgmPlayer.clip = clip;
+            bgmPlayer.Play();
+        }
+        else
+        {
+            Debug.LogWarning("BGM: " + name + " not found!");
+        }
+    }
+
+    // --- 피드백 2번: 볼륨 조절 기능 ---
+    public void SetBgmVolume(float volume)
+    {
+        // 볼륨 값은 0과 1 사이로 제한
+        bgmPlayer.volume = Mathf.Clamp01(volume);
+    }
+
+    public void SetSfxVolume(float volume)
+    {
+        sfxPlayer.volume = Mathf.Clamp01(volume);
+    }
+
+    // --- 피드백 3번: 3D 사운드 지원 ---
+    /// <summary>
+    /// 2D 효과음을 재생합니다. (UI 클릭음 등)
+    /// </summary>
+    public void PlaySfx(string name)
+    {
+        if (sfxClips.TryGetValue(name, out AudioClip clip))
+        {
+            sfxPlayer.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.LogWarning("SFX: " + name + " not found!");
+        }
     }
 
     /// <summary>
-    /// 지정된 카테고리의 효과음을 재생합니다.
+    /// 지정된 위치에서 3D 효과음을 재생합니다. (총소리, 폭발음 등)
     /// </summary>
-    /// <param name="category">재생할 사운드의 카테고리</param>
-    /// <param name="name">오디오 파일 이름</param>
-    public static void PlaySfx(SoundCategory category, string name)
+    public void PlaySfxAtPoint(string name, Vector3 position)
     {
-        Init();
-
-        // BGM 카테고리가 실수로 들어오면 경고 메시지 출력
-        if (category == SoundCategory.BGM)
+        if (sfxClips.TryGetValue(name, out AudioClip clip))
         {
-            Debug.LogWarning("BGM은 PlayBgm 메서드를 사용해주세요.");
-            return;
+            // 지정된 위치에 사운드를 재생 (3D 사운드의 가장 간단한 구현법)
+            AudioSource.PlayClipAtPoint(clip, position);
         }
-
-        // 열거형을 문자열로 변환하여 동적으로 경로 생성
-        string path = $"Sounds/{category}/{name}";
-        AudioClip clip = Resources.Load<AudioClip>(path);
-
-        if (clip == null)
+        else
         {
-            Debug.LogWarning("SFX: " + path + " not found!");
-            return;
+            Debug.LogWarning("SFX: " + name + " not found!");
         }
-
-        sfxPlayer.PlayOneShot(clip);
-    }
-
-    /// <summary>
-    /// 배경음을 재생합니다.
-    /// </summary>
-    /// <param name="name">BGM 폴더 아래의 파일 이름</param>
-    public static void PlayBgm(string name)
-    {
-        Init();
-
-        string path = $"Sounds/BGM/{name}";
-        AudioClip clip = Resources.Load<AudioClip>(path);
-
-        if (clip == null)
-        {
-            Debug.LogWarning("BGM: " + path + " not found!");
-            return;
-        }
-
-        // 현재 재생 중인 BGM과 다른 경우에만 새로 재생
-        if (bgmPlayer.clip == clip) return;
-
-        bgmPlayer.clip = clip;
-        bgmPlayer.Play();
     }
 }

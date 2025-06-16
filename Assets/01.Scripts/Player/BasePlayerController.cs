@@ -16,9 +16,10 @@ public abstract class BasePlayerController : MonoBehaviour
     [Header("Gravity Settings")]
     [SerializeField] protected float gravity = -20f;
 
-    [Header("Audio Settings")]
+    // <<--- 플레이어 사운드 관련 변수 추가
+    [Header("Player Audio Settings")]
     [Tooltip("걷기 소리를 재생할 전용 AudioSource")]
-    [SerializeField] protected AudioSource walkSfxPlayer;
+    [SerializeField] protected AudioSource walkAudioSource;
     [Tooltip("재생할 걷기 소리 오디오 클립")]
     [SerializeField] protected AudioClip walkSoundClip;
     #endregion
@@ -88,19 +89,20 @@ public abstract class BasePlayerController : MonoBehaviour
 
         bool isMoving = moveDirection.magnitude > 0.1f;
 
+        // <<--- 걷기 소리 재생/정지 로직
         if (isMoving && isGrounded)
         {
-            if (!walkSfxPlayer.isPlaying)
+            if (!walkAudioSource.isPlaying)
             {
-                walkSfxPlayer.clip = walkSoundClip;
-                walkSfxPlayer.Play();
+                walkAudioSource.clip = walkSoundClip;
+                walkAudioSource.Play();
             }
         }
         else
         {
-            if (walkSfxPlayer.isPlaying)
+            if (walkAudioSource.isPlaying)
             {
-                walkSfxPlayer.Stop();
+                walkAudioSource.Stop();
             }
         }
 
@@ -113,9 +115,9 @@ public abstract class BasePlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            SoundManager.PlaySfx(SoundCategory.Movement, "Jump");
+            // <<--- 점프 사운드 재생
+            SoundManager.Instance.PlaySfx("Jump");
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            
         }
     }
 
