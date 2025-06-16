@@ -11,12 +11,12 @@ public class PuzzleWaitState: BaseState
     public override void Enter()
     {
         NavMeshAgent.isStopped = true;
-        //애니메이션
+        //정지
     }
 
     public override void Exit()
     {
         NavMeshAgent.isStopped = false;
-        //애니메이션
+        //다시 움직임
     }
 }

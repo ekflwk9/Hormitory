@@ -29,6 +29,7 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("아이템 획득")) ItemGet();
         else if (GUILayout.Button("인벤토리 On")) ShowInventory(true);
         else if (GUILayout.Button("인벤토리 Off")) ShowInventory(false);
+        else if (GUILayout.Button("퍼즐 플레이어 사망")) ShowPuzzlePlayerDead(true);
     }
 
     private void OnMenu()
@@ -81,6 +82,11 @@ public class DebugTool : EditorWindow
     private void ShowInventory(bool _isActive)
     {
         UiManager.Instance.Show<InventoryUi>(_isActive);
+    }
+
+    private void ShowPuzzlePlayerDead(bool isDead)
+    {
+        UiManager.Instance.Get<DeadUi>().Show(isDead);
     }
 }
 #endif

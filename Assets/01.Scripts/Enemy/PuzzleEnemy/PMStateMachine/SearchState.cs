@@ -40,7 +40,7 @@ public class SearchState : BaseState
         }
         float distance = Vector3.Distance(MonsterTransform.position,PlayerTransform.position);
 
-        if (distance <= DetectRange)
+        if (distance <= DetectRange && !PuzzlePlayerController.IsHiding)
         {
             StateMachine.TransitionTo(MonsterStateType.Chase);
         }

@@ -8,10 +8,12 @@ public enum MonsterStateType
     Idle,
     Chase,
     Search,
-    PuzzleWait
+    PuzzleWait,
+    Capture
 }
 public class MonsterStateMachine : MonoBehaviour
 {
+    
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private float _detectRange = 5f;
     [SerializeField] private float _searchDuration = 3f;
@@ -24,8 +26,16 @@ public class MonsterStateMachine : MonoBehaviour
     [SerializeField] private float _patrolWaitTime = 2f; // 목적지 도착 후 대기 시간
     
     [Header("SpeedSetting")]
-    [SerializeField] private float _chaseSpeed = 2.2f;//c추격 시 속도
+    [SerializeField] private float _chaseSpeed = 2.2f;//추격 시 속도
+    
+    
+    [SerializeField] private MainCamera _mainCam;
+    [SerializeField] private Camera _deadCam;
     private float _defaultSpeed;
+
+    
+    private float _captureRange = 1.5f;
+    
     public PuzzleMonster PuzzleMonster { get; private set; }
 
     public Transform PlayerStransform => _playerTransform;
@@ -36,6 +46,10 @@ public class MonsterStateMachine : MonoBehaviour
     public NavMeshAgent NavMeshAgent { get; private set; }
     public float PatrolRadius => _patrolRadius;
     public float PatrolWaitTime => _patrolWaitTime;
+    public float CaptureRange => _captureRange;
+    public PuzzlePlayerController PuzzlePlayerController => _playerTransform.GetComponent<PuzzlePlayerController>();
+    public Camera DeadCam => _deadCam;
+    public MainCamera MainCam => _mainCam;
     
     private void Awake()
     {
@@ -43,13 +57,13 @@ public class MonsterStateMachine : MonoBehaviour
         PuzzleMonster = GetComponent<PuzzleMonster>();
         
         _defaultSpeed = NavMeshAgent.speed;
-        
         _states = new Dictionary<MonsterStateType, IState>
         {
             { MonsterStateType.Idle, new IdleState(this) },
             { MonsterStateType.Chase, new ChaseState(this) },
             { MonsterStateType.Search, new SearchState( this) },
-            { MonsterStateType.PuzzleWait, new PuzzleWaitState(this) }
+            { MonsterStateType.PuzzleWait, new PuzzleWaitState(this) },
+            {MonsterStateType.Capture, new CaptureState(this)}
         };
     }
 
@@ -72,9 +86,4 @@ public class MonsterStateMachine : MonoBehaviour
         _currentState = _states[newStetType];
         _currentState.Enter();
     }
-
-    public void OnPlayerHidden() => TransitionTo(MonsterStateType.Search);
-    public void OnPlayerFound() => TransitionTo(MonsterStateType.Chase);
-    public void OnPuzzleStart() => TransitionTo(MonsterStateType.PuzzleWait);
-    public void OnPuzzleComplete() => TransitionTo(MonsterStateType.Chase);
 }
