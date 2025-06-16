@@ -75,7 +75,7 @@ public class PuzzlePlayerController : BasePlayerController
     /// <summary>
     /// 부모 클래스의 abstract Die 메서드를 반드시 구현(override)해야 합니다.
     /// </summary>
-    protected override void Die()
+    public override void Die()
     {
         
         if (isDead) return;

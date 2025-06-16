@@ -121,7 +121,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     // <<--- TakeDamage() 메서드 제거
 
-    protected virtual void Die()
+    public virtual void Die()
     {
         if (isDead) return;
         isDead = true;
