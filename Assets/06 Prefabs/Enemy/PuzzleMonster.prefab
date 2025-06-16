@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7955785544471469350}
   - component: {fileID: 198338755174588989}
   - component: {fileID: 3177928162202496411}
+  - component: {fileID: 8667069977826724318}
   m_Layer: 0
   m_Name: PuzzleMonster
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9543b3de2d4e58d4daef9abce908f0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
+  _playerTransform: {fileID: 547433657180574848, guid: dbd9b44e423a69045ae2ea2966258ff3,
+    type: 3}
   _detectRange: 8
   _searchDuration: 3
   _patrolRadius: 10
@@ -92,6 +94,29 @@ MonoBehaviour:
     walkParameterName: Walk
     chaseParameterName: Chase
     searchParameterName: Search
+--- !u!136 &8667069977826724318
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315978424599474479}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Height: 1.68
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.84, z: 0}
 --- !u!1001 &6746597255413027318
 PrefabInstance:
   m_ObjectHideFlags: 0

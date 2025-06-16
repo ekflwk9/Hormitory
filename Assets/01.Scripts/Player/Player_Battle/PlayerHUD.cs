@@ -29,69 +29,69 @@ public class PlayerHUD : MonoBehaviour
     {
         status.onHPEvent.AddListener(UpdateHPHUD);
     }
-
-    public void SetupAllWeapons(WeaponBase[] weapons)
-    {
-        SetupMagazine();
-        
-        for (int i = 0; i < weapons.Length; ++i)
-        {
-            weapons[i].onAmmoEvent.AddListener(UpdateAmmoUHD);
-            weapons[i].onMagazineEvent.AddListener(UpdateMagazineHUD);
-        }
-    }
-
-    public void SwitchingWeapon(WeaponBase newWeapon)
-    {
-        weapon = newWeapon;
-            
-        SetupWeapon();
-    }
-    private void SetupWeapon()
-    {
-        textWeaponName.text = weapon.WeaponName.ToString();
-        imageWeaponIcon.sprite = spriteWeaponIcons[(int)weapon.WeaponName];
-        imageWeaponIcon.rectTransform.sizeDelta = sizeWeaponIcons[(int)weapon.WeaponName];
-    }
-
-    private void UpdateAmmoUHD(int currentAmmo, int maxAmmo)
-    {
-        textAmmo.text = $"<size=40>{currentAmmo}/</size>{maxAmmo}";
-    }
-
-    private void SetupMagazine()
-    {
-        //weapon에 등록되어 있는 최대 탄창 갯수만큼 Image Icon 생성
-        //magazineParent 오브젝트의 자식으로 등록후 모두 비활설화 후 리스트에 저장
-        magazineList = new List<GameObject>();
-        for(int i = 0; i < maxMagazineCount; ++i)
-        {
-            GameObject clone = Instantiate(magazineUIPrefab);
-            clone.transform.SetParent(magazineParent);
-            clone.SetActive(false);
-            
-            magazineList.Add(clone);
-        }
-    }
-    
-    private void UpdateMagazineHUD(int currentMagazine)
-    {
-        //전부 비황성화하고, currentMagazine 갯수만큼 활성화
-        for(int i = 0; i < magazineList.Count; ++i)
-        {
-            magazineList[i].SetActive(false);
-        }
-
-        if (currentMagazine < 0 || currentMagazine >= magazineList.Count)
-        {
-            Debug.LogError($"탄창 인덱스 {currentMagazine}가 범위를 벗어났습니다. 컬렉션 크기: {magazineList.Count}");
-            return;
-        }
-        for (int i = 0; i < currentMagazine; ++i)
-        {
-            magazineList[i].SetActive(true);
-        }
-    }
+    //
+    // public void SetupAllWeapons(WeaponBase[] weapons)
+    // {
+    //     SetupMagazine();
+    //     
+    //     for (int i = 0; i < weapons.Length; ++i)
+    //     {
+    //         weapons[i].onAmmoEvent.AddListener(UpdateAmmoUHD);
+    //         weapons[i].onMagazineEvent.AddListener(UpdateMagazineHUD);
+    //     }
+    // }
+    //
+    // public void SwitchingWeapon(WeaponBase newWeapon)
+    // {
+    //     weapon = newWeapon;
+    //         
+    //     SetupWeapon();
+    // }
+    // private void SetupWeapon()
+    // {
+    //     textWeaponName.text = weapon.WeaponName.ToString();
+    //     imageWeaponIcon.sprite = spriteWeaponIcons[(int)weapon.WeaponName];
+    //     imageWeaponIcon.rectTransform.sizeDelta = sizeWeaponIcons[(int)weapon.WeaponName];
+    // }
+    //
+    // private void UpdateAmmoUHD(int currentAmmo, int maxAmmo)
+    // {
+    //     textAmmo.text = $"<size=40>{currentAmmo}/</size>{maxAmmo}";
+    // }
+    //
+    // private void SetupMagazine()
+    // {
+    //     //weapon에 등록되어 있는 최대 탄창 갯수만큼 Image Icon 생성
+    //     //magazineParent 오브젝트의 자식으로 등록후 모두 비활설화 후 리스트에 저장
+    //     magazineList = new List<GameObject>();
+    //     for(int i = 0; i < maxMagazineCount; ++i)
+    //     {
+    //         GameObject clone = Instantiate(magazineUIPrefab);
+    //         clone.transform.SetParent(magazineParent);
+    //         clone.SetActive(false);
+    //         
+    //         magazineList.Add(clone);
+    //     }
+    // }
+    //
+    // private void UpdateMagazineHUD(int currentMagazine)
+    // {
+    //     //전부 비황성화하고, currentMagazine 갯수만큼 활성화
+    //     for(int i = 0; i < magazineList.Count; ++i)
+    //     {
+    //         magazineList[i].SetActive(false);
+    //     }
+    //
+    //     if (currentMagazine < 0 || currentMagazine >= magazineList.Count)
+    //     {
+    //         Debug.LogError($"탄창 인덱스 {currentMagazine}가 범위를 벗어났습니다. 컬렉션 크기: {magazineList.Count}");
+    //         return;
+    //     }
+    //     for (int i = 0; i < currentMagazine; ++i)
+    //     {
+    //         magazineList[i].SetActive(true);
+    //     }
+    // }
 
     private void UpdateHPHUD(float previous, float current)
     {

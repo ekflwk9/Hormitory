@@ -15,5 +15,5 @@ public class MenuUi : UiBase
         UiManager.Instance.Get<FadeUi>().OnFade();
 
         //플레이어 조작 설정
-    }
+    }    
 }

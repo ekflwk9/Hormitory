@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public enum SlotType
+﻿public enum SlotType
 {
     None,
     FirstSlot,
@@ -9,27 +7,26 @@ public enum SlotType
 
 public class InventoryUi : UiBase
 {
-    private Animator anim;
     private SlotUi firstSlot, secondSlot;
 
     public override void Init()
     {
         firstSlot = this.TryGetChildComponent<SlotUi>("FirstSlot");
         secondSlot = this.TryGetChildComponent<SlotUi>("SecondSlot");
-        anim = this.TryGetComponent<Animator>();
 
         UiManager.Instance.Add<InventoryUi>(this);
-    }
-
-    public override void Show(bool _isActive)
-    {
-        anim.Play(_isActive ? AnimName.Show : AnimName.Hide, 0, 0);
     }
 
     public void SetView(SlotType _slot, int _itemId)
     {
         if (_slot == SlotType.FirstSlot) firstSlot.SetSlotView(_itemId);
         else secondSlot.SetSlotView(_itemId);
+    }
+
+    public override void Show(bool _isActive)
+    {
+        firstSlot.Show(false);
+        secondSlot.Show(false);
     }
 
     public void SlotSelection(SlotType _slot)

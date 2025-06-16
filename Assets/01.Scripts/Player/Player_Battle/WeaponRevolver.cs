@@ -79,7 +79,7 @@ public class WeaponRevolver : WeaponBase
         {
             //공격 중일 때는 모드 전환 X
             if (isAttack == true) return;
-
+            
             StartCoroutine(OnModeChange());
         }
     
@@ -96,6 +96,7 @@ public class WeaponRevolver : WeaponBase
 
     public override void StartReload()
     {
+        if (animator.AimModeIs) return;
         //재장전 or 탄창 x => 장전 불가
         if( isReload == true || weaponSetting.currentMagazine <= 0) return;
         

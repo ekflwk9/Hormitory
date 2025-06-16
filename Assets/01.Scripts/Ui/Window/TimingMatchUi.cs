@@ -6,6 +6,6 @@ public class TimingMatchUi : UiBase
 {
     public override void Init()
     {
-
+        UiManager.Instance.Add<TimingMatchUi>(this);
     }
 }
