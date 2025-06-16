@@ -1,11 +1,41 @@
-﻿// CameraShake.cs
+﻿// CameraShake.cs 파일 상단에 추가
+
 using UnityEngine;
+using System.Collections.Generic; // Dictionary 사용을 위해 추가
 using System.Collections;
 
+// 1. 카메라 쉐이크의 종류를 정의하는 열거형
+public enum CameraShakeType
+{
+    PlayerHit,
+    PlayerDeath,
+    SpecialEvent,
+    MonsterImpact
+}
+
+// 2. 각 쉐이크 타입에 대한 상세 설정을 담는 클래스
+[System.Serializable]
+public class ShakeProfile
+{
+    public CameraShakeType type;
+    public float duration = 0.2f;
+    public float magnitude = 0.1f;
+
+    [Tooltip("체크하면 일반 흔들림 대신 기울이기 효과를 사용합니다 (사망 연출 등)")]
+    public bool isTiltEffect = false;
+    [Range(0, 90)]
+    public float tiltAngle = 45f;
+}
+
+// CameraShake.cs (수정 버전)
 public class CameraShake : MonoBehaviour
 {
     public static CameraShake Instance { get; private set; }
 
+    [Header("흔들림 효과 프로필 목록")]
+    [SerializeField] private ShakeProfile[] shakeProfiles;
+
+    private Dictionary<CameraShakeType, ShakeProfile> shakeProfileDict;
     private Vector3 originalPos;
     private Quaternion originalRot;
 
@@ -19,70 +49,73 @@ public class CameraShake : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        shakeProfileDict = new Dictionary<CameraShakeType, ShakeProfile>();
+        foreach (var profile in shakeProfiles)
+        {
+            if (shakeProfileDict.ContainsKey(profile.type))
+            {
+                Debug.LogWarning($"CameraShake: 프로필 목록에 이미 '{profile.type}' 타입이 존재합니다.");
+                continue;
+            }
+            shakeProfileDict.Add(profile.type, profile);
+        }
     }
 
     private void Start()
     {
-        // 카메라의 원래 위치와 회전값을 저장해 둡니다.
         originalPos = transform.localPosition;
         originalRot = transform.localRotation;
     }
 
-    /// <summary>
-    /// 지정된 시간과 강도로 카메라를 흔듭니다. (피격 효과용)
-    /// </summary>
-    /// <param name="duration">흔들림 지속 시간</param>
-    /// <param name="magnitude">흔들림 강도</param>
-    public void Shake(float duration, float magnitude)
+    public void Play(CameraShakeType type)
     {
-        StartCoroutine(ShakeCoroutine(duration, magnitude));
+        if (shakeProfileDict.TryGetValue(type, out ShakeProfile profile))
+        {
+            if (profile.isTiltEffect)
+            {
+                StartCoroutine(DeathTiltCoroutine(profile.duration, profile.tiltAngle));
+            }
+            else
+            {
+                StartCoroutine(ShakeCoroutine(profile.duration, profile.magnitude));
+            }
+        }
+        else
+        {
+            Debug.LogWarning("요청한 카메라 쉐이크 타입을 찾을 수 없습니다: " + type);
+        }
     }
 
     private IEnumerator ShakeCoroutine(float duration, float magnitude)
     {
         float elapsed = 0.0f;
-
         while (elapsed < duration)
         {
-            // 랜덤한 위치로 카메라를 살짝 흔듦
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
-
             transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
 
-            elapsed += Time.deltaTime;
-            yield return null; // 다음 프레임까지 대기
+            // Time.deltaTime 대신 Time.unscaledDeltaTime 사용
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
         }
-
-        // 흔들림이 끝나면 원래 위치로 복원
         transform.localPosition = originalPos;
-    }
-
-
-    /// <summary>
-    /// 지정된 시간 동안 지정된 각도로 카메라를 기울입니다. (사망 연출용)
-    /// </summary>
-    /// <param name="duration">기울어지는 데 걸리는 시간</param>
-    /// <param name="tiltAngle">최종적으로 기울어질 각도</param>
-    public void StartDeathTilt(float duration, float tiltAngle)
-    {
-        StartCoroutine(DeathTiltCoroutine(duration, tiltAngle));
     }
 
     private IEnumerator DeathTiltCoroutine(float duration, float tiltAngle)
     {
         Quaternion startRot = transform.localRotation;
-        Quaternion targetRot = originalRot * Quaternion.Euler(0, 0, tiltAngle); // 원래 회전값에 기울임을 추가
+        Quaternion targetRot = originalRot * Quaternion.Euler(0, 0, tiltAngle);
         float elapsed = 0.0f;
-
         while (elapsed < duration)
         {
-            // Slerp를 사용해 부드럽게 회전
             transform.localRotation = Quaternion.Slerp(startRot, targetRot, elapsed / duration);
-            elapsed += Time.deltaTime;
+
+            // Time.deltaTime 대신 Time.unscaledDeltaTime 사용
+            elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
-
-        transform.localRotation = targetRot; // 정확한 목표 각도로 설정
+        transform.localRotation = targetRot;
     }
 }
