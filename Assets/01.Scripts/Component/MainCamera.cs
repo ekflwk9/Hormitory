@@ -10,11 +10,11 @@ public class MainCamera : MonoBehaviour
     private Vector3 originPosition;
     private Quaternion originRotation;
 
-    private bool isShaking = false;
+    public bool isShaking = false;
     void Awake()
     {
         if(CameraManager.Instance != null)
-            CameraManager.Instance.SetCamera(GetComponent<Camera>());
+            CameraManager.Instance.SetCamera(GetComponent<MainCamera>());
 
         originPosition = transform.localPosition;
         originRotation = transform.localRotation;
