@@ -2,21 +2,9 @@
 using UnityEngine.InputSystem;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
-public class PuzzlePlayerController : MonoBehaviour
+public class PuzzlePlayerController : BasePlayerController
 {
     #region Serialized Fields & Public Properties
-
-    [Header("Look Settings")]
-    [SerializeField] private float mouseSensitivity = 100f;
-    [SerializeField] private Transform cameraTransform;
-
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5.0f;
-    [SerializeField] private float jumpHeight = 1.5f;
-
-    [Header("Gravity Settings")]
-    [SerializeField] private float gravity = -20f;
 
     [Header("Interaction Settings")]
     [SerializeField] private float interactionDistance = 2.0f;
@@ -28,13 +16,6 @@ public class PuzzlePlayerController : MonoBehaviour
 
     #region Private State Variables
 
-    private CharacterController characterController;
-    private PuzzlePlayer playerActions;
-    private Vector2 moveInput;
-    private float verticalVelocity;
-    private float xRotation = 0f;
-    private float yRotation = 0f;
-    private bool isGrounded;
     private bool isInputLocked = false;
     private bool isHiding = false;
     private IInteractable currentInteractable;
@@ -44,112 +25,51 @@ public class PuzzlePlayerController : MonoBehaviour
 
     #region Unity Lifecycle Methods
 
-    private void Awake()
+    protected override void OnEnable()
     {
-        characterController = GetComponent<CharacterController>();
-        playerActions = new PuzzlePlayer();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    private void OnEnable()
-    {
-        playerActions.Player.Enable();
-        playerActions.Player.Jump.performed += OnJump;
+        base.OnEnable();
         playerActions.Player.Interact.performed += OnInteract;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
-        playerActions.Player.Disable();
-        playerActions.Player.Jump.performed -= OnJump;
+        base.OnDisable();
         playerActions.Player.Interact.performed -= OnInteract;
     }
 
     // <<--- 수정된 Update 함수
-    private void Update()
+    protected override void Update()
     {
         if (isInputLocked) return;
 
-        // 숨어있을 때는 아무 동작도 하지 않음. 나오기 처리는 OnInteract에서 전담.
-        if (isHiding)
-        {
-            return;
-        }
-
+        // 땅에 닿았는지 여부는 항상 체크
         isGrounded = characterController.isGrounded;
-        HandleMovementAndGravity();
-        HandleLook();
-        HandleInteraction();
-    }
 
-    #endregion
-
-    #region Input Handling Methods
-
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        if (isGrounded)
-        {
-            verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-    }
-
-    
-    private void OnInteract(InputAction.CallbackContext context)
-    {
-        // 1. 숨어있는 상태가 최우선. 다른 조건 없이 바로 나오기를 시도.
+        // 숨어있는 상태일 때의 로직
         if (isHiding)
         {
-            // 현재 숨어있는 장소(currentHidingSpot)와 다시 상호작용하여 나옴.
-            if (currentHidingSpot != null)
-            {
-                currentHidingSpot.Interact(this.gameObject);
-            }
+            // 시점 조작(엿보기)은 허용
+            HandleLook();
+            // 나오기 위한 상호작용 탐색도 허용
+            HandleInteraction();
         }
-        // 2. 숨어있지 않고, 바라보는 대상이 있을 때만 일반 상호작용
-        else if (currentInteractable != null)
+        // 숨어있지 않은 일반 상태일 때의 로직
+        else
         {
-            currentInteractable.Interact(this.gameObject);
+            // 부모 클래스의 기능을 직접 호출
+            HandleMovementAndGravity();
+            HandleLook();
+            HandleInteraction();
         }
     }
 
     #endregion
 
-    #region Core Logic Methods
-
-    private void HandleLook()
-    {
-        Vector2 lookInput = playerActions.Player.Look.ReadValue<Vector2>();
-        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
-        float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
-
-        xRotation -= mouseY;
-        yRotation += mouseX;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
-    }
-
-    private void HandleMovementAndGravity()
-    {
-        if (isGrounded && verticalVelocity < 0.0f)
-        {
-            verticalVelocity = -2.0f;
-        }
-
-        moveInput = playerActions.Player.Move.ReadValue<Vector2>();
-        Vector3 moveDirection = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized;
-        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
-
-        verticalVelocity += gravity * Time.deltaTime;
-        characterController.Move(new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
-    }
+    #region Puzzle-Specific Logic
 
     private void HandleInteraction()
     {
         currentInteractable = null;
-
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, interactionDistance, interactionLayer))
         {
             if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
@@ -159,9 +79,17 @@ public class PuzzlePlayerController : MonoBehaviour
         }
     }
 
-    #endregion
-
-    #region State Control Methods
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (isHiding && currentHidingSpot != null)
+        {
+            currentHidingSpot.Interact(this.gameObject);
+        }
+        else if (!isHiding && currentInteractable != null)
+        {
+            currentInteractable.Interact(this.gameObject);
+        }
+    }
 
     public void LockInput()
     {
@@ -179,7 +107,6 @@ public class PuzzlePlayerController : MonoBehaviour
 
     public void ToggleHiding(HidingSpot spot, Transform hideTransform, Transform exitTransform)
     {
-        // 숨으려고 할 때만 currentHidingSpot을 새로 지정
         if (!isHiding)
         {
             currentHidingSpot = spot;
@@ -187,20 +114,15 @@ public class PuzzlePlayerController : MonoBehaviour
         }
         else
         {
-            // 나올 때는 이미 저장된 currentHidingSpot 정보를 사용
             StartCoroutine(UnhideCoroutine(exitTransform));
         }
     }
-
-    #endregion
-
-    #region Coroutines
 
     private IEnumerator HideCoroutine(Transform hideTransform)
     {
         LockInput();
         isHiding = true;
-       
+
         characterController.enabled = false;
 
         Vector3 startPos = transform.position;
@@ -219,7 +141,6 @@ public class PuzzlePlayerController : MonoBehaviour
         transform.position = hideTransform.position;
         transform.rotation = hideTransform.rotation;
 
-        Debug.Log("숨기 완료.");
         UnlockInput();
     }
 
@@ -244,13 +165,9 @@ public class PuzzlePlayerController : MonoBehaviour
         transform.rotation = exitTransform.rotation;
 
         characterController.enabled = true;
-
-        // isHiding 상태는 모든 동작이 끝난 후 변경
         isHiding = false;
-       
         currentHidingSpot = null;
 
-        Debug.Log("나오기 완료.");
         UnlockInput();
     }
 

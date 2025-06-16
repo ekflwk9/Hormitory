@@ -42,17 +42,13 @@ public class WeaponKnifeCollider : MonoBehaviour
         {
             other.GetComponent<IDamagable>()?.TakeDamage(damage);
         }
+
+        if (other.CompareTag("ExplosiveBarrel"))
+        {
+            other.GetComponent<IDamagable>()?.TakeDamage(damage);
+            Debug.Log($"{damage}");
+        }
         
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

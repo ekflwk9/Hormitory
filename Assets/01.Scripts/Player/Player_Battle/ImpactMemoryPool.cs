@@ -7,6 +7,7 @@ namespace _01.Scripts.Player.Player_Battle
         Normal = 0,
         Obstacle,
         Enemy,
+        InteractionObject,
     }
 
     public class ImpactMemoryPool : MonoBehaviour
@@ -40,32 +41,50 @@ namespace _01.Scripts.Player.Player_Battle
             {
                 OnSpawnImpact(ImpactType.Enemy, hit.point, Quaternion.LookRotation(hit.normal));
             }
+            else if (hit.transform.CompareTag("ExplosiveBarrel"))
+            {
+                //오브젝트 색상에 따라 색상 변경
+                Color color = hit.transform.GetComponentInChildren<MeshRenderer>().material.color;
+                OnSpawnImpact(ImpactType.InteractionObject, hit.point, Quaternion.LookRotation(hit.normal), color);;
+            }
         }
 
         public void SpawnImapct(Collider other, Transform knifeTransform)
         {
             //부딪친 오브젝트의 Tag에 따라 다르게 처리
-            if (other.transform.CompareTag("ImpactNormal"))
+            if (other.CompareTag("ImpactNormal"))
             {
                 //Quaternion.Inverse(knifeTransform.rotation) rotation과 반대되는 회전 값을 반환
                 OnSpawnImpact(ImpactType.Normal, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation));
             }
-            else if (other.transform.CompareTag("ImpactObstacle"))
+            else if (other.CompareTag("ImpactObstacle"))
             {
                 OnSpawnImpact(ImpactType.Obstacle, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation));
             }
-            else if (other.transform.CompareTag("Enemy"))
+            else if (other.CompareTag("Enemy"))
             {
                 OnSpawnImpact(ImpactType.Enemy, knifeTransform.position,Quaternion.Inverse(knifeTransform.rotation));
             }
+            else if (other.CompareTag("ExplosiveBarrel"))
+            {
+                Color color = other.transform.GetComponentInChildren<MeshRenderer>().material.color;
+                OnSpawnImpact(ImpactType.InteractionObject, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation), color);
+            }
         }
 
-        public void OnSpawnImpact(ImpactType type, Vector3 position, Quaternion rotation)
+        public void OnSpawnImpact(ImpactType type, Vector3 position, Quaternion rotation, Color color = new Color())
         {
             GameObject item = memoryPool[(int)type].ActivePoolItem();
             item.transform.position = position;
             item.transform.rotation = rotation;
             item.GetComponent<Impact>().Setup(memoryPool[(int)type]);
+
+            if (type == ImpactType.InteractionObject)
+            {
+                // 파티클시스템의 메인프로퍼티는 바로 접근할 수 없기 때문에 변수를 생성한 후 접근해서 사용한다.
+                ParticleSystem.MainModule main = item.GetComponent<ParticleSystem>().main;
+                main.startColor = color;
+            }
         }
         void Start()
         {

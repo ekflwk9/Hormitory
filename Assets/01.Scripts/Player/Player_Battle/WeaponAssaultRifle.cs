@@ -45,9 +45,7 @@ public class WeaponAssaultRifle : WeaponBase
     private void OnEnable()
     {
         muzzleFlashEffect.SetActive(false);
-        //무기가 활성화될 때 해당 무기의 탄 수 정보 갱신
-        onAmmoEvent.Invoke(weaponSetting.currentAmmo,weaponSetting.maxAmmo);
-        
+
         //무기가 활성화될 때 해당 무기 탄창 정보 갱신
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
         //무기가 활성화될 때 해당 무기 탄 수 정보 갱신
@@ -214,6 +212,11 @@ public class WeaponAssaultRifle : WeaponBase
             impactMemoryPool.SpawnImpact(hit);
             
             if (hit.transform.CompareTag("Enemy"))
+            {
+                IDamagable damageable = hit.transform.GetComponent<IDamagable>();
+                damageable.TakeDamage(weaponSetting.damage);
+            }
+            else if (hit.transform.CompareTag("ExplosiveBarrel"))
             {
                 IDamagable damageable = hit.transform.GetComponent<IDamagable>();
                 damageable.TakeDamage(weaponSetting.damage);
