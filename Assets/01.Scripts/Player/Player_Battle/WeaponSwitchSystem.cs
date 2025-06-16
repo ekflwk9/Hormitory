@@ -31,12 +31,7 @@ public class WeaponSwitchSystem : MonoBehaviour
         }
         SwitchingWeapon(WeaponType.Main);
     }
-
-    private void Start()
-    {
-
-    }
-
+    
     private void Update()
     {
         UpdateSwitch();
@@ -54,6 +49,7 @@ public class WeaponSwitchSystem : MonoBehaviour
         {
             SwitchingWeapon((WeaponType)(inputIndex - 1));
         }
+
     }
 
     private void SwitchingWeapon(WeaponType weaponType)
@@ -85,5 +81,14 @@ public class WeaponSwitchSystem : MonoBehaviour
             previousWeapon.gameObject.SetActive(false);
         }
         currentWeapon.gameObject.SetActive(true);
+
+        if (currentWeapon == weapons[0])
+        {
+            UiManager.Instance.Show<BulletUi>(true);
+        }
+        else if (currentWeapon == weapons[1])
+        {
+            UiManager.Instance.Show<BulletUi>(false);
+        }
     }
 }

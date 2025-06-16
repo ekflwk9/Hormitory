@@ -28,10 +28,10 @@ public class ExplosionBarrel : InteractionObject, IDamagable
             if (currentHP > 0)
             {
                 currentHP -= damage;
-                currentHP = Mathf.Max(currentHP, 1);
+                currentHP = Mathf.Max(currentHP, 1.0f);
                 Debug.Log($"{currentHP}");
             }
-            if (currentHP == 1f)
+            if (currentHP == 1.0f)
             {
                 Debug.Log("Prepared");
                 isPrepared = true;
@@ -43,11 +43,10 @@ public class ExplosionBarrel : InteractionObject, IDamagable
             if (isPrepared)
             {
                  currentHP -= damage;
-                 StartCoroutine("ExplodeBarrel");
-            }
-            else
-            {
-                return;
+                 if (currentHP <= 0)
+                 {
+                    StartCoroutine("ExplodeBarrel");
+                 }
             }
         }
     }
