@@ -1,130 +1,179 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
-public class PuzzlePlayerController : MonoBehaviour
+public class PuzzlePlayerController : BasePlayerController
 {
-    [Header("Look Settings")]
-    [SerializeField] private float mouseSensitivity = 100f;
-    [SerializeField] private Transform cameraTransform;
-    private float xRotation = 0f;
-
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5.0f;
-    [SerializeField] private float rotationSpeed = 3f;
-    [SerializeField] private float jumpHeight = 1.5f;
-
-    [Header("Gravity Settings")]
-    [SerializeField] private float gravity = -9.81f;
+    #region Serialized Fields & Public Properties
 
     [Header("Interaction Settings")]
     [SerializeField] private float interactionDistance = 2.0f;
     [SerializeField] private LayerMask interactionLayer;
+
+    public bool IsHiding => isHiding;
+
+    #endregion
+
+    #region Private State Variables
+
+    private bool isInputLocked = false;
+    private bool isHiding = false;
     private IInteractable currentInteractable;
+    private HidingSpot currentHidingSpot;
 
-    private CharacterController characterController;
-    private PuzzlePlayer playerActions;
-    private Vector2 moveInput;
-    private float verticalVelocity;
-    private bool isGrounded;
+    #endregion
 
-    private void Awake()
+    #region Unity Lifecycle Methods
+
+    protected override void OnEnable()
     {
-        characterController = GetComponent<CharacterController>();
-        playerActions = new PuzzlePlayer();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    private void OnEnable()
-    {
-        playerActions.Player.Enable();
-        playerActions.Player.Jump.performed += OnJump;
+        base.OnEnable();
         playerActions.Player.Interact.performed += OnInteract;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
-        playerActions.Player.Disable();
-        playerActions.Player.Jump.performed -= OnJump;
+        base.OnDisable();
         playerActions.Player.Interact.performed -= OnInteract;
     }
 
-    private void Update()
+    // <<--- 수정된 Update 함수
+    protected override void Update()
     {
-        HandleMovementAndGravity();
-        HandleInteraction();
-        HandleLook();
-    }
+        if (isInputLocked) return;
 
-    private void HandleLook()
-    {
-        Vector2 lookInput = playerActions.Player.Look.ReadValue<Vector2>();
-        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
-        float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
-
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
-    }
-
-    // 이 함수가 수정되었습니다.
-    private void HandleMovementAndGravity()
-    {
+        // 땅에 닿았는지 여부는 항상 체크
         isGrounded = characterController.isGrounded;
-        if (isGrounded && verticalVelocity < 0.0f)
+
+        // 숨어있는 상태일 때의 로직
+        if (isHiding)
         {
-            verticalVelocity = -2.0f;
+            // 시점 조작(엿보기)은 허용
+            HandleLook();
+            // 나오기 위한 상호작용 탐색도 허용
+            HandleInteraction();
         }
-
-        moveInput = playerActions.Player.Move.ReadValue<Vector2>();
-
-        Vector3 moveDirection = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized;
-
-        // 회전 로직은 제거하고 이동만 처리합니다.
-        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
-
-        verticalVelocity += gravity * Time.deltaTime;
-        characterController.Move(new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
-    }
-
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        if (isGrounded)
+        // 숨어있지 않은 일반 상태일 때의 로직
+        else
         {
-            verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            // 부모 클래스의 기능을 직접 호출
+            HandleMovementAndGravity();
+            HandleLook();
+            HandleInteraction();
         }
     }
+
+    #endregion
+
+    #region Puzzle-Specific Logic
 
     private void HandleInteraction()
     {
+        currentInteractable = null;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, interactionDistance, interactionLayer))
         {
             if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
             {
                 currentInteractable = interactable;
             }
-            else
-            {
-                currentInteractable = null;
-            }
-        }
-        else
-        {
-            currentInteractable = null;
         }
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (currentInteractable != null)
+        if (isHiding && currentHidingSpot != null)
         {
-            currentInteractable.Interact();
+            currentHidingSpot.Interact(this.gameObject);
+        }
+        else if (!isHiding && currentInteractable != null)
+        {
+            currentInteractable.Interact(this.gameObject);
         }
     }
+
+    public void LockInput()
+    {
+        isInputLocked = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void UnlockInput()
+    {
+        isInputLocked = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void ToggleHiding(HidingSpot spot, Transform hideTransform, Transform exitTransform)
+    {
+        if (!isHiding)
+        {
+            currentHidingSpot = spot;
+            StartCoroutine(HideCoroutine(hideTransform));
+        }
+        else
+        {
+            StartCoroutine(UnhideCoroutine(exitTransform));
+        }
+    }
+
+    private IEnumerator HideCoroutine(Transform hideTransform)
+    {
+        LockInput();
+        isHiding = true;
+
+        characterController.enabled = false;
+
+        Vector3 startPos = transform.position;
+        Quaternion startRot = transform.rotation;
+        float duration = 0.5f;
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPos, hideTransform.position, elapsedTime / duration);
+            transform.rotation = Quaternion.Slerp(startRot, hideTransform.rotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = hideTransform.position;
+        transform.rotation = hideTransform.rotation;
+
+        UnlockInput();
+    }
+
+    private IEnumerator UnhideCoroutine(Transform exitTransform)
+    {
+        LockInput();
+
+        Vector3 startPos = transform.position;
+        Quaternion startRot = transform.rotation;
+        float duration = 0.5f;
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPos, exitTransform.position, elapsedTime / duration);
+            transform.rotation = Quaternion.Slerp(startRot, exitTransform.rotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = exitTransform.position;
+        transform.rotation = exitTransform.rotation;
+
+        characterController.enabled = true;
+        isHiding = false;
+        currentHidingSpot = null;
+
+        UnlockInput();
+    }
+
+    #endregion
+
+    #region Physics Callbacks
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -133,4 +182,6 @@ public class PuzzlePlayerController : MonoBehaviour
             Debug.Log("몬스터와 충돌했습니다!");
         }
     }
+
+    #endregion
 }

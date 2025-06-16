@@ -12,6 +12,7 @@ TagManager:
   - ExplosiveBarrel
   - ImpactNormal
   - ImpactObstacle
+  - Puzzle
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Ground
   - Casing
   - Interactable
-  - 
+  - Grenade
   - 
   - 
   - 
