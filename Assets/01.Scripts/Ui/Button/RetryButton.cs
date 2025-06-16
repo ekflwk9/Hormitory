@@ -8,7 +8,7 @@ public class RetryButton : UiButton
         UiManager.Instance.Show<MenuUi>(false);
         UiManager.Instance.Show<RetryUi>(false);
 
-        UiManager.Instance.Get<FadeUi>().OnFade(NextScene);
+        UiManager.Instance.Get<FadeUi>().OnFade(NextScene, 0.5f);
     }
 
     private void NextScene()

@@ -9,13 +9,15 @@ using UnityEngine;
 public class Door_Match : MonoBehaviour, IInteractable
 {
     public CountMatchSO MatchData;
+    public int MatchCount;
 
     public void Interact()
     {
         // 1. 해당 오브젝트의 MatchData를 가져온다 =>할당
         // 2. CountMatch의 StartPuzzle을 시작시킨다.
 
-        PuzzleManager.instance.CountMatch.SetRequiredNum(MatchData);
+        MatchCount = MatchData.RequiredNum;
+        PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(MatchCount);
     }
 
 }
