@@ -42,8 +42,6 @@ public class MonsterAIController : MonoBehaviour
     [SerializeField] private Animator animator;
     private bool flyingRoarEnded = false;
     private bool takeOffFinished = false;
-    private bool biteAttackFinished = false;
-    private bool tailAttackFinished = false;
     private bool roarFinished = false;
     
     [Header("Battle")]
@@ -51,9 +49,8 @@ public class MonsterAIController : MonoBehaviour
     [SerializeField] MonsterStatController monsterStatController;
     private bool isGroggy = false;
     private bool groggyCoroutineRunned = false;
-    private bool isSlamDescending = false; // 하강 중 여부
     private bool isPendingGroggy = false;
-
+    private float groggyDuration = 6.0f; // 그로기 지속 시간
     
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
@@ -152,8 +149,6 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator FlyingAndBodySlamActionCoroutine()
     {
-        isSlamDescending = false;
-        
         animator.SetBool("BiteAttack", false);
         
         shouldLookAtPlayer = true;
@@ -320,19 +315,16 @@ public class MonsterAIController : MonoBehaviour
 
         while (elapsed < duration)
         {
-            Service.Log(transform.position.ToString());
             transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
         transform.position = targetPos;
         
-        float groggyDuration = 3.0f; // 그로기 지속 시간
         yield return new WaitForSeconds(groggyDuration);
 
         Service.Log("그로기 상태 해제");
 
-        animator.SetTrigger("StandUp");
         animator.SetBool("Groggy", false);
         isGroggy = false;
         timer = 0f; // 패턴 다시 선택하게끔 타이머 초기화
