@@ -81,5 +81,7 @@ public class DebugTool : EditorWindow
     {
         UiManager.Instance.Show<InventoryUi>(_isActive);
     }
+
+    
 }
 #endif

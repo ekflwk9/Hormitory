@@ -103,7 +103,7 @@ public class PlayerController : BasePlayerController, IDamagable
         }
     }
 
-    protected override void Die()
+    public override void Die()
     {
         base.Die();
         //StartCoroutine("DeathEffect");

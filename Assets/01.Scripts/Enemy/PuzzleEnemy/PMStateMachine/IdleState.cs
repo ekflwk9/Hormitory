@@ -24,7 +24,7 @@ public class IdleState : BaseState
     public override void Update()
     {
         float distanceToPlayer = Vector3.Distance(MonsterTransform.position, PlayerTransform.position);
-        if (distanceToPlayer <= DetectRange ) //&& player가 !hide 한 상태
+        if (distanceToPlayer <= DetectRange && !PuzzlePlayerController.IsHiding )
         {
             StateMachine.TransitionTo(MonsterStateType.Chase);
             return;
