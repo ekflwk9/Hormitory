@@ -48,6 +48,7 @@ public class WeaponSwitchSystem : MonoBehaviour
         if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex <= weapons.Length))
         {
             SwitchingWeapon((WeaponType)(inputIndex - 1));
+
         }
 
     }
@@ -85,10 +86,12 @@ public class WeaponSwitchSystem : MonoBehaviour
         if (currentWeapon == weapons[0])
         {
             UiManager.Instance.Show<BulletUi>(true);
+            UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.FirstSlot);
         }
         else if (currentWeapon == weapons[1])
         {
             UiManager.Instance.Show<BulletUi>(false);
+            UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.SecondSlot);
         }
     }
 }
