@@ -4,29 +4,40 @@ using UnityEngine;
 
 public class CaptureState : BaseState
 {
+    //private Coroutine _coroutine;
     public CaptureState(MonsterStateMachine stateMachine) : base(stateMachine)
     {
+        
     }
-
     
     
     public override void Enter()
     {
         NavMeshAgent.isStopped = true;
-        //연출
-       
-        //gameOverUI 아니면 놓아주기
+        PuzzlePlayerController.LockInput();
+        StartAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
+        MainCam.enabled = false;
+        DeadCam.enabled = true;
+        PuzzlePlayerController.Die();
+        //UI띄워야되나
+        
     }
 
     public override void Exit()
     {
-        NavMeshAgent.isStopped = false;// 게임오버면 다시 움직임 필요없을지도
+        NavMeshAgent.isStopped = false;
+        PuzzlePlayerController.UnlockInput();
+        StopAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
+        MainCam.enabled = true;
+        DeadCam.enabled = false;
     }
 
     public override void Update()
     {
         
     }
+
     
     
+
 }
