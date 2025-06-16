@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -138,7 +139,14 @@ public class WeaponRevolver : WeaponBase
             
             string animation = animator.AimModeIs == true ? "AimFire" : "Fire";
             animator.Play(animation, -1, 0);
-            
+            if (animator.AimModeIs)
+            {
+                CameraManager.Instance.MainCamera.Shake(0.3f,0.3f);
+            }
+            else
+            {
+                CameraManager.Instance.MainCamera.Shake(0.2f,0.1f);
+            }
             //총구 이펙트 재생
             if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());
             //탄피 생성
@@ -201,7 +209,7 @@ public class WeaponRevolver : WeaponBase
         if (animator.AimModeIs)
         {
             //에임 모드 조준점과 일치한 방향으로 레이캐스트
-            ray = mainCamera.ViewportPointToRay(new Vector2(0.515f, 0.575f));
+            ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.55f));
 
             if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
             {
@@ -211,6 +219,7 @@ public class WeaponRevolver : WeaponBase
             {
                 targetPoint = ray.origin + ray.direction * weaponSetting.attackDistance;
             }
+            Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 20f);
         }
         //에임 모드 아닐시 레이 캐스트
         else
@@ -228,7 +237,7 @@ public class WeaponRevolver : WeaponBase
             {
                 targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
             }
-            Debug.DrawRay(spreadRay.origin, spreadRay.direction * 5f, Color.red, 20f);
+           
         }
 
         
@@ -243,10 +252,9 @@ public class WeaponRevolver : WeaponBase
             
             if (hit.transform.CompareTag("Enemy"))
             {
-                IDamagable damageable = hit.transform.GetComponent<IDamagable>();
-                damageable.TakeDamage(weaponSetting.damage);
+                return;
             }
-            else if (hit.transform.CompareTag("ExplosiveBarrel"))
+            if (hit.transform.CompareTag("ExplosiveBarrel"))
             {
                 hit.transform.GetComponent<ExplosionBarrel>().TakeDamageFromWeapon(weaponSetting.damage, WeaponType.Main);
             }
