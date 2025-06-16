@@ -7,7 +7,7 @@ public class BaseState : IState
 {
     protected readonly MonsterStateMachine StateMachine;
     protected Transform MonsterTransform => StateMachine.transform;
-    protected Transform PlayerTransform => StateMachine.PlayerStransform;
+    protected Transform PlayerTransform => StateMachine.PlayerTransform;
     protected NavMeshAgent NavMeshAgent => StateMachine.NavMeshAgent;
     protected float DetectRange => StateMachine.DetectRange;
     protected float SearchDuration => StateMachine.SearchDuration;

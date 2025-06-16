@@ -44,6 +44,8 @@ public class IdleState : BaseState
                     SetNextDestination();
                 }
             }
+            //SoundManager.PlaySfx(category:asdf, name: "asdf")
+            //UiManager.Instance.Get<TalkUi>().Popup("asdfasdf")
         }
     }
 

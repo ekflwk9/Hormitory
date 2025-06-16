@@ -16,7 +16,6 @@ public class CaptureState : BaseState
         NavMeshAgent.isStopped = true;
         PuzzlePlayerController.Die();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
-        
         DeadCam.enabled = true;
     }
 

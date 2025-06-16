@@ -28,8 +28,6 @@ public class MonsterStateMachine : MonoBehaviour
     [Header("SpeedSetting")]
     [SerializeField] private float _chaseSpeed = 2.2f;//추격 시 속도
     
-    
-    [SerializeField] private MainCamera _mainCam;
     [SerializeField] private Camera _deadCam;
     private float _defaultSpeed;
 
@@ -38,7 +36,7 @@ public class MonsterStateMachine : MonoBehaviour
     
     public PuzzleMonster PuzzleMonster { get; private set; }
 
-    public Transform PlayerStransform => _playerTransform;
+    public Transform PlayerTransform => _playerTransform;
     public float DetectRange => _detectRange;
     public float SearchDuration => _searchDuration;
     public float ChaseSpeed => _chaseSpeed;
@@ -47,14 +45,21 @@ public class MonsterStateMachine : MonoBehaviour
     public float PatrolRadius => _patrolRadius;
     public float PatrolWaitTime => _patrolWaitTime;
     public float CaptureRange => _captureRange;
-    public PuzzlePlayerController PuzzlePlayerController => _playerTransform.GetComponent<PuzzlePlayerController>();
+    public PuzzlePlayerController PuzzlePlayerController { get; private set; }
     public Camera DeadCam => _deadCam;
-    public MainCamera MainCam => _mainCam;
+    
     
     private void Awake()
     {
+        
         NavMeshAgent = GetComponent<NavMeshAgent>();
         PuzzleMonster = GetComponent<PuzzleMonster>();
+
+        if (_playerTransform != null)
+        {
+            PuzzlePlayerController = PlayerTransform.GetComponent<PuzzlePlayerController>();
+        }
+        
         
         _defaultSpeed = NavMeshAgent.speed;
         _states = new Dictionary<MonsterStateType, IState>
@@ -77,13 +82,13 @@ public class MonsterStateMachine : MonoBehaviour
         _currentState.Update();
     }
 
-    public void TransitionTo(MonsterStateType newStetType)
+    public void TransitionTo(MonsterStateType newStateType)
     {
         if (_currentState != null)
         {
             _currentState.Exit();
         }
-        _currentState = _states[newStetType];
+        _currentState = _states[newStateType];
         _currentState.Enter();
     }
 }
