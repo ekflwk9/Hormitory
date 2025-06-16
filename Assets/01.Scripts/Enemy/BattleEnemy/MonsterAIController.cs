@@ -49,6 +49,11 @@ public class MonsterAIController : MonoBehaviour
     [Header("Battle")]
     [SerializeField] private int damageAmount = 20;
     [SerializeField] MonsterStatController monsterStatController;
+    private bool isGroggy = false;
+    private bool groggyCoroutineRunned = false;
+    private bool isSlamDescending = false; // 하강 중 여부
+    private bool isPendingGroggy = false;
+
     
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
@@ -85,7 +90,7 @@ public class MonsterAIController : MonoBehaviour
 
     private void Update()
     {
-        if (!monsterStatController.isDead)
+        if (!monsterStatController.isDead && !isGroggy)
         {
             timer += Time.deltaTime;
         
@@ -147,6 +152,8 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator FlyingAndBodySlamActionCoroutine()
     {
+        isSlamDescending = false;
+        
         animator.SetBool("BiteAttack", false);
         
         shouldLookAtPlayer = true;
@@ -180,7 +187,8 @@ public class MonsterAIController : MonoBehaviour
 
         flyingRoarEnded = false;
         yield return new WaitUntil(() => flyingRoarEnded);
-
+        
+        groggyCoroutineRunned = false;
         shouldLookAtPlayer = false;
         
         if (player != null)
@@ -197,22 +205,26 @@ public class MonsterAIController : MonoBehaviour
             float slamDuration = 1f;
             float slamElapsed = 0f;
 
-            // slamTarget을 바라보도록 회전 한번 맞춰놓기
-            Vector3 slamDir = (slamTarget - slamStart).normalized;
-            slamDir.y = 0;
-            if (slamDir != Vector3.zero)
-                transform.rotation = Quaternion.LookRotation(slamDir);
-
             bool isFlyingRandingRunned = false;
 
             shouldLookAtPlayer = true;
             while (slamElapsed < slamDuration)
             {
+                if (isPendingGroggy && !groggyCoroutineRunned)
+                {
+                    Service.Log("그로기 진입");
+                    isPendingGroggy = false;
+                    groggyCoroutineRunned = true;
+                    StartCoroutine(GroggyCoroutine());
+                    yield break;// 코루틴 중단
+                }
+                
                 if (slamDuration - slamElapsed < 0.3f && isFlyingRandingRunned == false)
                 {
-                    animator.SetTrigger("FlyingRanding");
+                    animator.SetBool("FlyingLanding", true);
                     isFlyingRandingRunned = true;
                 }
+                
                 transform.position = Vector3.Lerp(slamStart, slamTarget, slamElapsed / slamDuration);
                 slamElapsed += Time.deltaTime;
                 yield return null;
@@ -221,6 +233,7 @@ public class MonsterAIController : MonoBehaviour
             transform.position = slamTarget; // 보정
         }
 
+        animator.SetBool("FlyingLanding", false);
         animator.SetBool("Fly", false);
         timer = 0f;
         currentAction = null;
@@ -270,6 +283,7 @@ public class MonsterAIController : MonoBehaviour
             yield return null;
         }
 
+        groggyCoroutineRunned = false;
         transform.position = targetPosition;
         animator.SetBool("BiteAttack", false);
 
@@ -277,7 +291,52 @@ public class MonsterAIController : MonoBehaviour
         currentAction = null;
     }
 
+    private IEnumerator GroggyCoroutine()
+    {
+        Service.Log("그로기 상태 진입");
+    
+        animator.ResetTrigger("StandUp");
+        animator.SetBool("FlyingLanding", false);
+        animator.SetBool("BiteAttack", false);
+        animator.SetBool("TailAttack", false);
+        animator.SetBool("CrawlForward", false);
+        animator.SetBool("Fly", false);
+        animator.SetBool("TakeOff", false);
+        animator.SetBool("Roar", false);
+        animator.SetBool("Groggy", false);
+        
+        animator.CrossFade("Groggy", 0f);
+        
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = new Vector3(startPos.x, 0, startPos.z);
+        float duration = 0.25f;
+        float elapsed = 0f;
+        
+        isGroggy = true;
+        currentAction = null; // 현재 액션 정지
+        animator.SetBool("Groggy", true);
+        agent.enabled = false; // 이동 중지
+        shouldLookAtPlayer = false; // 시선도 고정
 
+        while (elapsed < duration)
+        {
+            Service.Log(transform.position.ToString());
+            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = targetPos;
+        
+        float groggyDuration = 3.0f; // 그로기 지속 시간
+        yield return new WaitForSeconds(groggyDuration);
+
+        Service.Log("그로기 상태 해제");
+
+        animator.SetTrigger("StandUp");
+        animator.SetBool("Groggy", false);
+        isGroggy = false;
+        timer = 0f; // 패턴 다시 선택하게끔 타이머 초기화
+    }
     
     public void OnTakeOffEnd()
     {
@@ -310,6 +369,29 @@ public class MonsterAIController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (currentAction == flyBodySlam)
+        {
+            if (other.CompareTag("Wall"))
+            {
+                // 몬스터 앞 방향으로 레이 쏘기
+                Ray ray = new Ray(transform.position + Vector3.up * 1f, transform.forward); 
+                RaycastHit hit;
+                
+                if (Physics.Raycast(ray, out hit, 3f))
+                {
+                    if (hit.collider.CompareTag("Wall"))
+                    {
+                        Service.Log("벽에 박힘");
+                        // 벽을 바로 바라보고 있을 때만 그로기 상태 대기
+                        if (!groggyCoroutineRunned)
+                        {
+                            isPendingGroggy = true;
+                        }
+                    }
+                }
+            }
+        }
+        
         if (currentAction == flyBodySlam || currentAction == jumpBodySlam)
         {
             if (other.CompareTag("Player"))
