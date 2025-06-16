@@ -121,7 +121,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     // <<--- TakeDamage() 메서드 제거
 
-    protected virtual void Die()
+    public virtual void Die()
     {
         if (isDead) return;
         isDead = true;
@@ -129,7 +129,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
         if (CameraShake.Instance != null)
         {
-            CameraShake.Instance.StartDeathTilt(2.5f, 45f);
+            CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
         }
         Debug.Log("플레이어가 사망했습니다.");
     }
