@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Net.NetworkInformation;
 
 public class PuzzlePlayerController : BasePlayerController
 {
@@ -171,6 +172,21 @@ public class PuzzlePlayerController : BasePlayerController
         UnlockInput();
     }
 
+    public void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        LockInput();
+        characterController.enabled = false;
+        // 사망 UI 패널 활성화
+        // deathUIPanel.SetActive(true); // deathUIPanel은 BasePlayerController에서 관리
+        Debug.Log("플레이어가 사망했습니다.");
+    }
+    public void CameraShake()
+    {
+        // 카메라 흔들림 로직을 여기에 구현
+        Debug.Log("카메라 흔들림 효과 발생");
+    }
     #endregion
 
     #region Physics Callbacks
