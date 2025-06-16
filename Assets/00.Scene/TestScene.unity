@@ -1353,12 +1353,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1caabca635a11c4a843910b34305051, type: 3}
---- !u!4 &1729960807 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400038, guid: 182b7f11db452bc458d35a6c9eced06f,
-    type: 3}
-  m_PrefabInstance: {fileID: 9059902412027316426}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1823526695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,7 +2080,6 @@ MonoBehaviour:
   weapons:
   - {fileID: 4503449186784323981}
   - {fileID: 3016298345953825052}
-  - {fileID: 3487669912148435963}
 --- !u!114 &936400942074489210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2336,11 +2329,9 @@ MonoBehaviour:
   spriteWeaponIcons:
   - {fileID: 21300014, guid: 5acb27b603af6d44ea6113c4b7b15385, type: 3}
   - {fileID: 21300038, guid: 5acb27b603af6d44ea6113c4b7b15385, type: 3}
-  - {fileID: 21300022, guid: a1d46cd3f2614cc43be92ab44ea7d819, type: 3}
   sizeWeaponIcons:
   - {x: 150, y: 57}
   - {x: 200, y: 37.7}
-  - {x: 47.2, y: 57}
   textAmmo: {fileID: 3715017809533211318}
   magazineUIPrefab: {fileID: 3006175974032013610, guid: dbe698c85c4e06b4cb446925d1ac745e,
     type: 3}
@@ -3314,38 +3305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf0e4a5e6f57e042909a2a1cf4d272e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3487669912148435963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488439472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e5e0b38efe951947af14413c33c6e36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 2
-  weaponSetting:
-    WeaponName: 2
-    damage: 100
-    currentMagazine: 0
-    maxMagazine: 0
-    currentAmmo: 2
-    maxAmmo: 2
-    attackRate: 0
-    attackDistance: 0
-    isAutomaticAttack: 0
-  onAmmoEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onMagazineEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  grenadePrefab: {fileID: 7828418269412757405, guid: 49bd73878eea9ec4ea80e2039db146d8,
-    type: 3}
-  grenadeSpawnPoint: {fileID: 1729960807}
 --- !u!114 &3532172410734830740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,10 +4900,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100012, guid: 182b7f11db452bc458d35a6c9eced06f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3487669912148435963}
     - targetCorrespondingSourceObject: {fileID: 100012, guid: 182b7f11db452bc458d35a6c9eced06f,
         type: 3}
       insertIndex: -1

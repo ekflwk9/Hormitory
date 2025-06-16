@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -241,8 +242,7 @@ public class WeaponRevolver : WeaponBase
             }
             else if (hit.transform.CompareTag("ExplosiveBarrel"))
             {
-                IDamagable damageable = hit.transform.GetComponent<IDamagable>();
-                damageable.TakeDamage(weaponSetting.damage);
+                hit.transform.GetComponent<ExplosionBarrel>().TakeDamageFromWeapon(weaponSetting.damage, WeaponType.Main);
             }
         }
         //Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue,2f);

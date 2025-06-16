@@ -45,10 +45,8 @@ public class WeaponKnifeCollider : MonoBehaviour
 
         if (other.CompareTag("ExplosiveBarrel"))
         {
-            other.GetComponent<IDamagable>()?.TakeDamage(damage);
+            other.GetComponent<ExplosionBarrel>().TakeDamageFromWeapon(damage, WeaponType.Melee);
             Debug.Log($"{damage}");
         }
-        
     }
-
 }
