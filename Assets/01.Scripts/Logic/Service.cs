@@ -6,7 +6,10 @@ public static class AnimName
     public static int FadeIn = Animator.StringToHash("FadeIn");
     public static int FadeOut = Animator.StringToHash("FadeOut");
     public static int Idle = Animator.StringToHash("Idle");
+    public static int Show = Animator.StringToHash("Show");
+    public static int Hide = Animator.StringToHash("Hide");
     public static int Hit = Animator.StringToHash("Hit");
+    public static int Speed = Animator.StringToHash("Speed");
 }
 
 public static class StringMap
