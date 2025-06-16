@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class CaptureState : BaseState
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
         MainCam.enabled = false;
         DeadCam.enabled = true;
-        PuzzlePlayerController.Die();
+        //PuzzlePlayerController.Die();
         //UI띄워야되나
         
     }
