@@ -16,12 +16,6 @@ public class CaptureState : BaseState
         NavMeshAgent.isStopped = true;
         PuzzlePlayerController.Die();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
-        MainCam.enabled = false;
-        DeadCam.enabled = true;
-        UiManager.Instance.Get<HitUi>().HitView();
-        
-        UiManager.Instance.Show<DeadUi>(true);
-        
     }
 
     public override void Exit()
@@ -29,8 +23,6 @@ public class CaptureState : BaseState
         NavMeshAgent.isStopped = false;
         PuzzlePlayerController.UnlockInput();
         StopAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
-        MainCam.enabled = true;
-        DeadCam.enabled = false;
     }
 
     public override void Update()

@@ -122,6 +122,7 @@ public class PuzzlePlayerController : BasePlayerController
                 currentInteractable = interactable;
             }
         }
+        
     }
 
     private void OnInteract(InputAction.CallbackContext context)
