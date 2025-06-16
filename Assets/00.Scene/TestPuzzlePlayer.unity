@@ -123,60 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &146438887
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 146438888}
-  - component: {fileID: 146438889}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &146438888
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146438887}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &146438889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146438887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5c04ec61a1ea7a43b2d8790d05b41d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSounds:
-  - name: PuzzleBGM
-    clip: {fileID: 8300000, guid: d16f23f1203d3194ca25fef332cb71e0, type: 3}
-  sfxSounds:
-  - name: Walk
-    clip: {fileID: 8300000, guid: 98422e7cfb987bf4c9d19facbc35ae30, type: 3}
-  - name: Jump
-    clip: {fileID: 8300000, guid: f1836f503f5945c4c9f501224bbc2ce7, type: 3}
-  - name: Shoot
-    clip: {fileID: 8300000, guid: 5a54e55df08195c498a72a231307593d, type: 3}
 --- !u!1 &164500634 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5134014788960328504, guid: 0a1b27dd11c27ea498aaae6917455cb0,
@@ -1964,25 +1910,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823526695}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2058427535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4682836946809567857, guid: 0a1b27dd11c27ea498aaae6917455cb0,
-    type: 3}
-  m_PrefabInstance: {fileID: 9040780240638931076}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2058427540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058427535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78d009c06048e26488bf4a9afe2dced4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmName: PuzzleBGM
 --- !u!1001 &2131799854526771913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2196,10 +2123,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 164500640}
-    - targetCorrespondingSourceObject: {fileID: 4682836946809567857, guid: 0a1b27dd11c27ea498aaae6917455cb0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2058427540}
   m_SourcePrefab: {fileID: 100100000, guid: 0a1b27dd11c27ea498aaae6917455cb0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -2210,4 +2133,3 @@ SceneRoots:
   - {fileID: 9040780240638931076}
   - {fileID: 1375264849}
   - {fileID: 2131799854526771913}
-  - {fileID: 146438888}

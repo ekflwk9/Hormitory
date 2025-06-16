@@ -43,6 +43,10 @@ public abstract class BasePlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+    protected virtual void Start()
+    {
+        SoundManager.PlayBgm("PuzzleBGM");
+    }
 
     protected virtual void OnEnable()
     {
@@ -116,12 +120,12 @@ public abstract class BasePlayerController : MonoBehaviour
         if (isGrounded)
         {
             // <<--- 점프 사운드 재생
-            SoundManager.Instance.PlaySfx("Jump");
+            SoundManager.PlaySfx(SoundCategory.Movement, "Jump");
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
 
-    public virtual void Die()
+    protected virtual void Die()
     {
         if (isDead) return;
         isDead = true;
