@@ -63,6 +63,7 @@ public class DebugTool : EditorWindow
 
     private void MatchPuzzle()
     {
+        UiManager.Instance.Show<LockUi>(true);
         PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(1364);
     }
 
