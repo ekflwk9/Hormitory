@@ -60,6 +60,8 @@ public class MonsterAIController : MonoBehaviour
     };
     private float rayDistance = 0.5f;
     
+    [SerializeField] private BarrelSpawner barrelSpawner;
+    
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
     
@@ -67,6 +69,7 @@ public class MonsterAIController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        barrelSpawner = GameObject.Find("BarrelSpawner").GetComponent<BarrelSpawner>();
         monsterStatController = GetComponent<MonsterStatController>();
     }
 
@@ -106,10 +109,6 @@ public class MonsterAIController : MonoBehaviour
 
             rootNode.Evaluate();
         }
-    }
-
-    private void Start()
-    {
     }
 
     private INode.State IsTimerPassedAction()
@@ -224,7 +223,7 @@ public class MonsterAIController : MonoBehaviour
                         if (hit.collider.CompareTag("Wall"))
                         {   
                             PlayerManager.Instance.MainCamera.Shake(1f,1.4f);
-                            Service.Log("벽에 박힘");
+                            barrelSpawner.SpawnBarrelOnMonsterStun();
                             if (!groggyCoroutineRunned)
                             {
                                 isPendingGroggy = true;
