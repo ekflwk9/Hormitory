@@ -18,6 +18,7 @@ public class Trunk : ItemReceiver, IInteractable
         else
         {            
             UiManager.Instance.Get<TalkUi>().Popup("맞는 열쇠가 없어.");
+            UiManager.Instance.Get<MissionUi>().Popup("목표 : 트렁크 열쇠 찾기");
             SoundManager.PlaySfx(SoundCategory.Interaction, "LockDoor");
         }
     }
