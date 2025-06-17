@@ -204,6 +204,7 @@ public class MonsterAIController : MonoBehaviour
             Vector3 behindPlayerOffset = dirFromEnemyToPlayer * 4.0f;
 
             slamTarget += behindPlayerOffset;
+            slamTarget.y = 0f;
             
             float slamDuration = 1f;
             float slamElapsed = 0f;

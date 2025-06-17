@@ -6,14 +6,21 @@ using Random = UnityEngine.Random;
 
 public class BarrelSpawner : MonoBehaviour
 {
+    public static BarrelSpawner instance;
+    
     public GameObject barrelPrefab;
     public int initialBarrelCount = 3;
     public float spawnHeight = 5f;
     public float dropDuration = 1.5f;
     public float barrelOffset = 0.5f;
     public LayerMask overlapMask;
-        
+    
     private List<Transform> wallTransforms = new List<Transform>();
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+    }
 
     private void Start()
     {
@@ -28,34 +35,53 @@ public class BarrelSpawner : MonoBehaviour
             TrySpawnBarrelNearWall();
         }
     }
-    
+
     private void FindWalls()
     {
         GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
         foreach (GameObject wall in walls)
         {
             wallTransforms.Add(wall.transform);
+            Service.Log(wall.transform.position.ToString());
         }
     }
 
     public void SpawnBarrelOnMonsterStun()
     {
+        Debug.Log("실행");
         TrySpawnBarrelNearWall();
     }
     
     private void TrySpawnBarrelNearWall()
-    {
+    {    
+        if (wallTransforms == null || wallTransforms.Count == 0)
+        {
+            Debug.LogWarning("벽 정보 비어있음 → FindWalls() 재시도");
+            FindWalls();
+        }
+        
         int maxTries = 10;
         int tries = 0;
 
         while (tries < maxTries)
         {
-            Transform wall = wallTransforms[Random.Range(0, wallTransforms.Count)];
+            Transform wallTransform = wallTransforms[Random.Range(0, wallTransforms.Count)];
+            GameObject wall = wallTransform.gameObject;
 
-            // 드럼통이 안쪽으로 떨어지게 하려면 벽의 노멀 방향 반대쪽으로 약간 이동
-            Vector3 inwardOffset = -wall.forward * 1f + wall.right * Random.Range(-2f, 2f);
+            // 중심 좌표를 collider 기준으로 정확히 잡음
+            BoxCollider col = wall.GetComponent<BoxCollider>();
+            if (col == null)
+            {
+                Debug.LogWarning("벽 오브젝트에 BoxCollider가 없습니다.");
+                tries++;
+                continue;
+            }
 
-            Vector3 spawnPos = wall.position + inwardOffset;
+            Vector3 wallCenter = col.bounds.center;
+
+            // 중심 기준으로 offset 방향 계산
+            Vector3 inwardOffset = -wallTransform.forward * 1f + wallTransform.right * Random.Range(-2f, 2f);
+            Vector3 spawnPos = wallCenter + inwardOffset;
             spawnPos.y = 0f;
 
             if (!Physics.CheckSphere(spawnPos, barrelOffset, overlapMask))
@@ -70,6 +96,7 @@ public class BarrelSpawner : MonoBehaviour
             tries++;
         }
     }
+
     
     IEnumerator SmoothDrop(GameObject barrel, Vector3 targetPosition)
     {

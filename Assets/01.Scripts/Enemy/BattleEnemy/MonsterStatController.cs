@@ -33,7 +33,8 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         animator.SetBool("Fly", false);
         animator.SetBool("TakeOff", false);
         
-        isDead = true;
+        animator.SetBool("Death", true);
         
+        isDead = true;
     }
 }

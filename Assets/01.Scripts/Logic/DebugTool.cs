@@ -9,12 +9,12 @@ public class DebugTool : EditorWindow
     {
         GetWindow<DebugTool>("DebugTool");
     }
-
+    
     private void OnGUI()
     {
         //GUILayout.Label("디버그 전용 패널");
         //GUILayout.Space(10f);
-        // itemId = EditorGUILayout.IntField("획득할 아이템 아이디", itemId);
+        //itemId = EditorGUILayout.IntField("획득할 아이템 아이디", itemId);
 
         GUILayout.Space(15f);
         if (GUILayout.Button("메뉴 On")) OnMenu();
@@ -29,7 +29,7 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("아이템 획득")) ItemGet();
         else if (GUILayout.Button("인벤토리 On")) ShowInventory(true);
         else if (GUILayout.Button("인벤토리 Off")) ShowInventory(false);
-         
+        else if (GUILayout.Button("드럼통생성")) BarrelSpawn();
     }
 
     private void OnMenu()
@@ -84,7 +84,10 @@ public class DebugTool : EditorWindow
         UiManager.Instance.Show<InventoryUi>(_isActive);
     }
 
-    
+    private void BarrelSpawn()
+    {
+        BarrelSpawner.instance.SpawnBarrelOnMonsterStun();
+    }
     
 }
 #endif
