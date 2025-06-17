@@ -1505,7 +1505,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.6
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1947723043059993888
 MonoBehaviour:
@@ -1674,6 +1674,8 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   camFOV: 0
   bonusFOV: 15
+  _minTalkInterval: 4
+  _maxTalkInterval: 6
 --- !u!114 &5638772625410197378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3433,7 +3435,7 @@ MonoBehaviour:
     currentAmmo: 0
     maxAmmo: 6
     attackRate: 1
-    attackDistance: 20
+    attackDistance: 30
     isAutomaticAttack: 1
   onAmmoEvent:
     m_PersistentCalls:
