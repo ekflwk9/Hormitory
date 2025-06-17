@@ -34,8 +34,8 @@ public class ItemReceiver : MonoBehaviour, IInteractable
                 AfterInteract();
 
             }
-
-                Service.Log($"아이템 번호 {RequiredItemNumber}을 가진 아이템이 없습니다. 상호작용을 진행할 수 없습니다.");
+            InteractAction();
+            Service.Log($"아이템 번호 {RequiredItemNumber}을 가진 아이템이 없습니다. 상호작용을 진행할 수 없습니다.");
         }
         else
         {
