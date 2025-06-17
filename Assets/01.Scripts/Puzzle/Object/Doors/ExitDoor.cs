@@ -14,12 +14,14 @@ public class ExitDoor : ItemReceiver, IInteractable
         // 아이템이 일치하면 Exit 씬으로 전환
         if (isCleard)
         {
+            if (UiManager.Instance.Get<TalkUi>().onTalk) return;
             UiManager.Instance.Get<TalkUi>().Popup("좋았어, 열렸다!");
             SoundManager.PlaySfx(SoundCategory.Interaction, "UnLockDoor");
             UiManager.Instance.Get<MissionUi>().Popup("목표 : 밖으로 탈출하기");
         }
         else
         {
+            if (UiManager.Instance.Get<TalkUi>().onTalk) return;
             UiManager.Instance.Get<TalkUi>().Popup("문을 열 수 있는 물건이 필요해.");
             SoundManager.PlaySfx(SoundCategory.Interaction, "LockDoor");
         }
