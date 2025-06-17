@@ -52,7 +52,9 @@ public abstract class BasePlayerController : MonoBehaviour
     }
 
     protected virtual void Start()
-    { }
+    {
+        transform.rotation = Quaternion.identity;
+    }
 
     protected virtual void OnEnable()
     {
@@ -93,7 +95,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
 
         if (yRotation > 360f) yRotation -= 360f;
-        if (yRotation < 0f) yRotation += 360f;
+        else if (yRotation < 0f) yRotation += 360f;
      
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
@@ -171,7 +173,7 @@ public abstract class BasePlayerController : MonoBehaviour
     {
         isControl = !isPaused;        
         Cursor.lockState = isControl? CursorLockMode.Locked : CursorLockMode.None;
-        Cursor.visible = !isPaused;
+        Cursor.visible = isPaused;
 
     }
     #endregion
