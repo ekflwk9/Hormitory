@@ -10,13 +10,15 @@ public class MonsterAnimationData
     [SerializeField] private string walkParameterName = "Walk";
     [SerializeField] private string chaseParameterName = "Chase";
     [SerializeField] private string searchParameterName = "Search";
-    [SerializeField] private string CaptureParameterName = "Capture";
+    [SerializeField] private string captureParameterName = "Capture";
+    [SerializeField] private string puzzleWaitParameterName = "PuzzleWait";
     
     public int IdleParameterHash { get; private set;}
     public int WalkParameterHash { get; private set;}
     public int ChaseParameterHash { get; private set;}
     public int SearchParameterHash { get; private set;}
     public int CaptureParameterHash { get; private set;}
+    public int PuzzleWaitParameterHash { get; private set;}
 
     public void Initialize()
     {
@@ -24,6 +26,7 @@ public class MonsterAnimationData
         WalkParameterHash = Animator.StringToHash(walkParameterName);
         ChaseParameterHash = Animator.StringToHash(chaseParameterName);
         SearchParameterHash = Animator.StringToHash(searchParameterName);
-        CaptureParameterHash = Animator.StringToHash(CaptureParameterName);
+        CaptureParameterHash = Animator.StringToHash(captureParameterName);
+        PuzzleWaitParameterHash = Animator.StringToHash(puzzleWaitParameterName);
     }
 }

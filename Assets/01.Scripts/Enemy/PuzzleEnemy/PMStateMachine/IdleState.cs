@@ -14,6 +14,7 @@ public class IdleState : BaseState
 
     public override void Enter()
     {
+        StateMachine.ResetTalkTimer();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.WalkParameterHash);
         NavMeshAgent.isStopped = false;
         _waitTimer = 0f;
@@ -23,28 +24,35 @@ public class IdleState : BaseState
 
     public override void Update()
     {
-        float distanceToPlayer = Vector3.Distance(MonsterTransform.position, PlayerTransform.position);
-        if (distanceToPlayer <= DetectRange && !PuzzlePlayerController.IsHiding )
-        {
-            StateMachine.TransitionTo(MonsterStateType.Chase);
-            return;
-        }
-        float distanceToDestination = Vector3.Distance(MonsterTransform.position,_currentDestination);
-        if (distanceToDestination <= 0.5f)
-        {
-            if (_waitTimer <= 0f)
+        
+        base.Update();
+            float distanceToPlayer = Vector3.Distance(MonsterTransform.position, PlayerTransform.position);
+            if (distanceToPlayer <= DetectRange && !PuzzlePlayerController.IsHiding)
             {
-                _waitTimer = PatrolWaitTime;
+                StateMachine.TransitionTo(MonsterStateType.Chase);
+                return;
             }
-            else
+
+            float distanceToDestination = Vector3.Distance(MonsterTransform.position, _currentDestination);
+            if (distanceToDestination <= 0.5f)
             {
-                _waitTimer -= Time.deltaTime;
                 if (_waitTimer <= 0f)
                 {
-                    SetNextDestination();
+                    _waitTimer = PatrolWaitTime;
                 }
-            }
+                else
+                {
+                    _waitTimer -= Time.deltaTime;
+                    if (_waitTimer <= 0f)
+                    {
+                        SetNextDestination();
+                    }
+                }
+
+                
         }
+
+        
     }
 
     public override void Exit()

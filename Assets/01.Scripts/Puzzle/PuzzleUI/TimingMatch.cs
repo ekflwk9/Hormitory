@@ -20,6 +20,9 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     // 필요한 오브젝트를 외부에서 설정할 수 있도록 프로퍼티로 정의
     // RailObj의 하위에 Marker, PinPoint가 자식으로 존재.
     // TimingMatch 아래에 RailObj를 SetActive(true)로 활성화 시켜야 함.
+    public void SetRailObj(GameObject obj) => RailObj = obj;
+    public void SetMarker(RectTransform rect) => marker = rect;
+    public void SetPinPoint(RectTransform rect) => pinPoint = rect;
 
 
     // 아래는 게임 진행이 원활하게 진행되는 것이 확인하면 제거 [SerializeField] 제거
@@ -52,8 +55,8 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     // 시작 시 세팅
     private void Start()
     {
-        if(RailObj != null)
-        {            
+        if (RailObj != null)
+        {
             railRect = RailObj.GetComponent<RectTransform>();
             railLeftX = railRect.rect.xMin; // 레일의 왼쪽 끝 X 좌표
             railRightX = railRect.rect.xMax; // 레일의 오른쪽 끝 X 좌표
@@ -84,6 +87,8 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         markerPos = 0f; // 마커 위치 초기화
 
         isPlaying = true; // 게임을 시작할 수 있도록 bool 변경
+        RailObj.SetActive(false); // RailObj 비활성화
+
         UiManager.Instance.Show<TimingMatchUi>(true); // TimingMatchUi 활성화
         UpdateMarkerPosition(); // 마커 위치 업데이트
 
@@ -93,7 +98,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     // 단, isPlaying이 true일 때만 업데이트.
     private void Update()
     {
-        if(!isPlaying || RailObj == null || marker == null || pinPoint == null)
+        if (!isPlaying || RailObj == null || marker == null || pinPoint == null)
         {
             return; // 게임이 진행 중이 아니거나 필요한 오브젝트가 할당되지 않은 경우
         }
@@ -103,11 +108,11 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     private void GamePlaying()
     {
         //마커 이동
-        markerPos += direction* moveSpeed * Time.deltaTime; // 마커 위치 업데이트 (0~1 사이의 값으로 이동)
+        markerPos += direction * moveSpeed * Time.deltaTime; // 마커 위치 업데이트 (0~1 사이의 값으로 이동)
         markerPos = Mathf.Clamp01(markerPos); // 마커 위치를 0~1 사이로 제한
 
         //방향 전환 및 사이클 체크
-        if(markerPos >= 1f)
+        if (markerPos >= 1f)
         {
             markerPos = 1f; // 마커가 오른쪽 끝에 도달하면 위치를 1로 고정
             direction = -1; // 방향을 왼쪽으로 변경
@@ -140,7 +145,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         float pinRatio = GetPinPointRatio(); // 핀포인트 위치 비율을 가져옴
         float distance = Mathf.Abs(markerPos - pinRatio); // 마커 위치와 핀포인트 위치 비율의 차이 계산
         Service.Log($"TimingMatch: Judge(): 마커 위치 비율: {markerPos}, 핀포인트 위치 비율: {pinRatio}, 거리: {distance}");
-        
+
         if (distance < pinPointRange) // 마커 위치가 핀포인트 위치와 가까운 경우
         {
             IsSuccess(); // 성공 처리
@@ -154,7 +159,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     //핀 포인트 위치 비율 반환(0.2~0.8), 전체 비율은 0~1 사이의 값
     private float GetPinPointRatio()
     {
-        if(RailObj == null || pinPoint == null)
+        if (RailObj == null || pinPoint == null)
         {
             Service.Log("TimingMatch: GetPinPointRatio(): RailObj 또는 pinPoint가 할당되지 않았습니다.");
             return 0.5f; // 중간 위치 반환
@@ -175,10 +180,10 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     //마커의 실제 위치를 UI에 반영시킴
     private void UpdateMarkerPosition()
     {
-        if(RailObj == null || marker == null)
+        if (RailObj == null || marker == null)
         {
             Service.Log("TimingMatch: UpdateMarkerPosition(): RailObj 또는 marker가 할당되지 않았습니다.");
-            return;            
+            return;
         }
         railWidth = railRect.rect.width; // 레일의 너비
         float x = railRect.rect.xMin + (railWidth * markerPos); // 레일의 왼쪽 끝에서 마커 위치까지의 X 좌표 계산
@@ -226,6 +231,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         isPlaying = false; // 게임 종료
 
+        RailObj.SetActive(false); // RailObj 비활성화
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
 
         playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
@@ -237,6 +243,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     public void IsFailed()
     {
         isPlaying = false; // 게임 종료
+        RailObj.SetActive(false); // RailObj 비활성화
 
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
 

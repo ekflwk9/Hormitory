@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ItemManager
 {
@@ -13,6 +14,7 @@ public class ItemManager
 
     // 아이템 데이터와 아이템 번호를 저장함
     public Dictionary<ItemSO, int> ItemDict = new Dictionary<ItemSO, int>();
+
 
 
     /// <summary>
@@ -42,7 +44,16 @@ public class ItemManager
         ItemDict[item] = itemNumber;
         // 등록 시 Inventory에 추가함
         Service.Log($"{item.name} 아이템이 등록되었습니다. 아이템 번호: {itemNumber}");
+        // 아이템 슬롯 중 빈 슬롯 찾기(itemNumber가 0이거나 null인 경우)
 
+        if (ItemDict.Count == 1)
+        {
+            UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, itemNumber); // 첫 번째 슬롯에 아이템 번호를 설정
+        }
+        else if (ItemDict.Count == 2)
+        {
+            UiManager.Instance.Get<InventoryUi>().SetView(SlotType.SecondSlot, itemNumber); // 두 번째 슬롯에 아이템 번호를 설정
+        }
     }
 
     // 아이템 번호로 아이템 찾기
@@ -89,7 +100,20 @@ public class ItemManager
         }
         if (ItemDict.ContainsKey(item))
         {
+            // 아이템을 인벤토리에서 제거, 남은 아이템이 있다면 첫번째 슬롯에 남은 아이템을 설정하고, 두번째 슬롯은 비워둠
             ItemDict.Remove(item);
+            if (ItemDict.Count == 1)
+            {
+                // 남은 아이템이 하나라면 첫 번째 슬롯에 남은 아이템 번호를 설정
+                UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, ItemDict.Values.First());
+                UiManager.Instance.Get<InventoryUi>().SetView(SlotType.SecondSlot, 0); // 두 번째 슬롯 비우기
+            }
+            else if (ItemDict.Count == 0)
+            {
+                // 남은 아이템이 없다면 두 슬롯 모두 비우기
+                UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, 0);
+                UiManager.Instance.Get<InventoryUi>().SetView(SlotType.SecondSlot, 0);
+            }
             // 아이템 제거 시 Inventory에서 제거함
 
             Service.Log($"{item.name} 아이템이 제거되었습니다.");

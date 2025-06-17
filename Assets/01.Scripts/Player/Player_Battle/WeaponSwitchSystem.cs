@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +9,8 @@ public class WeaponSwitchSystem : MonoBehaviour
     private PlayerController playerController;
     // [SerializeField]
     // private PlayerHUD playerHUD;
+    [SerializeField] private ItemSO pistol;
+    [SerializeField] private ItemSO knife;
     
     [SerializeField]
     private WeaponBase[] weapons;
@@ -29,12 +31,14 @@ public class WeaponSwitchSystem : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
             }
         }
+        //ItemManager.instance.RegisterItem(pistol,pistol.ItemID);
+        //ItemManager.instance.RegisterItem(knife,knife.ItemID);
     }
 
     private void Start()
     {
         SwitchingWeapon(WeaponType.Main);
-        //UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, 1);
+
     }
 
     private void Update()
@@ -95,6 +99,7 @@ public class WeaponSwitchSystem : MonoBehaviour
             {
                 UiManager.Instance.Show<BulletUi>(true);
                 UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.FirstSlot);
+
             }
         }
         else if (currentWeapon == weapons[1])
@@ -103,6 +108,7 @@ public class WeaponSwitchSystem : MonoBehaviour
             {
                 UiManager.Instance.Show<BulletUi>(false);
                 UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.SecondSlot);
+
             }
         }
     }

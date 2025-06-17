@@ -9728,6 +9728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 701759683294728636}
   - component: {fileID: 8079762497271791882}
+  - component: {fileID: 1714073606481994512}
   m_Layer: 5
   m_Name: ' TimingMatchUi'
   m_TagString: Untagged
@@ -9770,6 +9771,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2321ea61ab02b554aa6ca62536977f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1714073606481994512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894194544350041096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae99fc2caa52e94bbf1c54388c98d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RailObj: {fileID: 0}
+  marker: {fileID: 0}
+  pinPoint: {fileID: 0}
 --- !u!1 &7896389944017530848
 GameObject:
   m_ObjectHideFlags: 0
