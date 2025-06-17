@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : BasePlayerController, IDamagable
 {
@@ -16,7 +17,7 @@ public class PlayerController : BasePlayerController, IDamagable
     [SerializeField] private float rollSpeed = 5f;
     [SerializeField] private float delay = 5f;
     
-    [SerializeField] private Camera mainCamera;
+    [FormerlySerializedAs("mainCamera")] [SerializeField] private Camera playerCamera;
     [SerializeField] private float camFOV;
     [SerializeField] private float bonusFOV = 15f;
     
@@ -40,10 +41,10 @@ public class PlayerController : BasePlayerController, IDamagable
         base.OnEnable();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        mainCamera = Camera.main;
-        camFOV = mainCamera.fieldOfView;
+        playerCamera = Camera.main;
+        camFOV = playerCamera.fieldOfView;
     }
     protected override void Update()
     {
@@ -130,7 +131,7 @@ public class PlayerController : BasePlayerController, IDamagable
         float elapsed = 0f;
         isInvincibility = true;
         weapon.Animator.SetTrigger("isRoll");
-        mainCamera.fieldOfView = camFOV - bonusFOV;
+        playerCamera.fieldOfView = camFOV - bonusFOV;
         moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         Vector3 direction = (moveInput.y * transform.forward) + (moveInput.x * transform.right).normalized;
         
@@ -142,7 +143,7 @@ public class PlayerController : BasePlayerController, IDamagable
         }
         isRolling = false;
         isInvincibility = false;
-        mainCamera.fieldOfView = camFOV;
+        playerCamera.fieldOfView = camFOV;
         yield return new WaitForSeconds(delay);
         canRoll = true;
     }
@@ -150,13 +151,13 @@ public class PlayerController : BasePlayerController, IDamagable
     IEnumerator DeathEffect()
     {
         float t = 0f;
-        Quaternion startRot = mainCamera.transform.localRotation;
+        Quaternion startRot = playerCamera.transform.localRotation;
         Quaternion endRot = Quaternion.Euler(80, 0, 0); // 아래로 고개 떨어짐
     
         while (t < 1f)
         {
             t += Time.deltaTime;
-            mainCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
+            playerCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
             yield return null;
         }
     }
