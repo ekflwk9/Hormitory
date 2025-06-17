@@ -5,6 +5,7 @@ using _01.Scripts.Component;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class MonsterAIController : MonoBehaviour
 {
@@ -60,6 +61,21 @@ public class MonsterAIController : MonoBehaviour
     
     [SerializeField] private BarrelSpawner barrelSpawner;
     
+    
+    [Header("Talk")]
+    [SerializeField] private float _talkTimer;
+    [SerializeField] private float _nextTalkTime;
+    [SerializeField] private float _minTalkInterval = 5f;
+    [SerializeField] private float _maxTalkInterval = 7f;
+    private readonly List<string> _battleMonsterTalk = new List<string>()
+    {
+        "완전 쪼그맣군, 장난감처럼!", 
+        "으흐흐흐, 예아",
+        "난 죽을수가 없어. 하지만 넌 다르지",
+        "엿이나 먹어!",
+        "여기 오지 말았어야해 ,친구",
+    };
+    
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
     
@@ -93,10 +109,16 @@ public class MonsterAIController : MonoBehaviour
         rootNode.Add(currentActionStillRunning);
     }
 
+    private void Start()
+    {
+        ResetTalkTimer();
+    }
+
     private void Update()
     {
         if (!monsterStatController.isDead && !isGroggy)
         {
+            HandleRandomSound();
             timer += Time.deltaTime;
         
             // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
@@ -444,5 +466,46 @@ public class MonsterAIController : MonoBehaviour
                 }
             }
         }
+    }
+    
+    private void HandleRandomSound()
+    {
+        _talkTimer += Time.deltaTime;
+        if (_talkTimer >= _nextTalkTime)
+        {
+            PlayRandomSound();
+            ResetTalkTimer();
+        }
+    }
+    
+    public void PlayRandomSound()
+    {
+        if (_battleMonsterTalk.Count == 0)
+            return;
+        
+        int index = Random.Range(0, _battleMonsterTalk.Count);
+        SoundManager.PlaySfx(SoundCategory.Movement, $"BattleMonster{index+1}");
+        UiManager.Instance.Get<TalkUi>().Popup(_battleMonsterTalk[index]);
+    }
+    
+    public void ResetTalkTimer()
+    {
+        _talkTimer = 0f;
+        _nextTalkTime = Random.Range(_minTalkInterval, _maxTalkInterval);
+    }
+
+    public void RoarSoundStart()
+    {
+        SoundManager.PlaySfx(SoundCategory.Movement, $"BattleMonsterRoar");
+    }
+
+    public void LandingSoundStart()
+    {
+        // 
+    }
+
+    public void GroggySoundStart()
+    {
+        SoundManager.PlaySfx(SoundCategory.Movement, $"BattleMonsterGotGroggy");
     }
 }
