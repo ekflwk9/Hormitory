@@ -1,14 +1,12 @@
-﻿// BasePlayerController.cs
+﻿using _01.Scripts.Component;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
 public abstract class BasePlayerController : MonoBehaviour
 {
     #region Serialized Fields
     [Header("Look Settings")]
     [SerializeField] protected float mouseSensitivity = 100f;
-    [SerializeField] protected Transform cameraTransform;
 
     [Header("Movement Settings")]
     [SerializeField] protected float moveSpeed = 5.0f;
@@ -20,11 +18,15 @@ public abstract class BasePlayerController : MonoBehaviour
     [Header("Player Audio Settings")]
     [SerializeField] protected AudioSource walkAudioSource;
     [SerializeField] protected AudioClip walkSoundClip;
+    [SerializeField] protected GameObject UIManager;
+
     #endregion
 
     #region Protected Variables
+    public bool isControl { get; protected set; } = true;
     protected CharacterController characterController;
     protected PuzzlePlayer playerActions;
+    protected Camera mainCamera;
     protected Vector2 moveInput;
     protected float verticalVelocity;
     protected float xRotation = 0f;
@@ -36,29 +38,41 @@ public abstract class BasePlayerController : MonoBehaviour
     #region Unity Lifecycle Methods
     protected virtual void Awake()
     {
+        Instantiate(UIManager);
         characterController = GetComponent<CharacterController>();
         playerActions = new PuzzlePlayer();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        mainCamera = GetComponentInChildren<Camera>();
+        if (mainCamera == null)
+        {
+            Debug.LogError("Player 프리팹의 자식 오브젝트에 Camera 컴포넌트가 없습니다!", this);
+        }
+        PlayerManager.Instance.SetPlayer(this);
     }
+
+    protected virtual void Start()
+    { }
 
     protected virtual void OnEnable()
     {
         playerActions.Player.Enable();
         playerActions.Player.Jump.performed += OnJump;
+        playerActions.Player.Menu.performed += OnMenu;
     }
 
     protected virtual void OnDisable()
     {
         playerActions.Player.Disable();
         playerActions.Player.Jump.performed -= OnJump;
+        playerActions.Player.Menu.performed -= OnMenu;
+
     }
 
     protected virtual void Update()
     {
-        // isDead 플래그는 부모가 계속 관리하여, 어떤 자식이든 죽으면 움직임이 멈추도록 보장
-        if (isDead) return;
-
+        if (isDead || !isControl) return;
+        if (mainCamera == null) return;
         isGrounded = characterController.isGrounded;
         HandleMovementAndGravity();
         HandleLook();
@@ -72,9 +86,9 @@ public abstract class BasePlayerController : MonoBehaviour
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
         xRotation -= mouseY;
-        yRotation += mouseX;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        mainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
     }
 
     protected virtual void HandleMovementAndGravity()
@@ -86,12 +100,11 @@ public abstract class BasePlayerController : MonoBehaviour
 
         moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = (transform.forward * moveInput.y + transform.right * moveInput.x);
-
         bool isMoving = moveDirection.magnitude > 0.1f;
 
         if (isMoving && isGrounded)
         {
-            if (!walkAudioSource.isPlaying)
+            if (walkAudioSource != null && !walkAudioSource.isPlaying)
             {
                 walkAudioSource.clip = walkSoundClip;
                 walkAudioSource.Play();
@@ -99,7 +112,7 @@ public abstract class BasePlayerController : MonoBehaviour
         }
         else
         {
-            if (walkAudioSource.isPlaying)
+            if (walkAudioSource != null && walkAudioSource.isPlaying)
             {
                 walkAudioSource.Stop();
             }
@@ -119,13 +132,17 @@ public abstract class BasePlayerController : MonoBehaviour
         }
     }
 
-    // <<--- TakeDamage() 메서드 제거
-
     public virtual void Die()
     {
         if (isDead) return;
         isDead = true;
         playerActions.Player.Disable();
+        // UIManager 호출 방식으로 변경
+        if (UiManager.Instance != null)
+        {
+            UiManager.Instance.Get<HitUi>().Show(true);
+            UiManager.Instance.Get<DeadUi>().Show(true);
+        }
 
         if (CameraShake.Instance != null)
         {
@@ -134,5 +151,20 @@ public abstract class BasePlayerController : MonoBehaviour
         Debug.Log("플레이어가 사망했습니다.");
     }
 
+    private void OnMenu(InputAction.CallbackContext context)
+    {
+        if (isControl)
+        {
+            SetPauseState(true);
+            UiManager.Instance.Get<MenuUi>().Show(true);
+        }
+    }
+    public void SetPauseState(bool isPaused)
+    {
+        isControl = !isPaused;        
+        Cursor.lockState = isControl? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !isPaused;
+
+    }
     #endregion
 }

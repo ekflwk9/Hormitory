@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -29,6 +30,7 @@ public class WeaponRevolver : WeaponBase
     private ImpactMemoryPool impactMemoryPool;          //공격 효과 생성 후 활성/비활성화 관리
     private Camera mainCamera;           //광선 발사
     private Coroutine attackCoroutine;
+    private Coroutine reloadCoroutine;
 
     private void Awake()
     {
@@ -90,12 +92,14 @@ public class WeaponRevolver : WeaponBase
         if (type == 0) 
         {
             isAttack = false;
-            StopCoroutine(attackCoroutine);
         }
     }
 
     public override void StartReload()
     {
+        // 총알을 사용하지 않았을 때 장전 불가
+        if (weaponSetting.currentAmmo == weaponSetting.maxAmmo) return;
+        //조준 시 장전 불가
         if (animator.AimModeIs) return;
         //재장전 or 탄창 x => 장전 불가
         if( isReload == true || weaponSetting.currentMagazine <= 0) return;
@@ -103,17 +107,18 @@ public class WeaponRevolver : WeaponBase
         //무기 액션 도중 장전시도하면 무기 액션 종료 후 장전
         StopWeaponAction();
         
-        StartCoroutine(OnReload());
+        reloadCoroutine = StartCoroutine(OnReload());
     }
 
     private IEnumerator OnAttackLoop()
     {
-        while (true)
+        while (isAttack)
         {
             OnAttack();
 
             yield return null;
         }
+        attackCoroutine = null;
     }
     
     public void OnAttack()
@@ -138,11 +143,18 @@ public class WeaponRevolver : WeaponBase
             
             string animation = animator.AimModeIs == true ? "AimFire" : "Fire";
             animator.Play(animation, -1, 0);
-            
+            if (animator.AimModeIs)
+            {
+                PlayerManager.Instance.MainCamera.Shake(0.3f,0.3f);
+            }
+            else
+            {
+                PlayerManager.Instance.MainCamera.Shake(0.2f,0.1f);
+            }
             //총구 이펙트 재생
             if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());
             //탄피 생성
-            casingMemoryPool.SpawnCasing(casingSpawnPoint.position,transform.right);
+            casingMemoryPool.SpawnCasing(casingSpawnPoint.position,Vector3.left);
             
             //광선을 발사해 원하는 위치 공격 (+Imapct Effect)
             TwoStepRaycast();
@@ -201,7 +213,7 @@ public class WeaponRevolver : WeaponBase
         if (animator.AimModeIs)
         {
             //에임 모드 조준점과 일치한 방향으로 레이캐스트
-            ray = mainCamera.ViewportPointToRay(new Vector2(0.515f, 0.575f));
+            ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.55f));
 
             if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
             {
@@ -211,6 +223,7 @@ public class WeaponRevolver : WeaponBase
             {
                 targetPoint = ray.origin + ray.direction * weaponSetting.attackDistance;
             }
+            Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 20f);
         }
         //에임 모드 아닐시 레이 캐스트
         else
@@ -228,10 +241,7 @@ public class WeaponRevolver : WeaponBase
             {
                 targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
             }
-            Debug.DrawRay(spreadRay.origin, spreadRay.direction * 5f, Color.red, 20f);
         }
-
-        
         
         
         //첫번째 Raycast연산으로 얻어진 targetPoint를 목표지점으로 설정하고
@@ -243,10 +253,9 @@ public class WeaponRevolver : WeaponBase
             
             if (hit.transform.CompareTag("Enemy"))
             {
-                IDamagable damageable = hit.transform.GetComponent<IDamagable>();
-                damageable.TakeDamage(weaponSetting.damage);
+                return;
             }
-            else if (hit.transform.CompareTag("ExplosiveBarrel"))
+            if (hit.transform.CompareTag("ExplosiveBarrel"))
             {
                 hit.transform.GetComponent<ExplosionBarrel>().TakeDamageFromWeapon(weaponSetting.damage, WeaponType.Main);
             }
@@ -285,6 +294,22 @@ public class WeaponRevolver : WeaponBase
         isReload = false;
         isAttack = false;
         isModeChange = false;
+    }
+
+    private void OnDisable()
+    {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+        if(reloadCoroutine != null)
+        {
+            StopCoroutine(reloadCoroutine);
+            reloadCoroutine = null;
+        }
+        
+        ResetVariables();
     }
 
     // private void OnDrawGizmos()

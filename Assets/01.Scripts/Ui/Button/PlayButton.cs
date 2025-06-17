@@ -1,12 +1,12 @@
-﻿using UnityEngine.EventSystems;
+﻿using _01.Scripts.Component;
+using UnityEngine.EventSystems;
 
 public class PlayButton : UiButton
 {
     public override void OnPointerClick(PointerEventData eventData)
     {
-        touch.SetActive(false);
+        touch.SetActive(false);                
         UiManager.Instance.Show<MenuUi>(false);
-        
-        //원상복귀
+        PlayerManager.Instance.Player.SetPauseState(false);
     }
 }

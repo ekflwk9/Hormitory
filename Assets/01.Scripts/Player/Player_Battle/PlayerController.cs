@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : BasePlayerController, IDamagable
 {
@@ -16,14 +17,16 @@ public class PlayerController : BasePlayerController, IDamagable
     [SerializeField] private float rollSpeed = 5f;
     [SerializeField] private float delay = 5f;
     
-    [SerializeField] private Camera mainCamera;
+    [FormerlySerializedAs("mainCamera")] [SerializeField] private Camera playerCamera;
     [SerializeField] private float camFOV;
     [SerializeField] private float bonusFOV = 15f;
     
     private bool isInvincibility;
     private bool isRolling; // 구르기 시 공격 제어
     private bool canRoll = true; //구르기 제어
-    private void Awake()
+    
+    private Coroutine rollCoroutine;
+    protected override void Awake()
     {
         base.Awake();
         //마우스 커서를 보이지 않게 설정하고, 현재위치에 고정
@@ -38,12 +41,12 @@ public class PlayerController : BasePlayerController, IDamagable
         base.OnEnable();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        mainCamera = CameraManager.Instance.MainCamera;
-        camFOV = mainCamera.fieldOfView;
+        playerCamera = Camera.main;
+        camFOV = playerCamera.fieldOfView;
     }
-    private void Update()
+    protected override void Update()
     {
         base.Update();
         
@@ -56,8 +59,8 @@ public class PlayerController : BasePlayerController, IDamagable
         
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(!isRolling)
-                StartCoroutine(Roll());
+            if(canRoll && rollCoroutine == null)
+                rollCoroutine = StartCoroutine(Roll());
         }
     }
     
@@ -105,8 +108,14 @@ public class PlayerController : BasePlayerController, IDamagable
 
     public override void Die()
     {
+        if (rollCoroutine != null)
+        {
+            StopCoroutine(rollCoroutine);
+            rollCoroutine = null;
+        }
         base.Die();
-        StartCoroutine("DeathEffect");
+        //StartCoroutine("DeathEffect");
+        PlayerManager.Instance.MainCamera.Fall();
         UiManager.Instance.Show<DeadUi>(true);
     }
 
@@ -122,7 +131,7 @@ public class PlayerController : BasePlayerController, IDamagable
         float elapsed = 0f;
         isInvincibility = true;
         weapon.Animator.SetTrigger("isRoll");
-        mainCamera.fieldOfView = camFOV - bonusFOV;
+        playerCamera.fieldOfView = camFOV - bonusFOV;
         moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         Vector3 direction = (moveInput.y * transform.forward) + (moveInput.x * transform.right).normalized;
         
@@ -134,7 +143,7 @@ public class PlayerController : BasePlayerController, IDamagable
         }
         isRolling = false;
         isInvincibility = false;
-        mainCamera.fieldOfView = camFOV;
+        playerCamera.fieldOfView = camFOV;
         yield return new WaitForSeconds(delay);
         canRoll = true;
     }
@@ -142,13 +151,13 @@ public class PlayerController : BasePlayerController, IDamagable
     IEnumerator DeathEffect()
     {
         float t = 0f;
-        Quaternion startRot = mainCamera.transform.localRotation;
+        Quaternion startRot = playerCamera.transform.localRotation;
         Quaternion endRot = Quaternion.Euler(80, 0, 0); // 아래로 고개 떨어짐
     
         while (t < 1f)
         {
             t += Time.deltaTime;
-            mainCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
+            playerCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
             yield return null;
         }
     }

@@ -1,135 +1,99 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-
+using _01.Scripts.Component;
 
 public class PuzzlePlayerController : BasePlayerController
 {
     #region Serialized Fields & Public Properties
-
     [Header("Puzzle Player Settings")]
     [SerializeField] private float interactionDistance = 2.0f;
     [SerializeField] private LayerMask interactionLayer;
 
-    private MainCamera mainCamera;
-
-    /// <summary>
-    /// 외부에서 플레이어가 숨어있는지 확인할 수 있는 프로퍼티입니다.
-    /// </summary>
     public bool IsHiding => isHiding;
-
     #endregion
 
     #region Private State Variables
-
     private bool isInputLocked = false;
     private bool isHiding = false;
     private IInteractable currentInteractable;
     private HidingSpot currentHidingSpot;
-
     #endregion
 
     #region Unity Lifecycle Methods
-
-    // 부모의 OnEnable 기능을 확장하여 상호작용 입력을 추가로 연결합니다.
     protected override void OnEnable()
     {
-        base.OnEnable(); // 부모 클래스의 OnEnable()을 먼저 실행 (점프 입력 등)
+        base.OnEnable();
         playerActions.Player.Interact.performed += OnInteract;
     }
 
-    // 부모의 OnDisable 기능을 확장합니다.
     protected override void OnDisable()
     {
-        base.OnDisable(); // 부모 클래스의 OnDisable()을 먼저 실행
+        base.OnDisable();
         playerActions.Player.Interact.performed -= OnInteract;
     }
 
-    
     protected override void Update()
     {
-        
-
         if (isInputLocked) return;
 
-        // 숨어있는 상태일 때의 로직
         if (isHiding)
         {
-            // 시점 조작(엿보기)은 허용
             HandleLook();
-            // 나오기 위한 상호작용 탐색도 허용
             HandleInteraction();
+            return;
         }
-        // 숨어있지 않은 일반 상태일 때의 로직
-        else
-        {
-            // 부모의 Update를 호출하여 이동, 시점 조작 등 공통 기능 실행
-            base.Update();
-            // 퍼즐 플레이어 고유의 상호작용 탐색 기능 실행
-            HandleInteraction();
-        }
-    }
 
+        base.Update();
+        HandleInteraction();
+    }
     #endregion
 
     #region Core Overridden & Specific Methods
-
-    /// <summary>
-    /// 부모 클래스의 abstract Die 메서드를 반드시 구현(override)해야 합니다.
-    /// </summary>
-    public override void Die()
+    
+   public override void Die()
     {
-        
-        if (isDead) return;
+        // 부모의 Die() 기능을 먼저 실행합니다.
+        base.Die();
 
-        isDead = true;
-        playerActions.Player.Disable();
-
-        // 카메라 사망 연출 호출
-        if (CameraShake.Instance != null)
+        // Awake에서 mainCamera가 이미 할당되었으므로, 이제 안전하게 사용할 수 있습니다.
+        if (mainCamera != null)
         {
-            CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
+            mainCamera.enabled = false;
+            Debug.Log("Main Camera has been disabled.");
         }
-        // 사망 시 UI 표시
-        
-        mainCamera.enabled = false;
-        UiManager.Instance.Show<HitUi>(true); 
-        UiManager.Instance.Show<DeadUi>(true);
-        Debug.Log("퍼즐 플레이어가 사망했습니다.");
     }
 
-    /// <summary>
-    /// PuzzlePlayerController의 고유한 피격 처리 기능입니다.
-    /// </summary>
+
     public void TakeDamage()
     {
         if (isDead) return;
-
         Debug.Log("퍼즐 플레이어가 피격당했습니다!");
-
-        // 카메라 피격 연출 호출
         if (CameraShake.Instance != null)
         {
             CameraShake.Instance.Play(CameraShakeType.PlayerHit);
         }
     }
-
     #endregion
 
     #region Interaction & Hiding Logic
 
+
     private void HandleInteraction()
     {
+        // mainCamera 변수는 부모로부터 물려받아 안전하게 사용
+        if (mainCamera == null) return;
+
         currentInteractable = null;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, interactionDistance, interactionLayer))
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out RaycastHit hit, interactionDistance, interactionLayer))
         {
             if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
             {
                 currentInteractable = interactable;
             }
         }
-        
     }
+
 
     private void OnInteract(InputAction.CallbackContext context)
     {
@@ -174,7 +138,6 @@ public class PuzzlePlayerController : BasePlayerController
     {
         LockInput();
         isHiding = true;
-
         characterController.enabled = false;
 
         Vector3 startPos = transform.position;
@@ -192,7 +155,6 @@ public class PuzzlePlayerController : BasePlayerController
 
         transform.position = hideTransform.position;
         transform.rotation = hideTransform.rotation;
-
         UnlockInput();
     }
 
@@ -222,19 +184,16 @@ public class PuzzlePlayerController : BasePlayerController
 
         UnlockInput();
     }
-
     #endregion
 
     #region Physics Callbacks
-
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.CompareTag("Enemy"))
         {
-           //TakeDamage();
-            Die(); // 사망 테스트 시 이 줄의 주석을 해제하세요.
+            // 이제 Die를 호출해도 mainCamera가 null일 걱정이 없습니다.
+            Die();
         }
     }
-
     #endregion
 }
