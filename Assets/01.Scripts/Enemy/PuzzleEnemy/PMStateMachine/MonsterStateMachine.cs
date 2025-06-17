@@ -123,6 +123,7 @@ public class MonsterStateMachine : MonoBehaviour
         "진실은 결국 드러난다!",
         "진정해. 진정해.",
         "이번엔 도망 못 가",
+        //"죽여버릴 거야, 죽여버릴 거야, 죽여버릴 거야!!"
     };
             
     public void PlayRandomSound()
