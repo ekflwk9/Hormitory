@@ -1,20 +1,69 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _01.Scripts.Component; // CameraManager°¡ ÀÖ´Â ³×ÀÓ½ºÆäÀÌ½º
+using _01.Scripts.Component;
+using DG.Tweening;
 using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Vector3 originPosition;
+    private Quaternion originRotation;
+
+    public bool isShaking = false;
     void Awake()
     {
         if(CameraManager.Instance != null)
+            CameraManager.Instance.SetCamera(GetComponent<MainCamera>());
+
+        originPosition = transform.localPosition;
+        originRotation = transform.localRotation;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            // ¼öÁ¤ Àü:
-            CameraManager.Instance.SetCamera(GetComponent<Camera>());
-            // ¼öÁ¤ ÈÄ:
-            //CameraManager.Instance.SetCamera(this);
+            Shake(1, 0.08f);
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Fall();
+        }
+    }
+
+    public void Shake(float duration, float strength)
+    {
+        if (isShaking) return;
+
+        isShaking = true;
+
+        transform.DOShakePosition(duration, strength)
+            .OnComplete(ResetPosition);
+    }
+
+    private void ResetPosition()
+    {
+        transform.localPosition = originPosition;
+        isShaking = false;
+    }
+
+    public void Fall()
+    {
+        Sequence seq = DOTween.Sequence();
+
+        // Step 1: ì™¼ìª½ìœ¼ë¡œ íœ˜ì²­ì´ë©° ê¸°ìš¸ì–´ì§ (Zì¶• -15ë„)
+        seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 15f), 0.7f)
+            .SetEase(Ease.OutSine));
+
+        // Step 2: ì ì  ì“°ëŸ¬ì§ (Zì¶• -90ë„ + ê³ ê°œ ì•½ê°„ ì•„ë˜ë¡œë„ ê°™ì´)
+        seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 80f), 0.6f)
+            .SetEase(Ease.InCubic));
+
+        // Step 3: ì“°ëŸ¬ì§„ ìƒíƒœì—ì„œ ë–¨ë¦¼
+        seq.Append(transform.DOShakeRotation(0.4f, 7f, 8, 90f));
+        seq.Join(transform.DOLocalMove(originPosition + new Vector3(0f, -1f, 0f), 0.6f));
+        
     }
 }

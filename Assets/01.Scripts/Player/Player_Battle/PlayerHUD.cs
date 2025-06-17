@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,6 +29,11 @@ public class PlayerHUD : MonoBehaviour
     private void Awake()
     {
         status.onHPEvent.AddListener(UpdateHPHUD);
+    }
+
+    private void Start()
+    {
+        UiManager.Instance.Show<InventoryUi>(true);
     }
     //
     // public void SetupAllWeapons(WeaponBase[] weapons)

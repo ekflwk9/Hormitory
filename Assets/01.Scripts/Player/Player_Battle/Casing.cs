@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +12,8 @@ namespace _01.Scripts.Player.Player_Battle
 
         private Rigidbody rigidbody3D;
         private MemoryPool memoryPool;
+        
+        private Coroutine deactivateCoroutine;
     
         public void Setup(MemoryPool pool, Vector3 direction)
         {
@@ -22,9 +25,15 @@ namespace _01.Scripts.Player.Player_Battle
             rigidbody3D.angularVelocity = new Vector3(Random.Range(-casingSpin, casingSpin),
                 Random.Range(-casingSpin, casingSpin),
                 Random.Range(-casingSpin, casingSpin));
-        
+
+            if (deactivateCoroutine != null)
+            {
+                StopCoroutine(deactivateCoroutine);
+                deactivateCoroutine = null;
+            }
+            
             //탄피 자동 비활성화 위한 코루틴 실행
-            StartCoroutine("DeactivateAfterTime");
+            deactivateCoroutine = StartCoroutine(DeactivateAfterTime());
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -37,6 +46,15 @@ namespace _01.Scripts.Player.Player_Battle
             yield return new WaitForSeconds(deactivateTime);
         
             memoryPool.DeactivatePoolItem(gameObject);
+        }
+
+        private void OnDisable()
+        {
+            if (deactivateCoroutine != null)
+            {
+                StopCoroutine(deactivateCoroutine);
+                deactivateCoroutine = null;
+            }
         }
     }
 }

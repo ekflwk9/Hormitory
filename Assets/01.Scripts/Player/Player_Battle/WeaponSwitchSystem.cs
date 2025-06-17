@@ -29,9 +29,14 @@ public class WeaponSwitchSystem : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
             }
         }
-        SwitchingWeapon(WeaponType.Main);
     }
-    
+
+    private void Start()
+    {
+        SwitchingWeapon(WeaponType.Main);
+        //UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, 1);
+    }
+
     private void Update()
     {
         UpdateSwitch();
@@ -41,6 +46,7 @@ public class WeaponSwitchSystem : MonoBehaviour
     {
         if(!Input.anyKeyDown) return;
         
+        //에임 모드 시 무기 변경 불가
         if (currentWeapon.Animator.AimModeIs) return;
 
 
@@ -81,16 +87,23 @@ public class WeaponSwitchSystem : MonoBehaviour
             previousWeapon.gameObject.SetActive(false);
         }
         currentWeapon.gameObject.SetActive(true);
-
+        
+        
         if (currentWeapon == weapons[0])
         {
-            UiManager.Instance.Show<BulletUi>(true);
-            UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.FirstSlot);
+            if (UiManager.Instance != null)
+            {
+                UiManager.Instance.Show<BulletUi>(true);
+                UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.FirstSlot);
+            }
         }
         else if (currentWeapon == weapons[1])
         {
-            UiManager.Instance.Show<BulletUi>(false);
-            UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.SecondSlot);
+            if (UiManager.Instance != null)
+            {
+                UiManager.Instance.Show<BulletUi>(false);
+                UiManager.Instance.Get<InventoryUi>().SlotSelection(SlotType.SecondSlot);
+            }
         }
     }
 }

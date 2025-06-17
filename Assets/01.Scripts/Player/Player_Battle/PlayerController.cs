@@ -23,7 +23,9 @@ public class PlayerController : BasePlayerController, IDamagable
     private bool isInvincibility;
     private bool isRolling; // 구르기 시 공격 제어
     private bool canRoll = true; //구르기 제어
-    private void Awake()
+    
+    private Coroutine rollCoroutine;
+    protected override void Awake()
     {
         base.Awake();
         //마우스 커서를 보이지 않게 설정하고, 현재위치에 고정
@@ -40,10 +42,10 @@ public class PlayerController : BasePlayerController, IDamagable
 
     private void Start()
     {
-        mainCamera = CameraManager.Instance.MainCamera;
+        mainCamera = Camera.main;
         camFOV = mainCamera.fieldOfView;
     }
-    private void Update()
+    protected override void Update()
     {
         base.Update();
         
@@ -56,8 +58,8 @@ public class PlayerController : BasePlayerController, IDamagable
         
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(!isRolling)
-                StartCoroutine(Roll());
+            if(canRoll && rollCoroutine == null)
+                rollCoroutine = StartCoroutine(Roll());
         }
     }
     
@@ -105,8 +107,14 @@ public class PlayerController : BasePlayerController, IDamagable
 
     public override void Die()
     {
+        if (rollCoroutine != null)
+        {
+            StopCoroutine(rollCoroutine);
+            rollCoroutine = null;
+        }
         base.Die();
-        StartCoroutine("DeathEffect");
+        //StartCoroutine("DeathEffect");
+        CameraManager.Instance.MainCamera.Fall();
         UiManager.Instance.Show<DeadUi>(true);
     }
 
