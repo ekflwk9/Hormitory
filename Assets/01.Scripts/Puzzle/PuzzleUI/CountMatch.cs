@@ -15,7 +15,9 @@ public class CountMatch : IPuzzle
     public event System.Action OnSolved; // 해결 이벤트
     public event System.Action OnFailed; // 실패 이벤트
 
-  
+    private PuzzlePlayerController playerController; // 플레이어 컨트롤러
+
+
     // 퍼즐 시작시 로직
     // 1. Numbers와 Buttons 게임 오브젝트를 SetActive true로 변경
     // 2. RequireNum이 존재한다면 퍼즐 로직을 진행
@@ -41,6 +43,11 @@ public class CountMatch : IPuzzle
     public void StartPuzzle()
     {
         // 퍼즐 시작, 초기화
+        playerController = UnityEngine.Object.FindObjectOfType<PuzzlePlayerController>();
+        if (playerController == null)
+        {
+            Service.Log("CountMatch: PuzzlePlayerController가 씬에 없습니다.");
+        }
         failCount = 0;
     }
 
@@ -80,14 +87,20 @@ public class CountMatch : IPuzzle
     {
         failCount++;
         // 3회의 기회를 모두 소모하면.
-        if(failCount >= maxChance)
+        if(failCount == 2)
+        {
+            UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
+            SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생
+        }
+        else if(failCount >= maxChance)
         {
             //게임 실패 연출
+            UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
+            SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생
             IsFailed();
+            playerController.Die();
             return;
         }
-
-        //여기에 SE: 심장소리/괴물 소리
         Service.Log($"CountMatch: Incorrect : {failCount}");
 
         //숫자맞추기에 실패했을 때(게임오버는 아직 아닐 때)의 로직

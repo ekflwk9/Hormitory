@@ -107,7 +107,6 @@ public class CountMatchController : MonoBehaviour
         playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
         UiManager.Instance.Show<LockUi>(false);
         // 실패 시 처리로직 (게임오버)
-        playerController.Die();
         ShowUI(false);
     }
     private void OnEnable()
