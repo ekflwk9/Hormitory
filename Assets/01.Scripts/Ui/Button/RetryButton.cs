@@ -1,4 +1,5 @@
-﻿using UnityEngine.EventSystems;
+﻿using _01.Scripts.Component;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class RetryButton : UiButton
@@ -16,6 +17,7 @@ public class RetryButton : UiButton
         var retryScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(retryScene);
 
+        PlayerManager.Instance.Player.SetPauseState(false);
         UiManager.Instance.Get<FadeUi>().OnFade();
     }
 }

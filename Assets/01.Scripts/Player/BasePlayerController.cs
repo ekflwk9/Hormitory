@@ -169,6 +169,7 @@ public abstract class BasePlayerController : MonoBehaviour
             UiManager.Instance.Get<MenuUi>().Show(true);
         }
     }
+
     public void SetPauseState(bool isPaused)
     {
         isControl = !isPaused;        
