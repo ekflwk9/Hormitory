@@ -1769,12 +1769,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 10
-  cameraTransform: {fileID: 0}
   moveSpeed: 5
   jumpHeight: 1.5
   gravity: -20
   walkAudioSource: {fileID: 5974853205066526809}
   walkSoundClip: {fileID: 8300000, guid: 98422e7cfb987bf4c9d19facbc35ae30, type: 3}
+  UIManager: {fileID: 0}
   keyCodeReload: 114
   duration: 0.5
   rollSpeed: 5

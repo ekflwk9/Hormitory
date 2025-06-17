@@ -15,11 +15,12 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     [SerializeField] private RectTransform marker; //마커 UI 위치 생성 범위 
     [SerializeField] private RectTransform pinPoint; //핀포인트 UI (정답 위치) (0.2~0.8 사이의 위치에 생성됨)
 
-    private PuzzlePlayerController playerController;
-
     // 필요한 오브젝트를 외부에서 설정할 수 있도록 프로퍼티로 정의
     // RailObj의 하위에 Marker, PinPoint가 자식으로 존재.
     // TimingMatch 아래에 RailObj를 SetActive(true)로 활성화 시켜야 함.
+    public void SetRailObj(GameObject obj) => RailObj = obj;
+    public void SetMarker(RectTransform rect) => marker = rect;
+    public void SetPinPoint(RectTransform rect) => pinPoint = rect;
 
 
     // 아래는 게임 진행이 원활하게 진행되는 것이 확인하면 제거 [SerializeField] 제거
@@ -41,12 +42,9 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     private float moveSpeed = 0.5f; // 마커 이동 속도 (초당 비율 이동)
     private float pinPointRange = 0.05f; // 핀포인트 위치의 허용 오차 범위 (0.05f = 5% 허용 오차)
 
-    public void Init()
+    private void Awake()
     {
         PuzzleManager.instance.RegisterPuzzle(this); // 퍼즐 매니저에 등록
-        RailObj = this.TryFindChild("BackGround");
-        marker = this.TryGetChildComponent<RectTransform>("Arrow");
-        pinPoint = this.TryGetChildComponent<RectTransform>("Range");
     }
 
     // 시작 시 세팅
@@ -57,16 +55,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
             railRect = RailObj.GetComponent<RectTransform>();
             railLeftX = railRect.rect.xMin; // 레일의 왼쪽 끝 X 좌표
             railRightX = railRect.rect.xMax; // 레일의 오른쪽 끝 X 좌표
-
-            playerController = FindObjectOfType<PuzzlePlayerController>();
-            if (playerController == null)
-            {
-                Service.Log("TimingMatch: PlayerController를 찾을 수 없습니다.");
-            }
-            else
-            {
-                playerController.LockInput(); // 시작 시 커서 잠금
-            }
         }
     }
 
@@ -76,7 +64,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     public void StartPuzzle()
     {
         // 1. 게임의 정보 초기화
-        Start(); // 게임 시작 메서드 호출
         success = 0;
         failed = 0;
         currentCycle = 0;
@@ -84,7 +71,8 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         markerPos = 0f; // 마커 위치 초기화
 
         isPlaying = true; // 게임을 시작할 수 있도록 bool 변경
-        UiManager.Instance.Show<TimingMatchUi>(true); // TimingMatchUi 활성화
+        RailObj.SetActive(false); // RailObj 비활성화
+
         UpdateMarkerPosition(); // 마커 위치 업데이트
 
     }
@@ -226,9 +214,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         isPlaying = false; // 게임 종료
 
-        UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
-
-        playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+        RailObj.SetActive(false); // RailObj 비활성화
         Service.Log($"TimingMatch: IsSolved(): 성공!");
         //성공 연출 및 로직 처리
         ResetSetting(); // 차후 다른 위치에서 게임이 처음부터 시작되도록 초기화
@@ -237,10 +223,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     public void IsFailed()
     {
         isPlaying = false; // 게임 종료
-
-        UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
-
-        playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+        RailObj.SetActive(false); // RailObj 비활성화
         Service.Log($"TimingMatch: IsFailed(): 실패!");
         // 실패 연출 및 로직 처리
         ResetSetting();

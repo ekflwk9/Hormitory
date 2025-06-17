@@ -7,7 +7,7 @@ public class BaseState : IState
 {
     protected readonly MonsterStateMachine StateMachine;
     protected Transform MonsterTransform => StateMachine.transform;
-    protected Transform PlayerTransform => StateMachine.PlayerStransform;
+    protected Transform PlayerTransform => StateMachine.PlayerTransform;
     protected NavMeshAgent NavMeshAgent => StateMachine.NavMeshAgent;
     protected float DetectRange => StateMachine.DetectRange;
     protected float SearchDuration => StateMachine.SearchDuration;
@@ -16,8 +16,9 @@ public class BaseState : IState
     protected float PatrolWaitTime => StateMachine.PatrolWaitTime;
     protected float CaptureRange => StateMachine.CaptureRange;
     protected PuzzlePlayerController PuzzlePlayerController => StateMachine.PuzzlePlayerController;
-    protected MainCamera MainCam => StateMachine.MainCam;
-    protected Camera DeadCam => StateMachine.DeadCam;
+    public  Camera DeadCam => StateMachine.DeadCam;
+
+    
     protected BaseState(MonsterStateMachine stateMachine)
     {
         StateMachine = stateMachine;
@@ -25,7 +26,6 @@ public class BaseState : IState
 
     public virtual void Enter()
     {
-
     }
 
 
@@ -36,7 +36,6 @@ public class BaseState : IState
 
     public virtual void Update()
     {
-
     }
 
     protected void StartAnimation(int animationHash)
@@ -48,4 +47,6 @@ public class BaseState : IState
     {
         StateMachine.PuzzleMonster.Animator.SetBool(animationHash, false);
     }
+
+    
 }

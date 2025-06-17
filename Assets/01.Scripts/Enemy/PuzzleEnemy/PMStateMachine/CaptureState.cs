@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CaptureState : BaseState
 {
-    //private Coroutine _coroutine;
     public CaptureState(MonsterStateMachine stateMachine) : base(stateMachine)
     {
         
@@ -13,32 +12,25 @@ public class CaptureState : BaseState
     
     public override void Enter()
     {
+        base.Enter();
+        StateMachine.ResetTalkTimer();
+        SoundManager.PlaySfx(SoundCategory.Movement,"PuzzleMonster4");
         NavMeshAgent.isStopped = true;
         PuzzlePlayerController.Die();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
-        MainCam.enabled = false;
         DeadCam.enabled = true;
-        UiManager.Instance.Get<HitUi>().HitView();
-        
-        UiManager.Instance.Show<DeadUi>(true);
-        
     }
 
     public override void Exit()
     {
+        base.Exit();
         NavMeshAgent.isStopped = false;
         PuzzlePlayerController.UnlockInput();
         StopAnimation(StateMachine.PuzzleMonster.AnimationData.CaptureParameterHash);
-        MainCam.enabled = true;
-        DeadCam.enabled = false;
     }
 
     public override void Update()
     {
-        
+        base.Update();
     }
-
-    
-    
-
 }

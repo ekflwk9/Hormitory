@@ -145,11 +145,11 @@ public class WeaponRevolver : WeaponBase
             animator.Play(animation, -1, 0);
             if (animator.AimModeIs)
             {
-                CameraManager.Instance.MainCamera.Shake(0.3f,0.3f);
+                PlayerManager.Instance.MainCamera.Shake(0.3f,0.3f);
             }
             else
             {
-                CameraManager.Instance.MainCamera.Shake(0.2f,0.1f);
+                PlayerManager.Instance.MainCamera.Shake(0.2f,0.1f);
             }
             //총구 이펙트 재생
             if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());

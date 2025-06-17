@@ -13,7 +13,6 @@ TagManager:
   - ImpactNormal
   - ImpactObstacle
   - Puzzle
-  - Wall
   layers:
   - Default
   - TransparentFX
