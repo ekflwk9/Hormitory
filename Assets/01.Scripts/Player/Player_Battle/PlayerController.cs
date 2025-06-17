@@ -41,7 +41,7 @@ public class PlayerController : BasePlayerController, IDamagable
         base.OnEnable();
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
         playerCamera = Camera.main;
         camFOV = playerCamera.fieldOfView;
