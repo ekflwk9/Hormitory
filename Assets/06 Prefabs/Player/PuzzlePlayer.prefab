@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8ebc23fac9b534bae93866ba1b12e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShaking: 0
 --- !u!1 &5134014788960328504
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +420,8 @@ MonoBehaviour:
   gravity: -20
   walkAudioSource: {fileID: 3360489762146967296}
   walkSoundClip: {fileID: 8300000, guid: 98422e7cfb987bf4c9d19facbc35ae30, type: 3}
-  UIManager: {fileID: 0}
+  UIManager: {fileID: 5275170033331383108, guid: 82bf9863203f6734bae819eb944ca94a,
+    type: 3}
   interactionDistance: 3
   interactionLayer:
     serializedVersion: 2

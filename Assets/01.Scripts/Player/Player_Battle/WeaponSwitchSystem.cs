@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,8 +31,8 @@ public class WeaponSwitchSystem : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
             }
         }
-        ItemManager.instance.RegisterItem(pistol,pistol.ItemID);
-        ItemManager.instance.RegisterItem(knife,knife.ItemID);
+        //ItemManager.instance.RegisterItem(pistol,pistol.ItemID);
+        //ItemManager.instance.RegisterItem(knife,knife.ItemID);
     }
 
     private void Start()

@@ -71,14 +71,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9543b3de2d4e58d4daef9abce908f0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
+  _playerTransform: {fileID: 7775541663249090279, guid: dbd9b44e423a69045ae2ea2966258ff3,
+    type: 3}
   _detectRange: 8
   _searchDuration: 3
   _patrolRadius: 10
   _patrolWaitTime: 1.2
   _chaseSpeed: 2.5
-  _mainCam: {fileID: 0}
   _deadCam: {fileID: 7212077420439766094}
+  _minTalkInterval: 4
+  _maxTalkInterval: 6
+  _isPuzzle: 0
 --- !u!114 &3177928162202496411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +99,8 @@ MonoBehaviour:
     walkParameterName: Walk
     chaseParameterName: Chase
     searchParameterName: Search
-    CaptureParameterName: Capture
+    captureParameterName: Capture
+    puzzleWaitParameterName: PuzzleWait
 --- !u!136 &8667069977826724318
 CapsuleCollider:
   m_ObjectHideFlags: 0
