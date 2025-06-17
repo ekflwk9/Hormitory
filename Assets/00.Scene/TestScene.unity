@@ -1617,6 +1617,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 388096649132334172, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 733754085484040101, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270355468204358921, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: weaponSetting.attackDistance
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6204939324654745962, guid: dbd9b44e423a69045ae2ea2966258ff3,
         type: 3}
       propertyPath: m_Name
