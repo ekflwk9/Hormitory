@@ -31,7 +31,7 @@ public class PlayerCombatController : BasePlayerController
 
     private void Start()
     {
-        mainCamera = Camera.main;
+        mainCamera = CameraManager.Instance.MainCamera;
         camFOV = mainCamera.fieldOfView;
     }
 

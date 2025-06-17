@@ -9,6 +9,8 @@ AnimatorOverrideController:
   m_Name: WeaponRevolver
   m_Controller: {fileID: 9100000, guid: f088e1d1e6ecba14887e5f6f7cb0715a, type: 2}
   m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
   - m_OriginalClip: {fileID: 7400002, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
     m_OverrideClip: {fileID: 7400002, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
   - m_OriginalClip: {fileID: 7400020, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
@@ -29,5 +31,3 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400050, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
   - m_OriginalClip: {fileID: 7400044, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
     m_OverrideClip: {fileID: 7400028, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
-  - m_OriginalClip: {fileID: 7400000, guid: 0d75a969efdd2b240a8bc8889de77a10, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9802c5b2c2c56dd48855eabc412f7083, type: 2}

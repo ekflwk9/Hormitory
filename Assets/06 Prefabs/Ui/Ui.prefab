@@ -2302,7 +2302,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 70, y: 70}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8448286756167832951
 CanvasRenderer:
@@ -2332,7 +2332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1461340320, guid: f5bf1807af0a8f3489010851561cc8c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5bf1807af0a8f3489010851561cc8c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2949,7 +2949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 45.4}
+  m_AnchoredPosition: {x: 146, y: 45.4}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4274661236956348855
@@ -3058,7 +3058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1649705709, guid: f5bf1807af0a8f3489010851561cc8c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5bf1807af0a8f3489010851561cc8c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6706,6 +6706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26b7804f0870134094540ccc64c0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconScale: {fileID: 0}
+  selectScale: {fileID: 0}
 --- !u!1 &5133450542660026209
 GameObject:
   m_ObjectHideFlags: 0
@@ -7681,6 +7683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26b7804f0870134094540ccc64c0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconScale: {fileID: 0}
+  selectScale: {fileID: 0}
 --- !u!1 &5826946472893661873
 GameObject:
   m_ObjectHideFlags: 0
@@ -8933,7 +8937,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 70, y: 70}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6766589991724967522
 CanvasRenderer:
@@ -8963,7 +8967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1461340320, guid: f5bf1807af0a8f3489010851561cc8c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5bf1807af0a8f3489010851561cc8c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9724,7 +9728,6 @@ GameObject:
   m_Component:
   - component: {fileID: 701759683294728636}
   - component: {fileID: 8079762497271791882}
-  - component: {fileID: 600800046449309153}
   m_Layer: 5
   m_Name: ' TimingMatchUi'
   m_TagString: Untagged
@@ -9767,21 +9770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2321ea61ab02b554aa6ca62536977f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &600800046449309153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7894194544350041096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ae99fc2caa52e94bbf1c54388c98d6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RailObj: {fileID: 0}
-  marker: {fileID: 0}
-  pinPoint: {fileID: 0}
 --- !u!1 &7896389944017530848
 GameObject:
   m_ObjectHideFlags: 0
