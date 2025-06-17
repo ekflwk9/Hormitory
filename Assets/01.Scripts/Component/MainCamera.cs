@@ -53,11 +53,11 @@ public class MainCamera : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
 
-        // Step 1: 왼쪽으로 휘청이며 기울어짐 (Z축 -15도)
+        // Step 1: 왼쪽으로 휘청이며 기울어짐 
         seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 15f), 0.7f)
             .SetEase(Ease.OutSine));
 
-        // Step 2: 점점 쓰러짐 (Z축 -90도 + 고개 약간 아래로도 같이)
+        // Step 2: 점점 쓰러짐 
         seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 80f), 0.6f)
             .SetEase(Ease.InCubic));
 
