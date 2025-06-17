@@ -12,7 +12,7 @@ public class PuzzlePlayerController : BasePlayerController
     [SerializeField] private float interactionDistance = 2.0f;
     [SerializeField] private LayerMask interactionLayer;
 
-    private Camera mainCamera => CameraManager.Instance.MainCamera;
+    private MainCamera mainCamera => CameraManager.Instance.MainCamera;
 
     /// <summary>
     /// 외부에서 플레이어가 숨어있는지 확인할 수 있는 프로퍼티입니다.
