@@ -122,7 +122,7 @@ namespace _01.Scripts.Player.Player_Battle
                 {
                     poolItem.isActive = false;
                     poolItem.gameObject.SetActive(false);
-
+                    activeCount--;
                     return;
                 }
             }

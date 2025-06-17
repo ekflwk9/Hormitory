@@ -13,6 +13,7 @@ public class ChaseState : BaseState
    
     public override void Enter()
     {
+        base.Enter();
         NavMeshAgent.speed = StateMachine.ChaseSpeed;
         NavMeshAgent.isStopped = false;
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.ChaseParameterHash);
@@ -20,6 +21,7 @@ public class ChaseState : BaseState
 
     public override void Update()
     {
+        base.Update();
         NavMeshAgent.SetDestination(PlayerTransform.position);
         float distance = Vector3.Distance(MonsterTransform.position,PlayerTransform.position);
 
@@ -38,6 +40,7 @@ public class ChaseState : BaseState
     }
     public override void Exit()
     {
+        base.Exit();
         NavMeshAgent.speed = StateMachine.DefaultSpeed;
         NavMeshAgent.isStopped = true;
         StopAnimation(StateMachine.PuzzleMonster.AnimationData.ChaseParameterHash);

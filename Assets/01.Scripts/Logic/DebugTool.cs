@@ -29,6 +29,7 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("아이템 획득")) ItemGet();
         else if (GUILayout.Button("인벤토리 On")) ShowInventory(true);
         else if (GUILayout.Button("인벤토리 Off")) ShowInventory(false);
+         
     }
 
     private void OnMenu()
@@ -83,6 +84,7 @@ public class DebugTool : EditorWindow
         UiManager.Instance.Show<InventoryUi>(_isActive);
     }
 
+    
     
 }
 #endif

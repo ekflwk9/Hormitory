@@ -11,6 +11,7 @@ public class SearchState : BaseState
 
     public override void Enter()
     {
+        base.Enter();
         NavMeshAgent.isStopped = true;
         
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.SearchParameterHash);
@@ -19,6 +20,7 @@ public class SearchState : BaseState
 
     public override void Exit()
     {
+        base.Exit();
         if (_searchCoroutine != null)
         {
             StateMachine.StopCoroutine(_searchCoroutine);
@@ -29,9 +31,13 @@ public class SearchState : BaseState
         StopAnimation(StateMachine.PuzzleMonster.AnimationData.SearchParameterHash);
     }
 
+    public override void Update()
+    {
+        base.Update();
+    }
+
     private IEnumerator SearchCoroutine()
     {
-        yield return new WaitForSeconds(SearchDuration);
         float timer = 0f;
         while (timer < SearchDuration)
         {

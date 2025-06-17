@@ -40,9 +40,9 @@ public class WeaponGreanadeProjectile : MonoBehaviour
             {
                 rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
-            //수류탄 삭제
-            Destroy(gameObject);
         }
+        //수류탄 삭제
+        Destroy(gameObject);
     }
 
 }

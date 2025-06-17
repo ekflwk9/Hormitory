@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using System.Linq;
 
 public class ItemManager
@@ -14,7 +15,8 @@ public class ItemManager
     // 아이템 데이터와 아이템 번호를 저장함
     public Dictionary<ItemSO, int> ItemDict = new Dictionary<ItemSO, int>();
 
-    
+
+
     /// <summary>
     /// 아이템 등록. ItemSO와 아이템id를 매핑합니다.
     /// </summary>
@@ -41,9 +43,10 @@ public class ItemManager
 
         ItemDict[item] = itemNumber;
         // 등록 시 Inventory에 추가함
+        Service.Log($"{item.name} 아이템이 등록되었습니다. 아이템 번호: {itemNumber}");
         // 아이템 슬롯 중 빈 슬롯 찾기(itemNumber가 0이거나 null인 경우)
 
-        if(ItemDict.Count == 1)
+        if (ItemDict.Count == 1)
         {
             UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, itemNumber); // 첫 번째 슬롯에 아이템 번호를 설정
         }

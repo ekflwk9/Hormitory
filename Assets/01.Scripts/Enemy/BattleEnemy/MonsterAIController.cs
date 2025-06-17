@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts.Component;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -31,11 +32,10 @@ public class MonsterAIController : MonoBehaviour
     private ActionNode currentActionStillRunning;
     
     [Header("AI")]
-    [SerializeField] private NavMeshAgent agent;
     [SerializeField] private float patternCooldown = 5f;
     private float timer;
     private bool shouldLookAtPlayer = true;
-    float overshootDistance = 10.0f; // 플레이어보다 얼마나 더 지나쳐서 착지할지
+    float overshootDistance = 4.0f; // 플레이어보다 얼마나 더 지나쳐서 착지할지
     [SerializeField] private GameObject player;
     
     [Header("Animation")]
@@ -47,10 +47,16 @@ public class MonsterAIController : MonoBehaviour
     [Header("Battle")]
     [SerializeField] private int damageAmount = 20;
     [SerializeField] MonsterStatController monsterStatController;
-    private bool isGroggy = false;
     private bool groggyCoroutineRunned = false;
     private bool isPendingGroggy = false;
     private float groggyDuration = 6.0f; // 그로기 지속 시간
+    private Vector3[] rayPos =
+    {
+        new Vector3(0f, 0f, 0f),         // 중심
+        new Vector3(-1f, 0f, 0f),     // 왼쪽
+        new Vector3(1f, 0f, 0f)       // 오른쪽
+    };
+    private float rayDistance = 0.5f;
     
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
@@ -58,7 +64,6 @@ public class MonsterAIController : MonoBehaviour
     private void Reset()
     {
         animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         monsterStatController = GetComponent<MonsterStatController>();
     }
@@ -101,6 +106,9 @@ public class MonsterAIController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+    }
 
     private INode.State IsTimerPassedAction()
     {
@@ -152,7 +160,6 @@ public class MonsterAIController : MonoBehaviour
         animator.SetBool("BiteAttack", false);
         
         shouldLookAtPlayer = true;
-        agent.enabled = false;
         
         takeOffFinished = false;
         animator.SetBool("TakeOff", true);
@@ -163,7 +170,7 @@ public class MonsterAIController : MonoBehaviour
         animator.SetBool("TakeOff", false);
         
         Vector3 startPos = transform.position;
-        Vector3 targetPos = startPos + new Vector3(0, 15f, 0);
+        Vector3 targetPos = startPos + new Vector3(0, 5f, 0);
         float riseDuration = 2.7f;
         float riseElapsed = 0f;
 
@@ -193,7 +200,7 @@ public class MonsterAIController : MonoBehaviour
             Vector3 slamTarget = player.transform.position;
 
             Vector3 dirFromEnemyToPlayer = (player.transform.position - transform.position).normalized;
-            Vector3 behindPlayerOffset = dirFromEnemyToPlayer * 8.0f;
+            Vector3 behindPlayerOffset = dirFromEnemyToPlayer * 4.0f;
 
             slamTarget += behindPlayerOffset;
             
@@ -202,9 +209,28 @@ public class MonsterAIController : MonoBehaviour
 
             bool isFlyingRandingRunned = false;
 
-            shouldLookAtPlayer = true;
             while (slamElapsed < slamDuration)
             {
+                Vector3 curpos = transform.position + transform.up + transform.forward * 1.75f;
+                
+                foreach (Vector3 rayOrigin in rayPos)
+                { 
+                    Debug.DrawRay(curpos, transform.forward + rayOrigin, Color.red, 1.0f);
+
+                    if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
+                    {
+                        if (hit.collider.CompareTag("Wall"))
+                        {   
+                            PlayerManager.Instance.MainCamera.Shake(1f,1.4f);
+                            Service.Log("벽에 박힘");
+                            if (!groggyCoroutineRunned)
+                            {
+                                isPendingGroggy = true;
+                            }
+                        }
+                    }
+                }
+                
                 if (isPendingGroggy && !groggyCoroutineRunned)
                 {
                     Service.Log("그로기 진입");
@@ -238,9 +264,6 @@ public class MonsterAIController : MonoBehaviour
     private IEnumerator JumpingAndBodySlamActionCoroutine()
     {
         shouldLookAtPlayer = true;
-        agent.enabled = true;
-        agent.isStopped = true;
-        agent.SetDestination(transform.position);
         
         roarFinished = false;
         animator.SetBool("Roar", true);
@@ -273,16 +296,32 @@ public class MonsterAIController : MonoBehaviour
 
         while (elapsed < duration)
         {
+            Vector3 curpos = transform.position + transform.up + transform.forward * 1.75f;
+                
+            foreach (Vector3 rayOrigin in rayPos)
+            { 
+                if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
+                {
+                    if (hit.collider.CompareTag("Wall"))
+                    {
+                        Service.Log("벽에 박힘");
+                        animator.SetBool("BiteAttack", false);
+                        currentAction = null;
+                        yield break;
+                    }
+                }
+            }
+            
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        groggyCoroutineRunned = false;
+        
+        PlayerManager.Instance.MainCamera.Shake(0.5f,1f);
         transform.position = targetPosition;
         animator.SetBool("BiteAttack", false);
 
-        shouldLookAtPlayer = true;
         currentAction = null;
     }
 
@@ -300,8 +339,6 @@ public class MonsterAIController : MonoBehaviour
         animator.SetBool("Roar", false);
         animator.SetBool("Groggy", false);
         
-        animator.CrossFade("Groggy", 0f);
-        
         Vector3 startPos = transform.position;
         Vector3 targetPos = new Vector3(startPos.x, 0, startPos.z);
         float duration = 0.25f;
@@ -310,7 +347,6 @@ public class MonsterAIController : MonoBehaviour
         isGroggy = true;
         currentAction = null; // 현재 액션 정지
         animator.SetBool("Groggy", true);
-        agent.enabled = false; // 이동 중지
         shouldLookAtPlayer = false; // 시선도 고정
 
         while (elapsed < duration)
@@ -361,29 +397,6 @@ public class MonsterAIController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (currentAction == flyBodySlam)
-        {
-            if (other.CompareTag("Wall"))
-            {
-                // 몬스터 앞 방향으로 레이 쏘기
-                Ray ray = new Ray(transform.position + Vector3.up * 1f, transform.forward); 
-                RaycastHit hit;
-                
-                if (Physics.Raycast(ray, out hit, 3f))
-                {
-                    if (hit.collider.CompareTag("Wall"))
-                    {
-                        Service.Log("벽에 박힘");
-                        // 벽을 바로 바라보고 있을 때만 그로기 상태 대기
-                        if (!groggyCoroutineRunned)
-                        {
-                            isPendingGroggy = true;
-                        }
-                    }
-                }
-            }
-        }
-        
         if (currentAction == flyBodySlam || currentAction == jumpBodySlam)
         {
             if (other.CompareTag("Player"))
