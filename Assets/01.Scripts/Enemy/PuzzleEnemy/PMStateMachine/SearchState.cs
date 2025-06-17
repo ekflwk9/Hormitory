@@ -14,8 +14,6 @@ public class SearchState : BaseState
         base.Enter();
         NavMeshAgent.isStopped = true;
         
-        //SoundManager.PlaySfx(SoundCategory.Movement, $"PuzzleMonster8");
-        //UiManager.Instance.Get<TalkUi>().Popup("Bless your heart--you know I'm going to find you in the end.");
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.SearchParameterHash);
         _searchCoroutine = StateMachine.StartCoroutine(SearchCoroutine());
     }
