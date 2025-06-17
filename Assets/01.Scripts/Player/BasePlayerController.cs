@@ -161,12 +161,12 @@ public abstract class BasePlayerController : MonoBehaviour
             UiManager.Instance.Get<MenuUi>().Show(true);
         }
     }
+
     public void SetPauseState(bool isPaused)
     {
         isControl = !isPaused;        
         Cursor.lockState = isControl? CursorLockMode.Locked : CursorLockMode.None;
-        Cursor.visible = !isPaused;
-
+        Cursor.visible = isPaused;
     }
     #endregion
 }
