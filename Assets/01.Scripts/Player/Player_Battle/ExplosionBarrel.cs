@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,9 @@ public class ExplosionBarrel : InteractionObject, IDamagable
     [SerializeField] private float explosionDelayTime = 0.3f;
     [SerializeField] private float explosionRadius = 10.0f;
     [SerializeField] private float explosionForce = 1000.0f;
-
     private bool isExplode = false;
     private bool isPrepared = false;
+    
     public void TakeDamage(float damage)
     {
         if (isExplode) return;
@@ -35,7 +36,6 @@ public class ExplosionBarrel : InteractionObject, IDamagable
             {
                 Debug.Log("Prepared");
                 isPrepared = true;
-                
             }
         }
         

@@ -1617,21 +1617,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 388096649132334172, guid: dbd9b44e423a69045ae2ea2966258ff3,
-        type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 733754085484040101, guid: dbd9b44e423a69045ae2ea2966258ff3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270355468204358921, guid: dbd9b44e423a69045ae2ea2966258ff3,
-        type: 3}
-      propertyPath: weaponSetting.attackDistance
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 6204939324654745962, guid: dbd9b44e423a69045ae2ea2966258ff3,
         type: 3}
       propertyPath: m_Name
@@ -1687,6 +1672,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8292457309185303849, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: impactPrefab.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292457309185303849, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: impactPrefab.Array.data[4]
+      value: 
+      objectReference: {fileID: 146587006374191570, guid: 8d311ceb383723f45812c8dec9da8329,
+        type: 3}
+    - target: {fileID: 9029261755297020427, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: impactPrefab.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029261755297020427, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: impactPrefab.Array.data[4]
+      value: 
+      objectReference: {fileID: 146587006374191570, guid: 8d311ceb383723f45812c8dec9da8329,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1755,6 +1762,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3720826665374994245, guid: 2825ac52d64636943b51a5d4b4bad77e,
+        type: 3}
+      propertyPath: particle
+      value: 
+      objectReference: {fileID: 198679442476388764, guid: f293a2dcc753a4a489fefe7f8f312d69,
+        type: 3}
+    - target: {fileID: 3720826665374994245, guid: 2825ac52d64636943b51a5d4b4bad77e,
+        type: 3}
+      propertyPath: particlePrefab
+      value: 
+      objectReference: {fileID: 6977771790550208059, guid: c032160cbac147d4086bee1281343989,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1783,6 +1802,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7155793756374373147, guid: 921e3ffa88d056d4baad55d063adca0d,
+        type: 3}
+      propertyPath: particle
+      value: 
+      objectReference: {fileID: 198679442476388764, guid: f293a2dcc753a4a489fefe7f8f312d69,
+        type: 3}
+    - target: {fileID: 7155793756374373147, guid: 921e3ffa88d056d4baad55d063adca0d,
+        type: 3}
+      propertyPath: particlePrefab
+      value: 
+      objectReference: {fileID: 6977771790550208059, guid: c032160cbac147d4086bee1281343989,
+        type: 3}
     - target: {fileID: 7416039577468641058, guid: 921e3ffa88d056d4baad55d063adca0d,
         type: 3}
       propertyPath: m_LocalPosition.x
