@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597038ec2b798c34f8c3e1b9ae604007, type: 3}
   m_Name: TrunkKey
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: 
-  icon: {fileID: 0}
+  itemID: 5
+  itemName: "\uD2B8\uB801\uD06C\uC5F4\uC1E0"
+  icon: {fileID: 21300000, guid: 76ab38f983d645d40b27355917979367, type: 3}
