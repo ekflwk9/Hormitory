@@ -9,7 +9,6 @@ public class SolidUi : MonoBehaviour
     private void Start()
     {
         target = PlayerManager.Instance.MainCamera.transform;
-        scale = this.transform.localScale.x;
     }
 
     private void LateUpdate()
