@@ -38,7 +38,9 @@ namespace _01.Scripts.Player.Player_Battle
 
         private void OnCollisionEnter(Collision collision)
         {
-            //사운드 재생
+            int index = Random.Range(0, 4);
+            string soundName = $"casing-sound-{index + 1}";
+            SoundManager.PlaySfx(SoundCategory.Casings_And_Shells, soundName);
         }
 
         private IEnumerator DeactivateAfterTime()
