@@ -6956,6 +6956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDead: 0
   animator: {fileID: 1422848593}
+  monsterAIController: {fileID: 1422848590}
 --- !u!114 &1422848590
 MonoBehaviour:
   m_ObjectHideFlags: 0

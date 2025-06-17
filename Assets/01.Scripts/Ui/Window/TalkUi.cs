@@ -6,6 +6,8 @@ public class TalkUi : UiBase
     private Animator anim;
     private TMP_Text talk;
 
+    public bool onTalk { get => this.gameObject.activeSelf; }
+
     public override void Init()
     {
         anim = this.TryGetComponent<Animator>();
