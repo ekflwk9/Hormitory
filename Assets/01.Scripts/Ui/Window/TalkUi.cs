@@ -6,7 +6,7 @@ public class TalkUi : UiBase
     private Animator anim;
     private TMP_Text talk;
 
-    public bool onTalk { get => this.gameObject.activeSelf; }
+    public bool onTalk { get; private set; }
 
     public override void Init()
     {
@@ -18,9 +18,15 @@ public class TalkUi : UiBase
 
     public void Popup(string _text)
     {
+        onTalk = true;
         talk.text = _text;
 
         if (this.gameObject.activeSelf) anim.Play(AnimName.Idle, 0, 0);
         else this.gameObject.SetActive(true);
+    }
+
+    private void EndTalk()
+    {
+        onTalk = false;
     }
 }
