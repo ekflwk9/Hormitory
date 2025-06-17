@@ -29,7 +29,6 @@ public class WeaponSwitchSystem : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
             }
         }
-        
     }
 
     private void Start()

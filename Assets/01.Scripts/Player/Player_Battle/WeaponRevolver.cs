@@ -154,7 +154,7 @@ public class WeaponRevolver : WeaponBase
             //총구 이펙트 재생
             if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());
             //탄피 생성
-            casingMemoryPool.SpawnCasing(casingSpawnPoint.position,transform.right);
+            casingMemoryPool.SpawnCasing(casingSpawnPoint.position,Vector3.left);
             
             //광선을 발사해 원하는 위치 공격 (+Imapct Effect)
             TwoStepRaycast();

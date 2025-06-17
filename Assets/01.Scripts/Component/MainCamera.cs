@@ -54,17 +54,16 @@ public class MainCamera : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         // Step 1: 왼쪽으로 휘청이며 기울어짐 (Z축 -15도)
-        seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, -15f), 0.3f)
+        seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 15f), 0.7f)
             .SetEase(Ease.OutSine));
 
         // Step 2: 점점 쓰러짐 (Z축 -90도 + 고개 약간 아래로도 같이)
-        seq.Append(transform.DOLocalRotate(new Vector3(30f, 0f, -90f), 0.6f)
+        seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 80f), 0.6f)
             .SetEase(Ease.InCubic));
 
         // Step 3: 쓰러진 상태에서 떨림
-        seq.Append(transform.DOShakeRotation(0.4f, 2f, 8, 90f));
-
-        // Step 4: 암전
-        seq.AppendInterval(0.3f);
+        seq.Append(transform.DOShakeRotation(0.4f, 7f, 8, 90f));
+        seq.Join(transform.DOLocalMove(originPosition + new Vector3(0f, -1f, 0f), 0.6f));
+        
     }
 }
