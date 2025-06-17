@@ -13,10 +13,8 @@ public class MonsterAIController : MonoBehaviour
     
     private SequenceNode flyingBodySlam = new SequenceNode(); // 날아오른 후 몸통박치기 시퀀스
     private SequenceNode jumpingBodySlam = new SequenceNode(); // 뛰어서 몸통박치기 시퀀스
-    private SequenceNode tailAttack = new SequenceNode(); // 꼬리 공격 시퀀스
-    private SequenceNode chasingPlayer = new SequenceNode(); // 플레이어 쫓기 시퀀스
-
-    private ActionNode currentAction = null; // 현재 진행중인 액션 저장용
+    
+    public ActionNode currentAction = null; // 현재 진행중인 액션 저장용
     
     // 액션 여부 체크 노드
     private ActionNode currentActionNull; // 현재 액션 null 
@@ -165,7 +163,13 @@ public class MonsterAIController : MonoBehaviour
         takeOffFinished = false;
         animator.SetBool("TakeOff", true);
 
-        yield return new WaitUntil(() => takeOffFinished);
+        while (!takeOffFinished)
+        {
+            if (monsterStatController.isDead)
+                yield break;  // 즉시 종료
+
+            yield return null;  // 한 프레임 대기
+        }
 
         animator.SetBool("Fly", true);
         animator.SetBool("TakeOff", false);
@@ -178,6 +182,11 @@ public class MonsterAIController : MonoBehaviour
         // 위로 천천히 상승하면서 플레이어를 바라보기
         while (riseElapsed < riseDuration)
         {
+            if (monsterStatController.isDead)
+            {
+                yield break;
+            }
+            
             transform.position = Vector3.Lerp(startPos, targetPos, riseElapsed / riseDuration);
             riseElapsed += Time.deltaTime;
             
@@ -189,7 +198,13 @@ public class MonsterAIController : MonoBehaviour
         animator.SetTrigger("FlyingRoar");
 
         flyingRoarEnded = false;
-        yield return new WaitUntil(() => flyingRoarEnded);
+        while (!flyingRoarEnded)
+        {
+            if (monsterStatController.isDead)
+                yield break;  // 즉시 종료
+
+            yield return null;  // 한 프레임 대기
+        }
         
         groggyCoroutineRunned = false;
         shouldLookAtPlayer = false;
@@ -213,6 +228,9 @@ public class MonsterAIController : MonoBehaviour
 
             while (slamElapsed < slamDuration)
             {
+                if (monsterStatController.isDead)
+                    yield break;
+                
                 Vector3 curpos = transform.position + transform.up + transform.forward * 1.75f;
                 
                 foreach (Vector3 rayOrigin in rayPos)
@@ -221,7 +239,7 @@ public class MonsterAIController : MonoBehaviour
 
                     if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
                     {
-                        if (hit.collider.CompareTag("Wall"))
+                        if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("ExplosiveBarrel"))
                         {   
                             PlayerManager.Instance.MainCamera.Shake(1f,1.4f);
                             barrelSpawner.SpawnBarrelOnMonsterStun();
@@ -235,7 +253,6 @@ public class MonsterAIController : MonoBehaviour
                 
                 if (isPendingGroggy && !groggyCoroutineRunned)
                 {
-                    Service.Log("그로기 진입");
                     isPendingGroggy = false;
                     groggyCoroutineRunned = true;
                     StartCoroutine(GroggyCoroutine());
@@ -270,7 +287,13 @@ public class MonsterAIController : MonoBehaviour
         roarFinished = false;
         animator.SetBool("Roar", true);
         
-        yield return new WaitUntil(() => roarFinished);
+        while (!roarFinished)
+        {
+            if (monsterStatController.isDead)
+                yield break;  // 즉시 종료
+
+            yield return null;  // 한 프레임 대기
+        }
         
         animator.SetBool("BiteAttack", true);
         animator.SetBool("Roar", false);
@@ -298,15 +321,21 @@ public class MonsterAIController : MonoBehaviour
 
         while (elapsed < duration)
         {
+            if (monsterStatController.isDead)
+                yield break;
+            
             Vector3 curpos = transform.position + transform.up + transform.forward * 1.75f;
                 
             foreach (Vector3 rayOrigin in rayPos)
             { 
                 if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
                 {
-                    if (hit.collider.CompareTag("Wall"))
+                    if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("ExplosiveBarrel"))
                     {
-                        Service.Log("벽에 박힘");
+                        Vector3 temp = transform.position;
+                        temp.y = 0f;
+                        transform.position = temp;
+                        
                         animator.SetBool("BiteAttack", false);
                         currentAction = null;
                         yield break;
@@ -329,8 +358,6 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator GroggyCoroutine()
     {
-        Service.Log("그로기 상태 진입");
-    
         animator.ResetTrigger("StandUp");
         animator.SetBool("FlyingLanding", false);
         animator.SetBool("BiteAttack", false);
@@ -359,9 +386,15 @@ public class MonsterAIController : MonoBehaviour
         }
         transform.position = targetPos;
         
-        yield return new WaitForSeconds(groggyDuration);
-
-        Service.Log("그로기 상태 해제");
+        float waitTime = 0f;
+        while (waitTime < groggyDuration)
+        {
+            if (monsterStatController.isDead)
+                yield break; // 즉시 종료
+        
+            waitTime += Time.deltaTime;
+            yield return null;
+        };
 
         animator.SetBool("Groggy", false);
         isGroggy = false;
