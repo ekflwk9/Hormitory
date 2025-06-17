@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1050550422}
-  m_IndirectSpecularColor: {r: 0.050410867, g: 0.039235838, b: 0.11432363, a: 1}
+  m_IndirectSpecularColor: {r: 0.060330953, g: 0.04722406, b: 0.13723981, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,7 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2242727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftMiddle_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3657456}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftBack_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -991,7 +991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -999,7 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1141,7 +1141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 114715574}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_WingLeft_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1491,7 +1491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 157476469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightBack_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1523,7 +1523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 158194598}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightMiddle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1611,7 +1611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 191759758}
   - component: {fileID: 191759759}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_MuscomorphWingRightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2334,7 +2334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 313086654}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2366,7 +2366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 320816559}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawUpperRight_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2587,7 +2587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 355080117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawUpperLeft_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2682,7 +2682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 366372860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftMiddle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2714,7 +2714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 368419037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftBack_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2746,7 +2746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 378279628}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightFront_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3496,7 +3496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 482138873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethUpperLeft_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3599,7 +3599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 510472081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftMiddle_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4187,7 +4187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 584032225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightBack_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4522,7 +4522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641207828}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightMiddle_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4826,7 +4826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4834,7 +4834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4977,7 +4977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 697324114}
   - component: {fileID: 697324115}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_MuscomorphHorns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5067,7 +5067,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5075,7 +5075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5265,7 +5265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742307059}
   - component: {fileID: 742307060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_MuscomorphWingLeftB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5354,7 +5354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751124168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightMiddle_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5484,7 +5484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 769765781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawUpperLeft_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5629,7 +5629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 801134030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftFront_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5794,7 +5794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 849956466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethLowerLeft_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5825,7 +5825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857330946}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5857,7 +5857,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858554870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6133,37 +6133,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 883867448}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &885661571
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 885661572}
-  m_Layer: 0
-  m_Name: test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &885661572
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885661571}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8800073, y: 2.248703, z: 1.8932939}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &890103939 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7894194544350041096, guid: 82bf9863203f6734bae819eb944ca94a,
@@ -6321,7 +6290,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -6329,7 +6298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -6561,7 +6530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 926617554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawLowerLeft_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6719,7 +6688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 934488339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawUpperRight_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6892,7 +6861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 986937440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7033,7 +7002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 998197179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawLowerRight_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7069,7 +7038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7077,7 +7046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7097,7 +7066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.05
+      value: 18.06
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7113,15 +7082,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -7321,7 +7290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1032374058}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_WingLeft_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7470,7 +7439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1043775388}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftFront_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8131,6 +8100,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1088694387}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1098143757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1098143759}
+  - component: {fileID: 1098143758}
+  m_Layer: 0
+  m_Name: BarrelSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1098143758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098143757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ce06bca43325545b6e5c3ea8f98521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrelPrefab: {fileID: 3221900602192822945, guid: f1caabca635a11c4a843910b34305051,
+    type: 3}
+  initialBarrelCount: 3
+  spawnHeight: 5
+  dropDuration: 1.5
+  barrelOffset: 0.5
+  overlapMask:
+    serializedVersion: 2
+    m_Bits: 4168
+--- !u!4 &1098143759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098143757}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1103894966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8341,7 +8363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1121715984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftBack_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8486,7 +8508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1148848021}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethUpperRight_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8517,6 +8539,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 208705512901902097, guid: dbd9b44e423a69045ae2ea2966258ff3,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 2110425675}
     - target: {fileID: 4182897962123512540, guid: dbd9b44e423a69045ae2ea2966258ff3,
         type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
@@ -9043,7 +9070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1211644359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethLowerLeft_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9075,7 +9102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1229981283}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftFront_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9107,7 +9134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235067561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftBack_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9211,7 +9238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -9219,7 +9246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -9361,7 +9388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267635252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9752,7 +9779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359562628}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightMiddle_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9956,153 +9983,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1369131592}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1369791000
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1554375382}
-    m_Modifications:
-    - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_Name
-      value: Factory1Wall01 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1265440563122594, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 35.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 64045204633522098, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-    - {fileID: 64564280853222780, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1369791005}
-    - targetCorrespondingSourceObject: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1369791004}
-  m_SourcePrefab: {fileID: 100100000, guid: f31869e8134aa7542b92b5e0b3e1f5c8, type: 3}
---- !u!4 &1369791001 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4925362290388050, guid: f31869e8134aa7542b92b5e0b3e1f5c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1369791000}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1369791002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1464647511585160, guid: f31869e8134aa7542b92b5e0b3e1f5c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1369791000}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1369791003 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1815745953697154, guid: f31869e8134aa7542b92b5e0b3e1f5c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1369791000}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1369791004
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369791002}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 16.036713, y: 2.6359386, z: 2}
-  m_Center: {x: -8.98914, y: 6.6937113, z: 0.1044534}
---- !u!65 &1369791005
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369791003}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 18.000002, y: 9.900018, z: 0.76}
-  m_Center: {x: -8.999997, y: 4.9500146, z: 0}
 --- !u!1001 &1374752464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10243,7 +10123,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -10251,7 +10131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -10535,7 +10415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386353359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_WingRight_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10566,7 +10446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386497871}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawLowerRight_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10605,7 +10485,7 @@ GameObject:
   - component: {fileID: 1422848588}
   - component: {fileID: 1422848587}
   - component: {fileID: 1422848586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Monster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -11032,7 +10912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467252923}
   - component: {fileID: 1467252924}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_MuscomorphWingRighA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11178,7 +11058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1494199642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11211,7 +11091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511160058}
   - component: {fileID: 1511160059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_MuscomorphTail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11516,7 +11396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534982913}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11739,7 +11619,6 @@ Transform:
   - {fileID: 696631335}
   - {fileID: 1255433991}
   - {fileID: 913943297}
-  - {fileID: 1369791001}
   - {fileID: 999188623}
   - {fileID: 1792093287}
   - {fileID: 9407443}
@@ -11910,7 +11789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580564551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethUpperRight_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11941,7 +11820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1590463489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftMiddle_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12260,7 +12139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637358444}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightBack_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12361,7 +12240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -12369,7 +12248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -12511,7 +12390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1657455766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_WingRight_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12727,7 +12606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1684915025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13007,7 +12886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1736833513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethUpperLeft_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13558,7 +13437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1786063925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightFront_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13595,7 +13474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1474017305109742, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -13603,7 +13482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1819584740406960, guid: ce6ad725e758b1344b46e8fe8c00eb64, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -14068,7 +13947,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1821490127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Tail_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14106,7 +13985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1858664410}
   - component: {fileID: 1858664411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_MuscomorphWingLeftA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14198,7 +14077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1861836442}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethLowerRight_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14363,7 +14242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1872713997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegLeftFront_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14395,7 +14274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1875055630}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightFront_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14502,7 +14381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1884355254}
   - component: {fileID: 1884355255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SK_Muscomorph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14899,7 +14778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1910201255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightFront_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14931,7 +14810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1919492512}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_JawLowerLeft_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15525,7 +15404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1991822364}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16286,7 +16165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2058072694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_TeethLowerRight_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16525,6 +16404,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4159253055756618, guid: ed861de9e9af2e2499e9cba5255df1c9,
     type: 3}
   m_PrefabInstance: {fileID: 2103883605}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2110425675 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4735698129430526606, guid: dbd9b44e423a69045ae2ea2966258ff3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1155718478}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2116850745
 PrefabInstance:
@@ -16779,7 +16664,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142147550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muscomorph_LegRightBack_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16882,4 +16767,4 @@ SceneRoots:
   - {fileID: 1422848594}
   - {fileID: 1155718478}
   - {fileID: 546780158}
-  - {fileID: 885661572}
+  - {fileID: 1098143759}
