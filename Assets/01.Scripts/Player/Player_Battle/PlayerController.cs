@@ -184,10 +184,11 @@ public class PlayerController : BasePlayerController, IDamagable
         "진정해. 진정해.",
         "이번엔 도망 못 가",
         //"죽여버릴 거야, 죽여버릴 거야, 죽여버릴 거야!!"
-    };
+    };  
             
     public void PlayRandomSound()
     {
+        if (UiManager.Instance.Get<TalkUi>().onTalk) return;
         if (playerTalk.Count == 0)
             return;
         

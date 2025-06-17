@@ -1674,6 +1674,8 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   camFOV: 0
   bonusFOV: 15
+  _minTalkInterval: 4
+  _maxTalkInterval: 6
 --- !u!114 &5638772625410197378
 MonoBehaviour:
   m_ObjectHideFlags: 0
