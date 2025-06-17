@@ -20,11 +20,6 @@ namespace _01.Scripts.Player.Player_Battle
             memoryPool = pool;
         }
 
-        void Start()
-        {
-        
-        }
-
         void Update()
         {
             //파티클이 재생중이 아니면 삭제
