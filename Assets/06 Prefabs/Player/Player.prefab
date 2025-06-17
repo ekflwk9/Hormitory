@@ -1774,12 +1774,13 @@ MonoBehaviour:
   gravity: -20
   walkAudioSource: {fileID: 5974853205066526809}
   walkSoundClip: {fileID: 8300000, guid: 98422e7cfb987bf4c9d19facbc35ae30, type: 3}
-  UIManager: {fileID: 0}
+  UIManager: {fileID: 5275170033331383108, guid: 82bf9863203f6734bae819eb944ca94a,
+    type: 3}
   keyCodeReload: 114
   duration: 0.5
   rollSpeed: 5
   delay: 5
-  mainCamera: {fileID: 0}
+  playerCamera: {fileID: 0}
   camFOV: 0
   bonusFOV: 15
 --- !u!114 &5638772625410197378
