@@ -1,18 +1,33 @@
 ﻿using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/// <summary>
+/// 인벤토리 슬롯 전용 열거형 데이터
+/// </summary>
+public enum SlotSizeType
+{
+    NoneIconSize,
+    NoneSelectSize,
+    IconSize,
+    SelectSize,
+}
 
 public class SlotUi : UiBase
 {
     private Image icon;
     private Image select;
+    private Sprite none;
 
-    [SerializeField]private RectTransform iconScale;
-    [SerializeField] private RectTransform selectScale;
+    private RectTransform iconScale;
+    private RectTransform selectScale;
 
-    private Color seletColor = new Color(0.278f, 0.764f, 1f, 1f);
-    private Vector2 selectSize = new Vector2(155f, 155f);
-    private Vector2 noneSize;
+    private Dictionary<SlotSizeType, Vector2> size = new()
+    {
+        [SlotSizeType.SelectSize] = new Vector2(155f, 155f),
+        [SlotSizeType.IconSize] = new Vector2(80f, 80f),
+    };
 
     public override void Init()
     {
@@ -23,23 +38,22 @@ public class SlotUi : UiBase
         icon = this.TryGetChildComponent<Image>(StringMap.Icon);
         iconScale = icon.TryGetComponent<RectTransform>();
         icon.color = Color.clear;
+        none = icon.sprite;
 
-        noneSize = this.TryGetComponent<RectTransform>().sizeDelta;
+        size.Add(SlotSizeType.NoneIconSize, icon.TryGetComponent<RectTransform>().sizeDelta);
+        size.Add(SlotSizeType.NoneSelectSize, this.TryGetComponent<RectTransform>().sizeDelta);
     }
 
     public void SetSlotView(int _itemId)
     {
         if (_itemId != 0)
         {
-            var itemData = ItemManager.instance.Getitem(_itemId);
-
-            icon.sprite = itemData.Icon;
-            icon.color = Color.white;
+            icon.sprite = ItemManager.instance.Getitem(_itemId).Icon;
         }
 
         else
         {
-            icon.color = Color.clear;
+            icon.sprite = none;
         }
     }
 
@@ -53,16 +67,16 @@ public class SlotUi : UiBase
 
         if (_isActive)
         {
-            select.color = seletColor;
+            select.color = new Color(0.278f, 0.764f, 1f, 1f);
 
-            selectScale.sizeDelta = selectSize;
-            iconScale.sizeDelta = selectSize;
+            iconScale.sizeDelta = size[SlotSizeType.IconSize];
+            selectScale.sizeDelta = size[SlotSizeType.SelectSize];
         }
 
         else
         {
-            selectScale.sizeDelta = noneSize;
-            iconScale.sizeDelta = noneSize;
+            iconScale.sizeDelta = size[SlotSizeType.NoneIconSize];
+            selectScale.sizeDelta = size[SlotSizeType.NoneSelectSize];
         }
 
         icon.DOFade(0, 2f);
