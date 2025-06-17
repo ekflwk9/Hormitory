@@ -11,14 +11,18 @@ public class SearchState : BaseState
 
     public override void Enter()
     {
+        base.Enter();
         NavMeshAgent.isStopped = true;
         
+        //SoundManager.PlaySfx(SoundCategory.Movement, $"PuzzleMonster8");
+        //UiManager.Instance.Get<TalkUi>().Popup("Bless your heart--you know I'm going to find you in the end.");
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.SearchParameterHash);
         _searchCoroutine = StateMachine.StartCoroutine(SearchCoroutine());
     }
 
     public override void Exit()
     {
+        base.Exit();
         if (_searchCoroutine != null)
         {
             StateMachine.StopCoroutine(_searchCoroutine);
@@ -29,9 +33,13 @@ public class SearchState : BaseState
         StopAnimation(StateMachine.PuzzleMonster.AnimationData.SearchParameterHash);
     }
 
+    public override void Update()
+    {
+        base.Update();
+    }
+
     private IEnumerator SearchCoroutine()
     {
-        yield return new WaitForSeconds(SearchDuration);
         float timer = 0f;
         while (timer < SearchDuration)
         {

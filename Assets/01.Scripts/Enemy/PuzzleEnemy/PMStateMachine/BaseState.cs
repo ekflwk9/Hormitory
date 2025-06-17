@@ -17,6 +17,8 @@ public class BaseState : IState
     protected float CaptureRange => StateMachine.CaptureRange;
     protected PuzzlePlayerController PuzzlePlayerController => StateMachine.PuzzlePlayerController;
     public  Camera DeadCam => StateMachine.DeadCam;
+
+    
     protected BaseState(MonsterStateMachine stateMachine)
     {
         StateMachine = stateMachine;
@@ -24,7 +26,6 @@ public class BaseState : IState
 
     public virtual void Enter()
     {
-
     }
 
 
@@ -35,7 +36,6 @@ public class BaseState : IState
 
     public virtual void Update()
     {
-
     }
 
     protected void StartAnimation(int animationHash)
@@ -47,4 +47,6 @@ public class BaseState : IState
     {
         StateMachine.PuzzleMonster.Animator.SetBool(animationHash, false);
     }
+
+    
 }

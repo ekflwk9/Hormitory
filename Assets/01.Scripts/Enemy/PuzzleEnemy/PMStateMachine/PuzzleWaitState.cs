@@ -10,6 +10,7 @@ public class PuzzleWaitState: BaseState
 
     public override void Enter()
     {
+        base.Enter();
         NavMeshAgent.isStopped = true;
         //정지
     }
@@ -17,6 +18,7 @@ public class PuzzleWaitState: BaseState
     public override void Exit()
     {
         //다시 움직임
+        base.Exit();
         NavMeshAgent.isStopped = false;
         StateMachine.TransitionTo(MonsterStateType.Idle);
     }
