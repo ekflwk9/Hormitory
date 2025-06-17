@@ -49,7 +49,7 @@ namespace _01.Scripts.Player.Player_Battle
             }
         }
 
-        public void SpawnImapct(Collider other, Transform knifeTransform)
+        public void SpawnImpact(Collider other, Transform knifeTransform)
         {
             //부딪친 오브젝트의 Tag에 따라 다르게 처리
             if (other.CompareTag("ImpactNormal"))
@@ -85,16 +85,6 @@ namespace _01.Scripts.Player.Player_Battle
                 ParticleSystem.MainModule main = item.GetComponent<ParticleSystem>().main;
                 main.startColor = color;
             }
-        }
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }
