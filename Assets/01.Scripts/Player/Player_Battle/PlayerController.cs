@@ -25,6 +25,12 @@ public class PlayerController : BasePlayerController, IDamagable
     private bool isRolling; // 구르기 시 공격 제어
     private bool canRoll = true; //구르기 제어
     
+    private float _talkTimer;
+    private float _nextTalkTime;
+    
+    [SerializeField] float _minTalkInterval = 4f;
+    [SerializeField] float _maxTalkInterval = 6f;
+    
     private Coroutine rollCoroutine;
     protected override void Awake()
     {
@@ -45,12 +51,15 @@ public class PlayerController : BasePlayerController, IDamagable
     {
         playerCamera = Camera.main;
         camFOV = playerCamera.fieldOfView;
+        
+        ResetTalkTimer();
     }
     protected override void Update()
     {
         base.Update();
         
         UpdateWeaponAction();
+        HandleRandomSound();
         
         if(Input.GetKeyDown(KeyCode.H))
         {
@@ -98,6 +107,7 @@ public class PlayerController : BasePlayerController, IDamagable
     public void TakeDamage(float damage)
     {
         if (isInvincibility) return;
+        
         status.DecreasHP(damage);
 
         if (status.CurrentHP == 0)
@@ -148,17 +158,45 @@ public class PlayerController : BasePlayerController, IDamagable
         canRoll = true;
     }
     
-    IEnumerator DeathEffect()
+    private void HandleRandomSound()
     {
-        float t = 0f;
-        Quaternion startRot = playerCamera.transform.localRotation;
-        Quaternion endRot = Quaternion.Euler(80, 0, 0); // 아래로 고개 떨어짐
-    
-        while (t < 1f)
+        _talkTimer += Time.deltaTime;
+        if (_talkTimer >= _nextTalkTime)
         {
-            t += Time.deltaTime;
-            playerCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
-            yield return null;
+            PlayRandomSound();
+            ResetTalkTimer();
         }
+    }
+    
+    
+    private readonly List<string> playerTalk = new List<string>()
+    {
+        "너도 알게 될거야!", 
+        "너 참 맛있어보인다",
+        "내 생각에 이거 즐거운데",
+        "하하 하하 하하 하 하하",
+        "이제 널 잡았어 셰어",
+        "그러지 마, 에단. 모습을 보여줘",
+        "키스해줘",
+        "네 마음을 축복해 - 결국 널 찾을 거란 걸 알잖아",
+        "지금 뭐하는 거야?",
+        "진실은 결국 드러난다!",
+        "진정해. 진정해.",
+        "이번엔 도망 못 가",
+        //"죽여버릴 거야, 죽여버릴 거야, 죽여버릴 거야!!"
+    };
+            
+    public void PlayRandomSound()
+    {
+        if (playerTalk.Count == 0)
+            return;
+        
+        int index = Random.Range(0, playerTalk.Count);
+        UiManager.Instance.Get<TalkUi>().Popup(playerTalk[index]);
+    }
+    public void ResetTalkTimer()
+    {
+        _talkTimer = 0f;
+        _nextTalkTime = Random.Range(_minTalkInterval, _maxTalkInterval);
     }
 }

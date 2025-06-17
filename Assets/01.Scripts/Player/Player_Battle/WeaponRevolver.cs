@@ -62,9 +62,12 @@ public class WeaponRevolver : WeaponBase
         
         //모드 전환중이면 무기 액션 X
         if (isModeChange == true) return;
+        
+        //UiManager.Instance.Get<TalkUi>().onTalk();
         //마우스 왼쪽 클릭( 공격 시작)
         if (type == 0)
         {
+            
             //연속 공격
             if (weaponSetting.isAutomaticAttack == true)
             {
@@ -74,6 +77,7 @@ public class WeaponRevolver : WeaponBase
             //단발 공격
             else
             {
+                
                 OnAttack();
             }
         }
