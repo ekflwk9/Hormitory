@@ -5,7 +5,7 @@ namespace _01.Scripts.Component
     public class CameraManager
     {
         public static CameraManager Instance {get; private set;}
-        public Camera MainCamera { get; private set; }
+        public MainCamera MainCamera { get; private set; }
 
         static CameraManager()
         {
@@ -14,7 +14,7 @@ namespace _01.Scripts.Component
     
         private CameraManager(){}
 
-        public void SetCamera(Camera camera)
+        public void SetCamera(MainCamera camera)
         {
             if (MainCamera == camera) return;
             MainCamera = camera;

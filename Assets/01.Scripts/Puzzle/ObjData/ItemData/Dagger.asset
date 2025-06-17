@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597038ec2b798c34f8c3e1b9ae604007, type: 3}
   m_Name: Dagger
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: 
-  icon: {fileID: 0}
+  itemID: 4
+  itemName: "\uB2E8\uAC80"
+  icon: {fileID: 21300038, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}

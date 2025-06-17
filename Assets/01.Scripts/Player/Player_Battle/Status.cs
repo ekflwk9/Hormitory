@@ -16,7 +16,7 @@ public class Status : MonoBehaviour
     [SerializeField]
     private float runSpeed;
 
-    [Header("HP")] [SerializeField] private int maxHP = 100;
+    [Header("HP")] [SerializeField] private int maxHP = 1000;
     private float currentHP;
     
     public float WalkSpeed => walkSpeed;
