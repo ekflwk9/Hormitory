@@ -86,9 +86,11 @@ public abstract class BasePlayerController : MonoBehaviour
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
         xRotation -= mouseY;
+        yRotation += mouseX;
+
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        mainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
 
     protected virtual void HandleMovementAndGravity()
