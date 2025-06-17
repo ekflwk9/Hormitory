@@ -14,6 +14,7 @@ public class IdleState : BaseState
 
     public override void Enter()
     {
+        StateMachine.ResetTalkTimer();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.WalkParameterHash);
         NavMeshAgent.isStopped = false;
         _waitTimer = 0f;
@@ -23,6 +24,7 @@ public class IdleState : BaseState
 
     public override void Update()
     {
+        base.Update();
         float distanceToPlayer = Vector3.Distance(MonsterTransform.position, PlayerTransform.position);
         if (distanceToPlayer <= DetectRange && !PuzzlePlayerController.IsHiding )
         {
@@ -44,8 +46,6 @@ public class IdleState : BaseState
                     SetNextDestination();
                 }
             }
-            //SoundManager.PlaySfx(category:asdf, name: "asdf")
-            //UiManager.Instance.Get<TalkUi>().Popup("asdfasdf")
         }
     }
 
