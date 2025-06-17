@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4947875373020402581}
   m_Layer: 12
   m_Name: ExplosionBarrel
-  m_TagString: Untagged
+  m_TagString: ExplosiveBarrel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  explosionPrefab: {fileID: 7178822946889837548, guid: 5abc2ef003a24bf47a07c117ac26c99d,
+  explosionPrefab: {fileID: 1427962332153456, guid: 301583a5af63a494298d60cd9f296909,
     type: 3}
   explosionDelayTime: 0.3
   explosionRadius: 10
