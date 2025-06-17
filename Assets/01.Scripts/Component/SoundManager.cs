@@ -21,7 +21,8 @@ public static class SoundManager
     private static AudioSource bgmPlayer;
     private static AudioSource sfxPlayer;
     private static bool isInitialized = false;
-
+    public static float sfxVolume {get ; private set;}
+    
     // --- 캐시를 위한 딕셔너리 추가 ---
     private static Dictionary<string, AudioClip> bgmCache = new Dictionary<string, AudioClip>();
     private static Dictionary<string, AudioClip> sfxCache = new Dictionary<string, AudioClip>();
@@ -69,7 +70,7 @@ public static class SoundManager
     }
 
     // --- SFX 클립을 가져오는 내부 함수 (캐싱 로직 포함) ---
-    private static AudioClip GetSfxClip(SoundCategory category, string name)
+    public static AudioClip GetSfxClip(SoundCategory category, string name)
     {
         string path = $"Sounds/{category}/{name}";
 
@@ -143,5 +144,6 @@ public static class SoundManager
     {
         Init();
         sfxPlayer.volume = Mathf.Clamp01(volume);
+        sfxVolume = sfxPlayer.volume;
     }
 }
