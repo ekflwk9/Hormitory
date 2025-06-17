@@ -12,14 +12,23 @@ public class PuzzleWaitState: BaseState
     {
         base.Enter();
         NavMeshAgent.isStopped = true;
-        //정지
+        StartAnimation(StateMachine.PuzzleMonster.AnimationData.PuzzleWaitParameterHash);
+                
     }
 
     public override void Exit()
     {
-        //다시 움직임
         base.Exit();
         NavMeshAgent.isStopped = false;
-        StateMachine.TransitionTo(MonsterStateType.Idle);
+        StopAnimation(StateMachine.PuzzleMonster.AnimationData.PuzzleWaitParameterHash);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        if (!StateMachine.IsPuzzle)
+        {
+            StateMachine.TransitionTo(MonsterStateType.Idle);
+        }
     }
 }

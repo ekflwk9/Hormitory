@@ -16,7 +16,10 @@ public class BaseState : IState
     protected float PatrolWaitTime => StateMachine.PatrolWaitTime;
     protected float CaptureRange => StateMachine.CaptureRange;
     protected PuzzlePlayerController PuzzlePlayerController => StateMachine.PuzzlePlayerController;
-    public  Camera DeadCam => StateMachine.DeadCam;
+    protected  Camera DeadCam => StateMachine.DeadCam;
+    protected bool IsPuzzle => StateMachine.IsPuzzle;
+    
+    
 
     
     protected BaseState(MonsterStateMachine stateMachine)
@@ -36,6 +39,10 @@ public class BaseState : IState
 
     public virtual void Update()
     {
+        if (IsPuzzle)
+        {
+            StateMachine.TransitionTo(MonsterStateType.PuzzleWait);
+        }
     }
 
     protected void StartAnimation(int animationHash)
