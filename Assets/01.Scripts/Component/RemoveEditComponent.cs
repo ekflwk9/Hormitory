@@ -10,6 +10,8 @@ public class RemoveEditComponent : MonoBehaviour
             FindComponent<BoxCollider>(this.transform);
             FindComponent<Rigidbody>(this.transform, true);
             FindComponent<MeshCollider>(this.transform, true);
+            FindComponent<CapsuleCollider>(this.transform, true);
+            FindComponent<CreateEditMap>(this.transform, true);
         }
     }
 

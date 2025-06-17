@@ -20,10 +20,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     // 필요한 오브젝트를 외부에서 설정할 수 있도록 프로퍼티로 정의
     // RailObj의 하위에 Marker, PinPoint가 자식으로 존재.
     // TimingMatch 아래에 RailObj를 SetActive(true)로 활성화 시켜야 함.
-    public void SetRailObj(GameObject obj) => RailObj = obj;
-    public void SetMarker(RectTransform rect) => marker = rect;
-    public void SetPinPoint(RectTransform rect) => pinPoint = rect;
-
 
     // 아래는 게임 진행이 원활하게 진행되는 것이 확인하면 제거 [SerializeField] 제거
     [Header("Game 카운터")]
@@ -43,6 +39,8 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     private float railWidth; // 레일의 너비
     private float moveSpeed = 0.5f; // 마커 이동 속도 (초당 비율 이동)
     private float pinPointRange = 0.05f; // 핀포인트 위치의 허용 오차 범위 (0.05f = 5% 허용 오차)
+
+    private ITiming target; // 타이밍 매치를 부른 객체
 
     public void Init()
     {
@@ -73,6 +71,17 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         }
     }
 
+    // TimingMatch를 호출한 객체 세팅 (없어도 작동은 되어야함)
+    public void SetTarget(ITiming timingtarget)
+    {
+        target = timingtarget; // 타이밍 매치를 부른 객체 설정
+        Service.Log($"TimingMatch: SetTarget(): 타겟 설정됨: {target}");
+        if(target == null)
+        {
+            Service.Log("TimingMatch: SetTarget(): 타겟이 null입니다. 타이밍 매치가 정상적으로 작동하지 않을 수 있습니다.");
+        }
+    }
+
 
 
     // 퍼즐 시작 로직
@@ -87,8 +96,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         markerPos = 0f; // 마커 위치 초기화
 
         isPlaying = true; // 게임을 시작할 수 있도록 bool 변경
-        RailObj.SetActive(false); // RailObj 비활성화
-
         UiManager.Instance.Show<TimingMatchUi>(true); // TimingMatchUi 활성화
         UpdateMarkerPosition(); // 마커 위치 업데이트
 
@@ -231,25 +238,34 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         isPlaying = false; // 게임 종료
 
-        RailObj.SetActive(false); // RailObj 비활성화
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
 
         playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
         Service.Log($"TimingMatch: IsSolved(): 성공!");
         //성공 연출 및 로직 처리
+
+        if(target != null)
+        {
+            target.isSolved = true;
+        }
+        else
+        {
+            Service.Log("TimingMatch: IsSolved(): 타겟이 null입니다. 퍼즐이 성공했지만 타겟이 설정되지 않았습니다.");
+        }       
+
         ResetSetting(); // 차후 다른 위치에서 게임이 처음부터 시작되도록 초기화
     }
 
     public void IsFailed()
     {
         isPlaying = false; // 게임 종료
-        RailObj.SetActive(false); // RailObj 비활성화
 
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
 
         playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
         Service.Log($"TimingMatch: IsFailed(): 실패!");
         // 실패 연출 및 로직 처리
+        playerController.Die(); // 플레이어 사망 처리
         ResetSetting();
     }
 
@@ -263,6 +279,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         direction = 1;
         markerPos = 0f; // 마커 위치 초기화
         isPlaying = false; // 게임을 중지 상태로 변경
+        target = null; // 타겟 초기화
         UpdateMarkerPosition(); // 마커 위치 업데이트
     }
 }

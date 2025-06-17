@@ -25,6 +25,12 @@ public class PlayerController : BasePlayerController, IDamagable
     private bool isRolling; // 구르기 시 공격 제어
     private bool canRoll = true; //구르기 제어
     
+    private float _talkTimer;
+    private float _nextTalkTime;
+    
+    [SerializeField] float _minTalkInterval = 4f;
+    [SerializeField] float _maxTalkInterval = 6f;
+    
     private Coroutine rollCoroutine;
     protected override void Awake()
     {
@@ -41,16 +47,19 @@ public class PlayerController : BasePlayerController, IDamagable
         base.OnEnable();
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
         playerCamera = Camera.main;
         camFOV = playerCamera.fieldOfView;
+        
+        ResetTalkTimer();
     }
     protected override void Update()
     {
         base.Update();
         
         UpdateWeaponAction();
+        HandleRandomSound();
         
         if(Input.GetKeyDown(KeyCode.H))
         {
@@ -98,6 +107,7 @@ public class PlayerController : BasePlayerController, IDamagable
     public void TakeDamage(float damage)
     {
         if (isInvincibility) return;
+        
         status.DecreasHP(damage);
 
         if (status.CurrentHP == 0)
@@ -128,6 +138,8 @@ public class PlayerController : BasePlayerController, IDamagable
     {
         canRoll = false;
         isRolling = true;
+        SoundManager.PlaySfx(SoundCategory.Movement, "Roll");
+        
         float elapsed = 0f;
         isInvincibility = true;
         weapon.Animator.SetTrigger("isRoll");
@@ -148,17 +160,39 @@ public class PlayerController : BasePlayerController, IDamagable
         canRoll = true;
     }
     
-    IEnumerator DeathEffect()
+    private void HandleRandomSound()
     {
-        float t = 0f;
-        Quaternion startRot = playerCamera.transform.localRotation;
-        Quaternion endRot = Quaternion.Euler(80, 0, 0); // 아래로 고개 떨어짐
-    
-        while (t < 1f)
+        _talkTimer += Time.deltaTime;
+        if (_talkTimer >= _nextTalkTime)
         {
-            t += Time.deltaTime;
-            playerCamera.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
-            yield return null;
+            PlayRandomSound();
+            ResetTalkTimer();
         }
+    }
+    
+    
+    private readonly List<string> _playerTalk = new List<string>()
+    {
+        "젠장",
+        "신이시여",
+        "나랑 장난해?",
+        "이게 누구야?  도대체 무슨  x같은 일이야?",
+        "이 악몽에서 나좀 꺼내줘!"
+    };  
+            
+    public void PlayRandomSound()
+    {
+        if (UiManager.Instance.Get<TalkUi>().onTalk) return;
+        if (_playerTalk.Count == 0)
+            return;
+        
+        int index = Random.Range(0, _playerTalk.Count);
+        SoundManager.PlaySfx(SoundCategory.Movement, $"Player{index + 1}");
+        UiManager.Instance.Get<TalkUi>().Popup(_playerTalk[index]);
+    }
+    public void ResetTalkTimer()
+    {
+        _talkTimer = 0f;
+        _nextTalkTime = Random.Range(_minTalkInterval, _maxTalkInterval);
     }
 }

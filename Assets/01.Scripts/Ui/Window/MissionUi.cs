@@ -17,6 +17,7 @@ public class MissionUi : UiBase
     public void Popup(string _text)
     {
         talk.text = _text;
+        SoundManager.PlaySfx(SoundCategory.Impacts, "MissionEffect");
 
         if (this.gameObject.activeSelf) anim.Play(AnimName.Idle, 0, 0);
         else this.gameObject.SetActive(true);

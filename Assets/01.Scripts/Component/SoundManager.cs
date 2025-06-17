@@ -1,5 +1,5 @@
-using UnityEngine;
-using System.Collections.Generic; // Dictionary¸¦ »ç¿ëÇÏ±â À§ÇØ Ãß°¡
+ï»¿using UnityEngine;
+using System.Collections.Generic; // Dictionaryë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ ì¶”ê°€
 
 public enum SoundCategory
 {
@@ -12,7 +12,8 @@ public enum SoundCategory
     Impacts,
     Misc,
     Movement,
-    Shoot
+    Shoot,
+    Interaction
 }
 
 public static class SoundManager
@@ -20,8 +21,9 @@ public static class SoundManager
     private static AudioSource bgmPlayer;
     private static AudioSource sfxPlayer;
     private static bool isInitialized = false;
-
-    // --- Ä³½Ã¸¦ À§ÇÑ µñ¼Å³Ê¸® Ãß°¡ ---
+    public static float sfxVolume {get ; private set;}
+    
+    // --- ìºì‹œë¥¼ ìœ„í•œ ë”•ì…”ë„ˆë¦¬ ì¶”ê°€ ---
     private static Dictionary<string, AudioClip> bgmCache = new Dictionary<string, AudioClip>();
     private static Dictionary<string, AudioClip> sfxCache = new Dictionary<string, AudioClip>();
 
@@ -40,23 +42,23 @@ public static class SoundManager
         isInitialized = true;
     }
 
-    // --- BGM Å¬¸³À» °¡Á®¿À´Â ³»ºÎ ÇÔ¼ö (Ä³½Ì ·ÎÁ÷ Æ÷ÇÔ) ---
+    // --- BGM í´ë¦½ì„ ê°€ì ¸ì˜¤ëŠ” ë‚´ë¶€ í•¨ìˆ˜ (ìºì‹± ë¡œì§ í¬í•¨) ---
     private static AudioClip GetBgmClip(string name)
     {
         string path = $"Sounds/BGM/{name}";
 
-        // 1. Ä³½Ã¿¡ Å¬¸³ÀÌ ÀÖ´ÂÁö ¸ÕÀú È®ÀÎ
+        // 1. ìºì‹œì— í´ë¦½ì´ ìˆëŠ”ì§€ ë¨¼ì € í™•ì¸
         if (bgmCache.TryGetValue(path, out AudioClip clip))
         {
-            return clip; // Ä³½Ã¿¡ ÀÖÀ¸¸é ¹Ù·Î ¹İÈ¯
+            return clip; // ìºì‹œì— ìˆìœ¼ë©´ ë°”ë¡œ ë°˜í™˜
         }
-        // 2. Ä³½Ã¿¡ ¾øÀ¸¸é Resources¿¡¼­ ·Îµå
+        // 2. ìºì‹œì— ì—†ìœ¼ë©´ Resourcesì—ì„œ ë¡œë“œ
         else
         {
             clip = Resources.Load<AudioClip>(path);
             if (clip != null)
             {
-                // 3. ·Îµå¿¡ ¼º°øÇÏ¸é ´ÙÀ½À» À§ÇØ Ä³½Ã¿¡ ÀúÀå
+                // 3. ë¡œë“œì— ì„±ê³µí•˜ë©´ ë‹¤ìŒì„ ìœ„í•´ ìºì‹œì— ì €ì¥
                 bgmCache.Add(path, clip);
             }
             else
@@ -67,8 +69,8 @@ public static class SoundManager
         }
     }
 
-    // --- SFX Å¬¸³À» °¡Á®¿À´Â ³»ºÎ ÇÔ¼ö (Ä³½Ì ·ÎÁ÷ Æ÷ÇÔ) ---
-    private static AudioClip GetSfxClip(SoundCategory category, string name)
+    // --- SFX í´ë¦½ì„ ê°€ì ¸ì˜¤ëŠ” ë‚´ë¶€ í•¨ìˆ˜ (ìºì‹± ë¡œì§ í¬í•¨) ---
+    public static AudioClip GetSfxClip(SoundCategory category, string name)
     {
         string path = $"Sounds/{category}/{name}";
 
@@ -92,7 +94,7 @@ public static class SoundManager
     }
 
 
-    // --- °ø°³ API (È£ÃâÇÏ´Â ¹æ½ÄÀº µ¿ÀÏ) ---
+    // --- ê³µê°œ API (í˜¸ì¶œí•˜ëŠ” ë°©ì‹ì€ ë™ì¼) ---
 
     public static void PlayBgm(string name)
     {
@@ -142,5 +144,6 @@ public static class SoundManager
     {
         Init();
         sfxPlayer.volume = Mathf.Clamp01(volume);
+        sfxVolume = sfxPlayer.volume;
     }
 }
