@@ -1,14 +1,13 @@
-﻿// BasePlayerController.cs
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using _01.Scripts.Component;
 
-[RequireComponent(typeof(CharacterController))]
 public abstract class BasePlayerController : MonoBehaviour
 {
     #region Serialized Fields
     [Header("Look Settings")]
     [SerializeField] protected float mouseSensitivity = 100f;
-    [SerializeField] protected Transform cameraTransform;
+    
 
     [Header("Movement Settings")]
     [SerializeField] protected float moveSpeed = 5.0f;
@@ -25,6 +24,8 @@ public abstract class BasePlayerController : MonoBehaviour
     #region Protected Variables
     protected CharacterController characterController;
     protected PuzzlePlayer playerActions;
+    protected Camera mainCamera; // 실제 Camera 컴포넌트를 저장할 변수
+
     protected Vector2 moveInput;
     protected float verticalVelocity;
     protected float xRotation = 0f;
@@ -40,6 +41,27 @@ public abstract class BasePlayerController : MonoBehaviour
         playerActions = new PuzzlePlayer();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Awake에서 직접 자식 카메라를 찾아 할당합니다.
+        // 이렇게 하면 다른 스크립트가 실행되기 전에 카메라 참조가 보장됩니다.
+        mainCamera = GetComponentInChildren<Camera>();
+        if (mainCamera == null)
+        {
+            Debug.LogError("Player 프리팹의 자식 오브젝트에 Camera 컴포넌트가 없습니다! Inspector에서 확인해주세요.", this);
+        }
+    }
+    protected virtual void Start()
+    {
+        //// CameraManager로부터 MainCamera 스크립트를 가져와서
+        //// 실제 Camera 컴포넌트를 찾아 할당합니다.
+        //if (CameraManager.Instance != null && CameraManager.Instance.MainCamera != null)
+        //{
+        //    mainCamera = CameraManager.Instance.MainCamera.GetComponent<Camera>();
+        //}
+        //else
+        //{
+        //    Debug.LogError("CameraManager 또는 CameraManager의 MainCamera가 할당되지 않았습니다!");
+        //}
     }
 
     protected virtual void OnEnable()
@@ -56,8 +78,8 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected virtual void Update()
     {
-        // isDead 플래그는 부모가 계속 관리하여, 어떤 자식이든 죽으면 움직임이 멈추도록 보장
         if (isDead) return;
+        if (mainCamera == null) return;
 
         isGrounded = characterController.isGrounded;
         HandleMovementAndGravity();
@@ -71,10 +93,12 @@ public abstract class BasePlayerController : MonoBehaviour
         Vector2 lookInput = playerActions.Player.Look.ReadValue<Vector2>();
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
+
         xRotation -= mouseY;
-        yRotation += mouseX;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+
+        mainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
     }
 
     protected virtual void HandleMovementAndGravity()
@@ -86,12 +110,11 @@ public abstract class BasePlayerController : MonoBehaviour
 
         moveInput = playerActions.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = (transform.forward * moveInput.y + transform.right * moveInput.x);
-
         bool isMoving = moveDirection.magnitude > 0.1f;
 
         if (isMoving && isGrounded)
         {
-            if (!walkAudioSource.isPlaying)
+            if (walkAudioSource != null && !walkAudioSource.isPlaying)
             {
                 walkAudioSource.clip = walkSoundClip;
                 walkAudioSource.Play();
@@ -99,7 +122,7 @@ public abstract class BasePlayerController : MonoBehaviour
         }
         else
         {
-            if (walkAudioSource.isPlaying)
+            if (walkAudioSource != null && walkAudioSource.isPlaying)
             {
                 walkAudioSource.Stop();
             }
@@ -112,6 +135,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     protected virtual void OnJump(InputAction.CallbackContext context)
     {
+        // SoundManager가 static 클래스이므로 Instance 없이 호출
         if (isGrounded)
         {
             SoundManager.PlaySfx(SoundCategory.Movement, "Jump");
@@ -119,20 +143,21 @@ public abstract class BasePlayerController : MonoBehaviour
         }
     }
 
-    // <<--- TakeDamage() 메서드 제거
-
+    // Die 메서드는 자식 클래스에서 재정의(override) 할 수 있도록 virtual로 유지
     public virtual void Die()
     {
         if (isDead) return;
         isDead = true;
         playerActions.Player.Disable();
+        UiManager.Instance.Get<HitUi>().Show(true);
+        UiManager.Instance.Get<DeadUi>().Show(true);
 
+        // CameraShake는 싱글턴이므로 Instance로 호출
         if (CameraShake.Instance != null)
         {
             CameraShake.Instance.Play(CameraShakeType.PlayerDeath);
         }
         Debug.Log("플레이어가 사망했습니다.");
     }
-
     #endregion
 }
