@@ -7,7 +7,7 @@ public class CloseOptionButton : UiButton
         touch.SetActive(false);
         UiManager.Instance.Show<OptionUi>(false);
 
-        if (!UiManager.Instance.introScene) UiManager.Instance.Show<MenuUi>(true);
-        else UiManager.Instance.Show<IntroUi>(true);
+        if (UiManager.Instance.introScene) UiManager.Instance.Show<IntroUi>(true);
+        else UiManager.Instance.Show<MenuUi>(true);
     }
 }
