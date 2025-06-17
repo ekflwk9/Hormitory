@@ -71,7 +71,7 @@ public class PlayerController : BasePlayerController, IDamagable
 
     private void UpdateWeaponAction()
     {
-        if (Input.GetMouseButtonDown(0) && !isRolling)
+        if (Input.GetMouseButtonDown(0) && !isRolling && isControl)
         {
             weapon.StartWeaponAction();
         }
@@ -80,7 +80,7 @@ public class PlayerController : BasePlayerController, IDamagable
             weapon.StopWeaponAction();
         }
 
-        if (Input.GetMouseButton(1) && !isRolling)
+        if (Input.GetMouseButton(1) && !isRolling && isControl)
         {
             weapon.StartWeaponAction(1);
         }
