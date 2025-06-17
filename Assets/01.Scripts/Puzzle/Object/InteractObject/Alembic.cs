@@ -18,7 +18,7 @@ public class Alembic : MonoBehaviour, IInteractable, ITiming
         if (!isInteracted)
         {            
             SoundManager.PlaySfx(SoundCategory.Movement, "Player2");
-            UiManager.Instance.Get<TalkUi>().Popup("소리 때문에 저녀석의 소리가 안 들리잖아.");
+            UiManager.Instance.Get<TalkUi>().Popup("이건 또 뭐야?");
             isInteracted = true; // 첫 상호작용이 있었음을 표시
         }
         else if (!isSolved)
@@ -28,17 +28,10 @@ public class Alembic : MonoBehaviour, IInteractable, ITiming
         }
         else
         {
-            UiManager.Instance.Get<TalkUi>().Popup("드디어 조용해졌군.");
+            UiManager.Instance.Get<TalkUi>().Popup("그냥 고물이었군.");
+            SoundManager.PlaySfx(SoundCategory.Movement, "Player1");
         }
 
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.CompareTag("Player") && !isSolved)
-        {
-            //SoundManager.PlaySfx(SoundCategory.Interaction, "Steaming");
-        }
     }
 
 }
