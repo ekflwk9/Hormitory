@@ -138,6 +138,8 @@ public class PlayerController : BasePlayerController, IDamagable
     {
         canRoll = false;
         isRolling = true;
+        SoundManager.PlaySfx(SoundCategory.Movement, "Roll");
+        
         float elapsed = 0f;
         isInvincibility = true;
         weapon.Animator.SetTrigger("isRoll");
@@ -169,31 +171,24 @@ public class PlayerController : BasePlayerController, IDamagable
     }
     
     
-    private readonly List<string> playerTalk = new List<string>()
+    private readonly List<string> _playerTalk = new List<string>()
     {
-        "너도 알게 될거야!", 
-        "너 참 맛있어보인다",
-        "내 생각에 이거 즐거운데",
-        "하하 하하 하하 하 하하",
-        "이제 널 잡았어 셰어",
-        "그러지 마, 에단. 모습을 보여줘",
-        "키스해줘",
-        "네 마음을 축복해 - 결국 널 찾을 거란 걸 알잖아",
-        "지금 뭐하는 거야?",
-        "진실은 결국 드러난다!",
-        "진정해. 진정해.",
-        "이번엔 도망 못 가",
-        //"죽여버릴 거야, 죽여버릴 거야, 죽여버릴 거야!!"
+        "젠장",
+        "신이시여",
+        "나랑 장난해?",
+        "이게 누구야?  도대체 무슨  x같은 일이야?",
+        "이 악몽에서 나좀 꺼내줘!"
     };  
             
     public void PlayRandomSound()
     {
         if (UiManager.Instance.Get<TalkUi>().onTalk) return;
-        if (playerTalk.Count == 0)
+        if (_playerTalk.Count == 0)
             return;
         
-        int index = Random.Range(0, playerTalk.Count);
-        UiManager.Instance.Get<TalkUi>().Popup(playerTalk[index]);
+        int index = Random.Range(0, _playerTalk.Count);
+        SoundManager.PlaySfx(SoundCategory.Movement, $"Player{index + 1}");
+        UiManager.Instance.Get<TalkUi>().Popup(_playerTalk[index]);
     }
     public void ResetTalkTimer()
     {
