@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Component;
@@ -49,6 +49,8 @@ public class MonsterAIController : MonoBehaviour
     [SerializeField] MonsterStatController monsterStatController;
     private bool groggyCoroutineRunned = false;
     private bool isPendingGroggy = false;
+    private bool isGroggy = false;
+
     private float groggyDuration = 6.0f; // 그로기 지속 시간
     private Vector3[] rayPos =
     {
