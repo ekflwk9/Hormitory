@@ -81,7 +81,7 @@ public class WeaponRevolver : WeaponBase
         {
             //공격 중일 때는 모드 전환 X
             if (isAttack == true) return;
-            
+            SoundManager.PlaySfx(SoundCategory.Aiming, "aim_in");
             StartCoroutine(OnModeChange());
         }
     
@@ -140,7 +140,7 @@ public class WeaponRevolver : WeaponBase
             
             //animator.Play("Fire", -1, 0) --> 같은 애니메이션을 반복할 떄
             //애니메이션을 끊고 처음부터 다시 재생
-            
+            SoundManager.PlaySfx(SoundCategory.Shoot, "shoot");
             string animation = animator.AimModeIs == true ? "AimFire" : "Fire";
             animator.Play(animation, -1, 0);
             if (animator.AimModeIs)
@@ -173,7 +173,10 @@ public class WeaponRevolver : WeaponBase
     {
         isReload = true;
         animator.OnReload();
-
+        
+        SoundManager.PlaySfx(SoundCategory.Gun_Reloads,
+            "Handgun_01-04_Reloads/handgun_01-04_reload_out_of_ammo");
+        
         yield return new WaitForSeconds(0.5f);
         while (true)
         {

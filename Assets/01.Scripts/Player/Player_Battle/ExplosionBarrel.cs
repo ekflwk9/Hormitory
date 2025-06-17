@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ExplosionBarrel : InteractionObject, IDamagable
 {
@@ -58,6 +60,10 @@ public class ExplosionBarrel : InteractionObject, IDamagable
         yield return new WaitForSeconds(explosionDelayTime);
 
         isExplode = true;
+        int index = Random.Range(0, 5);
+        string soundName = $"explosion-{index + 1}";
+        
+        SoundManager.PlaySfx(SoundCategory.Explosions, soundName);
 
         Bounds bounds = GetComponent<Collider>().bounds;
         Instantiate(explosionPrefab, new Vector3(bounds.center.x, bounds.center.y, bounds.center.z),
