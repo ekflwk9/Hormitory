@@ -30,6 +30,7 @@ public class WeaponRevolver : WeaponBase
     private ImpactMemoryPool impactMemoryPool;          //공격 효과 생성 후 활성/비활성화 관리
     private Camera mainCamera;           //광선 발사
     private Coroutine attackCoroutine;
+    private Coroutine reloadCoroutine;
 
     private void Awake()
     {
@@ -91,12 +92,14 @@ public class WeaponRevolver : WeaponBase
         if (type == 0) 
         {
             isAttack = false;
-            StopCoroutine(attackCoroutine);
         }
     }
 
     public override void StartReload()
     {
+        // 총알을 사용하지 않았을 때 장전 불가
+        if (weaponSetting.currentAmmo == weaponSetting.maxAmmo) return;
+        //조준 시 장전 불가
         if (animator.AimModeIs) return;
         //재장전 or 탄창 x => 장전 불가
         if( isReload == true || weaponSetting.currentMagazine <= 0) return;
@@ -104,17 +107,18 @@ public class WeaponRevolver : WeaponBase
         //무기 액션 도중 장전시도하면 무기 액션 종료 후 장전
         StopWeaponAction();
         
-        StartCoroutine(OnReload());
+        reloadCoroutine = StartCoroutine(OnReload());
     }
 
     private IEnumerator OnAttackLoop()
     {
-        while (true)
+        while (isAttack)
         {
             OnAttack();
 
             yield return null;
         }
+        attackCoroutine = null;
     }
     
     public void OnAttack()
@@ -237,10 +241,7 @@ public class WeaponRevolver : WeaponBase
             {
                 targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
             }
-           
         }
-
-        
         
         
         //첫번째 Raycast연산으로 얻어진 targetPoint를 목표지점으로 설정하고
@@ -293,6 +294,22 @@ public class WeaponRevolver : WeaponBase
         isReload = false;
         isAttack = false;
         isModeChange = false;
+    }
+
+    private void OnDisable()
+    {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+        if(reloadCoroutine != null)
+        {
+            StopCoroutine(reloadCoroutine);
+            reloadCoroutine = null;
+        }
+        
+        ResetVariables();
     }
 
     // private void OnDrawGizmos()
