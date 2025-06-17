@@ -36,7 +36,7 @@ public class WeaponKnifeCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        impactMemoryPool.SpawnImapct(other, knifeTransform);
+        impactMemoryPool.SpawnImpact(other, knifeTransform);
 
         if (other.CompareTag("Enemy"))
         {
