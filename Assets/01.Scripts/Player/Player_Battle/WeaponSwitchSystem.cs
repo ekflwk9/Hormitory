@@ -34,7 +34,7 @@ public class WeaponSwitchSystem : MonoBehaviour
     private void Start()
     {
         SwitchingWeapon(WeaponType.Main);
-        //UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, 1);
+        UiManager.Instance.Get<InventoryUi>().SetView(SlotType.FirstSlot, 1);
     }
 
     private void Update()
