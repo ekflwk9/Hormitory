@@ -419,6 +419,7 @@ MonoBehaviour:
   gravity: -20
   walkAudioSource: {fileID: 3360489762146967296}
   walkSoundClip: {fileID: 8300000, guid: 98422e7cfb987bf4c9d19facbc35ae30, type: 3}
+  UIManager: {fileID: 0}
   interactionDistance: 3
   interactionLayer:
     serializedVersion: 2

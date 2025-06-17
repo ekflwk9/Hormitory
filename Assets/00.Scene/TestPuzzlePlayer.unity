@@ -556,6 +556,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82bf9863203f6734bae819eb944ca94a, type: 3}
+--- !u!1 &1137562610 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5275170033331383108, guid: 82bf9863203f6734bae819eb944ca94a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1137562609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1182584994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,6 +1339,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuzzlePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7168733559019425342, guid: 0a1b27dd11c27ea498aaae6917455cb0,
+        type: 3}
+      propertyPath: UIManager
+      value: 
+      objectReference: {fileID: 1137562610}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
