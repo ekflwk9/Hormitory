@@ -40,11 +40,13 @@ public class MainCamera : MonoBehaviour
         isShaking = true;
 
         transform.DOShakePosition(duration, strength)
-            .OnComplete(() =>
-            {
-                transform.localPosition = originPosition;
-                isShaking = false;
-            });
+            .OnComplete(ResetPosition);
+    }
+
+    private void ResetPosition()
+    {
+        transform.localPosition = originPosition;
+        isShaking = false;
     }
 
     public void Fall(float duration, float angle)

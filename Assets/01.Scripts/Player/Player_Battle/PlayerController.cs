@@ -56,7 +56,7 @@ public class PlayerController : BasePlayerController, IDamagable
         
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(!isRolling)
+            if(canRoll)
                 StartCoroutine(Roll());
         }
     }
