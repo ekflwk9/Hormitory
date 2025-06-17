@@ -35,6 +35,7 @@ public class ExplosionBarrel : InteractionObject, IDamagable
             {
                 Debug.Log("Prepared");
                 isPrepared = true;
+                
             }
         }
         
