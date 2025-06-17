@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using _01.Scripts.Component;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using _01.Scripts.Component;
-using UnityEditor;
 
 public abstract class BasePlayerController : MonoBehaviour
 {
@@ -20,12 +19,11 @@ public abstract class BasePlayerController : MonoBehaviour
     [SerializeField] protected AudioSource walkAudioSource;
     [SerializeField] protected AudioClip walkSoundClip;
     [SerializeField] protected GameObject UIManager;
-   
+
     #endregion
 
     #region Protected Variables
     public bool isControl { get; protected set; } = true;
-    private bool isMenuOpen = false;
     protected CharacterController characterController;
     protected PuzzlePlayer playerActions;
     protected Camera mainCamera;
@@ -40,7 +38,7 @@ public abstract class BasePlayerController : MonoBehaviour
     #region Unity Lifecycle Methods
     protected virtual void Awake()
     {
-        Instantiate(UIManager); 
+        Instantiate(UIManager);
         characterController = GetComponent<CharacterController>();
         playerActions = new PuzzlePlayer();
         Cursor.lockState = CursorLockMode.Locked;
@@ -50,9 +48,11 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             Debug.LogError("Player 프리팹의 자식 오브젝트에 Camera 컴포넌트가 없습니다!", this);
         }
+        PlayerManager.Instance.SetPlayer(this);
     }
 
-    protected virtual void Start() { }
+    protected virtual void Start()
+    { }
 
     protected virtual void OnEnable()
     {
@@ -66,6 +66,7 @@ public abstract class BasePlayerController : MonoBehaviour
         playerActions.Player.Disable();
         playerActions.Player.Jump.performed -= OnJump;
         playerActions.Player.Menu.performed -= OnMenu;
+
     }
 
     protected virtual void Update()
@@ -152,31 +153,18 @@ public abstract class BasePlayerController : MonoBehaviour
 
     private void OnMenu(InputAction.CallbackContext context)
     {
-        isMenuOpen = !isMenuOpen;
-        SetPauseState(isMenuOpen);
-    }
-
-    public void SetPauseState(bool isPaused)
-    {
-        if (UiManager.Instance != null)
+        if (isControl)
         {
+            SetPauseState(true);
             UiManager.Instance.Get<MenuUi>().Show(true);
         }
+    }
+    public void SetPauseState(bool isPaused)
+    {
+        isControl = !isPaused;        
+        Cursor.lockState = isControl? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !isPaused;
 
-        isControl = !isPaused;
-        
-
-        if (isPaused)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            UiManager.Instance.Get<MenuUi>().Show(false);
-        }
     }
     #endregion
 }

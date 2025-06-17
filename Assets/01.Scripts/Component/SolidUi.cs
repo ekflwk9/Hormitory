@@ -8,7 +8,7 @@ public class SolidUi : MonoBehaviour
 
     private void Start()
     {
-        target = CameraManager.Instance.MainCamera.transform;
+        target = PlayerManager.Instance.MainCamera.transform;
         scale = this.transform.localScale.x;
     }
 

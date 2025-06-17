@@ -13,8 +13,8 @@ public class MainCamera : MonoBehaviour
     public bool isShaking = false;
     void Awake()
     {
-        if(CameraManager.Instance != null)
-            CameraManager.Instance.SetCamera(GetComponent<MainCamera>());
+        if(PlayerManager.Instance != null)
+            PlayerManager.Instance.SetCamera(this);
 
         originPosition = transform.localPosition;
         originRotation = transform.localRotation;

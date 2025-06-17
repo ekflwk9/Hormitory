@@ -114,7 +114,7 @@ public class PlayerController : BasePlayerController, IDamagable
         }
         base.Die();
         //StartCoroutine("DeathEffect");
-        CameraManager.Instance.MainCamera.Fall();
+        PlayerManager.Instance.MainCamera.Fall();
         UiManager.Instance.Show<DeadUi>(true);
     }
 
