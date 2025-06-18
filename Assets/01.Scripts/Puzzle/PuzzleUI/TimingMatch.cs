@@ -219,7 +219,12 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         failed++; // 실패 횟수 증가
         Service.Log($"TimingMatch: IsFail(): 실패 횟수: {failed}");
-        if (failed >= maxCycles)
+        if (failed == 2)
+        {
+            UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
+            SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생
+        }
+        else if (failed >= maxCycles)
         {
             IsFailed(); // 실패 횟수가 최대치에 도달하면 퍼즐 실패
         }
@@ -265,6 +270,8 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
         Service.Log($"TimingMatch: IsFailed(): 실패!");
         // 실패 연출 및 로직 처리
+        UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
+        SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생
         playerController.Die(); // 플레이어 사망 처리
         ResetSetting();
     }

@@ -79,8 +79,19 @@ public class LockUi : UiBase
         for (int i = 0; i < passWord.Length; i++)
         {
             passWordNumber = (passWordNumber * 10) + passWord[i];
+            passWord[i] = 0;
+            number[i].text = "0";
         }
 
         PuzzleManager.instance.GetPuzzle<CountMatch>().GuessNum(passWordNumber);
+    }
+
+    public void ResetPassWord()
+    {
+        for (int i = 0; i < passWord.Length; i++)
+        {
+            passWord[i] = 0;
+            number[i].text = "0";
+        }
     }
 }

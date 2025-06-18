@@ -20,23 +20,25 @@ public class ItemReceiver : MonoBehaviour, IInteractable
         if (RequiredItemNumber > 0)
         {
             itemData = ItemManager.instance.Getitem(RequiredItemNumber);
-            if (itemData != null && !isCleard)
+            if (itemData != null && isCleard == false)
             {
                 Service.Log($"아이템 번호 {RequiredItemNumber}을 가진 아이템을 찾았습니다: {itemData.ItemName} (ID: {itemData.ItemID})");
-                // 아이템이 있다면 상호작용 액션 실행
-                InteractAction();
+                // 아이템이 있다면 상호작용 액션 실행                
                 ItemManager.instance.RemoveItem(itemData); //상호작용한 아이템을 제거
                 isCleard = true; // 상호작용 완료 상태로 변경
+                InteractAction();
                 return; // 아이템이 있으면 상호작용 종료
             }
-            else if (isCleard)
+            else if(itemData == null && isCleard == false)
+            {
+                InteractAction();
+                Service.Log($"아이템 번호 {RequiredItemNumber}을 가진 아이템이 없습니다. 상호작용을 진행할 수 없습니다.");
+            }
+            else
             {
                 //상호 작용 완료 후 interact가 호출되면, 완료된 후의 상호작용 액션 실행
                 AfterInteract();
-
             }
-            InteractAction();
-            Service.Log($"아이템 번호 {RequiredItemNumber}을 가진 아이템이 없습니다. 상호작용을 진행할 수 없습니다.");
         }
         else
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Print : MonoBehaviour, IInteractable
 {
-    bool isMention; // 두 가지의 대사를 번갈아 사용하기 위한 변수
+    bool isMention = true; // 두 가지의 대사를 번갈아 사용하기 위한 변수
     public bool CanInteract = false; // 상호작용 가능 여부
     public void Interact()
     {

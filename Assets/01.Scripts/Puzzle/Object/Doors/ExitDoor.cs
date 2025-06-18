@@ -31,7 +31,7 @@ public class ExitDoor : ItemReceiver, IInteractable
     {
         // 여기서 Battle씬으로 전환
         // 여긴 IsCleard가 true일 때만 호출됨
-        SoundManager.PlaySfx(SoundCategory.Interaction, "DoorOpen");
+        SoundManager.PlaySfx(SoundCategory.Interaction, "OpenDoor");
         SceneManager.LoadScene("Battle");
     }
 }
