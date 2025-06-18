@@ -19,7 +19,6 @@ public class MonsterStatController : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
-        Service.Log($"공격받음{MonsterHealth}");
         MonsterHealth = Mathf.Max(MonsterHealth - damage, 0) ;
         if (MonsterHealth <= 0)
         {
@@ -59,12 +58,12 @@ public class MonsterStatController : MonoBehaviour, IDamagable
     {
         Vector3 startPos = transform.position;
         Vector3 targetPos = new Vector3(startPos.x, 0f, startPos.z);
-        float duration = 0.5f; // 원하는 속도에 맞게 조절
+        float duration = 0.5f;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            if (!isDead) // 혹시 죽음 취소 같은 게 있으면 멈추도록
+            if (!isDead)
                 yield break;
 
             transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
