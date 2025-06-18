@@ -67,8 +67,8 @@ namespace _01.Scripts.Player.Player_Battle
             }
             else if (other.CompareTag("ExplosiveBarrel"))
             {
-                Color color = other.transform.GetComponentInChildren<MeshRenderer>().material.color;
-                OnSpawnImpact(ImpactType.InteractionObject, knifeTransform.position, Quaternion.Inverse(knifeTransform.rotation), color);
+                //Color color = other.transform.GetComponentInChildren<MeshRenderer>().material.color;
+                OnSpawnImpact(ImpactType.InteractionObject, knifeTransform.position + Vector3.left * 0.3f, Quaternion.Inverse(knifeTransform.rotation));
             }
         }
 
@@ -84,6 +84,20 @@ namespace _01.Scripts.Player.Player_Battle
                 // 파티클시스템의 메인프로퍼티는 바로 접근할 수 없기 때문에 변수를 생성한 후 접근해서 사용한다.
                 ParticleSystem.MainModule main = item.GetComponent<ParticleSystem>().main;
                 main.startColor = color;
+            }
+        }
+        
+        public void OnSpawnImpact(ImpactType type, Vector3 position, Quaternion rotation)
+        {
+            GameObject item = memoryPool[(int)type].ActivePoolItem();
+            item.transform.position = position;
+            item.transform.rotation = rotation;
+            item.GetComponent<Impact>().Setup(memoryPool[(int)type]);
+
+            if (type == ImpactType.InteractionObject)
+            {
+                // 파티클시스템의 메인프로퍼티는 바로 접근할 수 없기 때문에 변수를 생성한 후 접근해서 사용한다.
+                ParticleSystem.MainModule main = item.GetComponent<ParticleSystem>().main;
             }
         }
     }
