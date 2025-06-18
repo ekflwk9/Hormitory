@@ -141,20 +141,21 @@ public class PuzzlePlayerController : BasePlayerController
         characterController.enabled = false;
 
         Vector3 startPos = transform.position;
-        Quaternion startRot = transform.rotation;
         float duration = 0.5f;
         float elapsedTime = 0;
 
         while (elapsedTime < duration)
         {
+            // 위치만 부드럽게 이동
             transform.position = Vector3.Lerp(startPos, hideTransform.position, elapsedTime / duration);
-            transform.rotation = Quaternion.Slerp(startRot, hideTransform.rotation, elapsedTime / duration);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        // 최종 위치 설정
         transform.position = hideTransform.position;
-        transform.rotation = hideTransform.rotation;
+
         UnlockInput();
     }
 
@@ -164,19 +165,26 @@ public class PuzzlePlayerController : BasePlayerController
 
         Vector3 startPos = transform.position;
         Quaternion startRot = transform.rotation;
+        // 목표 회전값을 '똑바로 선 자세'로 설정
+        Quaternion targetRot = Quaternion.identity;
+
         float duration = 0.5f;
         float elapsedTime = 0;
 
         while (elapsedTime < duration)
         {
             transform.position = Vector3.Lerp(startPos, exitTransform.position, elapsedTime / duration);
-            transform.rotation = Quaternion.Slerp(startRot, exitTransform.rotation, elapsedTime / duration);
+            transform.rotation = Quaternion.Slerp(startRot, targetRot, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         transform.position = exitTransform.position;
-        transform.rotation = exitTransform.rotation;
+        transform.rotation = targetRot;
+
+        // HandleLook이 사용하는 회전 변수들을 현재 상태에 맞게 초기화 (핵심)
+        xRotation = 0f;
+        yRotation = transform.eulerAngles.y;
 
         characterController.enabled = true;
         isHiding = false;
