@@ -39,6 +39,7 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         monsterAIController.sfxSource.Stop();
         monsterAIController.talkSource.Stop();
         SoundManager.PlaySfx(SoundCategory.Movement, "BattleMonsterDying");
+        UiManager.Instance.Get<TalkUi>().Popup("...실패작...은... 또 버려지는군...");
         
         monsterAIController.AllAnimationStop();
         animator.SetBool(monsterAIController.animationData.DeathParameterHash, true);

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 /// <summary>
 /// 이미 열려있는 문. 즉, 별도의 퍼즐이 필요하지 않은 문.
 /// </summary>

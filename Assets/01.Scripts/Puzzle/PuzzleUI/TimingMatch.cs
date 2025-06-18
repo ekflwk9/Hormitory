@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// 마커가 좌우로 오가며 핀포인트를 찾는 게임
@@ -66,7 +64,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
             }
             else
             {
-                playerController.LockInput(); // 시작 시 커서 잠금
+                playerController.SetPauseState(true);// 시작 시 커서 잠금
             }
         }
     }
@@ -139,7 +137,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
 
         UpdateMarkerPosition(); // 마커 위치 업데이트
         // Space 입력 시 판정
-        if (Input.GetKeyDown(KeyCode.Space)) // Space 키 입력 시
+        if (Input.GetKeyDown(KeyCode.F)) // E 키 입력 시
         {
             Judge(); // 마커-핀포인트 타이밍을 판단
         }
@@ -242,7 +240,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
 
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
 
-        playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+        playerController.SetPauseState(false); // 플레이어 컨트롤러의 입력 잠금 해제
         SoundManager.PlaySfx(SoundCategory.Interaction, "UnLockDoor"); // 성공 사운드 재생
         //성공 연출 및 로직 처리
 
@@ -265,7 +263,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
         MonsterStateMachine.OffPuzzle();
 
-        playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+        playerController.SetPauseState(false); // 플레이어 컨트롤러의 입력 잠금 해제
         // 실패 연출 및 로직 처리
         UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
         SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생
