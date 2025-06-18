@@ -29,6 +29,7 @@ public class MonsterStatController : MonoBehaviour, IDamagable
 
     public void Die()
     {
+        if (isDead) return;
         isDead = true;
         StopAllCoroutines();
         monsterAIController.currentAction = null;
