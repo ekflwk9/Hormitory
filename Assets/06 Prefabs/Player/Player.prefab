@@ -2464,7 +2464,7 @@ MonoBehaviour:
   impactPrefab:
   - {fileID: 5178234590704103676, guid: f0ca7bd38ecd8124cb9aed26c408dc38, type: 3}
   - {fileID: 5178234590704103676, guid: 2dbf809c8962f9f4796fa326f18a642e, type: 3}
-  - {fileID: 5178234590704103676, guid: e11a43f6ade461a4082b195e25c9f4b9, type: 3}
+  - {fileID: 7584886428874567428, guid: ca6d932891e006946ab829e1c10e1ad1, type: 3}
   - {fileID: 5178234590704103676, guid: e9831b7c396e20049a21aa6d9af9ee58, type: 3}
 --- !u!114 &7448931627783698330
 MonoBehaviour:
@@ -3023,7 +3023,7 @@ MonoBehaviour:
   impactPrefab:
   - {fileID: 5178234590704103676, guid: f0ca7bd38ecd8124cb9aed26c408dc38, type: 3}
   - {fileID: 5178234590704103676, guid: 2dbf809c8962f9f4796fa326f18a642e, type: 3}
-  - {fileID: 0}
+  - {fileID: 7584886428874567428, guid: ca6d932891e006946ab829e1c10e1ad1, type: 3}
   - {fileID: 5178234590704103676, guid: e9831b7c396e20049a21aa6d9af9ee58, type: 3}
 --- !u!114 &7222447922608319589
 MonoBehaviour:
