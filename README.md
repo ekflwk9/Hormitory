@@ -96,6 +96,22 @@ https://github.com/user-attachments/assets/ad67a497-60de-447b-a9ce-f56a8d475929
 > 주변에 있는 '드럼통'을 이용하여, '잭'을 쓰러트리고 탈출해야합니다.   
 > 하지만, 폭발에 휘말리면 자신도 휩쓸릴 수 있습니다.
 
+
+
+
+https://github.com/user-attachments/assets/dced3ab7-cf5c-45c8-b85f-92cff1528992
+
+>드럼통을 칼로 두 번 가격하면 폭발시킬 수 있는 상태가 됩니다.
+
+>총을 이용해 드럼통을 멀리서 폭발시키고 보스몬스터 '잭'에게 데미지를 입히세요!
+
+https://github.com/user-attachments/assets/a64bfef5-bb9a-4b33-85d1-8566ab80aaa9
+
+>F키 : 구르기 --> 약간의 시간동안 무적, 쿨타임
+
+>구르기를 이용해 보스 몬스터 '잭'의 공격을 피하면서 드럼통을 파괴하라!
+
+
 # 🎞️ Ending
 
 
