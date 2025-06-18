@@ -45,7 +45,7 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         animator.SetBool("CrawlForward", false);
         animator.SetBool("Fly", false);
         animator.SetBool("TakeOff", false);
-    
+        animator.SetBool("FlyingRoar", false);
         animator.SetBool("Death", true);
 
         // y 위치가 0이 아니면 내려가는 코루틴 실행
