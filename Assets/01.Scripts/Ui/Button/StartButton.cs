@@ -16,7 +16,8 @@ public class StartButton : UiButton
     {
         SceneManager.LoadScene(StringMap.Puzzle);
         UiManager.Instance.IntroScene(false);
-
+        SoundManager.PlayBgm("PuzzleBGM");
+        
         UiManager.Instance.Get<IntroUi>().RemoveIntroData();
         UiManager.Instance.Get<FadeUi>().OnFade();
     }
