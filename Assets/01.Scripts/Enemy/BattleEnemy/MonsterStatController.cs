@@ -14,7 +14,7 @@ public class MonsterStatController : MonoBehaviour, IDamagable
     private void Reset()
     {
         bloodParticle = this.TryGetChildComponent<ParticleSystem>("BloodVFX");
-        MonsterHealth = 1f;
+        MonsterHealth = 1000f;
         animator = GetComponent<Animator>();
         monsterAIController = GetComponent<MonsterAIController>();
     }

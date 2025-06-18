@@ -6307,7 +6307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be55179ca6ae07544b82250ff52eb820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MonsterHealth>k__BackingField: 1
+  <MonsterHealth>k__BackingField: 1000
   animator: {fileID: 1422848593}
   monsterAIController: {fileID: 1422848590}
   bloodParticle: {fileID: 4886063052734657736}
