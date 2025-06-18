@@ -63,11 +63,6 @@ public class PlayerController : BasePlayerController, IDamagable
         UpdateWeaponAction();
         HandleRandomSound();
         
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(10);
-        }
-        
         if (Input.GetKeyDown(KeyCode.F))
         {
             if(canRoll)
