@@ -37,6 +37,10 @@ public class MonsterStateMachine : MonoBehaviour
     private float _talkTimer;
     private float _nextTalkTime;
     private float _captureRange = 1.5f;
+
+   
+    
+    
     [SerializeField]private  bool _isPuzzle = false;
     
     public PuzzleMonster PuzzleMonster { get; private set; }
@@ -91,7 +95,6 @@ public class MonsterStateMachine : MonoBehaviour
     {
         _currentState.Update();
         HandleRandomSound();
-        
     }
 
     public void TransitionTo(MonsterStateType newStateType)
@@ -159,6 +162,9 @@ public class MonsterStateMachine : MonoBehaviour
     {
         _isPuzzle = false;
     }
+
+    
+    
 
 
 }
