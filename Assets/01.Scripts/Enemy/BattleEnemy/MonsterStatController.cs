@@ -33,6 +33,10 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         StopAllCoroutines();
         monsterAIController.currentAction = null;
     
+        monsterAIController.sfxSource.Stop();
+        monsterAIController.talkSource.Stop();
+        SoundManager.PlaySfx(SoundCategory.Movement, "BattleMonsterDying");
+        
         animator.SetBool("Roar", false);
         animator.SetBool("Groggy", false);
         animator.SetBool("BiteAttack", false);
@@ -68,5 +72,6 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         }
 
         transform.position = targetPos;
+        yield return new WaitForSeconds(4.5f);
     }
 }
