@@ -9,65 +9,59 @@ using Random = UnityEngine.Random;
 
 public class MonsterAIController : MonoBehaviour
 {
-    [Header("Nodes")] private SelectorNode rootNode = new SelectorNode(); // 루트노드 
+    [Header("Nodes")] 
+    private SelectorNode rootNode = new SelectorNode(); // 루트노드 
 
     private SequenceNode flyingBodySlam = new SequenceNode(); // 날아오른 후 몸통박치기 시퀀스
     private SequenceNode jumpingBodySlam = new SequenceNode(); // 뛰어서 몸통박치기 시퀀스
-
     public ActionNode currentAction = null; // 현재 진행중인 액션 저장용
-
-    // 액션 여부 체크 노드
     private ActionNode currentActionNull; // 현재 액션 null 
-
     // 날기 패턴
     private ActionNode timerPassed; // 시간 체크
     private ActionNode flyBodySlam; // 날기 패턴 실행노드
-
     // 점프 돌진 패턴
     private ActionNode jumpBodySlam; // 점프돌진 패턴 실행노드
-
     // 예외처리
     private ActionNode currentActionStillRunning;
 
-    [Header("AI")] [SerializeField] private float patternCooldown = 5f;
+    [Header("AI")] 
+    [SerializeField] private float patternCooldown = 5f;
     private float timer;
     private bool shouldLookAtPlayer = true;
     float overshootDistance = 4.0f; // 플레이어보다 얼마나 더 지나쳐서 착지할지
     [SerializeField] private GameObject player;
 
-    [Header("Animation")] [SerializeField] private Animator animator;
+    [Header("Animation")] 
+    [SerializeField] private Animator animator;
     private bool flyingRoarEnded = false;
     private bool takeOffFinished = false;
     private bool roarFinished = false;
 
-    [Header("Battle")] [SerializeField] private int damageAmount = 20;
+    [Header("Battle")] 
+    [SerializeField] private int damageAmount = 20;
     [SerializeField] MonsterStatController monsterStatController;
     private bool groggyCoroutineRunned = false;
     private bool isPendingGroggy = false;
     private bool isGroggy = false;
-
     private float groggyDuration = 6.0f; // 그로기 지속 시간
-
     private Vector3[] rayPos =
     {
         new Vector3(0f, 0f, 0f), // 중심
         new Vector3(-1f, 0f, 0f), // 왼쪽
         new Vector3(1f, 0f, 0f) // 오른쪽
     };
-
-    private float rayDistance = 0.5f;
-
+    private float rayDistance = 0.7f;
     [SerializeField] private BarrelSpawner barrelSpawner;
 
 
-    [Header("Talk")] public AudioSource sfxSource; // 날기, 착지 등 효과음
+    [Header("Talk")] 
+    public AudioSource sfxSource; // 날기, 착지 등 효과음
     public AudioSource talkSource; // 대사 출력용
     private float maxSoundDistance = 48f;
     [SerializeField] private float _talkTimer;
     [SerializeField] private float _nextTalkTime = 5f;
-    [SerializeField] private float _minTalkInterval = 10f;
-    [SerializeField] private float _maxTalkInterval = 12f;
-
+    [SerializeField] private float _minTalkInterval = 8f;
+    [SerializeField] private float _maxTalkInterval = 10f;
     private readonly List<string> _battleMonsterTalk = new List<string>()
     {
         "완전 쪼그맣군, 장난감처럼!",
@@ -112,8 +106,8 @@ public class MonsterAIController : MonoBehaviour
 
     private void Start()
     {
-        sfxSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance);
-        talkSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance);
+        sfxSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance, true);
+        talkSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance, false);
 
         ResetTalkTimer();
     }
@@ -125,7 +119,6 @@ public class MonsterAIController : MonoBehaviour
             HandleRandomSound();
             timer += Time.deltaTime;
 
-            // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
             if (shouldLookAtPlayer)
             {
                 LookAtPlayer();
@@ -275,8 +268,6 @@ public class MonsterAIController : MonoBehaviour
 
                 foreach (Vector3 rayOrigin in rayPos)
                 {
-                    Debug.DrawRay(curpos, transform.forward + rayOrigin, Color.red, 1.0f);
-
                     if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
                     {
                         if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("ExplosiveBarrel"))
@@ -384,7 +375,7 @@ public class MonsterAIController : MonoBehaviour
             {
                 if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
                 {
-                    if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("ExplosiveBarrel"))
+                    if (hit.collider.CompareTag("Wall"))
                     {
                         Vector3 temp = transform.position;
                         temp.y = 0f;
@@ -396,7 +387,7 @@ public class MonsterAIController : MonoBehaviour
                     }
                 }
             }
-
+            
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
@@ -500,7 +491,6 @@ public class MonsterAIController : MonoBehaviour
                 if (damageable != null)
                 {
                     damageable.TakeDamage(damageAmount);
-                    Service.Log("데미지입음");
                 }
             }
         }
@@ -508,11 +498,9 @@ public class MonsterAIController : MonoBehaviour
 
     private void HandleRandomSound()
     {
-        Service.Log(_talkTimer.ToString());
         _talkTimer += Time.deltaTime;
         if (_talkTimer >= _nextTalkTime)
         {
-            Debug.Log("대사출력");
             PlayRandomSound();
             ResetTalkTimer();
         }
@@ -569,15 +557,18 @@ public class MonsterAIController : MonoBehaviour
         talkSource.Stop();
     }
 
-private AudioSource InitAudioSource(float volume, float maxDistance)
+    private AudioSource InitAudioSource(float volume, float maxDistance, bool is3DSound)
     {
         AudioSource source = gameObject.AddComponent<AudioSource>();
-        source.volume = volume;
         source.loop = false;
         source.playOnAwake = false;
-        source.rolloffMode = AudioRolloffMode.Custom;
-        source.spatialBlend = 1f;
-        source.maxDistance = maxDistance;
+        if (is3DSound)
+        {
+            source.volume = volume;
+            source.rolloffMode = AudioRolloffMode.Custom;
+            source.spatialBlend = 1f;
+            source.maxDistance = maxDistance;
+        }
 
         return source;
     }

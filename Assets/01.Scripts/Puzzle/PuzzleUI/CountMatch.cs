@@ -81,6 +81,7 @@ public class CountMatch : IPuzzle
         if (userNum == requireNum)
         {
             playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+            SoundManager.PlaySfx(SoundCategory.Interaction, "UnLockDoor");
             MonsterStateMachine.OffPuzzle();
             IsSolved();
         }
@@ -94,6 +95,7 @@ public class CountMatch : IPuzzle
     {
         failCount++;
         // 3회의 기회를 모두 소모하면.
+        SoundManager.PlaySfx(SoundCategory.Interaction,"LockDoor");
         if(failCount == 2)
         {
             UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
