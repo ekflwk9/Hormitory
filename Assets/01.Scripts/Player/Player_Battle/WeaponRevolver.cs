@@ -1,31 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using _01.Scripts.Component;
+﻿using _01.Scripts.Component;
 using _01.Scripts.Player.Player_Battle;
-using Unity.VisualScripting.Dependencies.NCalc;
-using UnityEditor.PackageManager;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class WeaponRevolver : WeaponBase
 {
-    [Header("Fire Effects")] [SerializeField]
+    [Header("Fire Effects")]
+    [SerializeField]
     private GameObject muzzleFlashEffect;       //총구 이펙트
 
-    [Header("Spawn Ponts")] [SerializeField]
+    [Header("Spawn Ponts")]
+    [SerializeField]
     private Transform bulletSpawnPoint;                 //총알 생성 위치
-    [SerializeField]private Transform casingSpawnPoint; //탄피 생성 위치
+    [SerializeField] private Transform casingSpawnPoint; //탄피 생성 위치
     float spreadAmount => animator.AimModeIs ? 0f : 0.5f;
-    [Header("Aim UI")]  
-    
+    [Header("Aim UI")]
+
     private bool isModeChange = false;                  //모드 전환 여부 체크
     private float defaultModeFOV = 60;                  //기본 모드에서 카메라 FOV
     private float aimModeFOV = 30;                      //AIM모드에서 카메라 FOV
-    
+
     private CasingMemoryPool casingMemoryPool;          //탄피 생성 관리
     private ImpactMemoryPool impactMemoryPool;          //공격 효과 생성 후 활성/비활성화 관리
     private Camera mainCamera;           //광선 발사
@@ -47,7 +42,7 @@ public class WeaponRevolver : WeaponBase
     private void OnEnable()
     {
         muzzleFlashEffect.SetActive(false);
-        
+
         //무기 활성화 될 때 무기 정보 갱신
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
@@ -58,16 +53,16 @@ public class WeaponRevolver : WeaponBase
     // Start is called before the first frame update
     public override void StartWeaponAction(int type = 0)
     {
-        if(isReload)return;
-        
+        if (isReload) return;
+
         //모드 전환중이면 무기 액션 X
         if (isModeChange == true) return;
-        
+
         //UiManager.Instance.Get<TalkUi>().onTalk();
         //마우스 왼쪽 클릭( 공격 시작)
         if (type == 0)
         {
-            
+
             //연속 공격
             if (weaponSetting.isAutomaticAttack == true)
             {
@@ -77,7 +72,7 @@ public class WeaponRevolver : WeaponBase
             //단발 공격
             else
             {
-                
+
                 OnAttack();
             }
         }
@@ -88,12 +83,12 @@ public class WeaponRevolver : WeaponBase
             SoundManager.PlaySfx(SoundCategory.Aiming, "aim_in");
             StartCoroutine(OnModeChange());
         }
-    
+
     }
 
     public override void StopWeaponAction(int type = 0)
     {
-        if (type == 0) 
+        if (type == 0)
         {
             isAttack = false;
         }
@@ -106,11 +101,11 @@ public class WeaponRevolver : WeaponBase
         //조준 시 장전 불가
         if (animator.AimModeIs) return;
         //재장전 or 탄창 x => 장전 불가
-        if( isReload == true || weaponSetting.currentMagazine <= 0) return;
-        
+        if (isReload == true || weaponSetting.currentMagazine <= 0) return;
+
         //무기 액션 도중 장전시도하면 무기 액션 종료 후 장전
         StopWeaponAction();
-        
+
         reloadCoroutine = StartCoroutine(OnReload());
     }
 
@@ -124,16 +119,16 @@ public class WeaponRevolver : WeaponBase
         }
         attackCoroutine = null;
     }
-    
+
     public void OnAttack()
     {
         if (isReload) return;
         if (Time.time - lastAttackTime > weaponSetting.attackRate)
         {
-            if(animator.MoveSpeed > 0.5f) return;
+            if (animator.MoveSpeed > 0.5f) return;
 
             lastAttackTime = Time.time;
-            
+
             if (weaponSetting.currentAmmo <= 0)
             {
                 return;
@@ -141,7 +136,7 @@ public class WeaponRevolver : WeaponBase
             weaponSetting.currentAmmo--;
             UiManager.Instance.Get<BulletUi>().BulletView(false);
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-            
+
             //animator.Play("Fire", -1, 0) --> 같은 애니메이션을 반복할 떄
             //애니메이션을 끊고 처음부터 다시 재생
             SoundManager.PlaySfx(SoundCategory.Shoot, "shoot");
@@ -149,18 +144,18 @@ public class WeaponRevolver : WeaponBase
             animator.Play(animation, -1, 0);
             if (animator.AimModeIs)
             {
-                PlayerManager.Instance.MainCamera.Shake(0.3f,0.3f);
+                PlayerManager.Instance.MainCamera.Shake(0.3f, 0.3f);
             }
             else
             {
-                PlayerManager.Instance.MainCamera.Shake(0.2f,0.1f);
+                PlayerManager.Instance.MainCamera.Shake(0.2f, 0.1f);
             }
             //총구 이펙트 재생
             StartCoroutine(OnMuzzleFlashEffect());
 
             //탄피 생성
-            casingMemoryPool.SpawnCasing(casingSpawnPoint.position,Vector3.left);
-            
+            casingMemoryPool.SpawnCasing(casingSpawnPoint.position, Vector3.left);
+
             //광선을 발사해 원하는 위치 공격 (+Imapct Effect)
             TwoStepRaycast();
         }
@@ -169,20 +164,20 @@ public class WeaponRevolver : WeaponBase
     private IEnumerator OnMuzzleFlashEffect()
     {
         muzzleFlashEffect.SetActive(true);
-        
+
         yield return new WaitForSeconds(weaponSetting.attackRate * 0.05f);
-        
+
         muzzleFlashEffect.SetActive(false);
     }
-    
+
     private IEnumerator OnReload()
     {
         isReload = true;
         animator.OnReload();
-        
+
         SoundManager.PlaySfx(SoundCategory.Gun_Reloads,
             "Handgun_01-04_Reloads/handgun_01-04_reload_out_of_ammo");
-        
+
         yield return new WaitForSeconds(0.5f);
         while (true)
         {
@@ -193,12 +188,12 @@ public class WeaponRevolver : WeaponBase
                 weaponSetting.currentMagazine--;
                 onMagazineEvent.Invoke(weaponSetting.currentMagazine);
 
-                
+
                 //현재 탄 수 최대, 바뀐 탄 수 정보 업데이트
                 weaponSetting.currentAmmo = weaponSetting.maxAmmo;
-                onAmmoEvent.Invoke(weaponSetting.currentAmmo,weaponSetting.maxAmmo);
-                
-                
+                onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+
+
                 UiManager.Instance.Get<BulletUi>().BulletView(true);
                 isReload = false;
                 yield break;
@@ -212,7 +207,7 @@ public class WeaponRevolver : WeaponBase
         Ray ray;
         RaycastHit hit;
         Vector3 targetPoint = Vector3.zero;
-        
+
         // 탄 정확도 조절
         Vector2 spreadOffset = new Vector2(
             Random.Range(-spreadAmount, spreadAmount),
@@ -239,9 +234,9 @@ public class WeaponRevolver : WeaponBase
         {
             //화면의 중앙 좌표 (Aim 기준으로 Raycast 연산)
             Ray spreadRay = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f) + spreadOffset);
-            
+
             //공격 사거리 안에 부딪치는 오브젝트 있으면 targetPoint는 광선에 부딪친 위치
-            if(Physics.Raycast(spreadRay, out hit, weaponSetting.attackDistance))
+            if (Physics.Raycast(spreadRay, out hit, weaponSetting.attackDistance))
             {
                 targetPoint = hit.point;
             }
@@ -251,15 +246,15 @@ public class WeaponRevolver : WeaponBase
                 targetPoint = spreadRay.origin + spreadRay.direction * weaponSetting.attackDistance;
             }
         }
-        
-        
+
+
         //첫번째 Raycast연산으로 얻어진 targetPoint를 목표지점으로 설정하고
         //총구를 시작지점으로 하여 Raycast 연산
         Vector3 attackDirection = (targetPoint - bulletSpawnPoint.position).normalized;
         if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
         {
             impactMemoryPool.SpawnImpact(hit);
-            
+
             if (hit.transform.CompareTag("Enemy"))
             {
                 return;
@@ -270,7 +265,7 @@ public class WeaponRevolver : WeaponBase
             }
         }
         //Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue,2f);
-        
+
     }
     private IEnumerator OnModeChange()
     {
@@ -279,20 +274,20 @@ public class WeaponRevolver : WeaponBase
         float time = 0.35f;
 
         animator.AimModeIs = !animator.AimModeIs;
-        
+
         float start = mainCamera.fieldOfView;
         float end = animator.AimModeIs == true ? aimModeFOV : defaultModeFOV;
-        
+
         isModeChange = true;
 
         while (percent < 1)
         {
             current += Time.deltaTime;
             percent = current / time;
-            
+
             //모드에 따라 카메라 시야각 변경
             mainCamera.fieldOfView = Mathf.Lerp(start, end, percent);
-            
+
             yield return null;
         }
         isModeChange = false;
@@ -311,12 +306,12 @@ public class WeaponRevolver : WeaponBase
             StopCoroutine(attackCoroutine);
             attackCoroutine = null;
         }
-        if(reloadCoroutine != null)
+        if (reloadCoroutine != null)
         {
             StopCoroutine(reloadCoroutine);
             reloadCoroutine = null;
         }
-        
+
         ResetVariables();
     }
 
