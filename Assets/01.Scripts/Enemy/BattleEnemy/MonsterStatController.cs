@@ -12,7 +12,7 @@ public class MonsterStatController : MonoBehaviour, IDamagable
     
     private void Reset()
     {
-        MonsterHealth = 100f;
+        MonsterHealth = 500f;
         animator = GetComponent<Animator>();
         monsterAIController = GetComponent<MonsterAIController>();
     }

@@ -11,7 +11,7 @@ public class ExplosionBarrel : InteractionObject, IDamagable
     private GameObject explosionPrefab;
 
     [SerializeField] private float explosionDelayTime = 0.3f;
-    [SerializeField] private float explosionRadius = 10.0f;
+    [SerializeField] private float explosionRadius = 8.0f;
     [SerializeField] private float explosionForce = 1000.0f;
     private bool isExplode = false;
     private bool isPrepared = false;
