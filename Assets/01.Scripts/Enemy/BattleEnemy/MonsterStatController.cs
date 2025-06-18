@@ -23,7 +23,10 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         if (MonsterHealth <= 0)
         {
             Die();
+            return;
         }
+        
+        monsterAIController.GotHitSoundStart();
     }
 
     public void Die()

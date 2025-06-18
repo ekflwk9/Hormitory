@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-
+﻿using UnityEngine;
 /// <summary>
 /// 기존 스크립트에서 사용할 수 없게된 요소
 /// 컨트롤러로 이사(버튼, TMP, SetActive등)
@@ -48,9 +42,7 @@ public class CountMatchController : MonoBehaviour
 
     private void HandleSolved()
     {
-        Service.Log("CountMatch: 성공했습니다. 다음 장면 실행.");
         // 성공 시 처리 로직
-        // SE: 문이 열리는 소리(달칵)
         if (targetDoor != null)
         {
             targetDoor.isSolved = true;
@@ -74,11 +66,9 @@ public class CountMatchController : MonoBehaviour
 
     private void HandleFailed()
     {
-        Service.Log("CountMatch: 실패했습니다. 게임오버로직 실행.");
         if (targetDoor != null)
         {
             targetDoor.isSolved = false;
-            // 또는 targetDoor.OpenDoor() 등으로 애니메이션 처리
         }
         else
         {

@@ -76,7 +76,6 @@ public class CountMatch : IPuzzle
         // 1. userNum을 받아온다.
         // 2. 조정된 숫자와 맞춰야 할 숫자를 확인한다.
         // 3. 동일하면 IsSolved로, 틀리면 Incorrect로
-        Service.Log($"입력한 정답{userNum}, 요구되는 정답{requireNum}");
 
         if (userNum == requireNum)
         {
@@ -112,7 +111,6 @@ public class CountMatch : IPuzzle
             MonsterStateMachine.OffPuzzle();
             return;
         }
-        Service.Log($"CountMatch: Incorrect : {failCount}");
 
         //숫자맞추기에 실패했을 때(게임오버는 아직 아닐 때)의 로직
         //오류 처리 후 다시 숫자 선택로직으로 변경함
