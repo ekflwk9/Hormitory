@@ -13,6 +13,7 @@
             uiBase[i].Init();
         }
 
+        SoundManager.PlayBgm("PuzzleBGM");
         UiManager.Instance.Add<IntroUi>(this);
     }
 
