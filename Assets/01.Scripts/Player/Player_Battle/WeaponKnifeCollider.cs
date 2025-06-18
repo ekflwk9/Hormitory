@@ -25,7 +25,7 @@ public class WeaponKnifeCollider : MonoBehaviour
         this.damage = damage;
         collider.enabled = true;
 
-        StartCoroutine("DisableByTime", 0.2f);
+        StartCoroutine("DisableByTime", 0.1f);
     }
 
     private IEnumerator DisableByTime(float time)
