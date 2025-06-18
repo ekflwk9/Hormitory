@@ -197,19 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: {fileID: 5638772625410197378}
-  textWeaponName: {fileID: 0}
-  imageWeaponIcon: {fileID: 0}
-  spriteWeaponIcons:
-  - {fileID: 21300014, guid: 5acb27b603af6d44ea6113c4b7b15385, type: 3}
-  - {fileID: 21300038, guid: 5acb27b603af6d44ea6113c4b7b15385, type: 3}
-  sizeWeaponIcons:
-  - {x: 150, y: 57}
-  - {x: 200, y: 37.7}
-  textAmmo: {fileID: 0}
-  magazineUIPrefab: {fileID: 3006175974032013610, guid: dbe698c85c4e06b4cb446925d1ac745e,
-    type: 3}
-  magazineParent: {fileID: 0}
-  maxMagazineCount: 50
 --- !u!1 &2118526682066392726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3036,7 +3023,7 @@ MonoBehaviour:
   impactPrefab:
   - {fileID: 5178234590704103676, guid: f0ca7bd38ecd8124cb9aed26c408dc38, type: 3}
   - {fileID: 5178234590704103676, guid: 2dbf809c8962f9f4796fa326f18a642e, type: 3}
-  - {fileID: 5178234590704103676, guid: e11a43f6ade461a4082b195e25c9f4b9, type: 3}
+  - {fileID: 0}
   - {fileID: 5178234590704103676, guid: e9831b7c396e20049a21aa6d9af9ee58, type: 3}
 --- !u!114 &7222447922608319589
 MonoBehaviour:
