@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MonsterStatController : MonoBehaviour, IDamagable
 {
-    public float MonsterHealth { get; private set; }
+    [field:SerializeField] public float MonsterHealth { get; private set; }
     public bool isDead = false;
     [SerializeField] private Animator animator;
     [SerializeField] private MonsterAIController monsterAIController;
     
     private void Reset()
     {
-        MonsterHealth = 500f;
+        MonsterHealth = 600f;
         animator = GetComponent<Animator>();
         monsterAIController = GetComponent<MonsterAIController>();
     }
