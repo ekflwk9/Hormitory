@@ -40,7 +40,6 @@ public class WeaponKnifeCollider : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<IDamagable>()?.TakeDamage(damage);
         }
 
         if (other.CompareTag("ExplosiveBarrel"))
