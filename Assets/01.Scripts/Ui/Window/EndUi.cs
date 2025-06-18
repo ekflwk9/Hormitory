@@ -30,6 +30,5 @@ public class EndUi : MonoBehaviour
     {
         SceneManager.LoadScene("Intro");
         UiManager.Instance.DestrotyManager();
-        UiManager.Instance.Get<FadeUi>().OnFade(0.5f);
     }
 }
