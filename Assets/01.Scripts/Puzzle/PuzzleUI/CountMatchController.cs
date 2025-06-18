@@ -20,7 +20,6 @@ public class CountMatchController : MonoBehaviour
     public void SetRequiredNum(int num)
     {
         countMatch.SetRequiredNum(num);
-        ShowUI(true);
     }
 
     public void SetTargetDoor(Door_Match door)
@@ -31,13 +30,6 @@ public class CountMatchController : MonoBehaviour
             Service.Log("CountMatchController: Target Door is null");
             // 게임은 계속 진행 가능.
         }
-    }
-
-    //UI와 Cursor의 OnOff를 bool값으로 한 번에 조절
-    private void ShowUI(bool isOn)
-    {
-        Cursor.lockState = isOn? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isOn;
     }
 
     private void HandleSolved()
@@ -55,7 +47,6 @@ public class CountMatchController : MonoBehaviour
         }
         IsPuzzleSolved(true); // 퍼즐이 해결되었음을 알림
         UiManager.Instance.Show<LockUi>(false);
-        ShowUI(false);
     }
 
     // 퍼즐이 해결되었는지 여부 반환
@@ -78,7 +69,6 @@ public class CountMatchController : MonoBehaviour
         IsPuzzleSolved(false); // 퍼즐 미해결        
         UiManager.Instance.Show<LockUi>(false);
         // 실패 시 처리로직 (게임오버)
-        ShowUI(false);
     }
     private void OnEnable()
     {

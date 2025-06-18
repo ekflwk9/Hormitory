@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// 가지고 있는 아이템과 자신의 번호를 비교하여 상호작용할 수 있는 오브젝트
