@@ -152,7 +152,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
   explosionDelayTime: 0.3
-  explosionRadius: 10
+  explosionRadius: 8
   explosionForce: 1000
   iconUI: {fileID: 2232680961849411756}
 --- !u!1001 &3642353813108584131
@@ -167,6 +167,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CrossHairIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3887153780686045050, guid: 222b682e29a25cc478e764632920e5ef,
+        type: 3}
+      propertyPath: scale
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8943903250973158074, guid: 222b682e29a25cc478e764632920e5ef,
         type: 3}

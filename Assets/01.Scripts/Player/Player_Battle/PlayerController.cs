@@ -12,7 +12,6 @@ public class PlayerController : BasePlayerController, IDamagable
     private Status status;
     private WeaponBase weapon;
 
-
     [SerializeField] private float duration = 0.3f;
     [SerializeField] private float rollSpeed = 5f;
     [SerializeField] private float delay = 5f;
@@ -27,6 +26,7 @@ public class PlayerController : BasePlayerController, IDamagable
     
     private float _talkTimer;
     private float _nextTalkTime;
+    private MonsterStatController monsterStatController;
     
     [SerializeField] float _minTalkInterval = 8f;
     [SerializeField] float _maxTalkInterval = 12f;
@@ -39,7 +39,8 @@ public class PlayerController : BasePlayerController, IDamagable
         //마우스 커서를 보이지 않게 설정하고, 현재위치에 고정
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
+
+        monsterStatController = FindObjectOfType<MonsterStatController>();
         status = GetComponent<Status>();
     }
 
@@ -191,7 +192,7 @@ public class PlayerController : BasePlayerController, IDamagable
             
     public void PlayRandomSound()
     {
-        if (UiManager.Instance.Get<TalkUi>().onTalk) return;
+        if (UiManager.Instance.Get<TalkUi>().onTalk || monsterStatController.isDead) return;
         if (_playerTalk.Count == 0)
             return;
         
