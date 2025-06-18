@@ -71,8 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9543b3de2d4e58d4daef9abce908f0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 7775541663249090279, guid: dbd9b44e423a69045ae2ea2966258ff3,
-    type: 3}
+  _playerTransform: {fileID: 0}
   _detectRange: 8
   _searchDuration: 3
   _patrolRadius: 10
@@ -120,7 +119,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.25
   m_Height: 1.68
   m_Direction: 1
   m_Center: {x: 0, y: 0.84, z: 0}

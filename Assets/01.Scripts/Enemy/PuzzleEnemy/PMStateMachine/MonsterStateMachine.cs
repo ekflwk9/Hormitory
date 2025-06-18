@@ -134,6 +134,8 @@ public class MonsterStateMachine : MonoBehaviour
             
     public void PlayRandomSound()
     {
+        if (UiManager.Instance.Get<TalkUi>().onTalk) return;
+        
         if (_puzzleMonsterTalk.Count == 0)
             return;
         
