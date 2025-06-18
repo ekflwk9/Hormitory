@@ -6,13 +6,15 @@ using UnityEngine;
 public class MonsterStatController : MonoBehaviour, IDamagable
 {
     [field:SerializeField] public float MonsterHealth { get; private set; }
-    public bool isDead = false;
     [SerializeField] private Animator animator;
     [SerializeField] private MonsterAIController monsterAIController;
+    [SerializeField] private ParticleSystem bloodParticle;
+    public bool isDead = false;
     
     private void Reset()
     {
-        MonsterHealth = 1000f;
+        bloodParticle = this.TryGetChildComponent<ParticleSystem>("BloodVFX");
+        MonsterHealth = 1f;
         animator = GetComponent<Animator>();
         monsterAIController = GetComponent<MonsterAIController>();
     }
@@ -43,7 +45,9 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         
         monsterAIController.AllAnimationStop();
         animator.SetBool(monsterAIController.animationData.DeathParameterHash, true);
-
+        
+        bloodParticle.Play();
+        
         // y 위치가 0이 아니면 내려가는 코루틴 실행
         if (transform.position.y != 0f)
         {
