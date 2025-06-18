@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts.Player.Player_Battle;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponKnifeCollider : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class WeaponKnifeCollider : MonoBehaviour
         {
             other.GetComponent<ExplosionBarrel>().TakeDamageFromWeapon(damage, WeaponType.Melee);
             Debug.Log($"{damage}");
+            
+            SoundManager.PlaySfx(SoundCategory.Impacts, $"knifeImpact");
         }
     }
 }

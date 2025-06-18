@@ -3566,7 +3566,6 @@ MonoBehaviour:
   muzzleFlashEffect: {fileID: 7006086164996798377}
   bulletSpawnPoint: {fileID: 875764596188759392}
   casingSpawnPoint: {fileID: 613102741618848381}
-  imageAim: {fileID: 0}
 --- !u!114 &8292457309185303849
 MonoBehaviour:
   m_ObjectHideFlags: 0

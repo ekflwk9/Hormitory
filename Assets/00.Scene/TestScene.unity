@@ -1416,11 +1416,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4270355468204358921, guid: dbd9b44e423a69045ae2ea2966258ff3,
-        type: 3}
-      propertyPath: imageAim
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6204939324654745962, guid: dbd9b44e423a69045ae2ea2966258ff3,
         type: 3}
       propertyPath: m_Name

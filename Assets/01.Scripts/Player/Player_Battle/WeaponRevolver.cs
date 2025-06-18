@@ -20,7 +20,7 @@ public class WeaponRevolver : WeaponBase
     private Transform bulletSpawnPoint;                 //총알 생성 위치
     [SerializeField]private Transform casingSpawnPoint; //탄피 생성 위치
     float spreadAmount => animator.AimModeIs ? 0f : 0.5f;
-    [Header("Aim UI")] [SerializeField] private Image imageAim; // default/aim 모드에 따라 Aim 이미지 활성/비활성
+    [Header("Aim UI")]  
     
     private bool isModeChange = false;                  //모드 전환 여부 체크
     private float defaultModeFOV = 60;                  //기본 모드에서 카메라 FOV
