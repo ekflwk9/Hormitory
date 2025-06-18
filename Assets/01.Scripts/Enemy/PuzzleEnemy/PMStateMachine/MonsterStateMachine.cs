@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
+using Random = UnityEngine.Random;
 
 public enum MonsterStateType
 {
@@ -51,9 +53,13 @@ public class MonsterStateMachine : MonoBehaviour
     public PuzzlePlayerController PuzzlePlayerController { get; private set; }
     public Camera DeadCam => _deadCam;
     public bool IsPuzzle => _isPuzzle;
-    
+    public static Action OnPuzzle;
+    public static Action OffPuzzle;
     private void Awake()
     {
+        OnPuzzle = PuzzleStart;
+        OffPuzzle = PuzzleEnd;
+        
         
         NavMeshAgent = GetComponent<NavMeshAgent>();
         PuzzleMonster = GetComponent<PuzzleMonster>();
@@ -128,6 +134,8 @@ public class MonsterStateMachine : MonoBehaviour
             
     public void PlayRandomSound()
     {
+        if (UiManager.Instance.Get<TalkUi>().onTalk) return;
+        
         if (_puzzleMonsterTalk.Count == 0)
             return;
         

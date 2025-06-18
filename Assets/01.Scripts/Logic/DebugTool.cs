@@ -9,7 +9,7 @@ public class DebugTool : EditorWindow
     {
         GetWindow<DebugTool>("DebugTool");
     }
-    
+
     private void OnGUI()
     {
         //GUILayout.Label("디버그 전용 패널");
@@ -30,6 +30,10 @@ public class DebugTool : EditorWindow
         else if (GUILayout.Button("인벤토리 On")) ShowInventory(true);
         else if (GUILayout.Button("인벤토리 Off")) ShowInventory(false);
         else if (GUILayout.Button("드럼통생성")) BarrelSpawn();
+        else if (GUILayout.Button("퍼즐 시작")) OnPuzzle();
+        else if (GUILayout.Button("퍼즐 종료")) OffPuzzle();
+
+
     }
 
     private void OnMenu()
@@ -88,6 +92,17 @@ public class DebugTool : EditorWindow
     {
         BarrelSpawner.instance.SpawnBarrelOnMonsterStun();
     }
-    
+
+    private void OnPuzzle()
+    {
+        MonsterStateMachine.OnPuzzle();
+    }
+
+    private void OffPuzzle()
+    {
+        MonsterStateMachine.OffPuzzle();
+    }
+
+
 }
 #endif
