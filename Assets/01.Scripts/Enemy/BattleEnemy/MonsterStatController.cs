@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MonsterStatController : MonoBehaviour, IDamagable
 {
-    public float MonsterHealth { get; private set; }
+    [field:SerializeField] public float MonsterHealth { get; private set; }
     public bool isDead = false;
     [SerializeField] private Animator animator;
     [SerializeField] private MonsterAIController monsterAIController;
     
     private void Reset()
     {
-        MonsterHealth = 500f;
+        MonsterHealth = 600f;
         animator = GetComponent<Animator>();
         monsterAIController = GetComponent<MonsterAIController>();
     }
@@ -45,7 +45,7 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         animator.SetBool("CrawlForward", false);
         animator.SetBool("Fly", false);
         animator.SetBool("TakeOff", false);
-    
+        animator.SetBool("FlyingRoar", false);
         animator.SetBool("Death", true);
 
         // y 위치가 0이 아니면 내려가는 코루틴 실행
