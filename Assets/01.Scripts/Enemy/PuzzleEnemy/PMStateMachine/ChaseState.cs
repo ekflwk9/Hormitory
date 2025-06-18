@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class ChaseState : BaseState
 {
@@ -16,6 +17,7 @@ public class ChaseState : BaseState
         base.Enter();
         NavMeshAgent.speed = StateMachine.ChaseSpeed;
         NavMeshAgent.isStopped = false;
+        ResetHeartBeat();
         StartAnimation(StateMachine.PuzzleMonster.AnimationData.ChaseParameterHash);
     }
 
@@ -35,8 +37,7 @@ public class ChaseState : BaseState
         {
             StateMachine.TransitionTo(MonsterStateType.Capture);
         }
-            
-        
+        PlayHeartBeat("Chase");
     }
     public override void Exit()
     {
