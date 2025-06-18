@@ -12,20 +12,20 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Status status;
     
     
-    [Header("Weapon Base")] [SerializeField]
-    private TextMeshProUGUI textWeaponName;
-
-    [SerializeField] private Image imageWeaponIcon;             //무기 아이콘
-    [SerializeField] private Sprite[] spriteWeaponIcons;        //무기 아이콘에 사용되는 sprite 배열
-    [SerializeField] private Vector2[] sizeWeaponIcons;
-    
-    [Header("Ammo")][SerializeField] private TextMeshProUGUI textAmmo;// 현재/최대 탄수 출력
-
-    [Header("Magazine")] [SerializeField] private GameObject magazineUIPrefab; //탄창 UI 프리펩
-    [SerializeField] private Transform magazineParent;   //탄창 UI가 배치되는 Panel
-    [SerializeField] private int maxMagazineCount;      //처음 생성하는 최대 탄창 수
-    
-    private List<GameObject> magazineList;  //탄창 UI 리스트
+    // [Header("Weapon Base")] [SerializeField]
+    // private TextMeshProUGUI textWeaponName;
+    //
+    // [SerializeField] private Image imageWeaponIcon;             //무기 아이콘
+    // [SerializeField] private Sprite[] spriteWeaponIcons;        //무기 아이콘에 사용되는 sprite 배열
+    // [SerializeField] private Vector2[] sizeWeaponIcons;
+    //
+    // [Header("Ammo")][SerializeField] private TextMeshProUGUI textAmmo;// 현재/최대 탄수 출력
+    //
+    // [Header("Magazine")] [SerializeField] private GameObject magazineUIPrefab; //탄창 UI 프리펩
+    // [SerializeField] private Transform magazineParent;   //탄창 UI가 배치되는 Panel
+    // [SerializeField] private int maxMagazineCount;      //처음 생성하는 최대 탄창 수
+    //
+    // private List<GameObject> magazineList;  //탄창 UI 리스트
     private void Awake()
     {
         status.onHPEvent.AddListener(UpdateHPHUD);

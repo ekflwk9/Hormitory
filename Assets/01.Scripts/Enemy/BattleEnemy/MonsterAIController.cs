@@ -9,65 +9,60 @@ using Random = UnityEngine.Random;
 
 public class MonsterAIController : MonoBehaviour
 {
-    [Header("Nodes")] private SelectorNode rootNode = new SelectorNode(); // 루트노드 
-
+    [Header("Nodes")] 
+    private SelectorNode rootNode = new SelectorNode(); // 루트노드 
     private SequenceNode flyingBodySlam = new SequenceNode(); // 날아오른 후 몸통박치기 시퀀스
     private SequenceNode jumpingBodySlam = new SequenceNode(); // 뛰어서 몸통박치기 시퀀스
-
     public ActionNode currentAction = null; // 현재 진행중인 액션 저장용
-
-    // 액션 여부 체크 노드
     private ActionNode currentActionNull; // 현재 액션 null 
-
     // 날기 패턴
     private ActionNode timerPassed; // 시간 체크
     private ActionNode flyBodySlam; // 날기 패턴 실행노드
-
     // 점프 돌진 패턴
     private ActionNode jumpBodySlam; // 점프돌진 패턴 실행노드
-
     // 예외처리
     private ActionNode currentActionStillRunning;
 
-    [Header("AI")] [SerializeField] private float patternCooldown = 5f;
+    [Header("AI")] 
+    [SerializeField] private float patternCooldown = 5f;
     private float timer;
     private bool shouldLookAtPlayer = true;
     float overshootDistance = 4.0f; // 플레이어보다 얼마나 더 지나쳐서 착지할지
     [SerializeField] private GameObject player;
 
-    [Header("Animation")] [SerializeField] private Animator animator;
+    [Header("Animation")] 
+    [SerializeField] private Animator animator;
+    [SerializeField] private Monster monster;
+    public BattleMonsterAnimationData animationData;
     private bool flyingRoarEnded = false;
     private bool takeOffFinished = false;
     private bool roarFinished = false;
 
-    [Header("Battle")] [SerializeField] private int damageAmount = 20;
+    [Header("Battle")] 
+    [SerializeField] private int damageAmount = 20;
     [SerializeField] MonsterStatController monsterStatController;
     private bool groggyCoroutineRunned = false;
     private bool isPendingGroggy = false;
     private bool isGroggy = false;
-
     private float groggyDuration = 6.0f; // 그로기 지속 시간
-
     private Vector3[] rayPos =
     {
         new Vector3(0f, 0f, 0f), // 중심
         new Vector3(-1f, 0f, 0f), // 왼쪽
         new Vector3(1f, 0f, 0f) // 오른쪽
     };
-
-    private float rayDistance = 0.5f;
-
+    private float rayDistance = 0.7f;
     [SerializeField] private BarrelSpawner barrelSpawner;
 
 
-    [Header("Talk")] public AudioSource sfxSource; // 날기, 착지 등 효과음
+    [Header("Talk")] 
+    public AudioSource sfxSource; // 날기, 착지 등 효과음
     public AudioSource talkSource; // 대사 출력용
     private float maxSoundDistance = 48f;
     [SerializeField] private float _talkTimer;
     [SerializeField] private float _nextTalkTime = 5f;
-    [SerializeField] private float _minTalkInterval = 10f;
-    [SerializeField] private float _maxTalkInterval = 12f;
-
+    [SerializeField] private float _minTalkInterval = 8f;
+    [SerializeField] private float _maxTalkInterval = 10f;
     private readonly List<string> _battleMonsterTalk = new List<string>()
     {
         "완전 쪼그맣군, 장난감처럼!",
@@ -79,9 +74,10 @@ public class MonsterAIController : MonoBehaviour
 
     // 액션노드 생성 헬퍼
     private ActionNode CreateAction(Func<INode.State> func) => new ActionNode(func);
-
+    
     private void Reset()
     {
+        monster = GetComponent<Monster>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         barrelSpawner = GameObject.Find("BarrelSpawner").GetComponent<BarrelSpawner>();
@@ -112,8 +108,9 @@ public class MonsterAIController : MonoBehaviour
 
     private void Start()
     {
-        sfxSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance);
-        talkSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance);
+        animationData = monster.AnimationData;
+        sfxSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance, true);
+        talkSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance, false);
 
         ResetTalkTimer();
     }
@@ -125,7 +122,6 @@ public class MonsterAIController : MonoBehaviour
             HandleRandomSound();
             timer += Time.deltaTime;
 
-            // 상태 체크: 추적 중이거나 대기 상태일 때만 회전
             if (shouldLookAtPlayer)
             {
                 LookAtPlayer();
@@ -182,12 +178,12 @@ public class MonsterAIController : MonoBehaviour
 
     private IEnumerator FlyingAndBodySlamActionCoroutine()
     {
-        animator.SetBool("BiteAttack", false);
+        animator.SetBool(animationData.BiteAttackParameterHash, false);
 
         shouldLookAtPlayer = true;
 
         takeOffFinished = false;
-        animator.SetBool("TakeOff", true);
+        animator.SetBool(animationData.TakeOffParameterHash, true);
 
         while (!takeOffFinished)
         {
@@ -197,8 +193,8 @@ public class MonsterAIController : MonoBehaviour
             yield return null; // 한 프레임 대기
         }
 
-        animator.SetBool("Fly", true);
-        animator.SetBool("TakeOff", false);
+        animator.SetBool(animationData.FlyParameterHash, true);
+        animator.SetBool(animationData.TakeOffParameterHash, false);
         FlySoundStart();
 
         Vector3 startPos = transform.position;
@@ -222,7 +218,7 @@ public class MonsterAIController : MonoBehaviour
 
         transform.position = targetPos;
 
-        animator.SetBool("FlyingRoar", true);
+        animator.SetBool(animationData.FlyingRoarParameterHash, true);
 
         flyingRoarEnded = false;
 
@@ -244,7 +240,7 @@ public class MonsterAIController : MonoBehaviour
             yield return null; // 한 프레임 대기
         }
 
-        animator.SetBool("FlyingRoar", false);
+        animator.SetBool(animationData.FlyingRoarParameterHash, false);
 
         groggyCoroutineRunned = false;
         shouldLookAtPlayer = false;
@@ -275,8 +271,6 @@ public class MonsterAIController : MonoBehaviour
 
                 foreach (Vector3 rayOrigin in rayPos)
                 {
-                    Debug.DrawRay(curpos, transform.forward + rayOrigin, Color.red, 1.0f);
-
                     if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
                     {
                         if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("ExplosiveBarrel"))
@@ -302,7 +296,7 @@ public class MonsterAIController : MonoBehaviour
 
                 if (slamDuration - slamElapsed < 0.3f && isFlyingRandingRunned == false)
                 {
-                    animator.SetBool("FlyingLanding", true);
+                    animator.SetBool(animationData.FlyingLandingParameterHash, true);
                     isFlyingRandingRunned = true;
                 }
 
@@ -317,8 +311,8 @@ public class MonsterAIController : MonoBehaviour
             transform.position = slamTarget; // 보정
         }
 
-        animator.SetBool("FlyingLanding", false);
-        animator.SetBool("Fly", false);
+        animator.SetBool(animationData.FlyingLandingParameterHash, false);
+        animator.SetBool(animationData.FlyParameterHash, false);
         timer = 0f;
         currentAction = null;
     }
@@ -329,7 +323,7 @@ public class MonsterAIController : MonoBehaviour
         shouldLookAtPlayer = true;
 
         roarFinished = false;
-        animator.SetBool("Roar", true);
+        animator.SetBool(animationData.RoarParameterHash, true);
 
         float groundRoarTimer = 0f;
         bool isScreamed = false;
@@ -349,9 +343,8 @@ public class MonsterAIController : MonoBehaviour
             yield return null; // 한 프레임 대기
         }
 
-        animator.SetBool("BiteAttack", true);
-        animator.SetBool("Roar", false);
-        animator.SetBool("CrawlForward", false);
+        animator.SetBool(animationData.BiteAttackParameterHash, true);
+        animator.SetBool(animationData.RoarParameterHash, false);
 
         Vector3 direction = player.transform.position - transform.position;
         direction.y = 0;
@@ -384,19 +377,22 @@ public class MonsterAIController : MonoBehaviour
             {
                 if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
                 {
-                    if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("ExplosiveBarrel"))
+                    if (hit.collider.CompareTag("Wall"))
                     {
+                        PlayerManager.Instance.MainCamera.Shake(0.5f, 1f);
+                        LandingSoundStart();
+                        
                         Vector3 temp = transform.position;
                         temp.y = 0f;
                         transform.position = temp;
 
-                        animator.SetBool("BiteAttack", false);
+                        animator.SetBool(animationData.BiteAttackParameterHash, false);
                         currentAction = null;
                         yield break;
                     }
                 }
             }
-
+            
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
@@ -406,7 +402,7 @@ public class MonsterAIController : MonoBehaviour
         PlayerManager.Instance.MainCamera.Shake(0.5f, 1f);
         LandingSoundStart();
         transform.position = targetPosition;
-        animator.SetBool("BiteAttack", false);
+        animator.SetBool(animationData.BiteAttackParameterHash, false);
 
         currentAction = null;
     }
@@ -417,15 +413,7 @@ public class MonsterAIController : MonoBehaviour
         TalkSoundStop();
         GroggySoundStart();
         
-        animator.ResetTrigger("StandUp");
-        animator.SetBool("FlyingLanding", false);
-        animator.SetBool("BiteAttack", false);
-        animator.SetBool("TailAttack", false);
-        animator.SetBool("CrawlForward", false);
-        animator.SetBool("Fly", false);
-        animator.SetBool("TakeOff", false);
-        animator.SetBool("Roar", false);
-        animator.SetBool("Groggy", false);
+        AllAnimationStop();
 
         Vector3 startPos = transform.position;
         Vector3 targetPos = new Vector3(startPos.x, 0, startPos.z);
@@ -434,7 +422,7 @@ public class MonsterAIController : MonoBehaviour
 
         isGroggy = true;
         currentAction = null; // 현재 액션 정지
-        animator.SetBool("Groggy", true);
+        animator.SetBool(animationData.GroggyParameterHash, true);
         shouldLookAtPlayer = false; // 시선도 고정
 
         while (elapsed < duration)
@@ -456,7 +444,7 @@ public class MonsterAIController : MonoBehaviour
             yield return null;
         }
 
-        animator.SetBool("Groggy", false);
+        animator.SetBool(animationData.GroggyParameterHash, false);
         isGroggy = false;
         timer = 0f; // 패턴 다시 선택하게끔 타이머 초기화
     }
@@ -500,19 +488,27 @@ public class MonsterAIController : MonoBehaviour
                 if (damageable != null)
                 {
                     damageable.TakeDamage(damageAmount);
-                    Service.Log("데미지입음");
                 }
             }
         }
     }
 
+    public void AllAnimationStop()
+    {
+        animator.SetBool(animationData.FlyingLandingParameterHash, false);
+        animator.SetBool(animationData.BiteAttackParameterHash, false);
+        animator.SetBool(animationData.FlyParameterHash, false);
+        animator.SetBool(animationData.TakeOffParameterHash, false);
+        animator.SetBool(animationData.RoarParameterHash, false);
+        animator.SetBool(animationData.GroggyParameterHash, false);
+        animator.SetBool(animationData.FlyingRoarParameterHash, false);
+    }
+    
     private void HandleRandomSound()
     {
-        Service.Log(_talkTimer.ToString());
         _talkTimer += Time.deltaTime;
         if (_talkTimer >= _nextTalkTime)
         {
-            Debug.Log("대사출력");
             PlayRandomSound();
             ResetTalkTimer();
         }
@@ -559,6 +555,12 @@ public class MonsterAIController : MonoBehaviour
         sfxSource.Play();
     }
 
+    public void GotHitSoundStart()
+    {
+        talkSource.clip = SoundManager.GetSfxClip(SoundCategory.Movement, "BattleMonsterGotHit");
+        talkSource.Play();
+    }
+    
     public void SfxSoundStop()
     {
         sfxSource.Stop();
@@ -569,15 +571,18 @@ public class MonsterAIController : MonoBehaviour
         talkSource.Stop();
     }
 
-private AudioSource InitAudioSource(float volume, float maxDistance)
+    private AudioSource InitAudioSource(float volume, float maxDistance, bool is3DSound)
     {
         AudioSource source = gameObject.AddComponent<AudioSource>();
-        source.volume = volume;
         source.loop = false;
         source.playOnAwake = false;
-        source.rolloffMode = AudioRolloffMode.Custom;
-        source.spatialBlend = 1f;
-        source.maxDistance = maxDistance;
+        if (is3DSound)
+        {
+            source.volume = volume;
+            source.rolloffMode = AudioRolloffMode.Custom;
+            source.spatialBlend = 1f;
+            source.maxDistance = maxDistance;
+        }
 
         return source;
     }

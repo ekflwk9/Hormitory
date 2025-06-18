@@ -30,8 +30,9 @@ public class FadeUi : UiBase
     /// <summary>
     /// 페이드 아웃 애니메이션 재생
     /// </summary>
-    public void OnFade()
+    public void OnFade(float _speed = 1f)
     {
+        anim.SetFloat(AnimName.Speed, _speed);
         anim.Play(AnimName.FadeOut, 0, 0);
         isFade = false;
     }

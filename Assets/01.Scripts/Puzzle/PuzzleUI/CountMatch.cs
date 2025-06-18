@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// 4자리 숫자를 맞추는 오브젝트
@@ -51,7 +50,7 @@ public class CountMatch : IPuzzle
         }
         else
         {
-            playerController.LockInput(); // 시작 시 커서 잠금
+            playerController.SetPauseState(true); // 플레이어 컨트롤러의 입력 잠금
         }
             failCount = 0;
     }
@@ -76,11 +75,10 @@ public class CountMatch : IPuzzle
         // 1. userNum을 받아온다.
         // 2. 조정된 숫자와 맞춰야 할 숫자를 확인한다.
         // 3. 동일하면 IsSolved로, 틀리면 Incorrect로
-        Service.Log($"입력한 정답{userNum}, 요구되는 정답{requireNum}");
 
         if (userNum == requireNum)
         {
-            playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+            playerController.SetPauseState(false); // 플레이어 컨트롤러의 입력 잠금 해제
             SoundManager.PlaySfx(SoundCategory.Interaction, "UnLockDoor");
             MonsterStateMachine.OffPuzzle();
             IsSolved();
@@ -107,12 +105,11 @@ public class CountMatch : IPuzzle
             UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
             SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생
             IsFailed();
-            playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+            playerController.SetPauseState(false); // 플레이어 컨트롤러의 입력 잠금 해제
             playerController.Die();
             MonsterStateMachine.OffPuzzle();
             return;
         }
-        Service.Log($"CountMatch: Incorrect : {failCount}");
 
         //숫자맞추기에 실패했을 때(게임오버는 아직 아닐 때)의 로직
         //오류 처리 후 다시 숫자 선택로직으로 변경함
@@ -123,7 +120,7 @@ public class CountMatch : IPuzzle
     {
         // 퍼즐을 취소하는 로직
         // 예를 들어, UI를 비활성화하고 플레이어 컨트롤러의 입력 잠금을 해제
-        playerController.UnlockInput();
+        playerController.SetPauseState(false);
         MonsterStateMachine.OffPuzzle();
         UiManager.Instance.Show<LockUi>(false);
     }

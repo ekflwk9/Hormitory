@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DoorTiming : MonoBehaviour, IInteractable, ITiming
 {
@@ -22,7 +20,8 @@ public class DoorTiming : MonoBehaviour, IInteractable, ITiming
             dooranimator = GetComponent<Animator>();
             if (dooranimator == null)
             {
-                Service.Log("DoorTiming: Animator component is not assigned or found on the GameObject.");
+                // 예외처리
+                return;
             }
         }
     }

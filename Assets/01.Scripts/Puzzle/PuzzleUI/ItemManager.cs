@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 public class ItemManager
@@ -43,7 +41,6 @@ public class ItemManager
 
         ItemDict[item] = itemNumber;
         // 등록 시 Inventory에 추가함
-        Service.Log($"{item.name} 아이템이 등록되었습니다. 아이템 번호: {itemNumber}");
         // 아이템 슬롯 중 빈 슬롯 찾기(itemNumber가 0이거나 null인 경우)
 
         if (ItemDict.Count == 1)
@@ -115,8 +112,6 @@ public class ItemManager
                 UiManager.Instance.Get<InventoryUi>().SetView(SlotType.SecondSlot, 0);
             }
             // 아이템 제거 시 Inventory에서 제거함
-
-            Service.Log($"{item.name} 아이템이 제거되었습니다.");
         }
         else
         {

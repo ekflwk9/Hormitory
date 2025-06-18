@@ -20,7 +20,7 @@ public class WeaponRevolver : WeaponBase
     private Transform bulletSpawnPoint;                 //총알 생성 위치
     [SerializeField]private Transform casingSpawnPoint; //탄피 생성 위치
     float spreadAmount => animator.AimModeIs ? 0f : 0.5f;
-    [Header("Aim UI")] [SerializeField] private Image imageAim; // default/aim 모드에 따라 Aim 이미지 활성/비활성
+    [Header("Aim UI")]  
     
     private bool isModeChange = false;                  //모드 전환 여부 체크
     private float defaultModeFOV = 60;                  //기본 모드에서 카메라 FOV
@@ -156,7 +156,8 @@ public class WeaponRevolver : WeaponBase
                 PlayerManager.Instance.MainCamera.Shake(0.2f,0.1f);
             }
             //총구 이펙트 재생
-            if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());
+            StartCoroutine(OnMuzzleFlashEffect());
+
             //탄피 생성
             casingMemoryPool.SpawnCasing(casingSpawnPoint.position,Vector3.left);
             
@@ -169,10 +170,11 @@ public class WeaponRevolver : WeaponBase
     {
         muzzleFlashEffect.SetActive(true);
         
-        yield return new WaitForSeconds(weaponSetting.attackRate * 0.3f);
+        yield return new WaitForSeconds(weaponSetting.attackRate * 0.05f);
         
         muzzleFlashEffect.SetActive(false);
     }
+    
     private IEnumerator OnReload()
     {
         isReload = true;
@@ -277,7 +279,6 @@ public class WeaponRevolver : WeaponBase
         float time = 0.35f;
 
         animator.AimModeIs = !animator.AimModeIs;
-        imageAim.enabled = !imageAim.enabled;
         
         float start = mainCamera.fieldOfView;
         float end = animator.AimModeIs == true ? aimModeFOV : defaultModeFOV;

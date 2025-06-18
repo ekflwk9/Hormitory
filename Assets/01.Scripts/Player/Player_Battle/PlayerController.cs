@@ -12,7 +12,6 @@ public class PlayerController : BasePlayerController, IDamagable
     private Status status;
     private WeaponBase weapon;
 
-
     [SerializeField] private float duration = 0.3f;
     [SerializeField] private float rollSpeed = 5f;
     [SerializeField] private float delay = 5f;
@@ -27,18 +26,21 @@ public class PlayerController : BasePlayerController, IDamagable
     
     private float _talkTimer;
     private float _nextTalkTime;
+    private MonsterStatController monsterStatController;
     
-    [SerializeField] float _minTalkInterval = 4f;
-    [SerializeField] float _maxTalkInterval = 6f;
+    [SerializeField] float _minTalkInterval = 8f;
+    [SerializeField] float _maxTalkInterval = 12f;
     
     private Coroutine rollCoroutine;
+    private readonly WaitForSeconds delaySFX = new WaitForSeconds(1.1f);
     protected override void Awake()
     {
         base.Awake();
         //마우스 커서를 보이지 않게 설정하고, 현재위치에 고정
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
+
+        monsterStatController = FindObjectOfType<MonsterStatController>();
         status = GetComponent<Status>();
     }
 
@@ -61,11 +63,6 @@ public class PlayerController : BasePlayerController, IDamagable
         UpdateWeaponAction();
         HandleRandomSound();
         
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(10);
-        }
-        
         if (Input.GetKeyDown(KeyCode.F))
         {
             if(canRoll)
@@ -80,7 +77,7 @@ public class PlayerController : BasePlayerController, IDamagable
 
     private void UpdateWeaponAction()
     {
-        if (Input.GetMouseButtonDown(0) && !isRolling && isControl)
+        if (Input.GetMouseButtonDown(0) && !isRolling && isControl && !isDead)
         {
             weapon.StartWeaponAction();
         }
@@ -89,7 +86,7 @@ public class PlayerController : BasePlayerController, IDamagable
             weapon.StopWeaponAction();
         }
 
-        if (Input.GetMouseButton(1) && !isRolling && isControl)
+        if (Input.GetMouseButton(1) && !isRolling && isControl && !isDead)
         {
             weapon.StartWeaponAction(1);
         }
@@ -118,17 +115,25 @@ public class PlayerController : BasePlayerController, IDamagable
 
     public override void Die()
     {
+        if (isDead) return;
+        isDead = true;
         if (rollCoroutine != null)
         {
             StopCoroutine(rollCoroutine);
             rollCoroutine = null;
         }
         base.Die();
-        //StartCoroutine("DeathEffect");
         PlayerManager.Instance.MainCamera.Fall();
         UiManager.Instance.Show<DeadUi>(true);
+
+        StartCoroutine(DelaySFX());
     }
 
+    private IEnumerator DelaySFX()
+    {
+        yield return delaySFX;
+        SoundManager.PlaySfx(SoundCategory.Movement, "Die");
+    }
     public void SwitchingWeapon(WeaponBase newWeapon)
     {
         weapon = newWeapon;
@@ -182,7 +187,8 @@ public class PlayerController : BasePlayerController, IDamagable
             
     public void PlayRandomSound()
     {
-        if (UiManager.Instance.Get<TalkUi>().onTalk) return;
+        if (isDead) return;
+        if (UiManager.Instance.Get<TalkUi>().onTalk || monsterStatController.isDead) return;
         if (_playerTalk.Count == 0)
             return;
         

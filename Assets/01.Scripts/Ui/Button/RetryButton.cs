@@ -16,8 +16,10 @@ public class RetryButton : UiButton
     {
         var retryScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(retryScene);
-
         PlayerManager.Instance.Player.SetPauseState(false);
+
+        UiManager.Instance.Show<LockUi>(false);
+        UiManager.Instance.Show<TimingMatchUi>(false);
         UiManager.Instance.Get<FadeUi>().OnFade();
     }
 }

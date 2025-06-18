@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// 마커가 좌우로 오가며 핀포인트를 찾는 게임
@@ -66,7 +64,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
             }
             else
             {
-                playerController.LockInput(); // 시작 시 커서 잠금
+                playerController.SetPauseState(true);// 시작 시 커서 잠금
             }
         }
     }
@@ -75,7 +73,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     public void SetTarget(ITiming timingtarget)
     {
         target = timingtarget; // 타이밍 매치를 부른 객체 설정
-        Service.Log($"TimingMatch: SetTarget(): 타겟 설정됨: {target}");
         if(target == null)
         {
             Service.Log("TimingMatch: SetTarget(): 타겟이 null입니다. 타이밍 매치가 정상적으로 작동하지 않을 수 있습니다.");
@@ -130,7 +127,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
             markerPos = 0f; // 마커가 왼쪽 끝에 도달하면 위치를 0으로 고정
             direction = 1; // 방향을 오른쪽으로 변경
             currentCycle++; // 사이클 증가
-            Service.Log($"TimingMatch: GamePlaying(): 현재 사이클: {currentCycle}");
+
             if (currentCycle >= maxCycles) // 최대 사이클 수에 도달한 경우
             {
                 IsFail(); // 실패 처리
@@ -140,7 +137,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
 
         UpdateMarkerPosition(); // 마커 위치 업데이트
         // Space 입력 시 판정
-        if (Input.GetKeyDown(KeyCode.Space)) // Space 키 입력 시
+        if (Input.GetKeyDown(KeyCode.F)) // E 키 입력 시
         {
             Judge(); // 마커-핀포인트 타이밍을 판단
         }
@@ -152,7 +149,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         float pinRatio = GetPinPointRatio(); // 핀포인트 위치 비율을 가져옴
         float distance = Mathf.Abs(markerPos - pinRatio); // 마커 위치와 핀포인트 위치 비율의 차이 계산
-        Service.Log($"TimingMatch: Judge(): 마커 위치 비율: {markerPos}, 핀포인트 위치 비율: {pinRatio}, 거리: {distance}");
 
         if (distance < pinPointRange) // 마커 위치가 핀포인트 위치와 가까운 경우
         {
@@ -169,7 +165,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         if (RailObj == null || pinPoint == null)
         {
-            Service.Log("TimingMatch: GetPinPointRatio(): RailObj 또는 pinPoint가 할당되지 않았습니다.");
             return 0.5f; // 중간 위치 반환
         }
 
@@ -190,7 +185,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         if (RailObj == null || marker == null)
         {
-            Service.Log("TimingMatch: UpdateMarkerPosition(): RailObj 또는 marker가 할당되지 않았습니다.");
             return;
         }
         railWidth = railRect.rect.width; // 레일의 너비
@@ -202,7 +196,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     private void IsSuccess()
     {
         success++; // 성공 횟수 증가
-        Service.Log($"TimingMatch: IsSuccess(): 성공 횟수: {success}");
         if (success >= maxCount)
         {
             MonsterStateMachine.OffPuzzle();
@@ -220,7 +213,6 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     private void IsFail()
     {
         failed++; // 실패 횟수 증가
-        Service.Log($"TimingMatch: IsFail(): 실패 횟수: {failed}");
         SoundManager.PlaySfx(SoundCategory.Interaction, "LockDoor");
         if (failed == 2)
         {
@@ -248,9 +240,8 @@ public class TimingMatch : MonoBehaviour, IPuzzle
 
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
 
-        playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
-        SoundManager.PlaySfx(SoundCategory.Interaction, "UncLockDoor"); // 성공 사운드 재생
-        Service.Log($"TimingMatch: IsSolved(): 성공!");
+        playerController.SetPauseState(false); // 플레이어 컨트롤러의 입력 잠금 해제
+        SoundManager.PlaySfx(SoundCategory.Interaction, "UnLockDoor"); // 성공 사운드 재생
         //성공 연출 및 로직 처리
 
         if(target != null)
@@ -272,8 +263,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
         MonsterStateMachine.OffPuzzle();
 
-        playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
-        Service.Log($"TimingMatch: IsFailed(): 실패!");
+        playerController.SetPauseState(false); // 플레이어 컨트롤러의 입력 잠금 해제
         // 실패 연출 및 로직 처리
         UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
         SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생

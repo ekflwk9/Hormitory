@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Drawer : MonoBehaviour, IInteractable
 {
@@ -26,7 +24,6 @@ public class Drawer : MonoBehaviour, IInteractable
             }
             else
             {
-                Service.Log("Printing reference is not set in Drawer.");
                 return;
             }
         }

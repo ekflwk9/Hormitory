@@ -5,30 +5,33 @@ using UnityEngine;
 
 public class MonsterStatController : MonoBehaviour, IDamagable
 {
-    public float MonsterHealth { get; private set; }
+    [field:SerializeField] public float MonsterHealth { get; private set; }
     public bool isDead = false;
     [SerializeField] private Animator animator;
     [SerializeField] private MonsterAIController monsterAIController;
     
     private void Reset()
     {
-        MonsterHealth = 100f;
+        MonsterHealth = 1000f;
         animator = GetComponent<Animator>();
         monsterAIController = GetComponent<MonsterAIController>();
     }
 
     public void TakeDamage(float damage)
     {
-        Service.Log($"공격받음{MonsterHealth}");
         MonsterHealth = Mathf.Max(MonsterHealth - damage, 0) ;
         if (MonsterHealth <= 0)
         {
             Die();
+            return;
         }
+        
+        monsterAIController.GotHitSoundStart();
     }
 
     public void Die()
     {
+        if (isDead) return;
         isDead = true;
         StopAllCoroutines();
         monsterAIController.currentAction = null;
@@ -36,16 +39,10 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         monsterAIController.sfxSource.Stop();
         monsterAIController.talkSource.Stop();
         SoundManager.PlaySfx(SoundCategory.Movement, "BattleMonsterDying");
+        UiManager.Instance.Get<TalkUi>().Popup("...실패작...은... 또 버려지는군...");
         
-        animator.SetBool("Roar", false);
-        animator.SetBool("Groggy", false);
-        animator.SetBool("BiteAttack", false);
-        animator.SetBool("TailAttack", false);
-        animator.SetBool("CrawlForward", false);
-        animator.SetBool("Fly", false);
-        animator.SetBool("TakeOff", false);
-    
-        animator.SetBool("Death", true);
+        monsterAIController.AllAnimationStop();
+        animator.SetBool(monsterAIController.animationData.DeathParameterHash, true);
 
         // y 위치가 0이 아니면 내려가는 코루틴 실행
         if (transform.position.y != 0f)
@@ -58,12 +55,12 @@ public class MonsterStatController : MonoBehaviour, IDamagable
     {
         Vector3 startPos = transform.position;
         Vector3 targetPos = new Vector3(startPos.x, 0f, startPos.z);
-        float duration = 0.5f; // 원하는 속도에 맞게 조절
+        float duration = 0.5f;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            if (!isDead) // 혹시 죽음 취소 같은 게 있으면 멈추도록
+            if (!isDead)
                 yield break;
 
             transform.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);

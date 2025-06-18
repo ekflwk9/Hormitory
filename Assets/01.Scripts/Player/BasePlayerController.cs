@@ -83,8 +83,8 @@ public abstract class BasePlayerController : MonoBehaviour
     protected virtual void HandleLook()
     {
         Vector2 lookInput = playerActions.Player.Look.ReadValue<Vector2>();
-        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
-        float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * mouseSensitivity;// * Time.deltaTime;
+        float mouseX = lookInput.x * mouseSensitivity;// * Time.deltaTime;
 
         xRotation -= mouseY;
         yRotation += mouseX;
@@ -92,8 +92,8 @@ public abstract class BasePlayerController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
 
-        if (yRotation > 360f) yRotation -= 360f;
-        else if (yRotation < 0f) yRotation += 360f;
+        if (yRotation > 360f) yRotation = 0f;
+        else if (yRotation < 0f) yRotation = 360f;
 
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
@@ -169,8 +169,8 @@ public abstract class BasePlayerController : MonoBehaviour
     }
     public void SetPauseState(bool isPaused)
     {
-        isControl = !isPaused;        
-        Cursor.lockState = isControl? CursorLockMode.Locked : CursorLockMode.None;
+        isControl = !isPaused;
+        Cursor.lockState = isControl ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = isPaused;
 
     }

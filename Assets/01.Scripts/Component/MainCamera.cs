@@ -20,19 +20,6 @@ public class MainCamera : MonoBehaviour
         originRotation = transform.localRotation;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Shake(1, 0.08f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Fall();
-        }
-    }
-
     public void Shake(float duration, float strength)
     {
         if (isShaking) return;
@@ -61,8 +48,8 @@ public class MainCamera : MonoBehaviour
         seq.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 80f), 0.6f)
             .SetEase(Ease.InCubic));
 
-        // Step 3: 쓰러진 상태에서 떨림
-        seq.Append(transform.DOShakeRotation(0.4f, 7f, 8, 90f));
+        // Step 3: 쓰러진 상태에서 떨림 + 카메라 떨어짐
+        seq.Append(transform.DOShakeRotation(0.4f, 7f, 8, 90f)); 
         seq.Join(transform.DOLocalMove(originPosition + new Vector3(0f, -1f, 0f), 0.6f));
         
     }

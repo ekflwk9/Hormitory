@@ -13,6 +13,7 @@
             uiBase[i].Init();
         }
 
+        SoundManager.PlayBgm("IntroBGM");
         UiManager.Instance.Add<IntroUi>(this);
     }
 

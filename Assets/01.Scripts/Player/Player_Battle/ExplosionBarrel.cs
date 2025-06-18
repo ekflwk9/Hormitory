@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts.Component;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -11,7 +12,7 @@ public class ExplosionBarrel : InteractionObject, IDamagable
     private GameObject explosionPrefab;
 
     [SerializeField] private float explosionDelayTime = 0.3f;
-    [SerializeField] private float explosionRadius = 10.0f;
+    [SerializeField] private float explosionRadius = 8.0f;
     [SerializeField] private float explosionForce = 1000.0f;
     private bool isExplode = false;
     private bool isPrepared = false;
@@ -61,7 +62,8 @@ public class ExplosionBarrel : InteractionObject, IDamagable
     private IEnumerator ExplodeBarrel()
     {
         yield return new WaitForSeconds(explosionDelayTime);
-
+        
+        PlayerManager.Instance.MainCamera.Shake(0.5f, 0.4f);
         isExplode = true;
         int index = Random.Range(0, 5);
         string soundName = $"explosion-{index + 1}";
