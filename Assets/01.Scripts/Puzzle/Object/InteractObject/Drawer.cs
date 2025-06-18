@@ -26,7 +26,6 @@ public class Drawer : MonoBehaviour, IInteractable
             }
             else
             {
-                Service.Log("Printing reference is not set in Drawer.");
                 return;
             }
         }
