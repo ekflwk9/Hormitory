@@ -28,8 +28,8 @@ public class PlayerController : BasePlayerController, IDamagable
     private float _talkTimer;
     private float _nextTalkTime;
     
-    [SerializeField] float _minTalkInterval = 4f;
-    [SerializeField] float _maxTalkInterval = 6f;
+    [SerializeField] float _minTalkInterval = 8f;
+    [SerializeField] float _maxTalkInterval = 12f;
     
     private Coroutine rollCoroutine;
     private readonly WaitForSeconds delaySFX = new WaitForSeconds(1.1f);
