@@ -42,13 +42,11 @@ public class BarrelSpawner : MonoBehaviour
         foreach (GameObject wall in walls)
         {
             wallTransforms.Add(wall.transform);
-            Service.Log(wall.transform.position.ToString());
         }
     }
 
     public void SpawnBarrelOnMonsterStun()
     {
-        Debug.Log("실행");
         TrySpawnBarrelNearWall();
     }
     

@@ -555,6 +555,12 @@ public class MonsterAIController : MonoBehaviour
         sfxSource.Play();
     }
 
+    public void GotHitSoundStart()
+    {
+        talkSource.clip = SoundManager.GetSfxClip(SoundCategory.Movement, "BattleMonsterGotHit");
+        talkSource.Play();
+    }
+    
     public void SfxSoundStop()
     {
         sfxSource.Stop();
