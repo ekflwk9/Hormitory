@@ -12,6 +12,9 @@ public class UiManager : MonoBehaviour
     {
         if (UiManager.Instance == null)
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
 
@@ -32,6 +35,12 @@ public class UiManager : MonoBehaviour
     public void IntroScene(bool _isIntro)
     {
         introScene = _isIntro;
+    }
+
+    public void DestrotyManager()
+    {
+        Destroy(this.gameObject);
+        Instance = null;
     }
 
     public void Add<T>(UiBase _ui) where T : UiBase

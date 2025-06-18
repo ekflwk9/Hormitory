@@ -17,19 +17,25 @@ public static class SoundManager
     private static Dictionary<string, AudioClip> bgmCache = new Dictionary<string, AudioClip>();
     private static Dictionary<string, AudioClip> sfxCache = new Dictionary<string, AudioClip>();
 
-    public static float sfxVolume = 1.0f; // 효과음 볼륨 저장
+    public static float sfxVolume { get; private set; } = 0.5f; // 효과음 볼륨 저장
+    public static float bgmVolume { get; private set; } = 0.5f; // 배경음 볼륨 저장
 
     private static void Init()
     {
         if (isInitialized) return;
+
         GameObject soundPlayerObject = new GameObject("SoundPlayer");
         Object.DontDestroyOnLoad(soundPlayerObject);
+
         bgmPlayer = soundPlayerObject.AddComponent<AudioSource>();
         bgmPlayer.loop = true;
+        bgmPlayer.volume = 0.5f;
+
         sfxPlayerPool = new List<AudioSource>();
         for (int i = 0; i < sfxPlayerPoolSize; i++)
         {
             sfxPlayerPool.Add(soundPlayerObject.AddComponent<AudioSource>());
+            sfxPlayerPool[i].volume = 0.5f;
         }
         isInitialized = true;
     }
@@ -128,7 +134,8 @@ public static class SoundManager
     public static void SetBgmVolume(float volume)
     {
         Init();
-        bgmPlayer.volume = Mathf.Clamp01(volume);
+        bgmVolume = Mathf.Clamp01(volume);
+        bgmPlayer.volume = bgmVolume;
     }
 
     public static void SetSfxVolume(float volume)
