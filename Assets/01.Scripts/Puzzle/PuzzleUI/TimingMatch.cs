@@ -221,6 +221,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
     {
         failed++; // 실패 횟수 증가
         Service.Log($"TimingMatch: IsFail(): 실패 횟수: {failed}");
+        SoundManager.PlaySfx(SoundCategory.Interaction, "LockDoor");
         if (failed == 2)
         {
             UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
@@ -248,6 +249,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
 
         playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+        SoundManager.PlaySfx(SoundCategory.Interaction, "UncLockDoor"); // 성공 사운드 재생
         Service.Log($"TimingMatch: IsSolved(): 성공!");
         //성공 연출 및 로직 처리
 
