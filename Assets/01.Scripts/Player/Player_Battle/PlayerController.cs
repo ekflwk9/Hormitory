@@ -28,10 +28,11 @@ public class PlayerController : BasePlayerController, IDamagable
     private float _talkTimer;
     private float _nextTalkTime;
     
-    [SerializeField] float _minTalkInterval = 4f;
-    [SerializeField] float _maxTalkInterval = 6f;
+    [SerializeField] float _minTalkInterval = 8f;
+    [SerializeField] float _maxTalkInterval = 12f;
     
     private Coroutine rollCoroutine;
+    private readonly WaitForSeconds delaySFX = new WaitForSeconds(1.1f);
     protected override void Awake()
     {
         base.Awake();
@@ -118,17 +119,25 @@ public class PlayerController : BasePlayerController, IDamagable
 
     public override void Die()
     {
+        if (isDead) return;
+        isDead = true;
         if (rollCoroutine != null)
         {
             StopCoroutine(rollCoroutine);
             rollCoroutine = null;
         }
         base.Die();
-        //StartCoroutine("DeathEffect");
         PlayerManager.Instance.MainCamera.Fall();
         UiManager.Instance.Show<DeadUi>(true);
+
+        StartCoroutine(DelaySFX());
     }
 
+    private IEnumerator DelaySFX()
+    {
+        yield return delaySFX;
+        SoundManager.PlaySfx(SoundCategory.Movement, "Die");
+    }
     public void SwitchingWeapon(WeaponBase newWeapon)
     {
         weapon = newWeapon;
