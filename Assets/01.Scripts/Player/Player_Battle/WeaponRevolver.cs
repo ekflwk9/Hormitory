@@ -156,7 +156,8 @@ public class WeaponRevolver : WeaponBase
                 PlayerManager.Instance.MainCamera.Shake(0.2f,0.1f);
             }
             //총구 이펙트 재생
-            if(animator.AimModeIs == false)StartCoroutine(OnMuzzleFlashEffect());
+            StartCoroutine(OnMuzzleFlashEffect());
+
             //탄피 생성
             casingMemoryPool.SpawnCasing(casingSpawnPoint.position,Vector3.left);
             
@@ -169,10 +170,11 @@ public class WeaponRevolver : WeaponBase
     {
         muzzleFlashEffect.SetActive(true);
         
-        yield return new WaitForSeconds(weaponSetting.attackRate * 0.3f);
+        yield return new WaitForSeconds(weaponSetting.attackRate * 0.05f);
         
         muzzleFlashEffect.SetActive(false);
     }
+    
     private IEnumerator OnReload()
     {
         isReload = true;
