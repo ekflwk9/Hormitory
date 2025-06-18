@@ -279,7 +279,6 @@ public class WeaponRevolver : WeaponBase
         float time = 0.35f;
 
         animator.AimModeIs = !animator.AimModeIs;
-        imageAim.enabled = !imageAim.enabled;
         
         float start = mainCamera.fieldOfView;
         float end = animator.AimModeIs == true ? aimModeFOV : defaultModeFOV;

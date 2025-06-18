@@ -192,6 +192,7 @@ public class PlayerController : BasePlayerController, IDamagable
             
     public void PlayRandomSound()
     {
+        if (isDead) return;
         if (UiManager.Instance.Get<TalkUi>().onTalk || monsterStatController.isDead) return;
         if (_playerTalk.Count == 0)
             return;
