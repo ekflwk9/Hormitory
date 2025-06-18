@@ -44,11 +44,16 @@ public class CountMatch : IPuzzle
     {
         // 퍼즐 시작, 초기화
         playerController = UnityEngine.Object.FindObjectOfType<PuzzlePlayerController>();
+        MonsterStateMachine.OnPuzzle();
         if (playerController == null)
         {
             Service.Log("CountMatch: PuzzlePlayerController가 씬에 없습니다.");
         }
-        failCount = 0;
+        else
+        {
+            playerController.LockInput(); // 시작 시 커서 잠금
+        }
+            failCount = 0;
     }
 
     public void IsSolved()
@@ -75,6 +80,8 @@ public class CountMatch : IPuzzle
 
         if (userNum == requireNum)
         {
+            playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
+            MonsterStateMachine.OffPuzzle();
             IsSolved();
         }
         else
@@ -98,7 +105,9 @@ public class CountMatch : IPuzzle
             UiManager.Instance.Get<TalkUi>().Popup("하하 하하 하하 하 하하");
             SoundManager.PlaySfx(SoundCategory.Movement, "PuzzleMonster4"); // 실패 사운드 재생
             IsFailed();
+            playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
             playerController.Die();
+            MonsterStateMachine.OffPuzzle();
             return;
         }
         Service.Log($"CountMatch: Incorrect : {failCount}");
@@ -106,6 +115,15 @@ public class CountMatch : IPuzzle
         //숫자맞추기에 실패했을 때(게임오버는 아직 아닐 때)의 로직
         //오류 처리 후 다시 숫자 선택로직으로 변경함
         //3회 오류 시 IsFailed로
+    }
+
+    public void CancelPuzzle()
+    {
+        // 퍼즐을 취소하는 로직
+        // 예를 들어, UI를 비활성화하고 플레이어 컨트롤러의 입력 잠금을 해제
+        playerController.UnlockInput();
+        MonsterStateMachine.OffPuzzle();
+        UiManager.Instance.Show<LockUi>(false);
     }
 
 
