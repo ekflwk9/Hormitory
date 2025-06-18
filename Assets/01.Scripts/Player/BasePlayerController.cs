@@ -52,9 +52,7 @@ public abstract class BasePlayerController : MonoBehaviour
     }
 
     protected virtual void Start()
-    {
-        transform.rotation = Quaternion.identity;
-    }
+    { }
 
     protected virtual void OnEnable()
     {
@@ -96,7 +94,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
         if (yRotation > 360f) yRotation -= 360f;
         else if (yRotation < 0f) yRotation += 360f;
-     
+
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
@@ -169,7 +167,6 @@ public abstract class BasePlayerController : MonoBehaviour
             UiManager.Instance.Get<MenuUi>().Show(true);
         }
     }
-
     public void SetPauseState(bool isPaused)
     {
         isControl = !isPaused;        
