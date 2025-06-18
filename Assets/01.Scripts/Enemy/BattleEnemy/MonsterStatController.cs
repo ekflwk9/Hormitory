@@ -12,7 +12,7 @@ public class MonsterStatController : MonoBehaviour, IDamagable
     
     private void Reset()
     {
-        MonsterHealth = 600f;
+        MonsterHealth = 1000f;
         animator = GetComponent<Animator>();
         monsterAIController = GetComponent<MonsterAIController>();
     }
@@ -23,7 +23,10 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         if (MonsterHealth <= 0)
         {
             Die();
+            return;
         }
+        
+        monsterAIController.GotHitSoundStart();
     }
 
     public void Die()
@@ -37,15 +40,8 @@ public class MonsterStatController : MonoBehaviour, IDamagable
         monsterAIController.talkSource.Stop();
         SoundManager.PlaySfx(SoundCategory.Movement, "BattleMonsterDying");
         
-        animator.SetBool("Roar", false);
-        animator.SetBool("Groggy", false);
-        animator.SetBool("BiteAttack", false);
-        animator.SetBool("TailAttack", false);
-        animator.SetBool("CrawlForward", false);
-        animator.SetBool("Fly", false);
-        animator.SetBool("TakeOff", false);
-        animator.SetBool("FlyingRoar", false);
-        animator.SetBool("Death", true);
+        monsterAIController.AllAnimationStop();
+        animator.SetBool(monsterAIController.animationData.DeathParameterHash, true);
 
         // y 위치가 0이 아니면 내려가는 코루틴 실행
         if (transform.position.y != 0f)
