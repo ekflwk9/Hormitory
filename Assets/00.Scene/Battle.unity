@@ -3484,7 +3484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 869520338}
   m_Layer: 0
-  m_Name: Factory1Items
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9092,9 +9092,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1050550423}
-  - {fileID: 869520338}
-  - {fileID: 1422848594}
-  - {fileID: 546780158}
-  - {fileID: 1098143759}
   - {fileID: 1154309637}
+  - {fileID: 869520338}
+  - {fileID: 1098143759}
+  - {fileID: 1422848594}
   - {fileID: 403662033}
+  - {fileID: 546780158}
