@@ -30,13 +30,16 @@ public class Door_Match : MonoBehaviour, IInteractable
         // 2. CountMatch의 StartPuzzle을 시작시킨다.
         if (isSolved == false && isInteracted == false)
         {
+            if (UiManager.Instance.Get<TalkUi>().onTalk) return;
             //즉, 첫 상호작용(문이 잠겼음을 확인)
             UiManager.Instance.Get<TalkUi>().Popup("젠장, 좌물쇠가 걸려있잖아!");
             SoundManager.PlaySfx(SoundCategory.Interaction, "LockDoor");
+            UiManager.Instance.Get<MissionUi>().Popup("목표: 잠긴 문의 암호를 찾아라"); // 미션 UI 팝업
             isInteracted = true; // 첫 상호작용이 있었음을 표시
         }
         else if (!isSolved)
         {
+            if (UiManager.Instance.Get<TalkUi>().onTalk) return;
             UiManager.Instance.Show<LockUi>(true);
             PuzzleManager.instance.GetPuzzle<CountMatchController>().SetTargetDoor(this);
             PuzzleManager.instance.GetPuzzle<CountMatchController>().SetRequiredNum(MatchCount);

@@ -9,5 +9,6 @@ public class CloseLockButton : UiButton
     {
         touch.SetActive(false);
         UiManager.Instance.Show<LockUi>(false);
+        UiManager.Instance.Get<LockUi>().ResetPassWord();
     }
 }
