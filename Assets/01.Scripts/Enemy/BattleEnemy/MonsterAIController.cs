@@ -65,8 +65,8 @@ public class MonsterAIController : MonoBehaviour
     private float maxSoundDistance = 48f;
     [SerializeField] private float _talkTimer;
     [SerializeField] private float _nextTalkTime = 5f;
-    [SerializeField] private float _minTalkInterval = 10f;
-    [SerializeField] private float _maxTalkInterval = 12f;
+    [SerializeField] private float _minTalkInterval = 8f;
+    [SerializeField] private float _maxTalkInterval = 10f;
 
     private readonly List<string> _battleMonsterTalk = new List<string>()
     {
@@ -112,8 +112,8 @@ public class MonsterAIController : MonoBehaviour
 
     private void Start()
     {
-        sfxSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance);
-        talkSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance);
+        sfxSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance, true);
+        talkSource = InitAudioSource(SoundManager.sfxVolume, maxSoundDistance, false);
 
         ResetTalkTimer();
     }
@@ -384,7 +384,7 @@ public class MonsterAIController : MonoBehaviour
             {
                 if (Physics.Raycast(curpos, transform.forward + rayOrigin, out RaycastHit hit, rayDistance))
                 {
-                    if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("ExplosiveBarrel"))
+                    if (hit.collider.CompareTag("Wall"))
                     {
                         Vector3 temp = transform.position;
                         temp.y = 0f;
@@ -569,15 +569,18 @@ public class MonsterAIController : MonoBehaviour
         talkSource.Stop();
     }
 
-private AudioSource InitAudioSource(float volume, float maxDistance)
+    private AudioSource InitAudioSource(float volume, float maxDistance, bool is3DSound)
     {
         AudioSource source = gameObject.AddComponent<AudioSource>();
-        source.volume = volume;
         source.loop = false;
         source.playOnAwake = false;
-        source.rolloffMode = AudioRolloffMode.Custom;
-        source.spatialBlend = 1f;
-        source.maxDistance = maxDistance;
+        if (is3DSound)
+        {
+            source.volume = volume;
+            source.rolloffMode = AudioRolloffMode.Custom;
+            source.spatialBlend = 1f;
+            source.maxDistance = maxDistance;
+        }
 
         return source;
     }
