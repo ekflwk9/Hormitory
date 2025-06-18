@@ -33,6 +33,7 @@ public class MainCamera : MonoBehaviour
     private void ResetPosition()
     {
         transform.localPosition = originPosition;
+        
         isShaking = false;
     }
 
