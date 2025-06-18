@@ -15,6 +15,8 @@ public class ExplosionBarrel : InteractionObject, IDamagable
     [SerializeField] private float explosionForce = 1000.0f;
     private bool isExplode = false;
     private bool isPrepared = false;
+
+    [SerializeField] private GameObject iconUI;
     
     public void TakeDamage(float damage)
     {
@@ -38,6 +40,7 @@ public class ExplosionBarrel : InteractionObject, IDamagable
             {
                 Debug.Log("Prepared");
                 isPrepared = true;
+                iconUI.SetActive(true);
             }
         }
         
