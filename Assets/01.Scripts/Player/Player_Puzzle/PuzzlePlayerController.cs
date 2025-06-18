@@ -53,14 +53,7 @@ public class PuzzlePlayerController : BasePlayerController
     
    public override void Die()
     {
-        // 부모의 Die() 기능을 먼저 실행합니다.
-        base.Die();
-        // Awake에서 mainCamera가 이미 할당되었으므로, 이제 안전하게 사용할 수 있습니다.
-        if (mainCamera != null)
-        {
-            mainCamera.enabled = false;
-            Debug.Log("Main Camera has been disabled.");
-        }
+        base.Die();       
     }
 
 
