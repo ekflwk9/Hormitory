@@ -97,6 +97,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
 
         isPlaying = true; // 게임을 시작할 수 있도록 bool 변경
         UiManager.Instance.Show<TimingMatchUi>(true); // TimingMatchUi 활성화
+        MonsterStateMachine.OnPuzzle();
         UpdateMarkerPosition(); // 마커 위치 업데이트
 
     }
@@ -204,6 +205,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         Service.Log($"TimingMatch: IsSuccess(): 성공 횟수: {success}");
         if (success >= maxCount)
         {
+            MonsterStateMachine.OffPuzzle();
             IsSolved(); // 성공 횟수가 최대치에 도달하면 퍼즐 해결
         }
         else
@@ -266,6 +268,7 @@ public class TimingMatch : MonoBehaviour, IPuzzle
         isPlaying = false; // 게임 종료
 
         UiManager.Instance.Show<TimingMatchUi>(false); // TimingMatchUi 비활성화
+        MonsterStateMachine.OffPuzzle();
 
         playerController.UnlockInput(); // 플레이어 컨트롤러의 입력 잠금 해제
         Service.Log($"TimingMatch: IsFailed(): 실패!");
