@@ -111,6 +111,10 @@ https://github.com/user-attachments/assets/6bf9dc7a-d62c-460b-849a-97454be3d54b
 
 
 
+https://github.com/user-attachments/assets/416c7c8f-14ea-4cb8-ad51-4946d3369c7c
+
+
+
 >F키 : 구르기 --> 약간의 시간동안 무적, 쿨타임
 
 >구르기를 이용해 보스 몬스터 '잭'의 공격을 피하면서 드럼통을 파괴하라!
