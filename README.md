@@ -100,6 +100,10 @@ https://github.com/user-attachments/assets/ad67a497-60de-447b-a9ce-f56a8d475929
 
 
 
+https://github.com/user-attachments/assets/6bf9dc7a-d62c-460b-849a-97454be3d54b
+
+
+
 
 >드럼통을 칼로 두 번 가격하면 폭발시킬 수 있는 상태가 됩니다.
 
